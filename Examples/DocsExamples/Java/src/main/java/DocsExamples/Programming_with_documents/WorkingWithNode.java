@@ -5,21 +5,18 @@ import com.aspose.words.*;
 import org.testng.annotations.Test;
 
 @Test
-public class WorkingWithNode extends DocsExamplesBase
-{
+public class WorkingWithNode extends DocsExamplesBase {
     @Test
-    public void getNodeType() throws Exception
-    {
-        //ExStart:UseNodeType            
+    public void getNodeType() throws Exception {
+        //ExStart:GetNodeType
+        //GistId:3e9d92093b2f5995f984791bfc10c944
         Document doc = new Document();
-        
         int type = doc.getNodeType();
-        //ExEnd:UseNodeType
+        //ExEnd:GetNodeType
     }
 
     @Test
-    public void getParentNode() throws Exception
-    {
+    public void getParentNode() throws Exception {
         //ExStart:GetParentNode
         //GistId:3e9d92093b2f5995f984791bfc10c944
         Document doc = new Document();
@@ -31,8 +28,7 @@ public class WorkingWithNode extends DocsExamplesBase
     }
 
     @Test
-    public void ownerDocument() throws Exception
-    {
+    public void ownerDocument() throws Exception {
         //ExStart:OwnerDocument
         //GistId:3e9d92093b2f5995f984791bfc10c944
         Document doc = new Document();
@@ -48,26 +44,23 @@ public class WorkingWithNode extends DocsExamplesBase
         para.getParagraphFormat().setStyleName("Heading 1");
         // Now add the paragraph to the main text of the first section.
         doc.getFirstSection().getBody().appendChild(para);
-        
+
         // The paragraph node is now a child of the Body node.
         System.out.println("Paragraph has a parent node: " + (para.getParentNode() != null));
         //ExEnd:OwnerDocument
     }
 
     @Test
-    public void enumerateChildNodes() throws Exception
-    {
+    public void enumerateChildNodes() throws Exception {
         //ExStart:EnumerateChildNodes
         //GistId:3e9d92093b2f5995f984791bfc10c944
         Document doc = new Document();
         Paragraph paragraph = (Paragraph) doc.getChild(NodeType.PARAGRAPH, 0, true);
 
         NodeCollection children = paragraph.getChildNodes(NodeType.ANY, false);
-        for (Node child : (Iterable<Node>) children)
-        {
+        for (Node child : (Iterable<Node>) children) {
             // A paragraph may contain children of various types such as runs, shapes, and others.
-            if (child.getNodeType() == NodeType.RUN)
-            {
+            if (child.getNodeType() == NodeType.RUN) {
                 Run run = (Run) child;
                 System.out.println(run.getText());
             }
@@ -78,8 +71,7 @@ public class WorkingWithNode extends DocsExamplesBase
     @Test
     //ExStart:RecurseAllNodes
     //GistId:3e9d92093b2f5995f984791bfc10c944
-    public void recurseAllNodes() throws Exception
-    {
+    public void recurseAllNodes() throws Exception {
         Document doc = new Document(getMyDir() + "Paragraphs.docx");
         // Invoke the recursive function that will walk the tree.
         traverseAllNodes(doc);
@@ -89,11 +81,9 @@ public class WorkingWithNode extends DocsExamplesBase
     /// A simple function that will walk through all children of a specified node recursively 
     /// and print the type of each node to the screen.
     /// </summary>
-    private static void traverseAllNodes(CompositeNode parentNode)
-    {
+    private static void traverseAllNodes(CompositeNode parentNode) {
         // This is the most efficient way to loop through immediate children of a node.
-        for (Node childNode = parentNode.getFirstChild(); childNode != null; childNode = childNode.getNextSibling())
-        {
+        for (Node childNode = parentNode.getFirstChild(); childNode != null; childNode = childNode.getNextSibling()) {
             System.out.println(Node.nodeTypeToString(childNode.getNodeType()));
 
             // Recurse into the node if it is a composite node.
@@ -104,8 +94,7 @@ public class WorkingWithNode extends DocsExamplesBase
     //ExEnd:RecurseAllNodes
 
     @Test
-    public void typedAccess() throws Exception
-    {
+    public void typedAccess() throws Exception {
         //ExStart:TypedAccess
         //GistId:3e9d92093b2f5995f984791bfc10c944
         Document doc = new Document();
@@ -115,8 +104,7 @@ public class WorkingWithNode extends DocsExamplesBase
         // Quick typed access to all Table child nodes contained in the Body.
         TableCollection tables = body.getTables();
 
-        for (Table table : tables)
-        {
+        for (Table table : tables) {
             // Quick typed access to the first row of the table.
             table.getFirstRow().remove();
 
@@ -127,8 +115,7 @@ public class WorkingWithNode extends DocsExamplesBase
     }
 
     @Test
-    public void createAndAddParagraphNode() throws Exception
-    {
+    public void createAndAddParagraphNode() throws Exception {
         //ExStart:CreateAndAddParagraphNode
         Document doc = new Document();
 

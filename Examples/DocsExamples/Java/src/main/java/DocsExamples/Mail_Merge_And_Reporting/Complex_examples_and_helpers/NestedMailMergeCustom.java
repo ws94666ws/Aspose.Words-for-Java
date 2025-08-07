@@ -1,19 +1,18 @@
 package DocsExamples.Mail_Merge_And_Reporting.Complex_examples_and_helpers;
 
 import DocsExamples.DocsExamplesBase;
-import org.testng.annotations.Test;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
-import java.util.ArrayList;
 import com.aspose.words.IMailMergeDataSource;
 import com.aspose.words.ref.Ref;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
 
 @Test
-public class NestedMailMergeCustom extends DocsExamplesBase
-{
+public class NestedMailMergeCustom extends DocsExamplesBase {
     @Test
-    public void customMailMerge() throws Exception
-    {
+    public void customMailMerge() throws Exception {
         //ExStart:NestedMailMergeCustom
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -129,10 +128,8 @@ public class NestedMailMergeCustom extends DocsExamplesBase
     /// A custom mail merge data source that you implement to allow Aspose.Words
     /// to mail merge data from your Customer objects into Microsoft Word documents.
     /// </summary>
-    public static class CustomerMailMergeDataSource implements IMailMergeDataSource
-    {
-        public CustomerMailMergeDataSource(ArrayList<Customer> customers)
-        {
+    public static class CustomerMailMergeDataSource implements IMailMergeDataSource {
+        public CustomerMailMergeDataSource(ArrayList<Customer> customers) {
             mCustomers = customers;
 
             // When the data source is initialized, it must be positioned before the first record.
@@ -142,10 +139,8 @@ public class NestedMailMergeCustom extends DocsExamplesBase
         /// <summary>
         /// Aspose.Words calls this method to get a value for every data field.
         /// </summary>
-        public boolean getValue(String fieldName, Ref<Object> fieldValue)
-        {
-            switch (fieldName)
-            {
+        public boolean getValue(String fieldName, Ref<Object> fieldValue) {
+            switch (fieldName) {
                 case "FullName":
                     fieldValue.set(mCustomers.get(mRecordIndex).getFullName());
                     return true;
@@ -169,19 +164,17 @@ public class NestedMailMergeCustom extends DocsExamplesBase
         /// <summary>
         /// A standard implementation for moving to a next record in a collection.
         /// </summary>
-        public boolean moveNext()
-        {
+        public boolean moveNext() {
             if (!IsEof())
                 mRecordIndex++;
 
             return !IsEof();
         }
 
-        //ExStart:GetChildDataSourceExample           
-        public IMailMergeDataSource getChildDataSource(String tableName)
-        {
-            switch (tableName)
-            {
+        //ExStart:GetChildDataSource
+        //GistId:c68048adceb3bda6a1511c7d6f5ebf7b
+        public IMailMergeDataSource getChildDataSource(String tableName) {
+            switch (tableName) {
                 // Get the child collection to merge it with the region provided with tableName variable.
                 case "Order":
                     return new OrderMailMergeDataSource(mCustomers.get(mRecordIndex).getOrders());
@@ -189,10 +182,9 @@ public class NestedMailMergeCustom extends DocsExamplesBase
                     return null;
             }
         }
-        //ExEnd:GetChildDataSourceExample
+        //ExEnd:GetChildDataSource
 
-        private boolean IsEof()
-        {
+        private boolean IsEof() {
             return mRecordIndex >= mCustomers.size();
         }
 
@@ -200,10 +192,8 @@ public class NestedMailMergeCustom extends DocsExamplesBase
         private int mRecordIndex;
     }
 
-    public static class OrderMailMergeDataSource implements IMailMergeDataSource
-    {
-        public OrderMailMergeDataSource(ArrayList<NestedMailMergeCustom.Order> orders)
-        {
+    public static class OrderMailMergeDataSource implements IMailMergeDataSource {
+        public OrderMailMergeDataSource(ArrayList<NestedMailMergeCustom.Order> orders) {
             mOrders = orders;
 
             // When the data source is initialized, it must be positioned before the first record.
@@ -213,10 +203,8 @@ public class NestedMailMergeCustom extends DocsExamplesBase
         /// <summary>
         /// Aspose.Words calls this method to get a value for every data field.
         /// </summary>
-        public boolean getValue(String fieldName, /*out*/Ref<Object> fieldValue)
-        {
-            switch (fieldName)
-            {
+        public boolean getValue(String fieldName, /*out*/Ref<Object> fieldValue) {
+            switch (fieldName) {
                 case "Name":
                     fieldValue.set(mOrders.get(mRecordIndex).getName());
                     return true;
@@ -240,23 +228,20 @@ public class NestedMailMergeCustom extends DocsExamplesBase
         /// <summary>
         /// A standard implementation for moving to a next record in a collection.
         /// </summary>
-        public boolean moveNext()
-        {
+        public boolean moveNext() {
             if (!isEof())
                 mRecordIndex++;
 
             return !isEof();
         }
 
-        public IMailMergeDataSource getChildDataSource(String tableName)
-        {
+        public IMailMergeDataSource getChildDataSource(String tableName) {
             // Return null because we haven't any child elements for this sort of object.
             return null;
         }
 
-        private boolean isEof()
-        {
-            return mRecordIndex >= mOrders.size() ;
+        private boolean isEof() {
+            return mRecordIndex >= mOrders.size();
         }
 
         private ArrayList<NestedMailMergeCustom.Order> mOrders;

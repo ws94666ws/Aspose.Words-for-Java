@@ -1,9 +1,9 @@
 package DocsExamples.File_formats_and_conversions.Load_options;
 
 import DocsExamples.DocsExamplesBase;
-import org.testng.annotations.Test;
-import com.aspose.words.RtfLoadOptions;
 import com.aspose.words.Document;
+import com.aspose.words.RtfLoadOptions;
+import org.testng.annotations.Test;
 
 @Test
 public class WorkingWithRtfLoadOptions extends DocsExamplesBase {

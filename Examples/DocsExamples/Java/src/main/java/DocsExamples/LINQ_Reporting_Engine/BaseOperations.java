@@ -7,24 +7,22 @@ import TestData.TestClasses.ClientTestClass;
 import TestData.TestClasses.ColorItemTestClass;
 import TestData.TestClasses.ManagerTestClass;
 import TestData.TestClasses.SenderTestClass;
-import org.testng.annotations.Test;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.ReportingEngine;
+import org.testng.annotations.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 @Test
-public class BaseOperations extends DocsExamplesBase
-{
+public class BaseOperations extends DocsExamplesBase {
     @Test
-    public void helloWorld() throws Exception
-    {
+    public void helloWorld() throws Exception {
         //ExStart:HelloWorld
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.write("<<[sender.getName()]>> says: <<[sender.getMessage()]>>");
 
         SenderTestClass sender = new SenderTestClass();
@@ -39,8 +37,7 @@ public class BaseOperations extends DocsExamplesBase
     }
 
     @Test
-    public void singleRow() throws Exception
-    {
+    public void singleRow() throws Exception {
         //ExStart:SingleRow
         Document doc = new Document(getMyDir() + "Reporting engine template - Table row (Java).docx");
 
@@ -53,8 +50,7 @@ public class BaseOperations extends DocsExamplesBase
     }
 
     @Test
-    public void commonMasterDetail() throws Exception
-    {
+    public void commonMasterDetail() throws Exception {
         //ExStart:CommonMasterDetail
         Document doc = new Document(getMyDir() + "Reporting engine template - Common master detail (Java).docx");
 
@@ -67,8 +63,7 @@ public class BaseOperations extends DocsExamplesBase
     }
 
     @Test
-    public void conditionalBlocks() throws Exception
-    {
+    public void conditionalBlocks() throws Exception {
         //ExStart:ConditionalBlocks
         Document doc = new Document(getMyDir() + "Reporting engine template - Table row conditional blocks (Java).docx");
 
@@ -81,8 +76,7 @@ public class BaseOperations extends DocsExamplesBase
     }
 
     @Test
-    public void settingBackgroundColor() throws Exception
-    {
+    public void settingBackgroundColor() throws Exception {
         //ExStart:SettingBackgroundColor
         Document doc = new Document(getMyDir() + "Reporting engine template - Background color (Java).docx");
 

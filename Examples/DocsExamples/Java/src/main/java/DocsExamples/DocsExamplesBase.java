@@ -16,8 +16,7 @@ import org.testng.annotations.BeforeClass;
 import java.io.File;
 import java.util.Locale;
 
-public class DocsExamplesBase
-{
+public class DocsExamplesBase {
     /**
      * Test artifacts directory.
      */
@@ -28,17 +27,13 @@ public class DocsExamplesBase
      *
      * @param dir directory to be deleted
      */
-    private static void deleteDir(final File dir)
-    {
+    private static void deleteDir(final File dir) {
         String[] entries = dir.list();
-        for (String s : entries)
-        {
+        for (String s : entries) {
             File currentFile = new File(dir.getPath(), s);
-            if (currentFile.isDirectory())
-            {
+            if (currentFile.isDirectory()) {
                 deleteDir(currentFile);
-            } else
-            {
+            } else {
                 currentFile.delete();
             }
         }
@@ -54,8 +49,7 @@ public class DocsExamplesBase
     public void setUp() throws Exception {
         CurrentThreadSettings.setLocale(Locale.US);
 
-        if (artifactsDirPath.exists())
-        {
+        if (artifactsDirPath.exists()) {
             deleteDir(artifactsDirPath);
         }
         artifactsDirPath.mkdir();
@@ -67,8 +61,7 @@ public class DocsExamplesBase
      * Delete all dirs and files from directory for test artifacts.
      */
     @AfterClass(alwaysRun = true)
-    public void tearDown()
-    {
+    public void tearDown() {
         deleteDir(artifactsDirPath);
     }
 
@@ -93,56 +86,49 @@ public class DocsExamplesBase
     /**
      * Gets the path to the codebase directory.
      */
-    static String getMainDataDir()
-    {
+    static String getMainDataDir() {
         return mMainDataDir;
     }
 
     /**
      * Gets the path to the documents used by the code examples.
      */
-    public static String getMyDir()
-    {
+    public static String getMyDir() {
         return mMyDir;
     }
 
     /**
      * Gets the path to the images used by the code examples.
      */
-    public static String getImagesDir()
-    {
+    public static String getImagesDir() {
         return mImagesDir;
     }
 
     /**
      * Gets the path of the demo database.
      */
-    public static String getDatabaseDir()
-    {
+    public static String getDatabaseDir() {
         return mDatabaseDir;
     }
 
     /**
      * Gets the path to the license used by the code examples.
      */
-    static String getLicenseDir()
-    {
+    static String getLicenseDir() {
         return mLicenseDir;
     }
 
     /**
      * Gets the path to the artifacts used by the code examples.
      */
-    public static String getArtifactsDir()
-    {
+    public static String getArtifactsDir() {
         return mArtifactsDir;
     }
 
     /**
      * Gets the path of the free fonts. Ends with a back slash.
      */
-    public static String getFontsDir()
-    {
+    public static String getFontsDir() {
         return mFontsDir;
     }
 
@@ -155,10 +141,8 @@ public class DocsExamplesBase
     private static final String mArtifactsDir;
     private static final String mFontsDir;
 
-    static
-    {
-        try
-        {
+    static {
+        try {
             mAssemblyDir = System.getProperty("user.dir");
             mMainDataDir = new File(mAssemblyDir).getParentFile().getParentFile() + File.separator;
             mMyDir = mMainDataDir + "Data" + File.separator;
@@ -167,9 +151,7 @@ public class DocsExamplesBase
             mDatabaseDir = mMyDir + "Database" + File.separator;
             mLicenseDir = mMyDir + "License" + File.separator;
             mFontsDir = mMyDir + "MyFonts" + File.separator;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

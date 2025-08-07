@@ -39,7 +39,9 @@ public class ManagerTestClass extends DocsExamplesBase {
         mAge = value;
     }
 
-    public void setPhoto(byte[] value) { mPhoto = value; }
+    public void setPhoto(byte[] value) {
+        mPhoto = value;
+    }
 
     public void setContracts(final ArrayList<ContractTestClass> value) {
         mContracts = value;
@@ -53,7 +55,9 @@ public class ManagerTestClass extends DocsExamplesBase {
         return mAge;
     }
 
-    public byte[] getPhoto() { return mPhoto; }
+    public byte[] getPhoto() {
+        return mPhoto;
+    }
 
     public ArrayList<ContractTestClass> getContracts() {
         return mContracts;

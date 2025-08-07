@@ -1,17 +1,17 @@
 package DocsExamples.Mail_Merge_And_Reporting.Complex_examples_and_helpers;
 
+import com.aspose.words.BreakType;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.TextFormFieldType;
-import com.aspose.words.BreakType;
 import org.testng.annotations.Test;
 
 @Test
-public class CreateMailMergeTemplate
-{
-    //ExStart:CreateMailMergeTemplate
-    public Document template() throws Exception
-    {
+public class CreateMailMergeTemplate {
+
+    public Document template() throws Exception {
+        //ExStart:CreateMailMergeTemplate
+        //GistId:0a1baaa127443b485cc692c8d98ee353
         DocumentBuilder builder = new DocumentBuilder();
 
         // Insert a text input field the unique name of this field is "Hello", the other parameters define
@@ -32,11 +32,11 @@ public class CreateMailMergeTemplate
         builder.insertField("MERGEFIELD ProductName \\* MERGEFORMAT");
 
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", ", please download your Invoice at ",
-            0);
+                0);
         builder.insertField("MERGEFIELD InvoiceURL \\* MERGEFORMAT");
 
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "",
-            ". If you have any questions please call ", 0);
+                ". If you have any questions please call ", 0);
         builder.insertField("MERGEFIELD Supportphone \\* MERGEFORMAT");
 
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", ", or email us at ", 0);
@@ -55,7 +55,7 @@ public class CreateMailMergeTemplate
         builder.insertField("MERGEFIELD EmployeeDepartment \\* MERGEFORMAT");
 
         return builder.getDocument();
+        //ExEnd:CreateMailMergeTemplate
     }
-    //ExEnd:CreateMailMergeTemplate
 }
 

@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.*;
 
 @Test
-public class PageLayoutHelper extends DocsExamplesBase
-{
+public class PageLayoutHelper extends DocsExamplesBase {
     @Test
-    public void wrapperToAccessLayoutEntities() throws Exception
-    {
+    public void wrapperToAccessLayoutEntities() throws Exception {
         // This sample introduces the RenderedDocument class and other related classes which provide an API wrapper for 
         // the LayoutEnumerator. This allows you to access the layout entities of a document using a DOM style API.
         Document doc = new Document(getMyDir() + "Document layout.docx");
@@ -34,8 +32,7 @@ public class PageLayoutHelper extends DocsExamplesBase
         System.out.println();
 
         // Loop through each page in the document and print how many lines appear on each page.
-        for (RenderedPage page : layoutDoc.getPages())
-        {
+        for (RenderedPage page : layoutDoc.getPages()) {
             LayoutCollection<LayoutEntity> lines = page.getChildEntities(LayoutEntityType.LINE, true);
             System.out.println(MessageFormat.format("Page {0} has {1} lines.", page.getPageIndex(), lines.getCount()));
         }
@@ -45,8 +42,7 @@ public class PageLayoutHelper extends DocsExamplesBase
         System.out.println();
         System.out.println("The lines of the second paragraph:");
         for (LayoutEntity layoutEntity : layoutDoc.getLayoutEntitiesOfNode(
-            doc.getFirstSection().getBody().getParagraphs().get(1)))
-        {
+                doc.getFirstSection().getBody().getParagraphs().get(1))) {
             RenderedLine paragraphLine = (RenderedLine) layoutEntity;
             System.out.println("\"{paragraphLine.Text.Trim()}\"");
             System.out.println(paragraphLine.getRectangle().toString());
@@ -59,8 +55,7 @@ public class PageLayoutHelper extends DocsExamplesBase
 /// Provides an API wrapper for the LayoutEnumerator class to access the page layout
 /// of a document presented in an object model like the design.
 /// </summary>
-class RenderedDocument extends LayoutEntity
-{
+class RenderedDocument extends LayoutEntity {
     /// <summary>
     /// Creates a new instance from the supplied Document class.
     /// </summary>
@@ -69,8 +64,7 @@ class RenderedDocument extends LayoutEntity
     /// <see cref="Document.UpdatePageLayout"/> to build it.</para>
     /// <para>Whenever document is updated and new page layout model is created,
     /// a new RenderedDocument instance must be used to access the changes.</para></remarks>
-    public RenderedDocument(Document doc) throws Exception
-    {
+    public RenderedDocument(Document doc) throws Exception {
         mLayoutCollector = new LayoutCollector(doc);
         mEnumerator = new LayoutEnumerator(doc);
 
@@ -90,8 +84,7 @@ class RenderedDocument extends LayoutEntity
     /// Returns all the layout entities of the specified node.
     /// </summary>
     /// <remarks>Note that this method does not work with Run nodes or nodes in the header or footer.</remarks>
-    LayoutCollection<LayoutEntity> getLayoutEntitiesOfNode(Node node)
-    {
+    LayoutCollection<LayoutEntity> getLayoutEntitiesOfNode(Node node) {
         if (!mLayoutCollector.getDocument().equals(node.getDocument()))
             throw new IllegalArgumentException("Node does not belong to the same document which was rendered.");
 
@@ -101,14 +94,12 @@ class RenderedDocument extends LayoutEntity
         ArrayList<LayoutEntity> entities = new ArrayList<LayoutEntity>();
 
         // Retrieve all entities from the layout document (inversion of LayoutEntityType.None).
-        for (LayoutEntity entity : getChildEntities(~LayoutEntityType.NONE, true))
-        {
+        for (LayoutEntity entity : getChildEntities(~LayoutEntityType.NONE, true)) {
             if (entity.getParentNode() == node)
                 entities.add(entity);
 
             // There is no table entity in rendered output, so manually check if rows belong to a table node.
-            if (entity.getType() == LayoutEntityType.ROW)
-            {
+            if (entity.getType() == LayoutEntityType.ROW) {
                 RenderedRow row = (RenderedRow) entity;
                 if (row.getTable() == node)
                     entities.add(entity);
@@ -118,14 +109,11 @@ class RenderedDocument extends LayoutEntity
         return new LayoutCollection<>(entities);
     }
 
-    private void processLayoutElements(LayoutEntity current) throws Exception
-    {
-        do
-        {
+    private void processLayoutElements(LayoutEntity current) throws Exception {
+        do {
             LayoutEntity child = current.addChildEntity(mEnumerator);
 
-            if (mEnumerator.moveFirstChild())
-            {
+            if (mEnumerator.moveFirstChild()) {
                 current = child;
 
                 processLayoutElements(current);
@@ -136,31 +124,23 @@ class RenderedDocument extends LayoutEntity
         } while (mEnumerator.moveNext());
     }
 
-    private void collectLinesAndAddToMarkers()
-    {
+    private void collectLinesAndAddToMarkers() {
         collectLinesOfMarkersCore(LayoutEntityType.COLUMN);
         collectLinesOfMarkersCore(LayoutEntityType.COMMENT);
     }
 
-    private void collectLinesOfMarkersCore(int type)
-    {
+    private void collectLinesOfMarkersCore(int type) {
         ArrayList<RenderedLine> collectedLines = new ArrayList<>();
 
-        for (RenderedPage page : getPages())
-        {
-            for (LayoutEntity story : page.getChildEntities(type, false))
-            {
-                for (LayoutEntity le : story.getChildEntities(LayoutEntityType.LINE, true))
-                {
+        for (RenderedPage page : getPages()) {
+            for (LayoutEntity story : page.getChildEntities(type, false)) {
+                for (LayoutEntity le : story.getChildEntities(LayoutEntityType.LINE, true)) {
                     RenderedLine line = (RenderedLine) le;
                     collectedLines.add(line);
-                    for (RenderedSpan span : line.getSpans())
-                    {
-                        if (mLayoutToNodeLookup.containsKey(span.getLayoutObject()))
-                        {
+                    for (RenderedSpan span : line.getSpans()) {
+                        if (mLayoutToNodeLookup.containsKey(span.getLayoutObject())) {
                             if ("PARAGRAPH".equals(span.getKind()) || "ROW".equals(span.getKind()) || "CELL".equals(span.getKind()) ||
-                                "SECTION".equals(span.getKind()))
-                            {
+                                    "SECTION".equals(span.getKind())) {
                                 Node node = mLayoutToNodeLookup.get(span.getLayoutObject());
 
                                 if (node.getNodeType() == NodeType.ROW)
@@ -170,9 +150,7 @@ class RenderedDocument extends LayoutEntity
                                     collectedLine.setParentNode(node);
 
                                 collectedLines = new ArrayList<>();
-                            }
-                            else
-                            {
+                            } else {
                                 span.setParentNode(mLayoutToNodeLookup.get(span.getLayoutObject()));
                             }
                         }
@@ -182,10 +160,8 @@ class RenderedDocument extends LayoutEntity
         }
     }
 
-    private void linkLayoutMarkersToNodes(Document doc) throws Exception
-    {
-        for (Node node : (Iterable<Node>) doc.getChildNodes(NodeType.ANY, true))
-        {
+    private void linkLayoutMarkersToNodes(Document doc) throws Exception {
+        for (Node node : (Iterable<Node>) doc.getChildNodes(NodeType.ANY, true)) {
             Object entity = mLayoutCollector.getEntity(node);
 
             if (entity != null)
@@ -201,8 +177,7 @@ class RenderedDocument extends LayoutEntity
 /// <summary>
 /// Provides the base class for rendered elements of a document.
 /// </summary>
-abstract class LayoutEntity
-{
+abstract class LayoutEntity {
     public final int getPageIndex() {
         return mPageIndex;
     }
@@ -214,16 +189,16 @@ abstract class LayoutEntity
         return mRectangle;
     }
 
-    public final int getType() { return mType; }
+    public final int getType() {
+        return mType;
+    }
 
     /// <summary>
     /// Exports the contents of the entity into a string in plain text format.
     /// </summary>
-    public String getText()
-    {
+    public String getText() {
         StringBuilder builder = new StringBuilder();
-        for (LayoutEntity entity : mChildEntities)
-        {
+        for (LayoutEntity entity : mChildEntities) {
             builder.append(entity.getText());
         }
 
@@ -246,34 +221,40 @@ abstract class LayoutEntity
     /// <summary>
     /// Internal method separate from ParentNode property to make code autoportable to VB.NET.
     /// </summary>
-    public void setParentNode(Node value)
-    {
+    public void setParentNode(Node value) {
         mParentNode = value;
     }
 
     /// <summary>
     /// Reserved for internal use.
     /// </summary>
-    Object getLayoutObject() { return mLayoutObject; }; void setLayoutObject(Object value) { mLayoutObject = value; };
+    Object getLayoutObject() {
+        return mLayoutObject;
+    }
+
+    ;
+
+    void setLayoutObject(Object value) {
+        mLayoutObject = value;
+    }
+
+    ;
 
     private Object mLayoutObject;
 
     /// <summary>
     /// Reserved for internal use.
     /// </summary>
-    LayoutEntity addChildEntity(LayoutEnumerator it) throws Exception
-    {
+    LayoutEntity addChildEntity(LayoutEnumerator it) throws Exception {
         LayoutEntity child = createLayoutEntityFromType(it);
         mChildEntities.add(child);
 
         return child;
     }
 
-    private LayoutEntity createLayoutEntityFromType(LayoutEnumerator it) throws Exception
-    {
+    private LayoutEntity createLayoutEntityFromType(LayoutEnumerator it) throws Exception {
         LayoutEntity childEntity;
-        switch (it.getType())
-        {
+        switch (it.getType()) {
             case LayoutEntityType.CELL:
                 childEntity = new RenderedCell();
                 break;
@@ -338,12 +319,10 @@ abstract class LayoutEntity
     /// <param name="type">Specifies the type of entities to select.</param>
     /// <param name="isDeep">True to select from all child entities recursively.
     /// False to select only among immediate children</param>
-    public LayoutCollection<LayoutEntity> getChildEntities(int type, boolean isDeep)
-    {
+    public LayoutCollection<LayoutEntity> getChildEntities(int type, boolean isDeep) {
         ArrayList<LayoutEntity> childList = new ArrayList<>();
 
-        for (LayoutEntity entity : mChildEntities)
-        {
+        for (LayoutEntity entity : mChildEntities) {
             if ((entity.getType() & type) == entity.getType())
                 childList.add(entity);
 
@@ -354,8 +333,7 @@ abstract class LayoutEntity
         return new LayoutCollection<>(childList);
     }
 
-    protected <T extends LayoutEntity> LayoutCollection<T> getChildNodes(T t)
-    {
+    protected <T extends LayoutEntity> LayoutCollection<T> getChildNodes(T t) {
         T obj = t;
         ArrayList<T> childList = new ArrayList<>();
 
@@ -381,13 +359,11 @@ abstract class LayoutEntity
 /// <summary>
 /// Represents a generic collection of layout entity types.
 /// </summary>
-final class LayoutCollection<T extends LayoutEntity> implements Iterable<T>
-{
+final class LayoutCollection<T extends LayoutEntity> implements Iterable<T> {
     /// <summary>
     /// Reserved for internal use.
     /// </summary>
-    LayoutCollection(ArrayList<T> baseList)
-    {
+    LayoutCollection(ArrayList<T> baseList) {
         mBaseList = baseList;
     }
 
@@ -401,8 +377,7 @@ final class LayoutCollection<T extends LayoutEntity> implements Iterable<T>
     /// <summary>
     /// Provides a simple "foreach" style iteration over the collection of nodes. 
     /// </summary>
-    public Iterator<T> iterator()
-    {
+    public Iterator<T> iterator() {
         return mBaseList.iterator();
     }
 
@@ -451,8 +426,7 @@ final class LayoutCollection<T extends LayoutEntity> implements Iterable<T>
 /// <summary>
 /// Represents an entity that contains lines and rows.
 /// </summary>
-abstract class StoryLayoutEntity extends LayoutEntity
-{
+abstract class StoryLayoutEntity extends LayoutEntity {
     /// <summary>
     /// Provides access to the lines of a story.
     /// </summary>
@@ -471,8 +445,7 @@ abstract class StoryLayoutEntity extends LayoutEntity
 /// <summary>
 /// Represents line of characters of text and inline objects.
 /// </summary>
-class RenderedLine extends LayoutEntity
-{
+class RenderedLine extends LayoutEntity {
     @Override
     public String getText() {
         return super.getText() + "\n";
@@ -494,14 +467,11 @@ class RenderedLine extends LayoutEntity
 /// Represents one or more characters in a line.
 /// This include special characters like field start/end markers, bookmarks, shapes and comments.
 /// </summary>
-class RenderedSpan extends LayoutEntity
-{
-    public RenderedSpan()
-    {
+class RenderedSpan extends LayoutEntity {
+    public RenderedSpan() {
     }
 
-    RenderedSpan(String text)
-    {
+    RenderedSpan(String text) {
         // Assign empty text if the span text is null (this can happen with shape spans).
         mText = (text != null ? text : "");
     }
@@ -529,8 +499,7 @@ class RenderedSpan extends LayoutEntity
 /// <summary>
 /// Represents the header/footer content on a page.
 /// </summary>
-class RenderedHeaderFooter extends StoryLayoutEntity
-{
+class RenderedHeaderFooter extends StoryLayoutEntity {
     /// <summary>
     /// Returns the type of the header or footer.
     /// </summary>
@@ -542,8 +511,7 @@ class RenderedHeaderFooter extends StoryLayoutEntity
 /// <summary>
 /// Represents page of a document.
 /// </summary>
-class RenderedPage extends LayoutEntity
-{
+class RenderedPage extends LayoutEntity {
     /// <summary>
     /// Provides access to the columns of the page.
     /// </summary>
@@ -578,8 +546,7 @@ class RenderedPage extends LayoutEntity
 /// <summary>
 /// Represents a table row.
 /// </summary>
-class RenderedRow extends LayoutEntity
-{
+class RenderedRow extends LayoutEntity {
     public final LayoutCollection<RenderedCell> getCells() {
         return getChildNodes(new RenderedCell());
     }
@@ -609,8 +576,7 @@ class RenderedRow extends LayoutEntity
 /// <summary>
 /// Represents a column of text on a page.
 /// </summary>
-class RenderedColumn extends StoryLayoutEntity
-{
+class RenderedColumn extends StoryLayoutEntity {
     public final LayoutCollection<RenderedFootnote> getFootnotes() {
         return getChildNodes(new RenderedFootnote());
     }
@@ -645,8 +611,7 @@ class RenderedColumn extends StoryLayoutEntity
 /// <summary>
 /// Represents a table cell.
 /// </summary>
-class RenderedCell extends StoryLayoutEntity
-{
+class RenderedCell extends StoryLayoutEntity {
     public final Cell getCell() {
         return (Cell) getParentNode();
     }
@@ -664,8 +629,7 @@ class RenderedCell extends StoryLayoutEntity
 /// <summary>
 /// Represents placeholder for footnote content.
 /// </summary>
-class RenderedFootnote extends StoryLayoutEntity
-{
+class RenderedFootnote extends StoryLayoutEntity {
     public final Footnote getFootnote() {
         return (Footnote) getParentNode();
     }
@@ -682,8 +646,7 @@ class RenderedFootnote extends StoryLayoutEntity
 /// <summary>
 /// Represents placeholder for endnote content.
 /// </summary>
-class RenderedEndnote extends StoryLayoutEntity
-{
+class RenderedEndnote extends StoryLayoutEntity {
     /// <summary>
     /// Returns the endnote that corresponds to the layout entity.  
     /// </summary>
@@ -700,8 +663,7 @@ class RenderedEndnote extends StoryLayoutEntity
 /// <summary>
 /// Represents text area inside of a shape.
 /// </summary>
-class RenderedTextBox extends StoryLayoutEntity
-{
+class RenderedTextBox extends StoryLayoutEntity {
     /// <summary>
     /// Returns the Shape or DrawingML that corresponds to the layout entity.  
     /// </summary>
@@ -720,8 +682,7 @@ class RenderedTextBox extends StoryLayoutEntity
 /// <summary>
 /// Represents placeholder for comment content.
 /// </summary>
-class RenderedComment extends StoryLayoutEntity
-{
+class RenderedComment extends StoryLayoutEntity {
     public final Comment getComment() {
         return (Comment) getParentNode();
     }
@@ -738,8 +699,7 @@ class RenderedComment extends StoryLayoutEntity
 /// <summary>
 /// Represents footnote/endnote separator.
 /// </summary>
-class RenderedNoteSeparator extends StoryLayoutEntity
-{
+class RenderedNoteSeparator extends StoryLayoutEntity {
     /// <summary>
     /// Returns the footnote/endnote that corresponds to the layout entity.  
     /// </summary>

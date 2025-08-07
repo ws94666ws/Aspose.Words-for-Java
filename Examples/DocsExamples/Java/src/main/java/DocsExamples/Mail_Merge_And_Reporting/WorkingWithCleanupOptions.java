@@ -1,25 +1,23 @@
 package DocsExamples.Mail_Merge_And_Reporting;
 
 import DocsExamples.DocsExamplesBase;
-import org.testng.annotations.Test;
 import com.aspose.words.Document;
-import com.aspose.words.net.System.Data.DataSet;
-import com.aspose.words.MailMergeCleanupOptions;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.FieldMergeField;
+import com.aspose.words.MailMergeCleanupOptions;
+import com.aspose.words.net.System.Data.DataSet;
+import org.testng.annotations.Test;
 
 @Test
-public class WorkingWithCleanupOptions extends DocsExamplesBase
-{
+public class WorkingWithCleanupOptions extends DocsExamplesBase {
     @Test
-    public void removeRowsFromTable() throws Exception
-    {
+    public void removeRowsFromTable() throws Exception {
         //ExStart:RemoveRowsFromTable
         Document doc = new Document(getMyDir() + "Mail merge destination - Northwind suppliers.docx");
-        
+
         DataSet data = new DataSet();
         doc.getMailMerge().setCleanupOptions(MailMergeCleanupOptions.REMOVE_UNUSED_REGIONS |
-                                       MailMergeCleanupOptions.REMOVE_EMPTY_TABLE_ROWS);
+                MailMergeCleanupOptions.REMOVE_EMPTY_TABLE_ROWS);
 
         doc.getMailMerge().setMergeDuplicateRegions(true);
         doc.getMailMerge().executeWithRegions(data);
@@ -29,8 +27,7 @@ public class WorkingWithCleanupOptions extends DocsExamplesBase
     }
 
     @Test
-    public void cleanupParagraphsWithPunctuationMarks() throws Exception
-    {
+    public void cleanupParagraphsWithPunctuationMarks() throws Exception {
         //ExStart:CleanupParagraphsWithPunctuationMarks
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -49,16 +46,16 @@ public class WorkingWithCleanupOptions extends DocsExamplesBase
         // If you rely on the old behavior can revert it by setting the option to false.
         doc.getMailMerge().setCleanupParagraphsWithPunctuationMarks(true);
 
-        doc.getMailMerge().execute(new String[] { "Option_1", "Option_2" }, new Object[] { null, null });
+        doc.getMailMerge().execute(new String[]{"Option_1", "Option_2"}, new Object[]{null, null});
 
         doc.save(getArtifactsDir() + "WorkingWithCleanupOptions.CleanupParagraphsWithPunctuationMarks.docx");
         //ExEnd:CleanupParagraphsWithPunctuationMarks
     }
 
     @Test
-    public void removeUnmergedRegions() throws Exception
-    {
+    public void removeUnmergedRegions() throws Exception {
         //ExStart:RemoveUnmergedRegions
+        //GistId:f39874821cb317d245a769c9ce346fea
         Document doc = new Document(getMyDir() + "Mail merge destination - Northwind suppliers.docx");
 
         DataSet data = new DataSet();
@@ -66,7 +63,7 @@ public class WorkingWithCleanupOptions extends DocsExamplesBase
         doc.getMailMerge().setCleanupOptions(MailMergeCleanupOptions.REMOVE_UNUSED_REGIONS);
         // doc.MailMerge.CleanupOptions = MailMergeCleanupOptions.RemoveContainingFields;
         // doc.MailMerge.CleanupOptions |= MailMergeCleanupOptions.RemoveStaticFields;
-        // doc.MailMerge.CleanupOptions |= MailMergeCleanupOptions.RemoveEmptyParagraphs;           
+        // doc.MailMerge.CleanupOptions |= MailMergeCleanupOptions.RemoveEmptyParagraphs;
         // doc.MailMerge.CleanupOptions |= MailMergeCleanupOptions.RemoveUnusedFields;
         //ExEnd:MailMergeCleanupOptions
 
@@ -79,60 +76,60 @@ public class WorkingWithCleanupOptions extends DocsExamplesBase
     }
 
     @Test
-    public void removeEmptyParagraphs() throws Exception
-    {
+    public void removeEmptyParagraphs() throws Exception {
         //ExStart:RemoveEmptyParagraphs
+        //GistId:f39874821cb317d245a769c9ce346fea
         Document doc = new Document(getMyDir() + "Table with fields.docx");
 
         doc.getMailMerge().setCleanupOptions(MailMergeCleanupOptions.REMOVE_EMPTY_PARAGRAPHS);
 
-        doc.getMailMerge().execute(new String[] { "FullName", "Company", "Address", "Address2", "City" },
-            new Object[] { "James Bond", "MI5 Headquarters", "Milbank", "", "London" });
+        doc.getMailMerge().execute(new String[]{"FullName", "Company", "Address", "Address2", "City"},
+                new Object[]{"James Bond", "MI5 Headquarters", "Milbank", "", "London"});
 
         doc.save(getArtifactsDir() + "WorkingWithCleanupOptions.RemoveEmptyParagraphs.docx");
         //ExEnd:RemoveEmptyParagraphs
     }
 
     @Test
-    public void removeUnusedFields() throws Exception
-    {
+    public void removeUnusedFields() throws Exception {
         //ExStart:RemoveUnusedFields
+        //GistId:f39874821cb317d245a769c9ce346fea
         Document doc = new Document(getMyDir() + "Table with fields.docx");
 
         doc.getMailMerge().setCleanupOptions(MailMergeCleanupOptions.REMOVE_UNUSED_FIELDS);
 
-        doc.getMailMerge().execute(new String[] { "FullName", "Company", "Address", "Address2", "City" },
-            new Object[] { "James Bond", "MI5 Headquarters", "Milbank", "", "London" });
+        doc.getMailMerge().execute(new String[]{"FullName", "Company", "Address", "Address2", "City"},
+                new Object[]{"James Bond", "MI5 Headquarters", "Milbank", "", "London"});
 
         doc.save(getArtifactsDir() + "WorkingWithCleanupOptions.RemoveUnusedFields.docx");
         //ExEnd:RemoveUnusedFields
     }
 
     @Test
-    public void removeContainingFields() throws Exception
-    {
+    public void removeContainingFields() throws Exception {
         //ExStart:RemoveContainingFields
+        //GistId:f39874821cb317d245a769c9ce346fea
         Document doc = new Document(getMyDir() + "Table with fields.docx");
 
         doc.getMailMerge().setCleanupOptions(MailMergeCleanupOptions.REMOVE_CONTAINING_FIELDS);
 
-        doc.getMailMerge().execute(new String[] { "FullName", "Company", "Address", "Address2", "City" },
-            new Object[] { "James Bond", "MI5 Headquarters", "Milbank", "", "London" });
+        doc.getMailMerge().execute(new String[]{"FullName", "Company", "Address", "Address2", "City"},
+                new Object[]{"James Bond", "MI5 Headquarters", "Milbank", "", "London"});
 
         doc.save(getArtifactsDir() + "WorkingWithCleanupOptions.RemoveContainingFields.docx");
         //ExEnd:RemoveContainingFields
     }
 
     @Test
-    public void removeEmptyTableRows() throws Exception
-    {
+    public void removeEmptyTableRows() throws Exception {
         //ExStart:RemoveEmptyTableRows
+        //GistId:f39874821cb317d245a769c9ce346fea
         Document doc = new Document(getMyDir() + "Table with fields.docx");
 
         doc.getMailMerge().setCleanupOptions(MailMergeCleanupOptions.REMOVE_EMPTY_TABLE_ROWS);
 
-        doc.getMailMerge().execute(new String[] { "FullName", "Company", "Address", "Address2", "City" },
-            new Object[] { "James Bond", "MI5 Headquarters", "Milbank", "", "London" });
+        doc.getMailMerge().execute(new String[]{"FullName", "Company", "Address", "Address2", "City"},
+                new Object[]{"James Bond", "MI5 Headquarters", "Milbank", "", "London"});
 
         doc.save(getArtifactsDir() + "WorkingWithCleanupOptions.RemoveEmptyTableRows.docx");
         //ExEnd:RemoveEmptyTableRows

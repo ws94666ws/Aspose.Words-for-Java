@@ -108,8 +108,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
 
 
     @Test
-    public void loadWithEncoding() throws Exception
-    {
+    public void loadWithEncoding() throws Exception {
         //ExStart:LoadWithEncoding
         //GistId:40be8275fc43f78f5e5877212e4e1bf3
         LoadOptions loadOptions = new LoadOptions();
@@ -121,8 +120,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     }
 
     @Test
-    public void convertMetafilesToPng() throws Exception
-    {
+    public void convertMetafilesToPng() throws Exception {
         //ExStart:ConvertMetafilesToPng
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setConvertMetafilesToPng(true);

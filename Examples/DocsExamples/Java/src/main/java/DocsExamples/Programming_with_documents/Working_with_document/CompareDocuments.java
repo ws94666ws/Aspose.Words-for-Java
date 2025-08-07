@@ -7,16 +7,14 @@ import org.testng.annotations.Test;
 import java.util.Date;
 
 @Test
-public class CompareDocuments extends DocsExamplesBase
-{
+public class CompareDocuments extends DocsExamplesBase {
     @Test
-    public void compareForEqual() throws Exception
-    {
+    public void compareForEqual() throws Exception {
         //ExStart:CompareForEqual
         //GistId:66cba61d079d8ef1e676820633ba4586
         Document docA = new Document(getMyDir() + "Document.docx");
         Document docB = docA.deepClone();
-        
+
         // DocA now contains changes as revisions.
         docA.compare(docB, "user", new Date());
 
@@ -25,8 +23,7 @@ public class CompareDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void compareOptions() throws Exception
-    {
+    public void compareOptions() throws Exception {
         //ExStart:CompareOptions
         //GistId:66cba61d079d8ef1e676820633ba4586
         Document docA = new Document(getMyDir() + "Document.docx");
@@ -51,22 +48,24 @@ public class CompareDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void comparisonTarget() throws Exception
-    {
+    public void comparisonTarget() throws Exception {
         //ExStart:ComparisonTarget
         Document docA = new Document(getMyDir() + "Document.docx");
         Document docB = docA.deepClone();
 
         // Relates to Microsoft Word "Show changes in" option in "Compare Documents" dialog box.
-        CompareOptions options = new CompareOptions(); { options.setIgnoreFormatting(true); options.setTarget(ComparisonTargetType.NEW); }
+        CompareOptions options = new CompareOptions();
+        {
+            options.setIgnoreFormatting(true);
+            options.setTarget(ComparisonTargetType.NEW);
+        }
 
         docA.compare(docB, "user", new Date(), options);
         //ExEnd:ComparisonTarget
     }
 
     @Test
-    public void comparisonGranularity() throws Exception
-    {
+    public void comparisonGranularity() throws Exception {
         //ExStart:ComparisonGranularity
         DocumentBuilder builderA = new DocumentBuilder(new Document());
         DocumentBuilder builderB = new DocumentBuilder(new Document());
@@ -74,7 +73,10 @@ public class CompareDocuments extends DocsExamplesBase
         builderA.writeln("This is A simple word");
         builderB.writeln("This is B simple words");
 
-        CompareOptions compareOptions = new CompareOptions(); { compareOptions.setGranularity(Granularity.CHAR_LEVEL); }
+        CompareOptions compareOptions = new CompareOptions();
+        {
+            compareOptions.setGranularity(Granularity.CHAR_LEVEL);
+        }
 
         builderA.getDocument().compare(builderB.getDocument(), "author", new Date(), compareOptions);
         //ExEnd:ComparisonGranularity      

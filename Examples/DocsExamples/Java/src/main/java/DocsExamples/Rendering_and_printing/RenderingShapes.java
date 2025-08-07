@@ -14,19 +14,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 @Test
-public class RenderingShapes extends DocsExamplesBase
-{
+public class RenderingShapes extends DocsExamplesBase {
     @Test
-    public void renderShapeAsEmf() throws Exception
-    {
+    public void renderShapeAsEmf() throws Exception {
         Document doc = new Document(getMyDir() + "Rendering.docx");
-        
         // Retrieve the target shape from the document.
         Shape shape = (Shape) doc.getChild(NodeType.SHAPE, 0, true);
 
         //ExStart:RenderShapeAsEmf
+        //GistId:7fc867ac8ef1b729b6f70580fbc5b3f9
         ShapeRenderer render = shape.getShapeRenderer();
-
         ImageSaveOptions imageOptions = new ImageSaveOptions(SaveFormat.EMF);
         {
             imageOptions.setScale(1.5f);
@@ -37,26 +34,23 @@ public class RenderingShapes extends DocsExamplesBase
     }
 
     @Test
-    public void renderShapeAsJpeg() throws Exception
-    {
+    public void renderShapeAsJpeg() throws Exception {
         Document doc = new Document(getMyDir() + "Rendering.docx");
-        
+
         Shape shape = (Shape) doc.getChild(NodeType.SHAPE, 0, true);
 
         //ExStart:RenderShapeAsJpeg
+        //GistId:7fc867ac8ef1b729b6f70580fbc5b3f9
         ShapeRenderer render = new ShapeRenderer(shape);
-
         ImageSaveOptions imageOptions = new ImageSaveOptions(SaveFormat.JPEG);
         {
             // Output the image in gray scale
             imageOptions.setImageColorMode(ImageColorMode.GRAYSCALE);
-
             // Reduce the brightness a bit (default is 0.5f)
             imageOptions.setImageBrightness(0.45f);
         }
 
-        try (FileOutputStream stream = new FileOutputStream(getArtifactsDir() + "RenderShape.RenderShapeAsJpeg.jpg"))
-        {
+        try (FileOutputStream stream = new FileOutputStream(getArtifactsDir() + "RenderShape.RenderShapeAsJpeg.jpg")) {
             render.save(stream, imageOptions);
         }
         //ExEnd:RenderShapeAsJpeg
@@ -64,11 +58,11 @@ public class RenderingShapes extends DocsExamplesBase
 
     @Test
     //ExStart:RenderShapeToGraphics
+    //GistId:7fc867ac8ef1b729b6f70580fbc5b3f9
     public void renderShapeToGraphics() throws Exception {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         Shape shape = (Shape) doc.getChild(NodeType.SHAPE, 0, true);
-
         ShapeRenderer render = shape.getShapeRenderer();
 
         // Find the size that the shape will be rendered to at the specified scale and resolution.
@@ -105,20 +99,18 @@ public class RenderingShapes extends DocsExamplesBase
     //ExEnd:RenderShapeToGraphics
 
     @Test
-    public void renderCellToImage() throws Exception
-    {
+    public void renderCellToImage() throws Exception {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         //ExStart:RenderCellToImage
-        Cell cell = (Cell)doc.getChild(NodeType.CELL, 2, true);
+        Cell cell = (Cell) doc.getChild(NodeType.CELL, 2, true);
         Document tmp = convertToImage(doc, cell);
         tmp.save(getArtifactsDir() + "RenderShape.RenderCellToImage.png");
         //ExEnd:RenderCellToImage
     }
 
     @Test
-    public void renderRowToImage() throws Exception
-    {
+    public void renderRowToImage() throws Exception {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         //ExStart:RenderRowToImage
@@ -129,14 +121,13 @@ public class RenderingShapes extends DocsExamplesBase
     }
 
     @Test
-    public void renderParagraphToImage() throws Exception
-    {
+    public void renderParagraphToImage() throws Exception {
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         //ExStart:RenderParagraphToImage
         Shape textBoxShape = builder.insertShape(ShapeType.TEXT_BOX, 150.0, 100.0);
-        
+
         builder.moveTo(textBoxShape.getLastParagraph());
         builder.write("Vertical text");
 
@@ -156,6 +147,7 @@ public class RenderingShapes extends DocsExamplesBase
         Shape shape = (Shape) doc.getChild(NodeType.SHAPE, 0, true);
 
         //ExStart:FindShapeSizes
+        //GistId:7fc867ac8ef1b729b6f70580fbc5b3f9
         Point2D.Float shapeSizeInDocument = shape.getShapeRenderer().getSizeInPoints();
         float width = shapeSizeInDocument.x; // The width of the shape.
         float height = shapeSizeInDocument.y; // The height of the shape.
@@ -175,12 +167,12 @@ public class RenderingShapes extends DocsExamplesBase
     }
 
     @Test
-    public void renderShapeImage() throws Exception
-    {
+    public void renderShapeImage() throws Exception {
         Document doc = new Document(getMyDir() + "Rendering.docx");
-        
+
         Shape shape = (Shape) doc.getChild(NodeType.SHAPE, 0, true);
         //ExStart:RenderShapeImage
+        //GistId:7fc867ac8ef1b729b6f70580fbc5b3f9
         shape.getShapeRenderer().save(getArtifactsDir() + "RenderShape.RenderShapeImage.jpg", new ImageSaveOptions(SaveFormat.JPEG));
         //ExEnd:RenderShapeImage
     }
@@ -190,8 +182,7 @@ public class RenderingShapes extends DocsExamplesBase
     /// </summary>
     /// <param name="doc">The current document.</param>
     /// <param name="node">The node to render.</param>
-    private static Document convertToImage(Document doc, CompositeNode node) throws Exception
-    {
+    private static Document convertToImage(Document doc, CompositeNode node) throws Exception {
         Document tmp = createTemporaryDocument(doc, node);
         appendNodeContent(tmp, node);
         adjustDocumentLayout(tmp);
@@ -201,9 +192,8 @@ public class RenderingShapes extends DocsExamplesBase
     /// <summary>
     /// Creates a temporary document for further rendering.
     /// </summary>
-    private static Document createTemporaryDocument(Document doc, CompositeNode node)
-    {
-        Document tmp = (Document)doc.deepClone(false);
+    private static Document createTemporaryDocument(Document doc, CompositeNode node) {
+        Document tmp = (Document) doc.deepClone(false);
         tmp.getSections().add(tmp.importNode(node.getAncestor(NodeType.SECTION), false, ImportFormatMode.USE_DESTINATION_STYLES));
         tmp.getFirstSection().appendChild(new Body(tmp));
         tmp.getFirstSection().getPageSetup().setTopMargin(0.0);
@@ -215,22 +205,18 @@ public class RenderingShapes extends DocsExamplesBase
     /// <summary>
     /// Adds a node to a temporary document.
     /// </summary>
-    private static void appendNodeContent(Document tmp, CompositeNode node)
-    {
+    private static void appendNodeContent(Document tmp, CompositeNode node) {
         if (node.getNodeType() == NodeType.HEADER_FOOTER) {
             for (Node hfNode : node.getChildNodes(NodeType.ANY, false).toArray())
                 tmp.getFirstSection().getBody().appendChild(tmp.importNode(hfNode, true, ImportFormatMode.USE_DESTINATION_STYLES));
-        }
-        else
+        } else
             appendNonHeaderFooterContent(tmp, node);
     }
 
-    private static void appendNonHeaderFooterContent(Document tmp, CompositeNode node)
-    {
+    private static void appendNonHeaderFooterContent(Document tmp, CompositeNode node) {
         Node parentNode = node.getParentNode();
-        while (!(parentNode instanceof InlineStory || parentNode instanceof Story || parentNode instanceof ShapeBase))
-        {
-            CompositeNode parent = (CompositeNode)parentNode.deepClone(false);
+        while (!(parentNode instanceof InlineStory || parentNode instanceof Story || parentNode instanceof ShapeBase)) {
+            CompositeNode parent = (CompositeNode) parentNode.deepClone(false);
             parent.appendChild(node.deepClone(true));
             node = parent;
 
@@ -243,8 +229,7 @@ public class RenderingShapes extends DocsExamplesBase
     /// <summary>
     /// Adjusts the layout of the document to fit the content area.
     /// </summary>
-    private static void adjustDocumentLayout(Document tmp) throws Exception
-    {
+    private static void adjustDocumentLayout(Document tmp) throws Exception {
         LayoutEnumerator enumerator = new LayoutEnumerator(tmp);
         Rectangle2D.Float rect = new Rectangle2D.Float(0f, 0f, 0f, 0f);
         rect = calculateVisibleRect(enumerator, rect);
@@ -256,13 +241,10 @@ public class RenderingShapes extends DocsExamplesBase
     /// <summary>
     /// Calculates the visible area of the content.
     /// </summary>
-    private static Rectangle2D.Float calculateVisibleRect(LayoutEnumerator enumerator, Rectangle2D.Float rect) throws Exception
-    {
+    private static Rectangle2D.Float calculateVisibleRect(LayoutEnumerator enumerator, Rectangle2D.Float rect) throws Exception {
         Rectangle2D.Float result = rect;
-        do
-        {
-            if (enumerator.moveFirstChild())
-            {
+        do {
+            if (enumerator.moveFirstChild()) {
                 if (enumerator.getType() == LayoutEntityType.LINE || enumerator.getType() == LayoutEntityType.SPAN) {
                     if (result.isEmpty())
                         result = enumerator.getRectangle();

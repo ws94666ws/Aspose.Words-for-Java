@@ -8,11 +8,9 @@ import java.awt.*;
 import java.text.MessageFormat;
 
 @Test
-public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
-{
+public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
     @Test
-    public void optimizeFor() throws Exception
-    {
+    public void optimizeFor() throws Exception {
         //ExStart:OptimizeFor
         //GistId:5d2997d42c1f1fad79b18873f170855f
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -24,8 +22,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
     }
 
     @Test
-    public void showGrammaticalAndSpellingErrors() throws Exception
-    {
+    public void showGrammaticalAndSpellingErrors() throws Exception {
         //ExStart:ShowGrammaticalAndSpellingErrors
         Document doc = new Document(getMyDir() + "Document.docx");
 
@@ -37,8 +34,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
     }
 
     @Test
-    public void cleanupUnusedStylesAndLists() throws Exception
-    {
+    public void cleanupUnusedStylesAndLists() throws Exception {
         //ExStart:CleanupUnusedStylesAndLists
         //GistId:669f3d08f45b14f75f9d2cb17fa1056a
         Document doc = new Document(getMyDir() + "Unused styles.docx");
@@ -47,22 +43,25 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
         // A custom style is marked as "used" while there is any text within the document
         // formatted in that style. This means that the 4 styles we added are currently unused.
         System.out.println(MessageFormat.format("Count of styles before Cleanup: {0}\n", doc.getStyles().getCount()) +
-                              MessageFormat.format("Count of lists before Cleanup: {0}", doc.getLists().getCount()));
+                MessageFormat.format("Count of lists before Cleanup: {0}", doc.getLists().getCount()));
 
         // Cleans unused styles and lists from the document depending on given CleanupOptions. 
-        CleanupOptions cleanupOptions = new CleanupOptions(); { cleanupOptions.setUnusedLists(false); cleanupOptions.setUnusedStyles(true); }
+        CleanupOptions cleanupOptions = new CleanupOptions();
+        {
+            cleanupOptions.setUnusedLists(false);
+            cleanupOptions.setUnusedStyles(true);
+        }
         doc.cleanup(cleanupOptions);
 
         System.out.println(MessageFormat.format("Count of styles after Cleanup was decreased: {0}\n", doc.getStyles().getCount()) +
-                              MessageFormat.format("Count of lists after Cleanup is the same: {0}", doc.getLists().getCount()));
+                MessageFormat.format("Count of lists after Cleanup is the same: {0}", doc.getLists().getCount()));
 
         doc.save(getArtifactsDir() + "WorkingWithDocumentOptionsAndSettings.CleanupUnusedStylesAndLists.docx");
         //ExEnd:CleanupUnusedStylesAndLists
     }
 
     @Test
-    public void cleanupDuplicateStyle() throws Exception
-    {
+    public void cleanupDuplicateStyle() throws Exception {
         //ExStart:CleanupDuplicateStyle
         //GistId:669f3d08f45b14f75f9d2cb17fa1056a
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -71,7 +70,10 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
         System.out.println(doc.getStyles().getCount());
 
         // Cleans duplicate styles from the document.
-        CleanupOptions options = new CleanupOptions(); { options.setDuplicateStyle(true); }
+        CleanupOptions options = new CleanupOptions();
+        {
+            options.setDuplicateStyle(true);
+        }
         doc.cleanup(options);
 
         // Count of styles after Cleanup was decreased.
@@ -82,12 +84,11 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
     }
 
     @Test
-    public void viewOptions() throws Exception
-    {
+    public void viewOptions() throws Exception {
         //ExStart:SetViewOption
         //GistId:5d2997d42c1f1fad79b18873f170855f
         Document doc = new Document(getMyDir() + "Document.docx");
-        
+
         doc.getViewOptions().setViewType(ViewType.PAGE_LAYOUT);
         doc.getViewOptions().setZoomPercent(50);
 
@@ -96,8 +97,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
     }
 
     @Test
-    public void documentPageSetup() throws Exception
-    {
+    public void documentPageSetup() throws Exception {
         //ExStart:DocumentPageSetup
         //GistId:5d2997d42c1f1fad79b18873f170855f
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -114,26 +114,24 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
     }
 
     @Test
-    public void addEditingLanguage() throws Exception
-    {
+    public void addEditingLanguage() throws Exception {
         //ExStart:AddEditingLanguage
         //GistId:40be8275fc43f78f5e5877212e4e1bf3
         LoadOptions loadOptions = new LoadOptions();
         // Set language preferences that will be used when document is loading.
         loadOptions.getLanguagePreferences().addEditingLanguage(EditingLanguage.JAPANESE);
-        
+
         Document doc = new Document(getMyDir() + "No default editing language.docx", loadOptions);
         //ExEnd:AddEditingLanguage
 
         int localeIdFarEast = doc.getStyles().getDefaultFont().getLocaleIdFarEast();
         System.out.println(localeIdFarEast == (int) EditingLanguage.JAPANESE
-                    ? "The document either has no any FarEast language set in defaults or it was set to Japanese originally."
-                    : "The document default FarEast language was set to another than Japanese language originally, so it is not overridden.");
+                ? "The document either has no any FarEast language set in defaults or it was set to Japanese originally."
+                : "The document default FarEast language was set to another than Japanese language originally, so it is not overridden.");
     }
 
     @Test
-    public void setRussianAsDefaultEditingLanguage() throws Exception
-    {
+    public void setRussianAsDefaultEditingLanguage() throws Exception {
         //ExStart:SetRussianAsDefaultEditingLanguage
         //GistId:5d2997d42c1f1fad79b18873f170855f
         LoadOptions loadOptions = new LoadOptions();
@@ -143,14 +141,13 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
 
         int localeId = doc.getStyles().getDefaultFont().getLocaleId();
         System.out.println(localeId == (int) EditingLanguage.RUSSIAN
-                    ? "The document either has no any language set in defaults or it was set to Russian originally."
-                    : "The document default language was set to another than Russian language originally, so it is not overridden.");
+                ? "The document either has no any language set in defaults or it was set to Russian originally."
+                : "The document default language was set to another than Russian language originally, so it is not overridden.");
         //ExEnd:SetRussianAsDefaultEditingLanguage
     }
 
     @Test
-    public void pageSetupAndSectionFormatting() throws Exception
-    {
+    public void pageSetupAndSectionFormatting() throws Exception {
         //ExStart:PageSetupAndSectionFormatting
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document();
@@ -165,8 +162,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
     }
 
     @Test
-    public void pageBorderProperties() throws Exception
-    {
+    public void pageBorderProperties() throws Exception {
         //ExStart:PageBorderProperties
         Document doc = new Document();
 
@@ -186,8 +182,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase
     }
 
     @Test
-    public void lineGridSectionLayoutMode() throws Exception
-    {
+    public void lineGridSectionLayoutMode() throws Exception {
         //ExStart:LineGridSectionLayoutMode
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document();

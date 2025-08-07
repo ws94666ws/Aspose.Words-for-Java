@@ -19,12 +19,11 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 
 @Test
-public class WorkingWithFields extends DocsExamplesBase
-{
+public class WorkingWithFields extends DocsExamplesBase {
     @Test
-    public void mailMergeFormFields() throws Exception
-    {
+    public void mailMergeFormFields() throws Exception {
         //ExStart:MailMergeFormFields
+        //GistId:0a1baaa127443b485cc692c8d98ee353
         Document doc = new Document(getMyDir() + "Mail merge destinations - Fax.docx");
 
         // Setup mail merge event handler to do the custom work.
@@ -33,13 +32,13 @@ public class WorkingWithFields extends DocsExamplesBase
         doc.getMailMerge().setTrimWhitespaces(false);
 
         String[] fieldNames = {
-            "RecipientName", "SenderName", "FaxNumber", "PhoneNumber",
-            "Subject", "Body", "Urgent", "ForReview", "PleaseComment"
+                "RecipientName", "SenderName", "FaxNumber", "PhoneNumber",
+                "Subject", "Body", "Urgent", "ForReview", "PleaseComment"
         };
 
         Object[] fieldValues = {
-            "Josh", "Jenny", "123456789", "", "Hello",
-            "<b>HTML Body Test message 1</b>", true, false, true
+                "Josh", "Jenny", "123456789", "", "Hello",
+                "<b>HTML Body Test message 1</b>", true, false, true
         };
 
         doc.getMailMerge().execute(fieldNames, fieldValues);
@@ -49,20 +48,18 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     //ExStart:HandleMergeField
-    private static class HandleMergeField implements IFieldMergingCallback
-    {
+    //GistId:8a66b5cea0f9f8b862c092c9b93ccb3c
+    private static class HandleMergeField implements IFieldMergingCallback {
         /// <summary>
         /// This handler is called for every mail merge field found in the document,
         /// for every record found in the data source.
         /// </summary>
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception
-        {
+        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception {
             if (mBuilder == null)
                 mBuilder = new DocumentBuilder(e.getDocument());
 
             // We decided that we want all boolean values to be output as check box form fields.
-            if (e.getFieldValue() instanceof /*boolean*/Boolean)
-            {
+            if (e.getFieldValue() instanceof /*boolean*/ Boolean) {
                 // Move the "cursor" to the current merge field.
                 mBuilder.moveToMergeField(e.getFieldName());
 
@@ -73,14 +70,12 @@ public class WorkingWithFields extends DocsExamplesBase
                 return;
             }
 
-            switch (e.getFieldName())
-            {
+            switch (e.getFieldName()) {
                 case "Body":
                     mBuilder.moveToMergeField(e.getFieldName());
                     mBuilder.insertHtml((String) e.getFieldValue());
                     break;
-                case "Subject":
-                {
+                case "Subject": {
                     mBuilder.moveToMergeField(e.getFieldName());
                     String textInputName = MessageFormat.format("{0}{1}", e.getFieldName(), e.getRecordIndex());
                     mBuilder.insertTextInput(textInputName, TextFormFieldType.REGULAR, "", (String) e.getFieldValue(), 0);
@@ -90,8 +85,8 @@ public class WorkingWithFields extends DocsExamplesBase
         }
 
         //ExStart:ImageFieldMerging
-        public void imageFieldMerging(ImageFieldMergingArgs args)
-        {
+        //GistId:0a1baaa127443b485cc692c8d98ee353
+        public void imageFieldMerging(ImageFieldMergingArgs args) {
             args.setImageFileName("Image.png");
             args.getImageWidth().setValue(200.0);
             args.setImageHeight(new MergeFieldImageDimension(200.0, MergeFieldImageDimensionUnit.PERCENT));
@@ -103,9 +98,9 @@ public class WorkingWithFields extends DocsExamplesBase
     //ExEnd:HandleMergeField
 
     @Test
-    public void mailMergeImageField() throws Exception
-    {
-        //ExStart:MailMergeImageField       
+    public void mailMergeImageField() throws Exception {
+        //ExStart:MailMergeImageField
+        //GistId:8a66b5cea0f9f8b862c092c9b93ccb3c
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -129,18 +124,18 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     //ExStart:ImageFieldMergingHandler
-    private static class ImageFieldMergingHandler implements IFieldMergingCallback
-    {
-        public void fieldMerging(FieldMergingArgs args)
-        {
+    //GistId:8a66b5cea0f9f8b862c092c9b93ccb3c
+    private static class ImageFieldMergingHandler implements IFieldMergingCallback {
+        public void fieldMerging(FieldMergingArgs args) {
             //  Implementation is not required.
         }
 
-        public void imageFieldMerging(ImageFieldMergingArgs args) throws Exception
-        {
+        public void imageFieldMerging(ImageFieldMergingArgs args) throws Exception {
             Shape shape = new Shape(args.getDocument(), ShapeType.IMAGE);
             {
-                shape.setWidth(126.0); shape.setHeight(126.0); shape.setWrapType(WrapType.SQUARE);
+                shape.setWidth(126.0);
+                shape.setHeight(126.0);
+                shape.setWrapType(WrapType.SQUARE);
             }
 
             shape.getImageData().setImage(getMyDir() + "Mail merge image.png");
@@ -151,19 +146,16 @@ public class WorkingWithFields extends DocsExamplesBase
     //ExEnd:ImageFieldMergingHandler
 
     //ExStart:DataSourceRoot
-    public static class DataSourceRoot implements IMailMergeDataSourceRoot
-    {
-        public IMailMergeDataSource getDataSource(String s)
-        {
+    //GistId:8a66b5cea0f9f8b862c092c9b93ccb3c
+    public static class DataSourceRoot implements IMailMergeDataSourceRoot {
+        public IMailMergeDataSource getDataSource(String s) {
             return new DataSource();
         }
 
-        private static class DataSource implements IMailMergeDataSource
-        {
+        private static class DataSource implements IMailMergeDataSource {
             private boolean next = true;
 
-            private String tableName()
-            {
+            private String tableName() {
                 return "example";
             }
 
@@ -172,20 +164,17 @@ public class WorkingWithFields extends DocsExamplesBase
                 return tableName();
             }
 
-            public boolean moveNext()
-            {
+            public boolean moveNext() {
                 boolean result = next;
                 next = false;
                 return result;
             }
 
-            public IMailMergeDataSource getChildDataSource(String s)
-            {
+            public IMailMergeDataSource getChildDataSource(String s) {
                 return null;
             }
 
-            public boolean getValue(String fieldName, Ref<Object> fieldValue)
-            {
+            public boolean getValue(String fieldName, Ref<Object> fieldValue) {
                 fieldValue.set(null);
                 return false;
             }
@@ -194,8 +183,7 @@ public class WorkingWithFields extends DocsExamplesBase
     //ExEnd:DataSourceRoot
 
     @Test
-    public void mailMergeAndConditionalField() throws Exception
-    {
+    public void mailMergeAndConditionalField() throws Exception {
         //ExStart:MailMergeAndConditionalField
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -203,7 +191,7 @@ public class WorkingWithFields extends DocsExamplesBase
         // Insert a MERGEFIELD nested inside an IF field.
         // Since the IF field statement is false, the result of the inner MERGEFIELD will not be displayed,
         // and the MERGEFIELD will not receive any data during a mail merge.
-        FieldIf fieldIf = (FieldIf)builder.insertField(" IF 1 = 2 ");
+        FieldIf fieldIf = (FieldIf) builder.insertField(" IF 1 = 2 ");
         builder.moveTo(fieldIf.getSeparator());
         builder.insertField(" MERGEFIELD  FullName ");
 
@@ -223,9 +211,9 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void mailMergeImageFromBlob() throws Exception
-    {
+    public void mailMergeImageFromBlob() throws Exception {
         //ExStart:MailMergeImageFromBlob
+        //GistId:8a66b5cea0f9f8b862c092c9b93ccb3c
         Document doc = new Document(getMyDir() + "Mail merge destination - Northwind employees.docx");
 
         doc.getMailMerge().setFieldMergingCallback(new HandleMergeImageFieldFromBlob());
@@ -244,16 +232,15 @@ public class WorkingWithFields extends DocsExamplesBase
         doc.getMailMerge().executeWithRegions(dataReader, "Employees");
 
         connection.close();
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFields.MailMergeImageFromBlob.docx");
         //ExEnd:MailMergeImageFromBlob
     }
 
-    //ExStart:HandleMergeImageFieldFromBlob 
-    public static class HandleMergeImageFieldFromBlob implements IFieldMergingCallback
-    {
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs args)
-        {
+    //ExStart:HandleMergeImageFieldFromBlob
+    //GistId:8a66b5cea0f9f8b862c092c9b93ccb3c
+    public static class HandleMergeImageFieldFromBlob implements IFieldMergingCallback {
+        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs args) {
             // Do nothing.
         }
 
@@ -261,8 +248,7 @@ public class WorkingWithFields extends DocsExamplesBase
         /// This is called when mail merge engine encounters Image:XXX merge field in the document.
         /// You have a chance to return an Image object, file name, or a stream that contains the image.
         /// </summary>
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs e) throws Exception
-        {
+        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs e) throws Exception {
             // The field value is a byte array, just cast it and create a stream on it.
             ByteArrayInputStream imageStream = new ByteArrayInputStream((byte[]) e.getFieldValue());
             // Now the mail merge engine will retrieve the image from the stream.
@@ -272,28 +258,23 @@ public class WorkingWithFields extends DocsExamplesBase
     //ExEnd:HandleMergeImageFieldFromBlob
 
     @Test
-    public void handleMailMergeSwitches() throws Exception
-    {
+    public void handleMailMergeSwitches() throws Exception {
         Document doc = new Document(getMyDir() + "Field sample - MERGEFIELD.docx");
 
         doc.getMailMerge().setFieldMergingCallback(new MailMergeSwitches());
 
         final String HTML = "<html>\r\n                    <h1>Hello world!</h1>\r\n            </html>";
 
-        doc.getMailMerge().execute(new String[] { "htmlField1" }, new Object[] { HTML });
+        doc.getMailMerge().execute(new String[]{"htmlField1"}, new Object[]{HTML});
 
         doc.save(getArtifactsDir() + "WorkingWithFields.HandleMailMergeSwitches.docx");
     }
 
     //ExStart:HandleMailMergeSwitches
-    public static class MailMergeSwitches implements IFieldMergingCallback
-    {
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception
-        {
-            if (e.getFieldName().startsWith("HTML"))
-            {
-                if (e.getField().getFieldCode().contains("\\b"))
-                {
+    public static class MailMergeSwitches implements IFieldMergingCallback {
+        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception {
+            if (e.getFieldName().startsWith("HTML")) {
+                if (e.getField().getFieldCode().contains("\\b")) {
                     FieldMergeField field = e.getField();
 
                     DocumentBuilder builder = new DocumentBuilder(e.getDocument());
@@ -306,15 +287,13 @@ public class WorkingWithFields extends DocsExamplesBase
             }
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args)
-        {
+        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args) {
         }
     }
     //ExEnd:HandleMailMergeSwitches
 
     @Test
-    public void alternatingRows() throws Exception
-    {
+    public void alternatingRows() throws Exception {
         //ExStart:MailMergeAlternatingRows
         Document doc = new Document(getMyDir() + "Mail merge destination - Northwind suppliers.docx");
 
@@ -322,34 +301,30 @@ public class WorkingWithFields extends DocsExamplesBase
 
         DataTable dataTable = getSuppliersDataTable();
         doc.getMailMerge().executeWithRegions(dataTable);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFields.AlternatingRows.doc");
         //ExEnd:MailMergeAlternatingRows
     }
 
     //ExStart:HandleMergeFieldAlternatingRows
-    private static class HandleMergeFieldAlternatingRows implements IFieldMergingCallback
-    {
+    private static class HandleMergeFieldAlternatingRows implements IFieldMergingCallback {
         /// <summary>
         /// Called for every merge field encountered in the document.
         /// We can either return some data to the mail merge engine or do something else with the document.
         /// In this case we modify cell formatting.
         /// </summary>
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e)
-        {
+        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) {
             if (mBuilder == null)
                 mBuilder = new DocumentBuilder(e.getDocument());
 
-            if ("CompanyName".equals(e.getFieldName()))
-            {
+            if ("CompanyName".equals(e.getFieldName())) {
                 // Select the color depending on whether the row number is even or odd.
-                Color rowColor = isOdd(mRowIdx) 
-                    ? new Color((213), (227), (235)) 
-                    : new Color((242), (242), (242));
+                Color rowColor = isOdd(mRowIdx)
+                        ? new Color((213), (227), (235))
+                        : new Color((242), (242), (242));
 
                 // There is no way to set cell properties for the whole row at the moment, so we have to iterate over all cells in the row.
-                for (int colIdx = 0; colIdx < 4; colIdx++)
-                {
+                for (int colIdx = 0; colIdx < 4; colIdx++) {
                     mBuilder.moveToCell(0, mRowIdx, colIdx, 0);
                     mBuilder.getCellFormat().getShading().setBackgroundPatternColor(rowColor);
                 }
@@ -358,8 +333,7 @@ public class WorkingWithFields extends DocsExamplesBase
             }
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args)
-        {
+        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args) {
             // Do nothing.
         }
 
@@ -370,8 +344,7 @@ public class WorkingWithFields extends DocsExamplesBase
     /// <summary>
     /// Returns true if the value is odd; false if the value is even.
     /// </summary>
-    private static boolean isOdd(int value)
-    {
+    private static boolean isOdd(int value) {
         return (value / 2 * 2) == value;
     }
 
@@ -379,15 +352,13 @@ public class WorkingWithFields extends DocsExamplesBase
     /// Create DataTable and fill it with data.
     /// In real life this DataTable should be filled from a database.
     /// </summary>
-    private DataTable getSuppliersDataTable()
-    {
+    private DataTable getSuppliersDataTable() {
         DataTable dataTable = new DataTable("Suppliers");
 
         dataTable.getColumns().add("CompanyName");
         dataTable.getColumns().add("ContactName");
 
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             DataRow datarow = dataTable.newRow();
 
             dataTable.getRows().add(datarow);
@@ -398,4 +369,26 @@ public class WorkingWithFields extends DocsExamplesBase
         return dataTable;
     }
     //ExEnd:HandleMergeFieldAlternatingRows
+
+    @Test
+    public void fieldNext() throws Exception {
+        //ExStart:FieldNext
+        //GistId:b4bab1bf22437a86d8062e91cf154494
+        Document doc = new Document();
+        DocumentBuilder builder = new DocumentBuilder(doc);
+
+        // Use NextIf field. A NEXTIF field has the same function as a NEXT field,
+        // but it skips to the next row only if a statement constructed by the following 3 properties is true.
+        FieldNextIf fieldNextIf = (FieldNextIf) builder.insertField(FieldType.FIELD_NEXT_IF, true);
+
+        // Or use SkipIf field.
+        FieldSkipIf fieldSkipIf = (FieldSkipIf) builder.insertField(FieldType.FIELD_SKIP_IF, true);
+
+        fieldNextIf.setLeftExpression("5");
+        fieldNextIf.setRightExpression("2 + 3");
+        fieldNextIf.setComparisonOperator("=");
+
+        doc.save(getArtifactsDir() + "WorkingWithFields.FieldNext.docx");
+        //ExEnd:FieldNext
+    }
 }

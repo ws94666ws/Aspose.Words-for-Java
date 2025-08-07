@@ -1,12 +1,8 @@
 package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
+import com.aspose.words.*;
 import org.testng.annotations.Test;
-import com.aspose.words.Document;
-import com.aspose.words.DocumentBuilder;
-import com.aspose.words.ParagraphAlignment;
-import com.aspose.words.MarkdownSaveOptions;
-import com.aspose.words.TableContentAlignment;
 
 import java.io.ByteArrayOutputStream;
 

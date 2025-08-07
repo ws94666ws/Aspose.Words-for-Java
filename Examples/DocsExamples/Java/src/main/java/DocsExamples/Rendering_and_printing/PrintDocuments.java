@@ -15,11 +15,9 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterJob;
 
 @Test
-public class PrintDocuments extends DocsExamplesBase
-{
-    @Test (enabled = false, description = "Run only when the printer driver is installed")
-    public void printMultiplePages() throws Exception
-    {
+public class PrintDocuments extends DocsExamplesBase {
+    @Test(enabled = false, description = "Run only when the printer driver is installed")
+    public void printMultiplePages() throws Exception {
         //ExStart:PrintMultiplePagesOnOneSheet
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
@@ -43,8 +41,7 @@ public class PrintDocuments extends DocsExamplesBase
 }
 
 //ExStart:MultipagePrintDocument
-class MultipagePrintDocument implements Printable
-{
+class MultipagePrintDocument implements Printable {
     //ExStart:DataAndStaticFields
     private final Document mDocument;
     private final int mPagesPerSheet;

@@ -9,11 +9,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 @Test
-public class SplitIntoHtmlPages extends DocsExamplesBase
-{
+public class SplitIntoHtmlPages extends DocsExamplesBase {
     @Test
-    public void htmlPages() throws Exception
-    {
+    public void htmlPages() throws Exception {
         String srcFileName = getMyDir() + "Footnotes and endnotes.docx";
         String tocTemplate = getMyDir() + "Table of content template.docx";
 
@@ -25,8 +23,7 @@ public class SplitIntoHtmlPages extends DocsExamplesBase
     }
 }
 
-class WordToHtmlConverter
-{
+class WordToHtmlConverter {
     /// <summary>
     /// Performs the Word to HTML conversion.
     /// </summary>
@@ -34,8 +31,7 @@ class WordToHtmlConverter
     /// <param name="tocTemplate">An MS Word file that is used as a template to build a table of contents.
     /// This file needs to have a mail merge region called "TOC" defined and one mail merge field called "TocEntry".</param>
     /// <param name="dstDir">The output directory where to write HTML files.</param>
-    void execute(String srcFileName, String tocTemplate, String dstDir) throws Exception
-    {
+    void execute(String srcFileName, String tocTemplate, String dstDir) throws Exception {
         mDoc = new Document(srcFileName);
         mTocTemplate = tocTemplate;
         mDstDir = dstDir;
@@ -50,14 +46,13 @@ class WordToHtmlConverter
     /// Selects heading paragraphs that must become topic starts.
     /// We can't modify them in this loop, so we need to remember them in an array first.
     /// </summary>
-    private ArrayList<Paragraph> selectTopicStarts()
-    {
+    private ArrayList<Paragraph> selectTopicStarts() {
         NodeCollection paras = mDoc.getChildNodes(NodeType.PARAGRAPH, true);
         ArrayList<Paragraph> topicStartParas = new ArrayList<Paragraph>();
 
-        for (Paragraph para : (Iterable<Paragraph>) paras)
-        {
-            /*StyleIdentifier*/int style = para.getParagraphFormat().getStyleIdentifier();
+        for (Paragraph para : (Iterable<Paragraph>) paras) {
+            /*StyleIdentifier*/
+            int style = para.getParagraphFormat().getStyleIdentifier();
             if (style == StyleIdentifier.HEADING_1)
                 topicStartParas.add(para);
         }
@@ -70,16 +65,13 @@ class WordToHtmlConverter
     /// <summary>
     /// Insert section breaks before the specified paragraphs.
     /// </summary>
-    private void insertSectionBreaks(ArrayList<Paragraph> topicStartParas)
-    {
+    private void insertSectionBreaks(ArrayList<Paragraph> topicStartParas) {
         DocumentBuilder builder = new DocumentBuilder(mDoc);
-        for (Paragraph para : topicStartParas)
-        {
+        for (Paragraph para : topicStartParas) {
             Section section = para.getParentSection();
 
             // Insert section break if the paragraph is not at the beginning of a section already.
-            if (para != section.getBody().getFirstParagraph())
-            {
+            if (para != section.getBody().getFirstParagraph()) {
                 builder.moveTo(para.getFirstChild());
                 builder.insertBreak(BreakType.SECTION_BREAK_NEW_PAGE);
 
@@ -95,11 +87,9 @@ class WordToHtmlConverter
     /// Splits the current document into one topic per section and saves each topic
     /// as an HTML file. Returns a collection of Topic objects.
     /// </summary>
-    private ArrayList<Topic> saveHtmlTopics() throws Exception
-    {
+    private ArrayList<Topic> saveHtmlTopics() throws Exception {
         ArrayList<Topic> topics = new ArrayList<Topic>();
-        for (int sectionIdx = 0; sectionIdx < mDoc.getSections().getCount(); sectionIdx++)
-        {
+        for (int sectionIdx = 0; sectionIdx < mDoc.getSections().getCount(); sectionIdx++) {
             Section section = mDoc.getSections().get(sectionIdx);
 
             String paraText = section.getBody().getFirstParagraph().getText();
@@ -129,12 +119,10 @@ class WordToHtmlConverter
     /// Leaves alphanumeric characters, replaces white space with underscore
     /// And removes all other characters from a string.
     /// </summary>
-    private String makeTopicFileName(String paraText)
-    {
+    private String makeTopicFileName(String paraText) {
         StringBuilder b = new StringBuilder();
-        for (int i = 0; i < paraText.length(); i++)
-        {
-        	char c = paraText.charAt(i);
+        for (int i = 0; i < paraText.length(); i++) {
+            char c = paraText.charAt(i);
             if (Character.isLetterOrDigit(c))
                 b.append(c);
             else if (c == ' ')
@@ -147,8 +135,7 @@ class WordToHtmlConverter
     /// <summary>
     /// Removes the last character (which is a paragraph break character from the given string).
     /// </summary>
-    private String makeTopicTitle(String paraText)
-    {
+    private String makeTopicTitle(String paraText) {
         return paraText.substring((0), (0) + (paraText.length() - 1));
     }
 
@@ -156,8 +143,7 @@ class WordToHtmlConverter
     /// Saves one section of a document as an HTML file.
     /// Any embedded images are saved as separate files in the same folder as the HTML file.
     /// </summary>
-    private void saveHtmlTopic(Section section, Topic topic) throws Exception
-    {
+    private void saveHtmlTopic(Section section, Topic topic) throws Exception {
         Document dummyDoc = new Document();
         dummyDoc.removeAllChildren();
         dummyDoc.appendChild(dummyDoc.importNode(section, true, ImportFormatMode.KEEP_SOURCE_FORMATTING));
@@ -177,8 +163,7 @@ class WordToHtmlConverter
     /// <summary>
     /// Generates a table of contents for the topics and saves to contents .html.
     /// </summary>
-    private void saveTableOfContents(ArrayList<Topic> topics) throws Exception
-    {
+    private void saveTableOfContents(ArrayList<Topic> topics) throws Exception {
         Document tocDoc = new Document(mTocTemplate);
 
         // We use a custom mail merge event handler defined below,
@@ -189,10 +174,8 @@ class WordToHtmlConverter
         tocDoc.save(mDstDir + "contents.html");
     }
 
-    private static class HandleTocMergeField implements IFieldMergingCallback
-    {
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception
-        {
+    private static class HandleTocMergeField implements IFieldMergingCallback {
+        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception {
             if (mBuilder == null)
                 mBuilder = new DocumentBuilder(e.getDocument());
 
@@ -206,8 +189,7 @@ class WordToHtmlConverter
             e.setText("");
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args)
-        {
+        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args) {
             // Do nothing.
         }
 
@@ -219,27 +201,31 @@ class WordToHtmlConverter
     private String mDstDir;
 }
 
-class Topic
-{
-    Topic(String title, String fileName)
-    {
+class Topic {
+    Topic(String title, String fileName) {
         mTitle = title;
         mFileName = fileName;
     }
 
-    String getTitle() { return mTitle; };
+    String getTitle() {
+        return mTitle;
+    }
+
+    ;
 
     private String mTitle;
 
-    String getFileName() { return mFileName; };
+    String getFileName() {
+        return mFileName;
+    }
+
+    ;
 
     private String mFileName;
 }
 
-class TocMailMergeDataSource implements IMailMergeDataSource
-{
-    TocMailMergeDataSource(ArrayList<Topic> topics)
-    {
+class TocMailMergeDataSource implements IMailMergeDataSource {
+    TocMailMergeDataSource(ArrayList<Topic> topics) {
         mTopics = topics;
         mIndex = -1;
     }
@@ -249,10 +235,8 @@ class TocMailMergeDataSource implements IMailMergeDataSource
         return "TOC";
     }
 
-    public boolean moveNext()
-    {
-        if (mIndex < mTopics.size() - 1)
-        {
+    public boolean moveNext() {
+        if (mIndex < mTopics.size() - 1) {
             mIndex++;
             return true;
         }
@@ -260,10 +244,8 @@ class TocMailMergeDataSource implements IMailMergeDataSource
         return false;
     }
 
-    public boolean getValue(String fieldName, /*out*/Ref<Object> fieldValue)
-    {
-        if ("TocEntry".equals(fieldName))
-        {
+    public boolean getValue(String fieldName, /*out*/Ref<Object> fieldValue) {
+        if ("TocEntry".equals(fieldName)) {
             // The template document is supposed to have only one field called "TocEntry".
             fieldValue.set(mTopics.get(mIndex));
             return true;
@@ -273,8 +255,7 @@ class TocMailMergeDataSource implements IMailMergeDataSource
         return false;
     }
 
-    public IMailMergeDataSource getChildDataSource(String tableName)
-    {
+    public IMailMergeDataSource getChildDataSource(String tableName) {
         return null;
     }
 

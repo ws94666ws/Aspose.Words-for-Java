@@ -7,11 +7,9 @@ import org.testng.annotations.Test;
 import java.text.MessageFormat;
 
 @Test
-public class WorkingWithBookmarks extends DocsExamplesBase
-{
+public class WorkingWithBookmarks extends DocsExamplesBase {
     @Test
-    public void accessBookmarks() throws Exception
-    {
+    public void accessBookmarks() throws Exception {
         //ExStart:AccessBookmarks
         //GistId:c4555b1a088856e21394104faeb86e51
         Document doc = new Document(getMyDir() + "Bookmarks.docx");
@@ -23,8 +21,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase
     }
 
     @Test
-    public void updateBookmarkData() throws Exception
-    {
+    public void updateBookmarkData() throws Exception {
         //ExStart:UpdateBookmarkData
         //GistId:c4555b1a088856e21394104faeb86e51
         Document doc = new Document(getMyDir() + "Bookmarks.docx");
@@ -47,7 +44,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         builder.startTable();
-        
+
         builder.insertCell();
 
         builder.startBookmark("MyBookmark");
@@ -89,8 +86,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase
     }
 
     @Test
-    public void copyBookmarkedText() throws Exception
-    {
+    public void copyBookmarkedText() throws Exception {
         Document srcDoc = new Document(getMyDir() + "Bookmarks.docx");
 
         // This is the bookmark whose content we want to copy.
@@ -106,7 +102,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase
         NodeImporter importer = new NodeImporter(srcDoc, dstDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
 
         appendBookmarkedText(importer, srcBookmark, dstNode);
-        
+
         dstDoc.save(getArtifactsDir() + "WorkingWithBookmarks.CopyBookmarkedText.docx");
     }
 
@@ -117,8 +113,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase
     /// <param name="importer">Maintains the import context.</param>
     /// <param name="srcBookmark">The input bookmark.</param>
     /// <param name="dstNode">Must be a node that can contain paragraphs (such as a Story).</param>
-    private void appendBookmarkedText(NodeImporter importer, Bookmark srcBookmark, CompositeNode dstNode) throws Exception
-    {
+    private void appendBookmarkedText(NodeImporter importer, Bookmark srcBookmark, CompositeNode dstNode) throws Exception {
         // This is the paragraph that contains the beginning of the bookmark.
         Paragraph startPara = (Paragraph) srcBookmark.getBookmarkStart().getParentNode();
 
@@ -127,19 +122,18 @@ public class WorkingWithBookmarks extends DocsExamplesBase
 
         if (startPara == null || endPara == null)
             throw new IllegalStateException(
-                "Parent of the bookmark start or end is not a paragraph, cannot handle this scenario yet.");
+                    "Parent of the bookmark start or end is not a paragraph, cannot handle this scenario yet.");
 
         // Limit ourselves to a reasonably simple scenario.
         if (startPara.getParentNode() != endPara.getParentNode())
             throw new IllegalStateException(
-                "Start and end paragraphs have different parents, cannot handle this scenario yet.");
+                    "Start and end paragraphs have different parents, cannot handle this scenario yet.");
 
         // We want to copy all paragraphs from the start paragraph up to (and including) the end paragraph,
         // therefore the node at which we stop is one after the end paragraph.
         Node endNode = endPara.getNextSibling();
 
-        for (Node curNode = startPara; curNode != endNode; curNode = curNode.getNextSibling())
-        {
+        for (Node curNode = startPara; curNode != endNode; curNode = curNode.getNextSibling()) {
             // This creates a copy of the current node and imports it (makes it valid) in the context
             // of the destination document. Importing means adjusting styles and list identifiers correctly.
             Node newNode = importer.importNode(curNode, true);
@@ -149,8 +143,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase
     }
 
     @Test
-    public void createBookmark() throws Exception
-    {
+    public void createBookmark() throws Exception {
         //ExStart:CreateBookmark
         //GistId:c4555b1a088856e21394104faeb86e51
         Document doc = new Document();
@@ -175,30 +168,26 @@ public class WorkingWithBookmarks extends DocsExamplesBase
     }
 
     @Test
-    public void showHideBookmarks() throws Exception
-    {
+    public void showHideBookmarks() throws Exception {
         //ExStart:ShowHideBookmarks
         //GistId:c4555b1a088856e21394104faeb86e51
         Document doc = new Document(getMyDir() + "Bookmarks.docx");
 
         showHideBookmarkedContent(doc, "MyBookmark1", true);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithBookmarks.ShowHideBookmarks.docx");
         //ExEnd:ShowHideBookmarks
     }
 
     //ExStart:ShowHideBookmarkedContent
     //GistId:c4555b1a088856e21394104faeb86e51
-    private static void showHideBookmarkedContent(Document doc, String bookmarkName, boolean isHidden)
-    {
+    private static void showHideBookmarkedContent(Document doc, String bookmarkName, boolean isHidden) {
         Bookmark bm = doc.getRange().getBookmarks().get(bookmarkName);
 
         Node currentNode = bm.getBookmarkStart();
-        while (currentNode != null && currentNode.getNodeType() != NodeType.BOOKMARK_END)
-        {
-            if (currentNode.getNodeType() == NodeType.RUN)
-            {
-                Run run = (Run)currentNode;
+        while (currentNode != null && currentNode.getNodeType() != NodeType.BOOKMARK_END) {
+            if (currentNode.getNodeType() == NodeType.RUN) {
+                Run run = (Run) currentNode;
                 run.getFont().setHidden(isHidden);
             }
             currentNode = currentNode.getNextSibling();
@@ -207,8 +196,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase
     //ExEnd:ShowHideBookmarkedContent
 
     @Test
-    public void untangleRowBookmarks() throws Exception
-    {
+    public void untangleRowBookmarks() throws Exception {
         Document doc = new Document(getMyDir() + "Table column bookmarks.docx");
 
         // This performs the custom task of putting the row bookmark ends into the same row with the bookmark starts.
@@ -224,10 +212,8 @@ public class WorkingWithBookmarks extends DocsExamplesBase
         doc.save(getArtifactsDir() + "WorkingWithBookmarks.UntangleRowBookmarks.docx");
     }
 
-    private void untangle(Document doc) throws Exception
-    {
-        for (Bookmark bookmark : doc.getRange().getBookmarks())
-        {
+    private void untangle(Document doc) throws Exception {
+        for (Bookmark bookmark : doc.getRange().getBookmarks()) {
             // Get the parent row of both the bookmark and bookmark end node.
             Row row1 = (Row) bookmark.getBookmarkStart().getAncestor(Row.class);
             Row row2 = (Row) bookmark.getBookmarkEnd().getAncestor(Row.class);
@@ -239,8 +225,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase
         }
     }
 
-    private void deleteRowByBookmark(Document doc, String bookmarkName)
-    {
+    private void deleteRowByBookmark(Document doc, String bookmarkName) {
         Bookmark bookmark = doc.getRange().getBookmarks().get(bookmarkName);
 
         Row row = (Row) bookmark.getBookmarkStart().getAncestor(Row.class);

@@ -7,11 +7,9 @@ import com.aspose.words.TextBox;
 import org.testng.annotations.Test;
 
 @Test
-public class WorkingWithTextboxes
-{
+public class WorkingWithTextboxes {
     @Test
-    public void createLink() throws Exception
-    {
+    public void createLink() throws Exception {
         //ExStart:CreateLink
         //GistId:68b6041746b3d6bf5137cff8e6385b5f
         Document doc = new Document();
@@ -28,8 +26,7 @@ public class WorkingWithTextboxes
     }
 
     @Test
-    public void checkSequence() throws Exception
-    {
+    public void checkSequence() throws Exception {
         //ExStart:CheckSequence
         //GistId:68b6041746b3d6bf5137cff8e6385b5f
         Document doc = new Document();
@@ -37,26 +34,22 @@ public class WorkingWithTextboxes
         Shape shape = new Shape(doc, ShapeType.TEXT_BOX);
         TextBox textBox = shape.getTextBox();
 
-        if (textBox.getNext() != null && textBox.getPrevious() == null)
-        {
+        if (textBox.getNext() != null && textBox.getPrevious() == null) {
             System.out.println("The head of the sequence");
         }
 
-        if (textBox.getNext() != null && textBox.getPrevious() != null)
-        {
+        if (textBox.getNext() != null && textBox.getPrevious() != null) {
             System.out.println("The Middle of the sequence.");
         }
 
-        if (textBox.getNext() == null && textBox.getPrevious() != null)
-        {
+        if (textBox.getNext() == null && textBox.getPrevious() != null) {
             System.out.println("The Tail of the sequence.");
         }
         //ExEnd:CheckSequence
     }
 
     @Test
-    public void breakLink() throws Exception
-    {
+    public void breakLink() throws Exception {
         //ExStart:BreakLink
         //GistId:68b6041746b3d6bf5137cff8e6385b5f
         Document doc = new Document();
@@ -70,7 +63,7 @@ public class WorkingWithTextboxes
         // Break a forward link by setting a null.
         textBox.setNext(null);
 
-        // Break a link, which leads to this textbox
+        // Break a link, which leads to this textbox.
         if (textBox.getPrevious() != null)
             textBox.getPrevious().breakForwardLink();
         //ExEnd:BreakLink

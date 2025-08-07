@@ -1,15 +1,13 @@
 package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
-import org.testng.annotations.Test;
 import com.aspose.words.Document;
+import org.testng.annotations.Test;
 
 @Test
-public class WorkingWithRanges extends DocsExamplesBase
-{
+public class WorkingWithRanges extends DocsExamplesBase {
     @Test
-    public void rangesDeleteText() throws Exception
-    {
+    public void rangesDeleteText() throws Exception {
         //ExStart:RangesDeleteText
         //GistId:9164e9c0658006e51db723b0742c12fc
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -18,8 +16,7 @@ public class WorkingWithRanges extends DocsExamplesBase
     }
 
     @Test
-    public void rangesGetText() throws Exception
-    {
+    public void rangesGetText() throws Exception {
         //ExStart:RangesGetText
         //GistId:9164e9c0658006e51db723b0742c12fc
         Document doc = new Document(getMyDir() + "Document.docx");

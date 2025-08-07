@@ -1,19 +1,13 @@
 package DocsExamples.Programming_with_documents.Working_with_graphic_elements;
 
 import DocsExamples.DocsExamplesBase;
+import com.aspose.words.*;
 import org.testng.annotations.Test;
-import com.aspose.words.Document;
-import com.aspose.words.OfficeMath;
-import com.aspose.words.NodeType;
-import com.aspose.words.OfficeMathDisplayType;
-import com.aspose.words.OfficeMathJustification;
 
 @Test
-public class WorkingWithOfficeMath extends DocsExamplesBase
-{
+public class WorkingWithOfficeMath extends DocsExamplesBase {
     @Test
-    public void mathEquations() throws Exception
-    {
+    public void mathEquations() throws Exception {
         //ExStart:MathEquations
         //GistId:e19d5874b376b07466fd7a397d554648
         Document doc = new Document(getMyDir() + "Office math.docx");

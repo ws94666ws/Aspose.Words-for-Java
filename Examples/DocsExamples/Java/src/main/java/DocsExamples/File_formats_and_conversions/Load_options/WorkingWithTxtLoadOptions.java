@@ -71,7 +71,10 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
     public void documentTextDirection() throws Exception {
         //ExStart:DocumentTextDirection
         //GistId:ddafc3430967fb4f4f70085fa577d01a
-        TxtLoadOptions loadOptions = new TxtLoadOptions(); { loadOptions.setDocumentDirection(DocumentDirection.AUTO); }
+        TxtLoadOptions loadOptions = new TxtLoadOptions();
+        {
+            loadOptions.setDocumentDirection(DocumentDirection.AUTO);
+        }
 
         Document doc = new Document(getMyDir() + "Hebrew text.txt", loadOptions);
 
@@ -83,8 +86,7 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
     }
 
     @Test
-    public void exportHeadersFootersMode() throws Exception
-    {
+    public void exportHeadersFootersMode() throws Exception {
         //ExStart:ExportHeadersFootersMode
         //GistId:ddafc3430967fb4f4f70085fa577d01a
         Document doc = new Document();

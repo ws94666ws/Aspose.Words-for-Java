@@ -8,11 +8,9 @@ import org.testng.annotations.Test;
 import java.awt.*;
 
 @Test
-public class WorkingWithWatermark extends DocsExamplesBase
-{
+public class WorkingWithWatermark extends DocsExamplesBase {
     @Test
-    public void addTextWatermark() throws Exception
-    {
+    public void addTextWatermark() throws Exception {
         //ExStart:AddTextWatermark
         //GistId:1f690a31c188a851d80d7aed4ff7e44c
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -36,8 +34,7 @@ public class WorkingWithWatermark extends DocsExamplesBase
     //ExStart:AddDocumentWatermark
     //GistId:1f690a31c188a851d80d7aed4ff7e44c
     @Test
-    public void addAndRemoveWatermark() throws Exception
-    {
+    public void addAndRemoveWatermark() throws Exception {
         Document doc = new Document(getMyDir() + "Document.docx");
 
         insertWatermarkText(doc, "CONFIDENTIAL");
@@ -52,12 +49,14 @@ public class WorkingWithWatermark extends DocsExamplesBase
     /// </summary>
     /// <param name="doc">The input document.</param>
     /// <param name="watermarkText">Text of the watermark.</param>
-    private void insertWatermarkText(Document doc, String watermarkText) throws Exception
-    {
+    private void insertWatermarkText(Document doc, String watermarkText) throws Exception {
         //ExStart:SetShapeName
         //GistId:1f690a31c188a851d80d7aed4ff7e44c
         // Create a watermark shape, this will be a WordArt shape.
-        Shape watermark = new Shape(doc, ShapeType.TEXT_PLAIN_TEXT); { watermark.setName("Watermark"); }
+        Shape watermark = new Shape(doc, ShapeType.TEXT_PLAIN_TEXT);
+        {
+            watermark.setName("Watermark");
+        }
         //ExEnd:SetShapeName
 
         watermark.getTextPath().setText(watermarkText);
@@ -84,8 +83,7 @@ public class WorkingWithWatermark extends DocsExamplesBase
         watermarkPara.appendChild(watermark);
 
         // Insert the watermark into all headers of each document section.
-        for (Section sect : (Iterable<Section>) doc.getSections())
-        {
+        for (Section sect : (Iterable<Section>) doc.getSections()) {
             // There could be up to three different headers in each section.
             // Since we want the watermark to appear on all pages, insert it into all headers.
             insertWatermarkIntoHeader(watermarkPara, sect, HeaderFooterType.HEADER_PRIMARY);
@@ -95,12 +93,10 @@ public class WorkingWithWatermark extends DocsExamplesBase
     }
 
     private void insertWatermarkIntoHeader(Paragraph watermarkPara, Section sect,
-        /*HeaderFooterType*/int headerType)
-    {
+            /*HeaderFooterType*/int headerType) {
         HeaderFooter header = sect.getHeadersFooters().getByHeaderFooterType(headerType);
 
-        if (header == null)
-        {
+        if (header == null) {
             // There is no header of the specified type in the current section, so we need to create it.
             header = new HeaderFooter(sect.getDocument(), headerType);
             sect.getHeadersFooters().add(header);
@@ -113,14 +109,10 @@ public class WorkingWithWatermark extends DocsExamplesBase
 
     //ExStart:RemoveWatermarkShape
     //GistId:1f690a31c188a851d80d7aed4ff7e44c
-    private void removeWatermarkShape(Document doc)
-    {
-        for (HeaderFooter hf : (Iterable<HeaderFooter>) doc.getChildNodes(NodeType.HEADER_FOOTER, true))
-        {
-            for (Shape shape : (Iterable<Shape>) hf.getChildNodes(NodeType.SHAPE, true))
-            {
-                if (shape.getName().contains("Watermark"))
-                {
+    private void removeWatermarkShape(Document doc) {
+        for (HeaderFooter hf : (Iterable<HeaderFooter>) doc.getChildNodes(NodeType.HEADER_FOOTER, true)) {
+            for (Shape shape : (Iterable<Shape>) hf.getChildNodes(NodeType.SHAPE, true)) {
+                if (shape.getName().contains("Watermark")) {
                     shape.remove();
                 }
             }

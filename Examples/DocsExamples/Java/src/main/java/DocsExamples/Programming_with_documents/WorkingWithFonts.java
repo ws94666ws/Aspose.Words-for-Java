@@ -14,11 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @Test
-public class WorkingWithFonts extends DocsExamplesBase
-{
+public class WorkingWithFonts extends DocsExamplesBase {
     @Test
-    public void fontFormatting() throws Exception
-    {
+    public void fontFormatting() throws Exception {
         //ExStart:WriteAndFont
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -31,19 +29,18 @@ public class WorkingWithFonts extends DocsExamplesBase
         font.setUnderline(Underline.DASH);
 
         builder.write("Sample text.");
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.FontFormatting.docx");
         //ExEnd:WriteAndFont
     }
 
     @Test
-    public void getFontLineSpacing() throws Exception
-    {
+    public void getFontLineSpacing() throws Exception {
         //ExStart:GetFontLineSpacing
         //GistId:7cb86f131b74afcbebc153f0039e3947
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.getFont().setName("Calibri");
         builder.writeln("qText");
 
@@ -53,11 +50,10 @@ public class WorkingWithFonts extends DocsExamplesBase
     }
 
     @Test
-    public void checkDMLTextEffect() throws Exception
-    {
+    public void checkDMLTextEffect() throws Exception {
         //ExStart:CheckDMLTextEffect
         Document doc = new Document(getMyDir() + "DrawingML text effects.docx");
-        
+
         RunCollection runs = doc.getFirstSection().getBody().getFirstParagraph().getRuns();
         Font runFont = runs.get(0).getFont();
 
@@ -71,8 +67,7 @@ public class WorkingWithFonts extends DocsExamplesBase
     }
 
     @Test
-    public void setFontFormatting() throws Exception
-    {
+    public void setFontFormatting() throws Exception {
         //ExStart:SetFontFormatting
         //GistId:7cb86f131b74afcbebc153f0039e3947
         Document doc = new Document();
@@ -88,14 +83,13 @@ public class WorkingWithFonts extends DocsExamplesBase
         font.setUnderline(Underline.DOUBLE);
 
         builder.writeln("I'm a very nice formatted string.");
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.SetFontFormatting.docx");
         //ExEnd:SetFontFormatting
     }
 
     @Test
-    public void setFontEmphasisMark() throws Exception
-    {
+    public void setFontEmphasisMark() throws Exception {
         //ExStart:SetFontEmphasisMark
         //GistId:7cb86f131b74afcbebc153f0039e3947
         Document document = new Document();
@@ -113,56 +107,52 @@ public class WorkingWithFonts extends DocsExamplesBase
     }
 
     @Test
-    public void enableDisableFontSubstitution() throws Exception
-    {
+    public void enableDisableFontSubstitution() throws Exception {
         //ExStart:EnableDisableFontSubstitution
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         FontSettings fontSettings = new FontSettings();
         fontSettings.getSubstitutionSettings().getDefaultFontSubstitution().setDefaultFontName("Arial");
         fontSettings.getSubstitutionSettings().getFontInfoSubstitution().setEnabled(false);
-        
+
         doc.setFontSettings(fontSettings);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.EnableDisableFontSubstitution.pdf");
         //ExEnd:EnableDisableFontSubstitution
     }
 
     @Test
-    public void fontFallbackSettings() throws Exception
-    {
+    public void fontFallbackSettings() throws Exception {
         //ExStart:FontFallbackSettings
         //GistId:a08698f540d47082b4e2dbb1cb67fc1b
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         FontSettings fontSettings = new FontSettings();
         fontSettings.getFallbackSettings().load(getMyDir() + "Font fallback rules.xml");
-        
+
         doc.setFontSettings(fontSettings);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.FontFallbackSettings.pdf");
         //ExEnd:FontFallbackSettings
     }
 
     @Test
-    public void notoFallbackSettings() throws Exception
-    {
+    public void notoFallbackSettings() throws Exception {
         //ExStart:NotoFallbackSettings
         //GistId:a08698f540d47082b4e2dbb1cb67fc1b
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         FontSettings fontSettings = new FontSettings();
         fontSettings.getFallbackSettings().loadNotoFallbackSettings();
-        
+
         doc.setFontSettings(fontSettings);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.NotoFallbackSettings.pdf");
         //ExEnd:NotoFallbackSettings
     }
 
     @Test
-    public void defaultInstance() throws Exception
-    {
+    public void defaultInstance() throws Exception {
         //ExStart:DefaultInstance
         //GistId:7e64f6d40825be58a8c12f1307c12964
         FontSettings.getDefaultInstance().setFontsFolder("C:\\MyFonts\\", true);
@@ -173,30 +163,28 @@ public class WorkingWithFonts extends DocsExamplesBase
     }
 
     @Test
-    public void multipleFolders() throws Exception
-    {
+    public void multipleFolders() throws Exception {
         //ExStart:MultipleFolders
         //GistId:7e64f6d40825be58a8c12f1307c12964
         Document doc = new Document(getMyDir() + "Rendering.docx");
-        
+
         FontSettings fontSettings = new FontSettings();
         // Note that this setting will override any default font sources that are being searched by default. Now only these folders will be searched for
         // fonts when rendering or embedding fonts. To add an extra font source while keeping system font sources then use both FontSettings.GetFontSources and
         // FontSettings.SetFontSources instead.
-        fontSettings.setFontsFolders(new String[] { "C:\\MyFonts\\", "D:\\Misc\\Fonts\\" }, true);
-        
+        fontSettings.setFontsFolders(new String[]{"C:\\MyFonts\\", "D:\\Misc\\Fonts\\"}, true);
+
         doc.setFontSettings(fontSettings);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.MultipleFolders.pdf");
         //ExEnd:MultipleFolders
     }
 
     @Test
-    public void setFontsFoldersSystemAndCustomFolder() throws Exception
-    {
+    public void setFontsFoldersSystemAndCustomFolder() throws Exception {
         //ExStart:SetFontsFoldersSystemAndCustomFolder
         Document doc = new Document(getMyDir() + "Rendering.docx");
-        
+
         FontSettings fontSettings = new FontSettings();
         // Retrieve the array of environment-dependent font sources that are searched by default.
         // For example this will contain a "Windows\Fonts\" source on a Windows machines.
@@ -211,22 +199,21 @@ public class WorkingWithFonts extends DocsExamplesBase
 
         FontSourceBase[] updatedFontSources = fontSources.toArray(new FontSourceBase[0]);
         fontSettings.setFontsSources(updatedFontSources);
-        
+
         doc.setFontSettings(fontSettings);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.SetFontsFoldersSystemAndCustomFolder.pdf");
         //ExEnd:SetFontsFoldersSystemAndCustomFolder
     }
 
     @Test
-    public void fontsFoldersWithPriority() throws Exception
-    {
+    public void fontsFoldersWithPriority() throws Exception {
         //ExStart:FontsFoldersWithPriority
         //GistId:7e64f6d40825be58a8c12f1307c12964
         FontSettings.getDefaultInstance().setFontsSources(new FontSourceBase[]
-        {
-            new SystemFontSource(), new FolderFontSource("C:\\MyFonts\\", true,1)
-        });
+                {
+                        new SystemFontSource(), new FolderFontSource("C:\\MyFonts\\", true, 1)
+                });
         //ExEnd:FontsFoldersWithPriority
 
         Document doc = new Document(getMyDir() + "Rendering.docx");
@@ -234,8 +221,7 @@ public class WorkingWithFonts extends DocsExamplesBase
     }
 
     @Test
-    public void trueTypeFontsFolder() throws Exception
-    {
+    public void trueTypeFontsFolder() throws Exception {
         //ExStart:TrueTypeFontsFolder
         //GistId:7e64f6d40825be58a8c12f1307c12964
         Document doc = new Document(getMyDir() + "Rendering.docx");
@@ -247,14 +233,13 @@ public class WorkingWithFonts extends DocsExamplesBase
         fontSettings.setFontsFolder("C:\\MyFonts\\", false);
         // Set font settings
         doc.setFontSettings(fontSettings);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.TrueTypeFontsFolder.pdf");
         //ExEnd:TrueTypeFontsFolder
     }
 
     @Test
-    public void specifyDefaultFontWhenRendering() throws Exception
-    {
+    public void specifyDefaultFontWhenRendering() throws Exception {
         //ExStart:SpecifyDefaultFontWhenRendering
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
@@ -262,47 +247,44 @@ public class WorkingWithFonts extends DocsExamplesBase
         // If the default font defined here cannot be found during rendering then
         // the closest font on the machine is used instead.
         fontSettings.getSubstitutionSettings().getDefaultFontSubstitution().setDefaultFontName("Arial Unicode MS");
-        
+
         doc.setFontSettings(fontSettings);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.SpecifyDefaultFontWhenRendering.pdf");
         //ExEnd:SpecifyDefaultFontWhenRendering
     }
 
     @Test
-    public void fontSettingsWithLoadOptions() throws Exception
-    {
+    public void fontSettingsWithLoadOptions() throws Exception {
         //ExStart:FontSettingsWithLoadOptions
         FontSettings fontSettings = new FontSettings();
 
         TableSubstitutionRule substitutionRule = fontSettings.getSubstitutionSettings().getTableSubstitution();
         // If "UnknownFont1" font family is not available then substitute it by "Comic Sans MS"
-        substitutionRule.addSubstitutes("UnknownFont1", new String[] { "Comic Sans MS" });
-        
+        substitutionRule.addSubstitutes("UnknownFont1", new String[]{"Comic Sans MS"});
+
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setFontSettings(fontSettings);
-        
+
         Document doc = new Document(getMyDir() + "Rendering.docx", loadOptions);
         //ExEnd:FontSettingsWithLoadOptions
     }
 
     @Test
-    public void setFontsFolder() throws Exception
-    {
+    public void setFontsFolder() throws Exception {
         //ExStart:SetFontsFolder
         FontSettings fontSettings = new FontSettings();
         fontSettings.setFontsFolder(getMyDir() + "Fonts", false);
-        
+
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setFontSettings(fontSettings);
-        
+
         Document doc = new Document(getMyDir() + "Rendering.docx", loadOptions);
         //ExEnd:SetFontsFolder
     }
 
     @Test
-    public void loadOptionFontSettings() throws Exception
-    {
+    public void loadOptionFontSettings() throws Exception {
         //ExStart:LoadOptionFontSettings
         //GistId:a08698f540d47082b4e2dbb1cb67fc1b
         LoadOptions loadOptions = new LoadOptions();
@@ -313,8 +295,7 @@ public class WorkingWithFonts extends DocsExamplesBase
     }
 
     @Test
-    public void fontSettingsDefaultInstance() throws Exception
-    {
+    public void fontSettingsDefaultInstance() throws Exception {
         //ExStart:FontsFolders
         //GistId:7e64f6d40825be58a8c12f1307c12964
         //ExStart:FontSettingsFontSource
@@ -324,10 +305,10 @@ public class WorkingWithFonts extends DocsExamplesBase
         FontSettings fontSettings = FontSettings.getDefaultInstance();
         //ExEnd:FontSettingsDefaultInstance
         fontSettings.setFontsSources(new FontSourceBase[]
-        {
-            new SystemFontSource(),
-            new FolderFontSource("C:\\MyFonts\\", true)
-        });
+                {
+                        new SystemFontSource(),
+                        new FolderFontSource("C:\\MyFonts\\", true)
+                });
         //ExEnd:FontSettingsFontSource
 
         Document doc = new Document(getMyDir() + "Rendering.docx");
@@ -335,8 +316,7 @@ public class WorkingWithFonts extends DocsExamplesBase
     }
 
     @Test
-    public void availableFonts()
-    {
+    public void availableFonts() {
         //ExStart:AvailableFonts
         //GistId:7e64f6d40825be58a8c12f1307c12964
         List<FontSourceBase> fontSources = new ArrayList<>(Arrays.asList(FontSettings.getDefaultInstance().getFontsSources()));
@@ -348,8 +328,7 @@ public class WorkingWithFonts extends DocsExamplesBase
 
         FontSourceBase[] updatedFontSources = fontSources.toArray(new FontSourceBase[0]);
 
-        for (PhysicalFontInfo fontInfo : updatedFontSources[0].getAvailableFonts())
-        {
+        for (PhysicalFontInfo fontInfo : updatedFontSources[0].getAvailableFonts()) {
             System.out.println("FontFamilyName : " + fontInfo.getFontFamilyName());
             System.out.println("FullFontName  : " + fontInfo.getFullFontName());
             System.out.println("Version  : " + fontInfo.getVersion());
@@ -359,8 +338,7 @@ public class WorkingWithFonts extends DocsExamplesBase
     }
 
     @Test
-    public void receiveNotificationsOfFonts() throws Exception
-    {
+    public void receiveNotificationsOfFonts() throws Exception {
         //ExStart:ReceiveNotificationsOfFonts
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
@@ -378,42 +356,38 @@ public class WorkingWithFonts extends DocsExamplesBase
 
         doc.setWarningCallback(callback);
         doc.setFontSettings(fontSettings);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFonts.ReceiveNotificationsOfFonts.pdf");
         //ExEnd:ReceiveNotificationsOfFonts
     }
 
     @Test
-    public void receiveWarningNotification() throws Exception
-    {
+    public void receiveWarningNotification() throws Exception {
         //ExStart:ReceiveWarningNotification
         Document doc = new Document(getMyDir() + "Rendering.docx");
-        
+
         // When you call UpdatePageLayout the document is rendered in memory. Any warnings that occured during rendering
         // are stored until the document save and then sent to the appropriate WarningCallback.
         doc.updatePageLayout();
 
         HandleDocumentWarnings callback = new HandleDocumentWarnings();
         doc.setWarningCallback(callback);
-        
+
         // Even though the document was rendered previously, any save warnings are notified to the user during document save.
         doc.save(getArtifactsDir() + "WorkingWithFonts.ReceiveWarningNotification.pdf");
         //ExEnd:ReceiveWarningNotification  
     }
 
     //ExStart:HandleDocumentWarnings
-    public static class HandleDocumentWarnings implements IWarningCallback
-    {
+    public static class HandleDocumentWarnings implements IWarningCallback {
         /// <summary>
         /// Our callback only needs to implement the "Warning" method. This method is called whenever there is a
         /// Potential issue during document procssing. The callback can be set to listen for warnings generated
         /// during document load and/or document save.
         /// </summary>
-        public void warning(WarningInfo info)
-        {
+        public void warning(WarningInfo info) {
             // We are only interested in fonts being substituted.
-            if (info.getWarningType() == WarningType.FONT_SUBSTITUTION)
-            {
+            if (info.getWarningType() == WarningType.FONT_SUBSTITUTION) {
                 System.out.println("Font substitution: " + info.getDescription());
             }
         }
@@ -423,18 +397,16 @@ public class WorkingWithFonts extends DocsExamplesBase
     @Test
     //ExStart:ResourceSteam
     //GistId:7e64f6d40825be58a8c12f1307c12964
-    public void resourceSteam() throws Exception
-    {
+    public void resourceSteam() throws Exception {
         Document doc = new Document(getMyDir() + "Rendering.docx");
-        
+
         FontSettings.getDefaultInstance().setFontsSources(new FontSourceBase[]
-            { new SystemFontSource(), new ResourceSteamFontSource() });
+                {new SystemFontSource(), new ResourceSteamFontSource()});
 
         doc.save(getArtifactsDir() + "WorkingWithFonts.ResourceSteam.pdf");
     }
 
-    static class ResourceSteamFontSource extends StreamFontSource
-    {
+    static class ResourceSteamFontSource extends StreamFontSource {
         public InputStream openFontDataStream() throws IOException {
             return getClass().getClassLoader().getResource("resourceName").openStream();
         }
@@ -444,8 +416,7 @@ public class WorkingWithFonts extends DocsExamplesBase
     @Test
     //ExStart:GetSubstitutionWithoutSuffixes
     //GistId:a08698f540d47082b4e2dbb1cb67fc1b
-    public void getSubstitutionWithoutSuffixes() throws Exception
-    {
+    public void getSubstitutionWithoutSuffixes() throws Exception {
         Document doc = new Document(getMyDir() + "Get substitution without suffixes.docx");
 
         DocumentSubstitutionWarnings substitutionWarningHandler = new DocumentSubstitutionWarnings();
@@ -462,19 +433,17 @@ public class WorkingWithFonts extends DocsExamplesBase
         doc.save(getArtifactsDir() + "WorkingWithFonts.GetSubstitutionWithoutSuffixes.pdf");
 
         Assert.assertEquals(
-            "Font 'DINOT-Regular' has not been found. Using 'DINOT' font instead. Reason: font name substitution.",
-            substitutionWarningHandler.FontWarnings.get(0).getDescription());
+                "Font 'DINOT-Regular' has not been found. Using 'DINOT' font instead. Reason: font name substitution.",
+                substitutionWarningHandler.FontWarnings.get(0).getDescription());
     }
 
-    public static class DocumentSubstitutionWarnings implements IWarningCallback
-    {
+    public static class DocumentSubstitutionWarnings implements IWarningCallback {
         /// <summary>
         /// Our callback only needs to implement the "Warning" method.
         /// This method is called whenever there is a potential issue during document processing.
         /// The callback can be set to listen for warnings generated during document load and/or document save.
         /// </summary>
-        public void warning(WarningInfo info)
-        {
+        public void warning(WarningInfo info) {
             // We are only interested in fonts being substituted.
             if (info.getWarningType() == WarningType.FONT_SUBSTITUTION)
                 FontWarnings.warning(info);

@@ -11,11 +11,9 @@ import java.text.MessageFormat;
 import java.util.Collection;
 
 @Test
-public class SplitDocument extends DocsExamplesBase
-{
+public class SplitDocument extends DocsExamplesBase {
     @Test
-    public void byHeadings() throws Exception
-    {
+    public void byHeadings() throws Exception {
         //ExStart:SplitDocumentByHeadings
         //GistId:c0df00d37081f41a7683339fd7ef66c1
         Document doc = new Document(getMyDir() + "Rendering.docx");
@@ -25,33 +23,33 @@ public class SplitDocument extends DocsExamplesBase
             // Split a document into smaller parts, in this instance split by heading.
             options.setDocumentSplitCriteria(DocumentSplitCriteria.HEADING_PARAGRAPH);
         }
-        
+
         doc.save(getArtifactsDir() + "SplitDocument.ByHeadings.epub", options);
         //ExEnd:SplitDocumentByHeadings
     }
 
     @Test
-    public void bySectionsHtml() throws Exception
-    {
+    public void bySectionsHtml() throws Exception {
         Document doc = new Document(getMyDir() + "Rendering.docx");
- 
+
         //ExStart:SplitDocumentBySectionsHtml
         //GistId:6759a1a6b7f448798751d54922a8efcb
-        HtmlSaveOptions options = new HtmlSaveOptions(); { options.setDocumentSplitCriteria(DocumentSplitCriteria.SECTION_BREAK); }
+        HtmlSaveOptions options = new HtmlSaveOptions();
+        {
+            options.setDocumentSplitCriteria(DocumentSplitCriteria.SECTION_BREAK);
+        }
         //ExEnd:SplitDocumentBySectionsHtml
 
         doc.save(getArtifactsDir() + "SplitDocument.BySections.html", options);
     }
 
     @Test
-    public void bySections() throws Exception
-    {
+    public void bySections() throws Exception {
         //ExStart:SplitDocumentBySections
         //GistId:6759a1a6b7f448798751d54922a8efcb
         Document doc = new Document(getMyDir() + "Big document.docx");
 
-        for (int i = 0; i < doc.getSections().getCount(); i++)
-        {
+        for (int i = 0; i < doc.getSections().getCount(); i++) {
             // Split a document into smaller parts, in this instance, split by section.
             Section section = doc.getSections().get(i).deepClone();
 
@@ -68,16 +66,14 @@ public class SplitDocument extends DocsExamplesBase
     }
 
     @Test
-    public void pageByPage() throws Exception
-    {
+    public void pageByPage() throws Exception {
         //ExStart:SplitDocumentPageByPage
         //GistId:6759a1a6b7f448798751d54922a8efcb
         Document doc = new Document(getMyDir() + "Big document.docx");
 
         int pageCount = doc.getPageCount();
 
-        for (int page = 0; page < pageCount; page++)
-        {
+        for (int page = 0; page < pageCount; page++) {
             // Save each page as a separate document.
             Document extractedPage = doc.extractPages(page, 1);
             extractedPage.save(getArtifactsDir() + MessageFormat.format("SplitDocument.PageByPage_{0}.docx", page + 1));
@@ -89,8 +85,7 @@ public class SplitDocument extends DocsExamplesBase
 
     //ExStart:MergeSplitDocuments
     //GistId:6759a1a6b7f448798751d54922a8efcb
-    private void mergeDocuments() throws Exception
-    {
+    private void mergeDocuments() throws Exception {
         // Find documents using for merge.
         File directory = new File(getArtifactsDir());
         Collection<File> documentPaths = FileUtils.listFiles(directory, new WildcardFileFilter("SplitDocument.PageByPage_*.docx"), null);
@@ -106,8 +101,7 @@ public class SplitDocument extends DocsExamplesBase
         DocumentBuilder mergedDocBuilder = new DocumentBuilder(mergedDoc);
 
         // Merge document parts one by one.
-        for (File documentPath : documentPaths)
-        {
+        for (File documentPath : documentPaths) {
             if (documentPath.getName().equals(sourceDocumentPath))
                 continue;
 
@@ -121,12 +115,11 @@ public class SplitDocument extends DocsExamplesBase
     //ExEnd:MergeSplitDocuments
 
     @Test
-    public void byPageRange() throws Exception
-    {
+    public void byPageRange() throws Exception {
         //ExStart:SplitDocumentByPageRange
         //GistId:6759a1a6b7f448798751d54922a8efcb
         Document doc = new Document(getMyDir() + "Big document.docx");
-        
+
         // Get part of the document.
         Document extractedPages = doc.extractPages(3, 6);
         extractedPages.save(getArtifactsDir() + "SplitDocument.ByPageRange.docx");

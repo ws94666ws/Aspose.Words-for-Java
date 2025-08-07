@@ -7,15 +7,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Test
-public class WorkingWithRevisions extends DocsExamplesBase
-{
+public class WorkingWithRevisions extends DocsExamplesBase {
     @Test
-    public void acceptRevisions() throws Exception
-    {
+    public void acceptRevisions() throws Exception {
         //ExStart:AcceptAllRevisions
         //GistId:e8d71fde166d275d0fc9471c56c3ad39
         Document doc = new Document();
@@ -62,14 +62,12 @@ public class WorkingWithRevisions extends DocsExamplesBase
     }
 
     @Test
-    public void getRevisionTypes() throws Exception
-    {
+    public void getRevisionTypes() throws Exception {
         //ExStart:GetRevisionTypes
         Document doc = new Document(getMyDir() + "Revisions.docx");
 
         ParagraphCollection paragraphs = doc.getFirstSection().getBody().getParagraphs();
-        for (int i = 0; i < paragraphs.getCount(); i++)
-        {
+        for (int i = 0; i < paragraphs.getCount(); i++) {
             if (paragraphs.get(i).isMoveFromRevision())
                 System.out.println(MessageFormat.format("The paragraph {0} has been moved (deleted).", i));
             if (paragraphs.get(i).isMoveToRevision())
@@ -79,22 +77,19 @@ public class WorkingWithRevisions extends DocsExamplesBase
     }
 
     @Test
-    public void getRevisionGroups() throws Exception
-    {
+    public void getRevisionGroups() throws Exception {
         //ExStart:GetRevisionGroups
         Document doc = new Document(getMyDir() + "Revisions.docx");
 
-        for (RevisionGroup group : doc.getRevisions().getGroups())
-        {
-            System.out.println(MessageFormat.format("{0}, {1}:", group.getAuthor(),group.getRevisionType()));
+        for (RevisionGroup group : doc.getRevisions().getGroups()) {
+            System.out.println(MessageFormat.format("{0}, {1}:", group.getAuthor(), group.getRevisionType()));
             System.out.println(group.getText());
         }
         //ExEnd:GetRevisionGroups
     }
 
     @Test
-    public void removeCommentsInPdf() throws Exception
-    {
+    public void removeCommentsInPdf() throws Exception {
         //ExStart:RemoveCommentsInPDF
         Document doc = new Document(getMyDir() + "Revisions.docx");
 
@@ -106,8 +101,7 @@ public class WorkingWithRevisions extends DocsExamplesBase
     }
 
     @Test
-    public void showRevisionsInBalloons() throws Exception
-    {
+    public void showRevisionsInBalloons() throws Exception {
         //ExStart:ShowRevisionsInBalloons
         //GistId:ce015d9bade4e0294485ffb47462ded4
         //ExStart:SetMeasurementUnit
@@ -119,7 +113,7 @@ public class WorkingWithRevisions extends DocsExamplesBase
         doc.getLayoutOptions().getRevisionOptions().setMeasurementUnit(MeasurementUnits.INCHES);
         // Renders revision bars on the right side of a page.
         doc.getLayoutOptions().getRevisionOptions().setRevisionBarsPosition(HorizontalAlignment.RIGHT);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithRevisions.ShowRevisionsInBalloons.pdf");
         //ExEnd:SetRevisionBarsPosition
         //ExEnd:SetMeasurementUnit
@@ -127,16 +121,14 @@ public class WorkingWithRevisions extends DocsExamplesBase
     }
 
     @Test
-    public void getRevisionGroupDetails() throws Exception
-    {
+    public void getRevisionGroupDetails() throws Exception {
         //ExStart:GetRevisionGroupDetails
         Document doc = new Document(getMyDir() + "Revisions.docx");
 
-        for (Revision revision : doc.getRevisions())
-        {
+        for (Revision revision : doc.getRevisions()) {
             String groupText = revision.getGroup() != null
-                ? "Revision group text: " + revision.getGroup().getText()
-                : "Revision has no group";
+                    ? "Revision group text: " + revision.getGroup().getText()
+                    : "Revision has no group";
 
             System.out.println("Type: " + revision.getRevisionType());
             System.out.println("Author: " + revision.getAuthor());
@@ -148,8 +140,7 @@ public class WorkingWithRevisions extends DocsExamplesBase
     }
 
     @Test
-    public void accessRevisedVersion() throws Exception
-    {
+    public void accessRevisedVersion() throws Exception {
         //ExStart:AccessRevisedVersion
         Document doc = new Document(getMyDir() + "Revisions.docx");
         doc.updateListLabels();
@@ -157,13 +148,10 @@ public class WorkingWithRevisions extends DocsExamplesBase
         // Switch to the revised version of the document.
         doc.setRevisionsView(RevisionsView.FINAL);
 
-        for (Revision revision : doc.getRevisions())
-        {
-            if (revision.getParentNode().getNodeType() == NodeType.PARAGRAPH)
-            {
+        for (Revision revision : doc.getRevisions()) {
+            if (revision.getParentNode().getNodeType() == NodeType.PARAGRAPH) {
                 Paragraph paragraph = (Paragraph) revision.getParentNode();
-                if (paragraph.isListItem())
-                {
+                if (paragraph.isListItem()) {
                     System.out.println(paragraph.getListLabel().getLabelString());
                     System.out.println(paragraph.getListFormat().getListLevel());
                 }
@@ -173,8 +161,7 @@ public class WorkingWithRevisions extends DocsExamplesBase
     }
 
     @Test
-    public void moveNodeInTrackedDocument() throws Exception
-    {
+    public void moveNodeInTrackedDocument() throws Exception {
         //ExStart:MoveNodeInTrackedDocument
         //GistId:e8d71fde166d275d0fc9471c56c3ad39
         Document doc = new Document();
@@ -200,8 +187,7 @@ public class WorkingWithRevisions extends DocsExamplesBase
         Node node = body.getParagraphs().get(3);
         Node endNode = body.getParagraphs().get(5).getNextSibling();
         Node referenceNode = body.getParagraphs().get(0);
-        while (node != endNode)
-        {
+        while (node != endNode) {
             Node nextNode = node.getNextSibling();
             body.insertBefore(node, referenceNode);
             node = nextNode;
@@ -217,8 +203,7 @@ public class WorkingWithRevisions extends DocsExamplesBase
     }
 
     @Test
-    public void shapeRevision() throws Exception
-    {
+    public void shapeRevision() throws Exception {
         //ExStart:ShapeRevision
         //GistId:e8d71fde166d275d0fc9471c56c3ad39
         Document doc = new Document();

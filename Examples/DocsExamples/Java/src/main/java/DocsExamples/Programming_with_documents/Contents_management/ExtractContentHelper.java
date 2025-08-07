@@ -4,10 +4,8 @@ import com.aspose.words.*;
 
 import java.util.ArrayList;
 
-public class ExtractContentHelper
-{
-    public static ArrayList<Node> extractContent(Node startNode, Node endNode, boolean isInclusive, boolean copySection)
-    {
+public class ExtractContentHelper {
+    public static ArrayList<Node> extractContent(Node startNode, Node endNode, boolean isInclusive, boolean copySection) {
         // First, check that the nodes passed to this method are valid for use.
         verifyParameterNodes(startNode, endNode);
 
@@ -16,8 +14,7 @@ public class ExtractContentHelper
 
         // If either marker is part of a comment, including the comment itself, we need to move the pointer
         // forward to the Comment Node found after the CommentRangeEnd node.
-        if (endNode.getNodeType() == NodeType.COMMENT_RANGE_END && isInclusive)
-        {
+        if (endNode.getNodeType() == NodeType.COMMENT_RANGE_END && isInclusive) {
             Node node = findNextNode(NodeType.COMMENT, endNode.getNextSibling());
             if (node != null)
                 endNode = node;
@@ -41,8 +38,7 @@ public class ExtractContentHelper
         // and last nodes when needed, so paragraph formatting is retained.
         // Method is a little more complicated than a regular extractor as we need to factor
         // in extracting using inline nodes, fields, bookmarks, etc. to make it useful.
-        while (isExtracting)
-        {
+        while (isExtracting) {
             if (copySection) {
                 Node section = currNode.getAncestor(NodeType.SECTION);
                 boolean sectionExists = false;
@@ -61,40 +57,33 @@ public class ExtractContentHelper
             Node cloneNode = currNode.deepClone(true);
             boolean isEndingNode = currNode.equals(endNode);
 
-            if (isStartingNode || isEndingNode)
-            {
+            if (isStartingNode || isEndingNode) {
                 // We need to process each marker separately, so pass it off to a separate method instead.
                 // End should be processed at first to keep node indexes.
-                if (isEndingNode)
-                {
+                if (isEndingNode) {
                     // !isStartingNode: don't add the node twice if the markers are the same node.
                     processMarker(cloneNode, nodes, originalEndNode, currNode, isInclusive,
-                        false, !isStartingNode, false);
+                            false, !isStartingNode, false);
                     isExtracting = false;
                 }
 
                 // Conditional needs to be separate as the block level start and end markers, maybe the same node.
-                if (isStartingNode)
-                {
+                if (isStartingNode) {
                     processMarker(cloneNode, nodes, originalStartNode, currNode, isInclusive,
-                        true, true, false);
+                            true, true, false);
                     isStartingNode = false;
                 }
-            }
-            else
+            } else
                 // Node is not a start or end marker, simply add the copy to the list.
                 nodes.add(cloneNode);
 
             // Move to the next node and extract it. If the next node is null,
             // the rest of the content is found in a different section.
-            if (currNode.getNextSibling() == null && isExtracting)
-            {
+            if (currNode.getNextSibling() == null && isExtracting) {
                 // Move to the next section.
                 Section nextSection = (Section) currNode.getAncestor(NodeType.SECTION).getNextSibling();
                 currNode = nextSection.getBody().getFirstChild();
-            }
-            else
-            {
+            } else {
                 // Move to the next node in the body.
                 currNode = currNode.getNextSibling();
             }
@@ -108,8 +97,7 @@ public class ExtractContentHelper
         return nodes;
     }
 
-    private static void verifyParameterNodes(Node startNode, Node endNode)
-    {
+    private static void verifyParameterNodes(Node startNode, Node endNode) {
         // The order in which these checks are done is important.
         if (startNode == null)
             throw new IllegalArgumentException("Start node cannot be null");
@@ -131,23 +119,19 @@ public class ExtractContentHelper
         int startIndex = startSection.getParentNode().indexOf(startSection);
         int endIndex = endSection.getParentNode().indexOf(endSection);
 
-        if (startIndex == endIndex)
-        {
+        if (startIndex == endIndex) {
             if (startSection.getBody().indexOf(getAncestorInBody(startNode)) >
-                endSection.getBody().indexOf(getAncestorInBody(endNode)))
+                    endSection.getBody().indexOf(getAncestorInBody(endNode)))
                 throw new IllegalArgumentException("The end node must be after the start node in the body");
-        }
-        else if (startIndex > endIndex)
+        } else if (startIndex > endIndex)
             throw new IllegalArgumentException("The section of end node must be after the section start node");
     }
 
-    private static Node findNextNode(/*NodeType*/int nodeType, Node fromNode)
-    {
+    private static Node findNextNode(/*NodeType*/int nodeType, Node fromNode) {
         if (fromNode == null || fromNode.getNodeType() == nodeType)
             return fromNode;
 
-        if (fromNode.isComposite())
-        {
+        if (fromNode.isComposite()) {
             Node node = findNextNode(nodeType, ((CompositeNode) fromNode).getFirstChild());
             if (node != null)
                 return node;
@@ -156,8 +140,7 @@ public class ExtractContentHelper
         return findNextNode(nodeType, fromNode.getNextSibling());
     }
 
-    private boolean isInline(Node node)
-    {
+    private boolean isInline(Node node) {
         // Test if the node is a descendant of a Paragraph or Table node and is not a paragraph
         // or a table a paragraph inside a comment class that is decent of a paragraph is possible.
         return ((node.getAncestor(NodeType.PARAGRAPH) != null || node.getAncestor(NodeType.TABLE) != null) &&
@@ -165,11 +148,9 @@ public class ExtractContentHelper
     }
 
     private static void processMarker(Node cloneNode, ArrayList<Node> nodes, Node node, Node blockLevelAncestor,
-        boolean isInclusive, boolean isStartMarker, boolean canAdd, boolean forceAdd)
-    {
+                                      boolean isInclusive, boolean isStartMarker, boolean canAdd, boolean forceAdd) {
         // If we are dealing with a block-level node, see if it should be included and add it to the list.
-        if (node == blockLevelAncestor)
-        {
+        if (node == blockLevelAncestor) {
             if (canAdd && isInclusive)
                 nodes.add(cloneNode);
             return;
@@ -181,12 +162,10 @@ public class ExtractContentHelper
 
         // If a marker is a FieldStart node check if it's to be included or not.
         // We assume for simplicity that the FieldStart and FieldEnd appear in the same paragraph.
-        if (node.getNodeType() == NodeType.FIELD_START)
-        {
+        if (node.getNodeType() == NodeType.FIELD_START) {
             // If the marker is a start node and is not included, skip to the end of the field.
             // If the marker is an end node and is to be included, then move to the end field so the field will not be removed.
-            if (isStartMarker && !isInclusive || !isStartMarker && isInclusive)
-            {
+            if (isStartMarker && !isInclusive || !isStartMarker && isInclusive) {
                 while (node.getNextSibling() != null && node.getNodeType() != NodeType.FIELD_END)
                     node = node.getNextSibling();
             }
@@ -197,8 +176,7 @@ public class ExtractContentHelper
 
         // Process the corresponding node in our cloned node by index.
         Node currentCloneNode = cloneNode;
-        for (int i = nodeBranch.size() - 1; i >= 0; i--)
-        {
+        for (int i = nodeBranch.size() - 1; i >= 0; i--) {
             Node currentNode = nodeBranch.get(i);
             int nodeIndex = currentNode.getParentNode().indexOf(currentNode);
             currentCloneNode = ((CompositeNode) currentCloneNode).getChildNodes(NodeType.ANY, false).get(nodeIndex);
@@ -208,31 +186,25 @@ public class ExtractContentHelper
 
         // After processing, the composite node may become empty if it has doesn't include it.
         if (canAdd &&
-            (forceAdd || ((CompositeNode) cloneNode).hasChildNodes()))
+                (forceAdd || ((CompositeNode) cloneNode).hasChildNodes()))
             nodes.add(cloneNode);
     }
 
-    private static void removeNodesOutsideOfRange(Node markerNode, boolean isInclusive, boolean isStartMarker)
-    {
+    private static void removeNodesOutsideOfRange(Node markerNode, boolean isInclusive, boolean isStartMarker) {
         boolean isProcessing = true;
         boolean isRemoving = isStartMarker;
         Node nextNode = markerNode.getParentNode().getFirstChild();
 
-        while (isProcessing && nextNode != null)
-        {
+        while (isProcessing && nextNode != null) {
             Node currentNode = nextNode;
             boolean isSkip = false;
 
-            if (currentNode.equals(markerNode))
-            {
-                if (isStartMarker)
-                {
+            if (currentNode.equals(markerNode)) {
+                if (isStartMarker) {
                     isProcessing = false;
                     if (isInclusive)
                         isRemoving = false;
-                }
-                else
-                {
+                } else {
                     isRemoving = true;
                     if (isInclusive)
                         isSkip = true;
@@ -245,13 +217,11 @@ public class ExtractContentHelper
         }
     }
 
-    private static ArrayList<Node> fillSelfAndParents(Node node, Node tillNode)
-    {
+    private static ArrayList<Node> fillSelfAndParents(Node node, Node tillNode) {
         ArrayList<Node> list = new ArrayList<Node>();
         Node currentNode = node;
 
-        while (currentNode != tillNode)
-        {
+        while (currentNode != tillNode) {
             list.add(currentNode);
             currentNode = currentNode.getParentNode();
         }
@@ -259,22 +229,19 @@ public class ExtractContentHelper
         return list;
     }
 
-    private static void includeNextParagraph(Node node, ArrayList<Node> nodes)
-    {
+    private static void includeNextParagraph(Node node, ArrayList<Node> nodes) {
         Paragraph paragraph = (Paragraph) findNextNode(NodeType.PARAGRAPH, node.getNextSibling());
-        if (paragraph != null)
-        {
+        if (paragraph != null) {
             // Move to the first child to include paragraphs without content.
             Node markerNode = paragraph.hasChildNodes() ? paragraph.getFirstChild() : paragraph;
             Node rootNode = getAncestorInBody(paragraph);
 
             processMarker(rootNode.deepClone(true), nodes, markerNode, rootNode,
-                markerNode == paragraph, false, true, true);
+                    markerNode == paragraph, false, true, true);
         }
     }
 
-    private static Node getAncestorInBody(Node startNode)
-    {
+    private static Node getAncestorInBody(Node startNode) {
         while (startNode.getParentNode().getNodeType() != NodeType.BODY)
             startNode = startNode.getParentNode();
         return startNode;
@@ -282,8 +249,7 @@ public class ExtractContentHelper
 
     //ExStart:GenerateDocument
     //GistId:1975a35426bcd195a2e7c61d20a1580c
-    public static Document generateDocument(Document srcDoc, ArrayList<Node> nodes) throws Exception
-    {
+    public static Document generateDocument(Document srcDoc, ArrayList<Node> nodes) throws Exception {
         Document dstDoc = new Document();
         // Remove default section in the destination document.
         dstDoc.getFirstSection().remove();
@@ -291,21 +257,17 @@ public class ExtractContentHelper
         // Import each node from the list into the new document. Keep the original formatting of the node.
         NodeImporter importer = new NodeImporter(srcDoc, dstDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
         Section importedSection = null;
-        for (Node node : nodes)
-        {
-            if (node.getNodeType() == NodeType.SECTION)
-            {
+        for (Node node : nodes) {
+            if (node.getNodeType() == NodeType.SECTION) {
                 // Import a section from the source document.
-                Section srcSection = (Section)node;
-                importedSection = (Section)importer.importNode(srcSection, false);
+                Section srcSection = (Section) node;
+                importedSection = (Section) importer.importNode(srcSection, false);
                 importedSection.appendChild(importer.importNode(srcSection.getBody(), false));
                 for (HeaderFooter hf : srcSection.getHeadersFooters())
                     importedSection.getHeadersFooters().add(importer.importNode(hf, true));
 
                 dstDoc.appendChild(importedSection);
-            }
-            else
-            {
+            } else {
                 Node importNode = importer.importNode(node, true);
                 importedSection.getBody().appendChild(importNode);
             }

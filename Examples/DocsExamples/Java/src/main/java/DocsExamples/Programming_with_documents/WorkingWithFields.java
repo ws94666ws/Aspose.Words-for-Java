@@ -1,35 +1,27 @@
 package DocsExamples.Programming_with_documents;
 
 import DocsExamples.DocsExamplesBase;
-import com.aspose.email.system.DateTime;
 import com.aspose.words.*;
 import com.aspose.words.net.System.Globalization.CultureInfo;
 import com.aspose.words.net.System.Globalization.DateTimeFormatInfo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Test
-public class WorkingWithFields extends DocsExamplesBase
-{
+public class WorkingWithFields extends DocsExamplesBase {
     @Test
-    public void fieldCode() throws Exception
-    {
+    public void fieldCode() throws Exception {
         //ExStart:FieldCode
         //GistId:7c2b7b650a88375b1d438746f78f0d64
         Document doc = new Document(getMyDir() + "Hyperlinks.docx");
 
-        for (Field field : doc.getRange().getFields())
-        {
+        for (Field field : doc.getRange().getFields()) {
             String fieldCode = field.getFieldCode();
             String fieldResult = field.getResult();
         }
@@ -37,8 +29,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void changeFieldUpdateCultureSource() throws Exception
-    {
+    public void changeFieldUpdateCultureSource() throws Exception {
         //ExStart:ChangeFieldUpdateCultureSource
         //GistId:9e90defe4a7bcafb004f73a2ef236986
         //ExStart:DocumentBuilderInsertField
@@ -55,37 +46,33 @@ public class WorkingWithFields extends DocsExamplesBase
         // Shows how to specify where the culture used for date formatting during field update and mail merge is chosen from
         // set the culture used during field update to the culture used by the field.
         doc.getFieldOptions().setFieldUpdateCultureSource(FieldUpdateCultureSource.FIELD_CODE);
-        doc.getMailMerge().execute(new String[] { "Date2" }, new Object[] { LocalDate.of(2011, Month.JANUARY, 1) });
-        
+        doc.getMailMerge().execute(new String[]{"Date2"}, new Object[]{LocalDate.of(2011, Month.JANUARY, 1)});
+
         doc.save(getArtifactsDir() + "WorkingWithFields.ChangeFieldUpdateCultureSource.docx");
         //ExEnd:ChangeFieldUpdateCultureSource
     }
 
     @Test
-    public void specifyLocaleAtFieldLevel() throws Exception
-    {
+    public void specifyLocaleAtFieldLevel() throws Exception {
         //ExStart:SpecifyLocaleAtFieldLevel
         //GistId:1cf07762df56f15067d6aef90b14b3db
         DocumentBuilder builder = new DocumentBuilder();
 
         Field field = builder.insertField(FieldType.FIELD_DATE, true);
         field.setLocaleId(1049);
-        
+
         builder.getDocument().save(getArtifactsDir() + "WorkingWithFields.SpecifyLocaleAtFieldLevel.docx");
         //ExEnd:SpecifyLocaleAtFieldLevel
     }
 
     @Test
-    public void replaceHyperlinks() throws Exception
-    {
+    public void replaceHyperlinks() throws Exception {
         //ExStart:ReplaceHyperlinks
         //GistId:0213851d47551e83af42233f4d075cf6
         Document doc = new Document(getMyDir() + "Hyperlinks.docx");
 
-        for (Field field : doc.getRange().getFields())
-        {
-            if (field.getType() == FieldType.FIELD_HYPERLINK)
-            {
+        for (Field field : doc.getRange().getFields()) {
+            if (field.getType() == FieldType.FIELD_HYPERLINK) {
                 FieldHyperlink hyperlink = (FieldHyperlink) field;
 
                 // Some hyperlinks can be local (links to bookmarks inside the document), ignore these.
@@ -102,8 +89,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void renameMergeFields() throws Exception
-    {
+    public void renameMergeFields() throws Exception {
         //ExStart:RenameMergeFields
         //GistId:bf0f8a6b40b69a5274ab3553315e147f
         Document doc = new Document();
@@ -112,11 +98,9 @@ public class WorkingWithFields extends DocsExamplesBase
         builder.insertField("MERGEFIELD MyMergeField1 \\* MERGEFORMAT");
         builder.insertField("MERGEFIELD MyMergeField2 \\* MERGEFORMAT");
 
-        for (Field f : doc.getRange().getFields())
-        {
-            if (f.getType() == FieldType.FIELD_MERGE_FIELD)
-            {
-                FieldMergeField mergeField = (FieldMergeField)f;
+        for (Field f : doc.getRange().getFields()) {
+            if (f.getType() == FieldType.FIELD_MERGE_FIELD) {
+                FieldMergeField mergeField = (FieldMergeField) f;
                 mergeField.setFieldName(mergeField.getFieldName() + "_Renamed");
                 mergeField.update();
             }
@@ -127,20 +111,18 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void removeField() throws Exception
-    {
+    public void removeField() throws Exception {
         //ExStart:RemoveField
         //GistId:8c604665c1b97795df7a1e665f6b44ce
         Document doc = new Document(getMyDir() + "Various fields.docx");
-        
+
         Field field = doc.getRange().getFields().get(0);
         field.remove();
         //ExEnd:RemoveField
     }
 
     @Test
-    public void unlinkFields() throws Exception
-    {
+    public void unlinkFields() throws Exception {
         //ExStart:UnlinkFields
         //GistId:f3592014d179ecb43905e37b2a68bc92
         Document doc = new Document(getMyDir() + "Various fields.docx");
@@ -149,8 +131,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertToaFieldWithoutDocumentBuilder() throws Exception
-    {
+    public void insertToaFieldWithoutDocumentBuilder() throws Exception {
         //ExStart:InsertToaFieldWithoutDocumentBuilder
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -179,8 +160,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertNestedFields() throws Exception
-    {
+    public void insertNestedFields() throws Exception {
         //ExStart:InsertNestedFields
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -207,8 +187,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertMergeFieldUsingDom() throws Exception
-    {
+    public void insertMergeFieldUsingDom() throws Exception {
         //ExStart:InsertMergeFieldUsingDom
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -238,8 +217,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertAddressBlockFieldUsingDom() throws Exception
-    {
+    public void insertAddressBlockFieldUsingDom() throws Exception {
         //ExStart:InsertAddressBlockFieldUsingDom
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -269,8 +247,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertFieldIncludeTextWithoutDocumentBuilder() throws Exception
-    {
+    public void insertFieldIncludeTextWithoutDocumentBuilder() throws Exception {
         //ExStart:InsertFieldIncludeTextWithoutDocumentBuilder
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -292,8 +269,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertFieldNone() throws Exception
-    {
+    public void insertFieldNone() throws Exception {
         //ExStart:InsertFieldNone
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -306,39 +282,37 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertField() throws Exception
-    {
+    public void insertField() throws Exception {
         //ExStart:InsertField
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.insertField("MERGEFIELD MyFieldName \\* MERGEFORMAT");
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFields.InsertField.docx");
         //ExEnd:InsertField
     }
 
     @Test
-    public void insertFieldUsingFieldBuilder() throws Exception
-    {
+    public void insertFieldUsingFieldBuilder() throws Exception {
         //ExStart:InsertFieldUsingFieldBuilder
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
 
         // Prepare IF field with two nested MERGEFIELD fields: { IF "left expression" = "right expression" "Firstname: { MERGEFIELD firstname }" "Lastname: { MERGEFIELD lastname }"}
         FieldBuilder fieldBuilder = new FieldBuilder(FieldType.FIELD_IF)
-            .addArgument("left expression")
-            .addArgument("=")
-            .addArgument("right expression")
-            .addArgument(
-                new FieldArgumentBuilder()
-                    .addText("Firstname: ")
-                    .addField(new FieldBuilder(FieldType.FIELD_MERGE_FIELD).addArgument("firstname")))
-            .addArgument(
-                new FieldArgumentBuilder()
-                    .addText("Lastname: ")
-                    .addField(new FieldBuilder(FieldType.FIELD_MERGE_FIELD).addArgument("lastname")));
+                .addArgument("left expression")
+                .addArgument("=")
+                .addArgument("right expression")
+                .addArgument(
+                        new FieldArgumentBuilder()
+                                .addText("Firstname: ")
+                                .addField(new FieldBuilder(FieldType.FIELD_MERGE_FIELD).addArgument("firstname")))
+                .addArgument(
+                        new FieldArgumentBuilder()
+                                .addText("Lastname: ")
+                                .addField(new FieldBuilder(FieldType.FIELD_MERGE_FIELD).addArgument("lastname")));
 
         // Insert IF field in exact location
         Field field = fieldBuilder.buildAndInsert(doc.getFirstSection().getBody().getFirstParagraph());
@@ -349,8 +323,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertAuthorField() throws Exception
-    {
+    public void insertAuthorField() throws Exception {
         //ExStart:InsertAuthorField
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -359,7 +332,7 @@ public class WorkingWithFields extends DocsExamplesBase
 
         // We want to insert an AUTHOR field like this:
         // { AUTHOR Test1 }
-        FieldAuthor field = (FieldAuthor) para.appendField(FieldType.FIELD_AUTHOR, false);            
+        FieldAuthor field = (FieldAuthor) para.appendField(FieldType.FIELD_AUTHOR, false);
         field.setAuthorName("Test1");
 
         field.update();
@@ -369,8 +342,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertAskFieldWithoutDocumentBuilder() throws Exception
-    {
+    public void insertAskFieldWithoutDocumentBuilder() throws Exception {
         //ExStart:InsertAskFieldWithoutDocumentBuilder
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -395,8 +367,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void insertAdvanceFieldWithoutDocumentBuilder() throws Exception
-    {
+    public void insertAdvanceFieldWithoutDocumentBuilder() throws Exception {
         //ExStart:InsertAdvanceFieldWithoutDocumentBuilder
         //GistId:1cf07762df56f15067d6aef90b14b3db
         Document doc = new Document();
@@ -425,8 +396,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void getMailMergeFieldNames() throws Exception
-    {
+    public void getMailMergeFieldNames() throws Exception {
         //ExStart:GetFieldNames
         //GistId:b4bab1bf22437a86d8062e91cf154494
         Document doc = new Document();
@@ -437,8 +407,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void mappedDataFields() throws Exception
-    {
+    public void mappedDataFields() throws Exception {
         //ExStart:MappedDataFields
         //GistId:b4bab1bf22437a86d8062e91cf154494
         Document doc = new Document();
@@ -448,8 +417,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void deleteFields() throws Exception
-    {
+    public void deleteFields() throws Exception {
         //ExStart:DeleteFields
         //GistId:f39874821cb317d245a769c9ce346fea
         Document doc = new Document();
@@ -459,8 +427,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void fieldUpdateCulture() throws Exception
-    {
+    public void fieldUpdateCulture() throws Exception {
         //ExStart:FieldUpdateCulture
         //GistId:79b46682fbfd7f02f64783b163ed95fc
         Document doc = new Document();
@@ -477,37 +444,34 @@ public class WorkingWithFields extends DocsExamplesBase
 
     //ExStart:FieldUpdateCultureProvider
     //GistId:79b46682fbfd7f02f64783b163ed95fc
-    private static class FieldUpdateCultureProvider implements IFieldUpdateCultureProvider
-    {
-        public CultureInfo getCulture(String name, Field field)
-        {
-            switch (name)
-            {
+    private static class FieldUpdateCultureProvider implements IFieldUpdateCultureProvider {
+        public CultureInfo getCulture(String name, Field field) {
+            switch (name) {
                 case "ru-RU":
                     CultureInfo culture = new CultureInfo(new Locale(name));
                     DateTimeFormatInfo format = culture.getDateTimeFormat();
 
                     format.setMonthNames(new String[]
-                    {
-                        "месяц 1", "месяц 2", "месяц 3", "месяц 4", "месяц 5", "месяц 6", "месяц 7", "месяц 8",
-                        "месяц 9", "месяц 10", "месяц 11", "месяц 12", ""
-                    });
+                            {
+                                    "месяц 1", "месяц 2", "месяц 3", "месяц 4", "месяц 5", "месяц 6", "месяц 7", "месяц 8",
+                                    "месяц 9", "месяц 10", "месяц 11", "месяц 12", ""
+                            });
                     format.setMonthGenitiveNames(format.getMonthNames());
                     format.setAbbreviatedMonthNames(new String[]
-                    {
-                        "мес 1", "мес 2", "мес 3", "мес 4", "мес 5", "мес 6", "мес 7", "мес 8", "мес 9", "мес 10",
-                        "мес 11", "мес 12", ""
-                    });
+                            {
+                                    "мес 1", "мес 2", "мес 3", "мес 4", "мес 5", "мес 6", "мес 7", "мес 8", "мес 9", "мес 10",
+                                    "мес 11", "мес 12", ""
+                            });
                     format.setAbbreviatedMonthGenitiveNames(format.getAbbreviatedMonthNames());
 
                     format.setDayNames(new String[]
-                    {
-                        "день недели 7", "день недели 1", "день недели 2", "день недели 3", "день недели 4",
-                        "день недели 5", "день недели 6"
-                    });
+                            {
+                                    "день недели 7", "день недели 1", "день недели 2", "день недели 3", "день недели 4",
+                                    "день недели 5", "день недели 6"
+                            });
                     format.setAbbreviatedDayNames(new String[]
-                        { "день 7", "день 1", "день 2", "день 3", "день 4", "день 5", "день 6" });
-                    format.setShortestDayNames(new String[] { "д7", "д1", "д2", "д3", "д4", "д5", "д6" });
+                            {"день 7", "день 1", "день 2", "день 3", "день 4", "день 5", "день 6"});
+                    format.setShortestDayNames(new String[]{"д7", "д1", "д2", "д3", "д4", "д5", "д6"});
 
                     format.setAMDesignator("До полудня");
                     format.setPMDesignator("После полудня");
@@ -529,8 +493,7 @@ public class WorkingWithFields extends DocsExamplesBase
     //ExEnd:FieldUpdateCultureProvider
 
     @Test
-    public void fieldDisplayResults() throws Exception
-    {
+    public void fieldDisplayResults() throws Exception {
         //ExStart:FieldDisplayResults
         //GistId:bf0f8a6b40b69a5274ab3553315e147f
         //ExStart:UpdateDocFields
@@ -546,8 +509,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void evaluateIfCondition() throws Exception
-    {
+    public void evaluateIfCondition() throws Exception {
         //ExStart:EvaluateIfCondition
         //GistId:79b46682fbfd7f02f64783b163ed95fc
         DocumentBuilder builder = new DocumentBuilder();
@@ -560,8 +522,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void unlinkFieldsInParagraph() throws Exception
-    {
+    public void unlinkFieldsInParagraph() throws Exception {
         //ExStart:UnlinkFieldsInParagraph
         //GistId:f3592014d179ecb43905e37b2a68bc92
         Document doc = new Document(getMyDir() + "Linked fields.docx");
@@ -579,8 +540,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void unlinkFieldsInDocument() throws Exception
-    {
+    public void unlinkFieldsInDocument() throws Exception {
         //ExStart:UnlinkFieldsInDocument
         //GistId:f3592014d179ecb43905e37b2a68bc92
         Document doc = new Document(getMyDir() + "Linked fields.docx");
@@ -598,8 +558,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void unlinkFieldsInBody() throws Exception
-    {
+    public void unlinkFieldsInBody() throws Exception {
         //ExStart:UnlinkFieldsInBody
         //GistId:f3592014d179ecb43905e37b2a68bc92
         Document doc = new Document(getMyDir() + "Linked fields.docx");
@@ -616,8 +575,7 @@ public class WorkingWithFields extends DocsExamplesBase
     }
 
     @Test
-    public void changeLocale() throws Exception
-    {
+    public void changeLocale() throws Exception {
         //ExStart:ChangeLocale
         //GistId:9e90defe4a7bcafb004f73a2ef236986
         Document doc = new Document();
@@ -630,10 +588,10 @@ public class WorkingWithFields extends DocsExamplesBase
         // Set to German language so dates and numbers are formatted using this culture during mail merge.
         Locale.setDefault(new Locale("de-DE"));
 
-        doc.getMailMerge().execute(new String[] { "Date" }, new Object[] { new Date() });
+        doc.getMailMerge().execute(new String[]{"Date"}, new Object[]{new Date()});
 
         Locale.setDefault(currentCulture.getLocale(currentCulture));
-        
+
         doc.save(getArtifactsDir() + "WorkingWithFields.ChangeLocale.docx");
         //ExEnd:ChangeLocale
     }
@@ -659,8 +617,7 @@ public class WorkingWithFields extends DocsExamplesBase
     //ExEnd:ConvertFieldsToStaticText
 
     @Test
-    public void fieldResultFormatting() throws Exception
-    {
+    public void fieldResultFormatting() throws Exception {
         //ExStart:FieldResultFormatting
         //GistId:79b46682fbfd7f02f64783b163ed95fc
         Document doc = new Document();
@@ -718,7 +675,7 @@ public class WorkingWithFields extends DocsExamplesBase
                 return null;
             }
 
-            String newValue = String.format(mNumberFormat, (int)value);
+            String newValue = String.format(mNumberFormat, (int) value);
             formatInvocations.add(new FormatInvocation(FormatInvocationType.NUMERIC, value, format, newValue));
             return newValue;
         }
@@ -750,7 +707,7 @@ public class WorkingWithFields extends DocsExamplesBase
             }
 
             double doubleValue = Double.parseDouble(value.toString());
-            String newValue = String.format(mGeneralFormat, (int)doubleValue);
+            String newValue = String.format(mGeneralFormat, (int) doubleValue);
             formatInvocations.add(new FormatInvocation(FormatInvocationType.GENERAL, value, String.valueOf(format), newValue));
             return newValue;
         }

@@ -1,15 +1,15 @@
 package DocsExamples.Getting_started;
 
 import DocsExamples.DocsExamplesBase;
-import com.aspose.words.*;
+import com.aspose.words.Document;
+import com.aspose.words.DocumentBuilder;
+import com.aspose.words.ImportFormatMode;
 import org.testng.annotations.Test;
 
 @Test
-public class HelloWorld extends DocsExamplesBase
-{
+public class HelloWorld extends DocsExamplesBase {
     @Test
-    public void simpleHelloWorld() throws Exception
-    {
+    public void simpleHelloWorld() throws Exception {
         //ExStart:HelloWorld
         //GistId:4e111aa3d11a41428c8a0cadfc23b972
         Document docA = new Document();

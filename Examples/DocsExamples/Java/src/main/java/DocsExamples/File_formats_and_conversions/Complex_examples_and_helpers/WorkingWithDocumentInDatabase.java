@@ -8,29 +8,27 @@ import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.text.MessageFormat;
 
 @Test
-public class WorkingWithDocumentInDatabase extends DocsExamplesBase
-{
+public class WorkingWithDocumentInDatabase extends DocsExamplesBase {
     @Test
-    public void loadAndSaveDocToDatabase() throws Exception
-    {
+    public void loadAndSaveDocToDatabase() throws Exception {
         Document doc = new Document(getMyDir() + "Document.docx");
         //ExStart:OpenDatabaseConnection
+        //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         String connString = "jdbc:ucanaccess://" + getDatabaseDir() + "Northwind.accdb";
 
         Connection connection = DriverManager.getConnection(connString, "Admin", "");
         //ExEnd:OpenDatabaseConnection
-        
-        //ExStart:OpenRetrieveAndDelete 
+
+        //ExStart:OpenRetrieveAndDelete
+        //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2 
         storeToDatabase(doc, connection);
-        
+
         Document dbDoc = readFromDatabase("Document.docx", connection);
         dbDoc.save(getArtifactsDir() + "WorkingWithDocumentInDatabase.LoadAndSaveDocToDatabase.docx");
 
@@ -40,7 +38,8 @@ public class WorkingWithDocumentInDatabase extends DocsExamplesBase
         //ExEnd:OpenRetrieveAndDelete 
     }
 
-    //ExStart:StoreToDatabase 
+    //ExStart:StoreToDatabase
+    //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
     private void storeToDatabase(Document doc, Connection connection) throws Exception {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         doc.save(stream, SaveFormat.DOCX);
@@ -55,8 +54,9 @@ public class WorkingWithDocumentInDatabase extends DocsExamplesBase
         pStatement.execute();
     }
     //ExEnd:StoreToDatabase
-    
+
     //ExStart:ReadFromDatabase 
+    //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
     private Document readFromDatabase(String fileName, Connection connection) throws Exception {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Documents WHERE Name='" + fileName + "'");
@@ -78,8 +78,9 @@ public class WorkingWithDocumentInDatabase extends DocsExamplesBase
         return doc;
     }
     //ExEnd:ReadFromDatabase
-    
+
     //ExStart:DeleteFromDatabase 
+    //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
     private void deleteFromDatabase(String fileName, Connection connection) throws SQLException {
         Statement statement = connection.createStatement();
         statement.execute("DELETE * FROM Documents WHERE Name='" + fileName + "'");

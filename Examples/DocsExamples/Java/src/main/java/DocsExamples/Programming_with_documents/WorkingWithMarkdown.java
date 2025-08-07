@@ -5,11 +5,9 @@ import com.aspose.words.*;
 import org.testng.annotations.Test;
 
 @Test
-public class WorkingWithMarkdown extends DocsExamplesBase
-{
+public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
-    public void boldText() throws Exception
-    {
+    public void boldText() throws Exception {
         //ExStart:BoldText
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -22,8 +20,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void italicText() throws Exception
-    {
+    public void italicText() throws Exception {
         //ExStart:ItalicText
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -36,8 +33,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void strikethrough() throws Exception
-    {
+    public void strikethrough() throws Exception {
         //ExStart:Strikethrough
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -50,8 +46,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void inlineCode() throws Exception
-    {
+    public void inlineCode() throws Exception {
         //ExStart:InlineCode
         //GistId:51b4cb9c451832f23527892e19c7bca6
         // Use a document builder to add content to the document.
@@ -70,8 +65,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void autolink() throws Exception
-    {
+    public void autolink() throws Exception {
         //ExStart:Autolink
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -84,8 +78,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void link() throws Exception
-    {
+    public void link() throws Exception {
         //ExStart:Link
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -97,8 +90,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void image() throws Exception
-    {
+    public void image() throws Exception {
         //ExStart:Image
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -111,8 +103,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void horizontalRule() throws Exception
-    {
+    public void horizontalRule() throws Exception {
         //ExStart:HorizontalRule
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -124,8 +115,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void heading() throws Exception
-    {
+    public void heading() throws Exception {
         //ExStart:Heading
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -161,8 +151,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void setextHeading() throws Exception
-    {
+    public void setextHeading() throws Exception {
         //ExStart:SetextHeading
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -199,8 +188,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void indentedCode() throws Exception
-    {
+    public void indentedCode() throws Exception {
         //ExStart:IndentedCode
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -213,8 +201,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void fencedCode() throws Exception
-    {
+    public void fencedCode() throws Exception {
         //ExStart:FencedCode
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -231,8 +218,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void quote() throws Exception
-    {
+    public void quote() throws Exception {
         //ExStart:Quote
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -254,8 +240,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void bulletedList() throws Exception
-    {
+    public void bulletedList() throws Exception {
         //ExStart:BulletedList
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -275,8 +260,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void orderedList() throws Exception
-    {
+    public void orderedList() throws Exception {
         //ExStart:OrderedList
         //GistId:0697355b7f872839932388d269ed6a63
         Document doc = new Document();
@@ -295,8 +279,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void table() throws Exception
-    {
+    public void table() throws Exception {
         //ExStart:Table
         //GistId:0697355b7f872839932388d269ed6a63
         // Use a document builder to add content to the document.
@@ -319,8 +302,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void readMarkdownDocument() throws Exception
-    {
+    public void readMarkdownDocument() throws Exception {
         //ExStart:ReadMarkdownDocument
         //GistId:19de942ef8827201c1dca99f76c59133
         Document doc = new Document(getMyDir() + "Quotes.md");
@@ -334,8 +316,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void emphases() throws Exception
-    {
+    public void emphases() throws Exception {
         //ExStart:Emphases
         //GistId:19de942ef8827201c1dca99f76c59133
         Document doc = new Document();
@@ -371,8 +352,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void useWarningSource() throws Exception
-    {
+    public void useWarningSource() throws Exception {
         //ExStart:UseWarningSourceMarkdown
         Document doc = new Document(getMyDir() + "Emphases markdown warning.docx");
 
@@ -381,8 +361,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
 
         doc.save(getArtifactsDir() + "WorkingWithMarkdown.UseWarningSource.md");
 
-        for (WarningInfo warningInfo : warnings)
-        {
+        for (WarningInfo warningInfo : warnings) {
             if (warningInfo.getSource() == WarningSource.MARKDOWN)
                 System.out.println(warningInfo.getDescription());
         }
@@ -390,8 +369,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase
     }
 
     @Test
-    public void supportedFeatures() throws Exception
-    {
+    public void supportedFeatures() throws Exception {
         //ExStart:SupportedFeatures
         //GistId:51b4cb9c451832f23527892e19c7bca6
         Document doc = new Document();

@@ -11,11 +11,9 @@ import java.nio.file.Paths;
 import java.text.MessageFormat;
 
 @Test
-public class WorkingWithHyphenation extends DocsExamplesBase
-{
+public class WorkingWithHyphenation extends DocsExamplesBase {
     @Test
-    public void hyphenateWords() throws Exception
-    {
+    public void hyphenateWords() throws Exception {
         //ExStart:HyphenateWords
         //GistId:a52aacf87a36f7881ba29d25de92fb83
         Document doc = new Document(getMyDir() + "German text.docx");
@@ -28,12 +26,11 @@ public class WorkingWithHyphenation extends DocsExamplesBase
     }
 
     @Test
-    public void loadHyphenationDictionary() throws Exception
-    {
+    public void loadHyphenationDictionary() throws Exception {
         //ExStart:LoadHyphenationDictionary
         //GistId:a52aacf87a36f7881ba29d25de92fb83
         Document doc = new Document(getMyDir() + "German text.docx");
-        
+
         FileInputStream stream = new FileInputStream(getMyDir() + "hyph_de_CH.dic");
         Hyphenation.registerDictionary("de-CH", stream);
 
@@ -44,37 +41,28 @@ public class WorkingWithHyphenation extends DocsExamplesBase
     @Test
     //ExStart:CustomHyphenation
     //GistId:a52aacf87a36f7881ba29d25de92fb83
-    public void hyphenationCallback() throws Exception
-    {
-        try
-        {
+    public void hyphenationCallback() throws Exception {
+        try {
             // Register hyphenation callback.
             Hyphenation.setCallback(new CustomHyphenationCallback());
 
             Document document = new Document(getMyDir() + "German text.docx");
             document.save(getArtifactsDir() + "WorkingWithHyphenation.HyphenationCallback.pdf");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (e.getMessage().startsWith("Missing hyphenation dictionary")) {
-            System.out.println(e.getMessage());
-        }
+                System.out.println(e.getMessage());
+            }
 
-        }
-        finally
-        {
+        } finally {
             Hyphenation.setCallback(null);
         }
     }
 
-    public static class CustomHyphenationCallback implements IHyphenationCallback
-    {
-        public void requestDictionary(String language) throws Exception
-        {
+    public static class CustomHyphenationCallback implements IHyphenationCallback {
+        public void requestDictionary(String language) throws Exception {
             String dictionaryFolder = getMyDir();
             String dictionaryFullFileName;
-            switch (language)
-            {
+            switch (language) {
                 case "en-US":
                     dictionaryFullFileName = Paths.get(dictionaryFolder, "hyph_en_US.dic").toString();
                     break;

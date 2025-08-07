@@ -1,11 +1,11 @@
 package DocsExamples.File_formats_and_conversions;
 
 import DocsExamples.DocsExamplesBase;
-import org.apache.commons.io.FileUtils;
-import org.testng.annotations.Test;
 import com.aspose.words.FileFormatInfo;
 import com.aspose.words.FileFormatUtil;
 import com.aspose.words.LoadFormat;
+import org.apache.commons.io.FileUtils;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Test
-public class WorkingWithFileFormat extends DocsExamplesBase
-{
+public class WorkingWithFileFormat extends DocsExamplesBase {
     @Test
     public void detectFileFormat() throws Exception {
         //ExStart:CheckFormatCompatibility
+        //GistId:7fe3fc4004f081628a63608db70332b3
         File supportedDir = new File(getArtifactsDir() + "Supported");
         File unknownDir = new File(getArtifactsDir() + "Unknown");
         File encryptedDir = new File(getArtifactsDir() + "Encrypted");
@@ -35,17 +35,17 @@ public class WorkingWithFileFormat extends DocsExamplesBase
         if (pre97Dir.exists() == false)
             pre97Dir.mkdir();
 
-        //ExStart:GetListOfFilesInFolder
+        //ExStart:GetFiles
+        //GistId:7fe3fc4004f081628a63608db70332b3
         Set<String> listFiles = Stream.of(new File(getMyDir()).listFiles())
                 .filter(file -> !file.getName().endsWith("Corrupted document.docx") && !Files.isDirectory(file.toPath()))
                 .map(File::getPath)
                 .collect(Collectors.toSet());
-        //ExEnd:GetListOfFilesInFolder
+        //ExEnd:GetFiles
         for (String fileName : listFiles) {
             String nameOnly = Paths.get(fileName).getFileName().toString();
 
             System.out.println(nameOnly);
-            //ExStart:DetectFileFormat
             FileFormatInfo info = FileFormatUtil.detectFileFormat(fileName);
 
             // Display the document type
@@ -96,7 +96,6 @@ public class WorkingWithFileFormat extends DocsExamplesBase
                     System.out.println("\tUnknown format.");
                     break;
             }
-            //ExEnd:DetectFileFormat
 
             if (info.isEncrypted()) {
                 System.out.println("\tAn encrypted document.");
@@ -119,22 +118,19 @@ public class WorkingWithFileFormat extends DocsExamplesBase
     }
 
     @Test
-    public void detectDocumentSignatures() throws Exception
-    {
+    public void detectDocumentSignatures() throws Exception {
         //ExStart:DetectDocumentSignatures
         //GistId:39ea49b7754e472caf41179f8b5970a0
         FileFormatInfo info = FileFormatUtil.detectFileFormat(getMyDir() + "Digitally signed.docx");
 
-        if (info.hasDigitalSignature())
-        {
+        if (info.hasDigitalSignature()) {
             System.out.println("Document {Path.GetFileName(MyDir + ");
         }
-        //ExEnd:DetectDocumentSignatures            
+        //ExEnd:DetectDocumentSignatures
     }
 
     @Test
-    public void verifyEncryptedDocument() throws Exception
-    {
+    public void verifyEncryptedDocument() throws Exception {
         //ExStart:VerifyEncryptedDocument
         //GistId:821ff3a1df0c75b2af641299b393fb60
         FileFormatInfo info = FileFormatUtil.detectFileFormat(getMyDir() + "Encrypted.docx");

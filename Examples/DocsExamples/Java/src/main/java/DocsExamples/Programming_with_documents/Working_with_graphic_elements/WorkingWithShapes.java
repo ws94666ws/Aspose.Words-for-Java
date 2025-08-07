@@ -1,8 +1,8 @@
 package DocsExamples.Programming_with_documents.Working_with_graphic_elements;
 
 import DocsExamples.DocsExamplesBase;
-import com.aspose.words.*;
 import com.aspose.words.Shape;
+import com.aspose.words.*;
 import org.apache.commons.collections4.IterableUtils;
 import org.testng.annotations.Test;
 
@@ -11,23 +11,27 @@ import java.text.MessageFormat;
 import java.util.List;
 
 @Test
-public class WorkingWithShapes extends DocsExamplesBase
-{
+public class WorkingWithShapes extends DocsExamplesBase {
     @Test
-    public void addGroupShape() throws Exception
-    {
+    public void addGroupShape() throws Exception {
         //ExStart:AddGroupShape
         //GistId:072edc4bbb0dd0eebf1f61f610bd8d36
         Document doc = new Document();
         doc.ensureMinimum();
-        
+
         GroupShape groupShape = new GroupShape(doc);
-        Shape accentBorderShape = new Shape(doc, ShapeType.ACCENT_BORDER_CALLOUT_1); { accentBorderShape.setWidth(100.0); accentBorderShape.setHeight(100.0); }
+        Shape accentBorderShape = new Shape(doc, ShapeType.ACCENT_BORDER_CALLOUT_1);
+        {
+            accentBorderShape.setWidth(100.0);
+            accentBorderShape.setHeight(100.0);
+        }
         groupShape.appendChild(accentBorderShape);
 
         Shape actionButtonShape = new Shape(doc, ShapeType.ACTION_BUTTON_BEGINNING);
         {
-            actionButtonShape.setLeft(100.0); actionButtonShape.setWidth(100.0); actionButtonShape.setHeight(200.0);
+            actionButtonShape.setLeft(100.0);
+            actionButtonShape.setWidth(100.0);
+            actionButtonShape.setHeight(200.0);
         }
         groupShape.appendChild(actionButtonShape);
 
@@ -43,15 +47,14 @@ public class WorkingWithShapes extends DocsExamplesBase
     }
 
     @Test
-    public void insertShape() throws Exception
-    {
+    public void insertShape() throws Exception {
         //ExStart:InsertShape
         //GistId:ad463bf5f128fe6e6c1485df3c046a4c
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertShape(ShapeType.TEXT_BOX, RelativeHorizontalPosition.PAGE, 100.0,
-            RelativeVerticalPosition.PAGE, 100.0, 50.0, 50.0, WrapType.NONE);
+                RelativeVerticalPosition.PAGE, 100.0, 50.0, 50.0, WrapType.NONE);
         shape.setRotation(30.0);
 
         builder.writeln();
@@ -69,8 +72,7 @@ public class WorkingWithShapes extends DocsExamplesBase
     }
 
     @Test
-    public void aspectRatioLocked() throws Exception
-    {
+    public void aspectRatioLocked() throws Exception {
         //ExStart:AspectRatioLocked
         //GistId:ad463bf5f128fe6e6c1485df3c046a4c
         Document doc = new Document();
@@ -84,8 +86,7 @@ public class WorkingWithShapes extends DocsExamplesBase
     }
 
     @Test
-    public void layoutInCell() throws Exception
-    {
+    public void layoutInCell() throws Exception {
         //ExStart:LayoutInCell
         //GistId:ad463bf5f128fe6e6c1485df3c046a4c
         Document doc = new Document();
@@ -95,8 +96,7 @@ public class WorkingWithShapes extends DocsExamplesBase
         builder.getRowFormat().setHeight(100.0);
         builder.getRowFormat().setHeightRule(HeightRule.EXACTLY);
 
-        for (int i = 0; i < 31; i++)
-        {
+        for (int i = 0; i < 31; i++) {
             if (i != 0 && i % 7 == 0) builder.endRow();
             builder.insertCell();
             builder.write("Cell contents");
@@ -136,8 +136,7 @@ public class WorkingWithShapes extends DocsExamplesBase
     }
 
     @Test
-    public void addCornersSnipped() throws Exception
-    {
+    public void addCornersSnipped() throws Exception {
         //ExStart:AddCornersSnipped
         //GistId:ad463bf5f128fe6e6c1485df3c046a4c
         Document doc = new Document();
@@ -155,8 +154,7 @@ public class WorkingWithShapes extends DocsExamplesBase
     }
 
     @Test
-    public void getActualShapeBoundsPoints() throws Exception
-    {
+    public void getActualShapeBoundsPoints() throws Exception {
         //ExStart:GetActualShapeBoundsPoints
         //GistId:ad463bf5f128fe6e6c1485df3c046a4c
         Document doc = new Document();
@@ -171,8 +169,7 @@ public class WorkingWithShapes extends DocsExamplesBase
     }
 
     @Test
-    public void verticalAnchor() throws Exception
-    {
+    public void verticalAnchor() throws Exception {
         //ExStart:VerticalAnchor
         //GistId:ad463bf5f128fe6e6c1485df3c046a4c
         Document doc = new Document();
@@ -180,7 +177,7 @@ public class WorkingWithShapes extends DocsExamplesBase
 
         Shape textBox = builder.insertShape(ShapeType.TEXT_BOX, 200.0, 200.0);
         textBox.getTextBox().setVerticalAnchor(TextBoxAnchor.BOTTOM);
-        
+
         builder.moveTo(textBox.getFirstParagraph());
         builder.write("Textbox contents");
 
@@ -189,8 +186,7 @@ public class WorkingWithShapes extends DocsExamplesBase
     }
 
     @Test
-    public void detectSmartArtShape() throws Exception
-    {
+    public void detectSmartArtShape() throws Exception {
         //ExStart:DetectSmartArtShape
         //GistId:ad463bf5f128fe6e6c1485df3c046a4c
         Document doc = new Document(getMyDir() + "SmartArt.docx");
@@ -203,8 +199,7 @@ public class WorkingWithShapes extends DocsExamplesBase
     }
 
     @Test
-    public void updateSmartArtDrawing() throws Exception
-    {
+    public void updateSmartArtDrawing() throws Exception {
         Document doc = new Document(getMyDir() + "SmartArt.docx");
 
         //ExStart:UpdateSmartArtDrawing

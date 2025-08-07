@@ -7,11 +7,9 @@ import org.testng.annotations.Test;
 import java.awt.*;
 
 @Test
-public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
-{
+public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase {
     @Test
-    public void distanceBetweenTableSurroundingText() throws Exception
-    {
+    public void distanceBetweenTableSurroundingText() throws Exception {
         //ExStart:DistanceBetweenTableSurroundingText
         //GistId:0f235c484e5edae70a542ebdaae40fd8
         Document doc = new Document(getMyDir() + "Tables.docx");
@@ -27,8 +25,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void applyOutlineBorder() throws Exception
-    {
+    public void applyOutlineBorder() throws Exception {
         //ExStart:ApplyOutlineBorder
         //GistId:1c794bd06eb1e3b67f0368daa6f23b1f
         //ExStart:InlineTablePosition
@@ -56,17 +53,16 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void buildTableWithBorders() throws Exception
-    {
+    public void buildTableWithBorders() throws Exception {
         //ExStart:BuildTableWithBorders
         //GistId:1c794bd06eb1e3b67f0368daa6f23b1f
         Document doc = new Document(getMyDir() + "Tables.docx");
 
         Table table = (Table) doc.getChild(NodeType.TABLE, 0, true);
-        
+
         // Clear any existing borders from the table.
         table.clearBorders();
-        
+
         // Set a green border around and inside the table.
         table.setBorders(LineStyle.SINGLE, 1.5, Color.GREEN);
 
@@ -75,14 +71,13 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void modifyRowFormatting() throws Exception
-    {
+    public void modifyRowFormatting() throws Exception {
         //ExStart:ModifyRowFormatting
         //GistId:1c794bd06eb1e3b67f0368daa6f23b1f
         Document doc = new Document(getMyDir() + "Tables.docx");
 
         Table table = (Table) doc.getChild(NodeType.TABLE, 0, true);
-        
+
         // Retrieve the first row in the table.
         Row firstRow = table.getFirstRow();
         firstRow.getRowFormat().getBorders().setLineStyle(LineStyle.NONE);
@@ -92,8 +87,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void applyRowFormatting() throws Exception
-    {
+    public void applyRowFormatting() throws Exception {
         //ExStart:ApplyRowFormatting
         //GistId:1c794bd06eb1e3b67f0368daa6f23b1f
         Document doc = new Document();
@@ -105,7 +99,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
         RowFormat rowFormat = builder.getRowFormat();
         rowFormat.setHeight(100.0);
         rowFormat.setHeightRule(HeightRule.EXACTLY);
-        
+
         // These formatting properties are set on the table and are applied to all rows in the table.
         table.setLeftPadding(30.0);
         table.setRightPadding(30.0);
@@ -122,8 +116,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void cellPadding() throws Exception
-    {
+    public void cellPadding() throws Exception {
         //ExStart:CellPadding
         //GistId:1c794bd06eb1e3b67f0368daa6f23b1f
         Document doc = new Document();
@@ -147,8 +140,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     /// Shows how to modify formatting of a table cell.
     /// </summary>
     @Test
-    public void modifyCellFormatting() throws Exception
-    {
+    public void modifyCellFormatting() throws Exception {
         //ExStart:ModifyCellFormatting
         //GistId:1c794bd06eb1e3b67f0368daa6f23b1f
         Document doc = new Document(getMyDir() + "Tables.docx");
@@ -162,8 +154,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void formatTableAndCellWithDifferentBorders() throws Exception
-    {
+    public void formatTableAndCellWithDifferentBorders() throws Exception {
         //ExStart:FormatTableAndCellWithDifferentBorders
         //GistId:1c794bd06eb1e3b67f0368daa6f23b1f
         Document doc = new Document();
@@ -174,13 +165,13 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
 
         // Set the borders for the entire table.
         table.setBorders(LineStyle.SINGLE, 2.0, Color.BLACK);
-        
+
         // Set the cell shading for this cell.
         builder.getCellFormat().getShading().setBackgroundPatternColor(Color.RED);
         builder.writeln("Cell #1");
 
         builder.insertCell();
-        
+
         // Specify a different cell shading for the second cell.
         builder.getCellFormat().getShading().setBackgroundPatternColor(Color.GREEN);
         builder.writeln("Cell #2");
@@ -203,14 +194,13 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
         builder.insertCell();
         builder.getCellFormat().clearFormatting();
         builder.writeln("Cell #4");
-        
+
         doc.save(getArtifactsDir() + "WorkingWithTableStylesAndFormatting.FormatTableAndCellWithDifferentBorders.docx");
         //ExEnd:FormatTableAndCellWithDifferentBorders
     }
 
     @Test
-    public void tableTitleAndDescription() throws Exception
-    {
+    public void tableTitleAndDescription() throws Exception {
         //ExStart:TableTitleAndDescription
         //GistId:7855fd2588b90f4640bf0540285b5277
         Document doc = new Document(getMyDir() + "Tables.docx");
@@ -219,7 +209,10 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
         table.setTitle("Test title");
         table.setDescription("Test description");
 
-        OoxmlSaveOptions options = new OoxmlSaveOptions(); { options.setCompliance(OoxmlCompliance.ISO_29500_2008_STRICT); }
+        OoxmlSaveOptions options = new OoxmlSaveOptions();
+        {
+            options.setCompliance(OoxmlCompliance.ISO_29500_2008_STRICT);
+        }
 
         doc.getCompatibilityOptions().optimizeFor(com.aspose.words.MsWordVersion.WORD_2016);
 
@@ -228,8 +221,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void allowCellSpacing() throws Exception
-    {
+    public void allowCellSpacing() throws Exception {
         //ExStart:AllowCellSpacing
         //GistId:1c794bd06eb1e3b67f0368daa6f23b1f
         Document doc = new Document(getMyDir() + "Tables.docx");
@@ -237,27 +229,26 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
         Table table = (Table) doc.getChild(NodeType.TABLE, 0, true);
         table.setAllowCellSpacing(true);
         table.setCellSpacing(2.0);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithTableStylesAndFormatting.AllowCellSpacing.docx");
         //ExEnd:AllowCellSpacing
     }
 
     @Test
-    public void buildTableWithStyle() throws Exception
-    {
+    public void buildTableWithStyle() throws Exception {
         //ExStart:BuildTableWithStyle
         //GistId:f1d06175603c48e6dabf5a2eea01207c
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Table table = builder.startTable();
-        
+
         // We must insert at least one row first before setting any table formatting.
         builder.insertCell();
 
         // Set the table style used based on the unique style identifier.
         table.setStyleIdentifier(StyleIdentifier.MEDIUM_SHADING_1_ACCENT_1);
-        
+
         // Apply which features should be formatted by the style.
         table.setStyleOptions(TableStyleOptions.FIRST_COLUMN | TableStyleOptions.ROW_BANDS | TableStyleOptions.FIRST_ROW);
         table.autoFit(AutoFitBehavior.AUTO_FIT_TO_CONTENTS);
@@ -291,8 +282,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void expandFormattingOnCellsAndRowFromStyle() throws Exception
-    {
+    public void expandFormattingOnCellsAndRowFromStyle() throws Exception {
         //ExStart:ExpandFormattingOnCellsAndRowFromStyle
         //GistId:f1d06175603c48e6dabf5a2eea01207c
         Document doc = new Document(getMyDir() + "Tables.docx");
@@ -316,8 +306,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void createTableStyle() throws Exception
-    {
+    public void createTableStyle() throws Exception {
         //ExStart:CreateTableStyle
         //GistId:f1d06175603c48e6dabf5a2eea01207c
         Document doc = new Document();
@@ -348,8 +337,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void defineConditionalFormatting() throws Exception
-    {
+    public void defineConditionalFormatting() throws Exception {
         //ExStart:DefineConditionalFormatting
         //GistId:f1d06175603c48e6dabf5a2eea01207c
         Document doc = new Document();
@@ -376,8 +364,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void setTableCellFormatting() throws Exception
-    {
+    public void setTableCellFormatting() throws Exception {
         //ExStart:DocumentBuilderSetTableCellFormatting
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -402,8 +389,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void setTableRowFormatting() throws Exception
-    {
+    public void setTableRowFormatting() throws Exception {
         //ExStart:DocumentBuilderSetTableRowFormatting
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -414,7 +400,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase
         RowFormat rowFormat = builder.getRowFormat();
         rowFormat.setHeight(100.0);
         rowFormat.setHeightRule(HeightRule.EXACTLY);
-        
+
         // These formatting properties are set on the table and are applied to all rows in the table.
         table.setLeftPadding(30.0);
         table.setRightPadding(30.0);

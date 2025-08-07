@@ -10,11 +10,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 @Test
-public class WorkingWithComments extends DocsExamplesBase
-{
+public class WorkingWithComments extends DocsExamplesBase {
     @Test
-    public void addComments() throws Exception
-    {
+    public void addComments() throws Exception {
         //ExStart:AddComments
         //GistId:70902b20df8b1f6b0459f676e21623bb
         //ExStart:CreateSimpleDocumentUsingDocumentBuilder
@@ -23,7 +21,7 @@ public class WorkingWithComments extends DocsExamplesBase
 
         builder.write("Some text is added.");
         //ExEnd:CreateSimpleDocumentUsingDocumentBuilder
-        
+
         Comment comment = new Comment(doc, "Awais Hafeez", "AH", new Date());
         comment.setText("Comment text.");
 
@@ -34,8 +32,7 @@ public class WorkingWithComments extends DocsExamplesBase
     }
 
     @Test
-    public void anchorComment() throws Exception
-    {
+    public void anchorComment() throws Exception {
         //ExStart:AnchorComment
         //GistId:70902b20df8b1f6b0459f676e21623bb
         Document doc = new Document();
@@ -70,8 +67,7 @@ public class WorkingWithComments extends DocsExamplesBase
     }
 
     @Test
-    public void addRemoveCommentReply() throws Exception
-    {
+    public void addRemoveCommentReply() throws Exception {
         //ExStart:AddRemoveCommentReply
         //GistId:70902b20df8b1f6b0459f676e21623bb
         Document doc = new Document(getMyDir() + "Comments.docx");
@@ -91,8 +87,7 @@ public class WorkingWithComments extends DocsExamplesBase
     }
 
     @Test
-    public void processComments() throws Exception
-    {
+    public void processComments() throws Exception {
         //ExStart:ProcessComments
         //GistId:70902b20df8b1f6b0459f676e21623bb
         Document doc = new Document(getMyDir() + "Comments.docx");
@@ -122,15 +117,13 @@ public class WorkingWithComments extends DocsExamplesBase
 
     //ExStart:ExtractComments
     //GistId:70902b20df8b1f6b0459f676e21623bb
-    private ArrayList<String> extractComments(Document doc) throws Exception
-    {
+    private ArrayList<String> extractComments(Document doc) throws Exception {
         ArrayList<String> collectedComments = new ArrayList<String>();
         NodeCollection comments = doc.getChildNodes(NodeType.COMMENT, true);
 
-        for (Comment comment : (Iterable<Comment>) comments)
-        {
+        for (Comment comment : (Iterable<Comment>) comments) {
             collectedComments.add(comment.getAuthor() + " " + comment.getDateTime() + " " +
-                                  comment.toString(SaveFormat.TEXT));
+                    comment.toString(SaveFormat.TEXT));
         }
 
         return collectedComments;
@@ -139,16 +132,14 @@ public class WorkingWithComments extends DocsExamplesBase
 
     //ExStart:ExtractCommentsByAuthor
     //GistId:70902b20df8b1f6b0459f676e21623bb
-    private ArrayList<String> extractComments(Document doc, String authorName) throws Exception
-    {
+    private ArrayList<String> extractComments(Document doc, String authorName) throws Exception {
         ArrayList<String> collectedComments = new ArrayList<String>();
         NodeCollection comments = doc.getChildNodes(NodeType.COMMENT, true);
 
-        for (Comment comment : (Iterable<Comment>) comments)
-        {
+        for (Comment comment : (Iterable<Comment>) comments) {
             if (comment.getAuthor().equals(authorName))
                 collectedComments.add(comment.getAuthor() + " " + comment.getDateTime() + " " +
-                                      comment.toString(SaveFormat.TEXT));
+                        comment.toString(SaveFormat.TEXT));
         }
 
         return collectedComments;
@@ -157,8 +148,7 @@ public class WorkingWithComments extends DocsExamplesBase
 
     //ExStart:RemoveComments
     //GistId:70902b20df8b1f6b0459f676e21623bb
-    private void removeComments(Document doc)
-    {
+    private void removeComments(Document doc) {
         NodeCollection comments = doc.getChildNodes(NodeType.COMMENT, true);
         comments.clear();
     }
@@ -166,13 +156,11 @@ public class WorkingWithComments extends DocsExamplesBase
 
     //ExStart:RemoveCommentsByAuthor
     //GistId:70902b20df8b1f6b0459f676e21623bb
-    private void removeComments(Document doc, String authorName)
-    {
+    private void removeComments(Document doc, String authorName) {
         NodeCollection comments = doc.getChildNodes(NodeType.COMMENT, true);
 
         // Look through all comments and remove those written by the authorName.
-        for (int i = comments.getCount() - 1; i >= 0; i--)
-        {
+        for (int i = comments.getCount() - 1; i >= 0; i--) {
             Comment comment = (Comment) comments.get(i);
             if (comment.getAuthor().equals(authorName))
                 comment.remove();
@@ -182,13 +170,11 @@ public class WorkingWithComments extends DocsExamplesBase
 
     //ExStart:CommentResolvedAndReplies
     //GistId:70902b20df8b1f6b0459f676e21623bb
-    private void commentResolvedAndReplies(Document doc)
-    {
+    private void commentResolvedAndReplies(Document doc) {
         NodeCollection comments = doc.getChildNodes(NodeType.COMMENT, true);
 
         Comment parentComment = (Comment) comments.get(0);
-        for (Comment childComment : parentComment.getReplies())
-        {
+        for (Comment childComment : parentComment.getReplies()) {
             // Get comment parent and status.
             System.out.println(childComment.getAncestor().getId());
             System.out.println(childComment.getDone());
@@ -200,18 +186,16 @@ public class WorkingWithComments extends DocsExamplesBase
     //ExEnd:CommentResolvedAndReplies
 
     @Test
-    public void removeRangeText() throws Exception
-    {
+    public void removeRangeText() throws Exception {
         //ExStart:RemoveRangeText
         //GistId:70902b20df8b1f6b0459f676e21623bb
         Document doc = new Document(getMyDir() + "Comments.docx");
 
-        CommentRangeStart commentStart = (CommentRangeStart)doc.getChild(NodeType.COMMENT_RANGE_START, 0, true);
+        CommentRangeStart commentStart = (CommentRangeStart) doc.getChild(NodeType.COMMENT_RANGE_START, 0, true);
         Node currentNode = commentStart;
 
         boolean isRemoving = true;
-        while (currentNode != null && isRemoving)
-        {
+        while (currentNode != null && isRemoving) {
             if (currentNode.getNodeType() == NodeType.COMMENT_RANGE_END)
                 isRemoving = false;
 
