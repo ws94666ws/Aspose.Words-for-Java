@@ -1196,5 +1196,5 @@ public class ExPageSetup extends ApiExampleBase
 
         Assert.assertEquals(PaperSize.JIS_B_5, pageSetup.getPaperSize());
     }
-}
 
+}

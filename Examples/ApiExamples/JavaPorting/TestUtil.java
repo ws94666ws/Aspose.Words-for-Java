@@ -13,6 +13,15 @@ import com.aspose.ms.System.IO.Path;
 import com.aspose.ms.System.Drawing.Rectangle;
 import org.testng.Assert;
 import com.aspose.ms.NUnit.Framework.msAssert;
+import java.util.HashMap;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import com.aspose.ms.System.IO.FileStream;
+import java.io.FileInputStream;
+import com.aspose.ms.System.IO.File;
+import com.aspose.ms.System.IO.BinaryReader;
+import com.aspose.ms.System.Collections.msDictionary;
+import java.awt.Color;
 import com.aspose.words.Table;
 import com.aspose.words.net.System.Data.DataTable;
 import com.aspose.words.ControlChar;
@@ -24,7 +33,6 @@ import com.aspose.words.net.System.Data.DataSet;
 import com.aspose.ms.System.msString;
 import com.aspose.ms.System.StringSplitOptions;
 import com.aspose.ms.System.IO.Stream;
-import com.aspose.ms.System.IO.FileStream;
 import com.aspose.ms.System.IO.FileMode;
 import com.aspose.words.FieldType;
 import com.aspose.words.Field;
@@ -52,7 +60,6 @@ import com.aspose.words.EditorType;
 import com.aspose.words.EditableRange;
 import com.aspose.ms.System.Text.Encoding;
 import com.aspose.ms.System.IO.StreamReader;
-import com.aspose.ms.System.IO.File;
 
 
 class TestUtil extends ApiExampleBase
@@ -84,71 +91,91 @@ class TestUtil extends ApiExampleBase
         }
         else if (".emf".equals(ext))
         {
-            var (w, h) = GetEmfDimensions(filename);
-            Assert.That(w, assertEquals(expectedWidth, 1, );
-            Assert.That(h, assertEquals(expectedHeight, 1, );
+            HashMap<String, Integer> emfDimensions = getEmfDimensions(filename);
+            Assert.assertEquals(expectedWidth, 1, emfDimensions.get("width"));
+            Assert.assertEquals(expectedHeight, 1, emfDimensions.get("height"));
         }
         else if (".wmf".equals(ext))
         {
-            var (w, h) = GetWmfDimensions(filename);
-            Assert.That(w, assertEquals(expectedWidth, 1, );
-            Assert.That(h, assertEquals(expectedHeight, 1, );
+            HashMap<String, Integer> wmfDimensions = getWmfDimensions(filename);
+            Assert.assertEquals(expectedWidth, 1, wmfDimensions.get("width"));
+            Assert.assertEquals(expectedHeight, 1, wmfDimensions.get("height"));
         }
         else
         {
-            var image = SKBitmap.Decode(filename);
+            BufferedImage image = ImageIO.read(filename);
             try /*JAVA: was using*/
             {
                 Assert.Multiple(() =>
                 {
-                Assert.That(image.Width, Is.EqualTo(expectedWidth).Within(1));
-                Assert.That(image.Height, Is.EqualTo(expectedHeight).Within(1));
+                    Assert.assertEquals(expectedWidth, 1, image.getWidth());
+                    Assert.assertEquals(expectedHeight, 1, image.getHeight());
                 });
             }
-            finally { if (image != null) image.close(); }
+            finally { if (image != null) image.flush(); }
         }
     }
 
-     static (private int Width, int Height) GetEmfDimensions(String filePath)
+    static HashMap<String, Integer> getEmfDimensions(String filePath) throws Exception
     {
-        using (var stream = File.OpenRead(filePath))
-        using (var reader = new BinaryReader(stream))
+        FileStream stream = new FileInputStream(filePath);
+        try /*JAVA: was using*/
+    	{
+        BinaryReader reader = new BinaryReader(stream);
+        try /*JAVA: was using*/
         {
             // Skip EMF header (first 8 bytes).
-            stream.Position = 8;
+            stream.setPosition(8);
 
             // Read bounding rectangle (4 x Int32: left, top, right, bottom).
-            int left = reader.ReadInt32();
-            int top = reader.ReadInt32();
-            int right = reader.ReadInt32();
-            int bottom = reader.ReadInt32();
+            int left = reader.readInt32();
+            int top = reader.readInt32();
+            int right = reader.readInt32();
+            int bottom = reader.readInt32();
 
-            return (right - left, bottom - top);
+            HashMap<String, Integer> emfDimensions = new HashMap<String, Integer>();
+            msDictionary.add(emfDimensions, "width", right - left);
+            msDictionary.add(emfDimensions, "height", bottom - top);
+
+            return emfDimensions;
         }
+        finally { if (reader != null) reader.close(); }
+    	}
+        finally { if (stream != null) stream.close(); }
     }
 
-     static (private int Width, int Height) GetWmfDimensions(String filePath)
+    static HashMap<String, Integer> getWmfDimensions(String filePath) throws Exception
     {
-        using (var stream = File.OpenRead(filePath))
-        using (var reader = new BinaryReader(stream))
+        FileStream stream = new FileInputStream(filePath);
+        try /*JAVA: was using*/
+    	{
+        BinaryReader reader = new BinaryReader(stream);
+        try /*JAVA: was using*/
         {
             // WMF header (16 bytes).
             // Skip first 10 bytes (header + version).
-            stream.Position = 10;
+            stream.setPosition(10);
 
             // Read dimensions in 16-bit integers (0.01mm units).
-            short left = reader.ReadInt16();
-            short top = reader.ReadInt16();
-            short right = reader.ReadInt16();
-            short bottom = reader.ReadInt16();
+            short left = reader.readInt16();
+            short top = reader.readInt16();
+            short right = reader.readInt16();
+            short bottom = reader.readInt16();
 
             // Convert to pixels (96 DPI approximation).
-            static final double unitsPerInch = 2540.0; // WMF uses 0.01mm units.
-            int width = (int)((right - left) / unitsPerInch * 96);
-            int height = (int)((bottom - top) / unitsPerInch * 96);
+            final double UNITS_PER_INCH = 2540.0; // WMF uses 0.01mm units.
+            int width = (int)((right - left) / UNITS_PER_INCH * 96.0);
+            int height = (int)((bottom - top) / UNITS_PER_INCH * 96.0);
 
-            return (width, height);
+            HashMap<String, Integer> wmfDimensions = new HashMap<String, Integer>();
+            msDictionary.add(wmfDimensions, "width", width);
+            msDictionary.add(wmfDimensions, "height", height);
+
+            return wmfDimensions;
         }
+        finally { if (reader != null) reader.close(); }
+    	}
+        finally { if (stream != null) stream.close(); }
     }
 
     /// <summary>
@@ -157,20 +184,25 @@ class TestUtil extends ApiExampleBase
     /// <param name="filename">Local file system filename of the image file.</param>
     static void imageContainsTransparency(String filename)
     {
-        var bitmap = SKBitmap.Decode(filename);
+        BufferedImage image = ImageIO.read(filename);
         try /*JAVA: was using*/
         {
-            for (int x = 0; x < bitmap.Width; x++)
+            BufferedImage bitmap = new BufferedImage(image);
+            try /*JAVA: was using*/
             {
-                for (int y = 0; y < bitmap.Height; y++)
+                for (int x = 0; x < bitmap.getWidth(); x++)
                 {
-                    if (bitmap.GetPixel(x, y).Alpha != 255)
-                        return;
+                    for (int y = 0; y < bitmap.getHeight(); y++)
+                    {
+                        Color pixel = bitmap.GetPixel(x, y);
+                        if ((pixel.getAlpha() & 0xFF) != 255)
+                            return; // Transparency found.
+                    }
                 }
             }
+            finally { if (bitmap != null) bitmap.close(); }
         }
-        finally { if (bitmap != null) bitmap.close(); }
-
+        finally { if (image != null) image.flush(); }
         Assert.fail($"The image from \"{filename}\" does not contain any transparency.");
     }private VerifyWebResponseStatusCodeAsyncverifyWebResponseStatusCodeAsync(int expectedHttpStatusCode, String webAddress)
     {

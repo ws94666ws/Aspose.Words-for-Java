@@ -925,7 +925,7 @@ public class ExRange extends ApiExampleBase
 
         public ArrayList<String> getMatches() { return mMatches; };
 
-        private ArrayList<String> mMatches !!!Autoporter warning: AutoProperty initialization can't be autoported!  = /*new*/ ArrayList<String>list();
+        private ArrayList<String> mMatches !!!Autoporter warning: AutoProperty initialization can't be autoported!  = /*new*/ArrayList<String>list();
     }
     //ExEnd
 
@@ -944,10 +944,10 @@ public class ExRange extends ApiExampleBase
         builder.writeln("3");
 
         ReplacingCallback replacingCallback = new ReplacingCallback();
-        FindReplaceOptions opts = new FindReplaceOptions();
-        opts.setReplacingCallback(replacingCallback);
+        FindReplaceOptions options = new FindReplaceOptions();
+        options.setReplacingCallback(replacingCallback);
 
-        doc.getRange().replaceInternal(new Regex("1[\\s\\S]*3"), "X", opts);
+        doc.getRange().replaceInternal(new Regex("1[\\s\\S]*3"), "X", options);
         Assert.assertEquals("1", replacingCallback.getStartNodeText());
         Assert.assertEquals("3", replacingCallback.getEndNodeText());
     }
@@ -973,4 +973,37 @@ public class ExRange extends ApiExampleBase
         private String mEndNodeText;
     }
     //ExEnd:MatchEndNode
+
+    @Test (dataProvider = "ignoreOfficeMathDataProvider")
+    public void ignoreOfficeMath(boolean isIgnoreOfficeMath) throws Exception
+    {
+        //ExStart:IgnoreOfficeMath
+        //GistId:571cc6e23284a2ec075d15d4c32e3bbf
+        //ExFor:FindReplaceOptions.IgnoreOfficeMath
+        //ExSummary:Shows how to find and replace text within OfficeMath.
+        Document doc = new Document(getMyDir() + "Office math.docx");
+
+        Assert.assertEquals("i+b-c≥iM+bM-cM", doc.getFirstSection().getBody().getFirstParagraph().getText().trim());
+
+        FindReplaceOptions options = new FindReplaceOptions();
+        options.setIgnoreOfficeMath(isIgnoreOfficeMath);
+        doc.getRange().replace("b", "x", options);
+
+        if (isIgnoreOfficeMath)
+            Assert.assertEquals("i+b-c≥iM+bM-cM", doc.getFirstSection().getBody().getFirstParagraph().getText().trim());
+        else
+            Assert.assertEquals("i+x-c≥iM+xM-cM", doc.getFirstSection().getBody().getFirstParagraph().getText().trim());
+        //ExEnd:IgnoreOfficeMath
+    }
+
+	//JAVA-added data provider for test method
+	@DataProvider(name = "ignoreOfficeMathDataProvider")
+	public static Object[][] ignoreOfficeMathDataProvider() throws Exception
+	{
+		return new Object[][]
+		{
+			{true},
+			{false},
+		};
+	}
 }

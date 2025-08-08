@@ -19,6 +19,7 @@ import com.aspose.ms.NUnit.Framework.msAssert;
 import com.aspose.words.Paragraph;
 import com.aspose.words.NodeType;
 import com.aspose.words.Underline;
+import com.aspose.words.ControlChar;
 
 
 @Test
@@ -70,6 +71,26 @@ public class ExMarkdownLoadOptions extends ApiExampleBase
         }
         finally { if (stream != null) stream.close(); }
         //ExEnd:ImportUnderlineFormatting
+    }
+
+    @Test
+    public void softLineBreakCharacter() throws Exception
+    {
+        //ExStart:SoftLineBreakCharacter
+        //GistId:571cc6e23284a2ec075d15d4c32e3bbf
+        //ExFor:MarkdownLoadOptions.SoftLineBreakCharacter
+        //ExSummary:Shows how to set soft line break character.
+        MemoryStream stream = new MemoryStream(Encoding.getUTF8().getBytes("line1\nline2"));
+        try /*JAVA: was using*/
+        {
+            MarkdownLoadOptions loadOptions = new MarkdownLoadOptions();
+            loadOptions.setSoftLineBreakCharacter(ControlChar.LINE_BREAK_CHAR);
+            Document doc = new Document(stream, loadOptions);
+
+            Assert.assertEquals("line1\u000bline2", doc.getText().trim());
+        }
+        finally { if (stream != null) stream.close(); }
+        //ExEnd:SoftLineBreakCharacter
     }
 }
 

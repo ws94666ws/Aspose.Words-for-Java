@@ -3183,7 +3183,7 @@ class ExPdfSaveOptions !Test class should be public in Java to run, please fix .
         long asposeToPdfSize = new FileInfo(getArtifactsDir() + "PdfSaveOptions.CacheBackgroundGraphics.pdf").getLength();
         long wordToPdfSize = new FileInfo(getMyDir() + "Background images (word to pdf).pdf").getLength();
 
-        Assert.less(wordToPdfSize, asposeToPdfSize);
+        Assert.greater(wordToPdfSize, asposeToPdfSize);
         //ExEnd
     }
 

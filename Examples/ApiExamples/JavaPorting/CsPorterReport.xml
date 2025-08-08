@@ -104,6 +104,7 @@
 		<File project="Examples" dir="" name="ExXamlFlowSaveOptions" status="AUTO" isTest="false" />
 		<File project="Examples" dir="" name="ExXlsxSaveOptions" status="AUTO" isTest="false" />
 		<File project="Examples" dir="" name="ExXpsSaveOptions" status="AUTO" isTest="false" />
+		<File project="Examples" dir="" name="PrintTracker" status="EMPTY-IN-JAVA" isTest="false" />
 		<File project="Examples" dir="TestData" name="Common" status="AUTO" isTest="false" />
 		<File project="Examples" dir="TestData\TestBuilders" name="ColorItemTestBuilder" status="AUTO" isTest="false" />
 		<File project="Examples" dir="TestData\TestBuilders" name="DocumentTestBuilder" status="AUTO" isTest="false" />
