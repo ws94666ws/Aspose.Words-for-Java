@@ -37,6 +37,7 @@ import com.aspose.ms.System.Threading.CurrentThread;
 import java.util.Date;
 import com.aspose.words.CompositeNode;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 import com.aspose.words.IFieldResultFormatter;
 import com.aspose.ms.System.msString;
 import java.text.MessageFormat;
@@ -645,7 +646,7 @@ class WorkingWithFields extends DocsExamplesBase
         // Set to German language so dates and numbers are formatted using this culture during mail merge.
         CurrentThread.setCurrentCulture(new msCultureInfo("de-DE"));
 
-        doc.getMailMerge().execute(new String[] { "Date" }, new Object[] { new Date() });
+        doc.getMailMerge().execute(new String[] { "Date" }, new Object[] { new Date });
         
         CurrentThread.setCurrentCulture(currentCulture);
         

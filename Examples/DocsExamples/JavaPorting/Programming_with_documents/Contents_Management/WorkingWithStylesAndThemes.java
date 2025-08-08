@@ -15,6 +15,7 @@ import com.aspose.words.DocumentBuilder;
 import com.aspose.words.StyleType;
 import com.aspose.words.StyleIdentifier;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 
 
 class WorkingWithStylesAndThemes extends DocsExamplesBase

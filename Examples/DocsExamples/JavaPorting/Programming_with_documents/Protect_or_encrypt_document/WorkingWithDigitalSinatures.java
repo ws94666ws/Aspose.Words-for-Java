@@ -23,6 +23,7 @@ import com.aspose.ms.System.IO.Stream;
 import com.aspose.ms.System.IO.FileStream;
 import com.aspose.ms.System.IO.FileMode;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 import com.aspose.ms.System.Convert;
 
 
@@ -149,7 +150,7 @@ class WorkingWithDigitalSinatures extends DocsExamplesBase
             signOptions.setSignatureLineId(signatureLine.getIdInternal());
             signOptions.setProviderId(signatureLine.getProviderIdInternal());
             signOptions.setComments("Document was signed by Aspose");
-            signOptions.setSignTime(new Date());
+            signOptions.setSignTime(new Date);
         }
 
         CertificateHolder certHolder = CertificateHolder.create(getMyDir() + "morzal.pfx", "aw");
@@ -204,8 +205,8 @@ class WorkingWithDigitalSinatures extends DocsExamplesBase
         finally { if (streamIn != null) streamIn.close(); }
 
         // Verify that both our output documents have no digital signatures.
-        Assert.That(DigitalSignatureUtil.loadSignatures(getArtifactsDir() + "DigitalSignatureUtil.LoadAndRemove.FromString.docx"), Is.Empty);
-        Assert.That(DigitalSignatureUtil.loadSignatures(getArtifactsDir() + "DigitalSignatureUtil.LoadAndRemove.FromStream.docx"), Is.Empty);
+        Assert.isEmpty(DigitalSignatureUtil.loadSignatures(getArtifactsDir() + "DigitalSignatureUtil.LoadAndRemove.FromString.docx"));
+        Assert.isEmpty(DigitalSignatureUtil.loadSignatures(getArtifactsDir() + "DigitalSignatureUtil.LoadAndRemove.FromStream.docx"));
         //ExEnd:RemoveSignatures
     }
 
@@ -220,8 +221,8 @@ class WorkingWithDigitalSinatures extends DocsExamplesBase
         {
             String signatureValue = Convert.toBase64String(digitalSignature.getSignatureValue());
             Assert.assertEquals("K1cVLLg2kbJRAzT5WK+m++G8eEO+l7S+5ENdjMxxTXkFzGUfvwxREuJdSFj9AbD" +
-                "MhnGvDURv9KEhC25DDF1al8NRVR71TF3CjHVZXpYu7edQS5/yLw/k5CiFZzCp1+MmhOdYPcVO+Fm" +
-                "+9fKr2iNLeyYB+fgEeZHfTqTFM2WwAqo=", signatureValue);
+                    "MhnGvDURv9KEhC25DDF1al8NRVR71TF3CjHVZXpYu7edQS5/yLw/k5CiFZzCp1+MmhOdYPcVO+Fm" +
+                    "+9fKr2iNLeyYB+fgEeZHfTqTFM2WwAqo=", signatureValue);
         }
         //ExEnd:SignatureValue
     }

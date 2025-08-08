@@ -28,6 +28,7 @@ import com.aspose.words.BookmarkStart;
 import com.aspose.words.BookmarkEnd;
 import org.testng.Assert;
 import com.aspose.ms.System.msString;
+import com.aspose.ms.NUnit.Framework.msAssert;
 import com.aspose.words.NodeImporter;
 import com.aspose.words.ParagraphCollection;
 

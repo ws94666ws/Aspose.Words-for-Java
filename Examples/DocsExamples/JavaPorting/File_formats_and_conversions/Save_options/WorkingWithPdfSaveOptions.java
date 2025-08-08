@@ -105,7 +105,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase
         {
             saveOptions.setDigitalSignatureDetails(new PdfDigitalSignatureDetails(
                 CertificateHolder.create(getMyDir() + "morzal.pfx", "aw"), "reason", "location",
-                new Date()));
+                new Date));
         }
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.DigitallySignedPdfUsingCertificateHolder.pdf", saveOptions);

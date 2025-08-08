@@ -257,7 +257,7 @@ class FindAndReplace extends DocsExamplesBase
         builder.write("Text");
 
         // Remove first paragraph with tracking revisions.
-        doc.startTrackRevisionsInternal("author", new Date());
+        doc.startTrackRevisionsInternal("author", new Date);
         doc.getFirstSection().getBody().getFirstParagraph().remove();
         doc.stopTrackRevisions();
 
@@ -283,7 +283,7 @@ class FindAndReplace extends DocsExamplesBase
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         // Insert text with tracking revisions.
-        doc.startTrackRevisionsInternal("author", new Date());
+        doc.startTrackRevisionsInternal("author", new Date);
         builder.writeln("Inserted");
         doc.stopTrackRevisions();
 

@@ -12,6 +12,7 @@ import com.aspose.words.EditableRange;
 import com.aspose.words.EditableRangeEnd;
 import com.aspose.words.BreakType;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 
 
 class DocumentProtection extends DocsExamplesBase

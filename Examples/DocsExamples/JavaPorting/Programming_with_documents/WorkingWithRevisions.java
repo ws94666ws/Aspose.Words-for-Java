@@ -11,6 +11,7 @@ import com.aspose.words.Run;
 import java.util.Date;
 import com.aspose.ms.System.DateTime;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 import com.aspose.words.ParagraphCollection;
 import com.aspose.ms.System.msConsole;
 import com.aspose.words.RevisionGroup;
@@ -49,7 +50,7 @@ class WorkingWithRevisions extends DocsExamplesBase
         // We have three paragraphs, none of which registered as any type of revision
         // If we add/remove any content in the document while tracking revisions,
         // they will be displayed as such in the document and can be accepted/rejected.
-        doc.startTrackRevisionsInternal("John Doe", new Date());
+        doc.startTrackRevisionsInternal("John Doe", new Date);
 
         // This paragraph is a revision and will have the according "IsInsertRevision" flag set.
         para = body.appendParagraph("Paragraph 4. ");
@@ -69,7 +70,7 @@ class WorkingWithRevisions extends DocsExamplesBase
         // The delete revision paragraph is removed once we accept changes.
         doc.acceptAllRevisions();
         Assert.assertEquals(3, paragraphs.getCount());
-        Assert.That(para, Is.Empty);
+        Assert.isEmpty(para);
 
         // Stopping the tracking of revisions makes this text appear as normal text.
         // Revisions are not counted when the document is changed.
