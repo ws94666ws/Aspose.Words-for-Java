@@ -1937,7 +1937,7 @@ public class ExTable extends ApiExampleBase {
     public void hiddenRow() throws Exception
     {
         //ExStart:HiddenRow
-        //GistId:67c1d01ce69d189983b497fd497a7768
+        //GistId:2af5a850f2e0a83c3b114274a838c092
         //ExFor:Row.Hidden
         //ExSummary:Shows how to hide a table row.
         Document doc = new Document(getMyDir() + "Tables.docx");

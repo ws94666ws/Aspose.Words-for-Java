@@ -851,7 +851,7 @@ public class ExRange extends ApiExampleBase {
     //ExEnd
 
     //ExStart:MatchEndNode
-    //GistId:67c1d01ce69d189983b497fd497a7768
+    //GistId:2af5a850f2e0a83c3b114274a838c092
     //ExFor:ReplacingArgs.MatchEndNode
     //ExSummary:Shows how to get match end node.
     @Test
