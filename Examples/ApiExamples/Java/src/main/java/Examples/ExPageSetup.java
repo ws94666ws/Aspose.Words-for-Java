@@ -17,6 +17,7 @@ import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.print.attribute.standard.Media;
 import java.awt.*;
+import java.awt.print.PrinterJob;
 import java.text.MessageFormat;
 
 public class ExPageSetup extends ApiExampleBase {
@@ -1089,5 +1090,33 @@ public class ExPageSetup extends ApiExampleBase {
         pageSetup = doc.getFirstSection().getPageSetup();
 
         Assert.assertEquals(PaperSize.JIS_B_5, pageSetup.getPaperSize());
+    }
+
+    @Test(enabled = false, description = "Run only when the printer driver is installed")
+    public void PrintPagesRemaining() throws Exception {
+        //ExStart:PrintPagesRemaining
+        //GistId:571cc6e23284a2ec075d15d4c32e3bbf
+        //ExFor:AsposeWordsPrintDocument
+        //ExFor:AsposeWordsPrintDocument.PagesRemaining
+        //ExSummary: Shows how to monitor printing progress.
+        Document doc = new Document(getMyDir() + "Rendering.docx");
+
+        // Create a special Aspose.Words implementation of the Java PrintDocument class
+        AsposeWordsPrintDocument printDoc = new AsposeWordsPrintDocument(doc);
+
+        // In Java, printer settings are handled through PrinterJob.
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        printerJob.setPrintable(printDoc);
+
+        // Initialize the custom printing tracker.
+        PrintTracker printTracker = new PrintTracker(printDoc);
+
+        printerJob.print();
+
+        // Write the event log.
+        for (String eventString : printTracker.getEventLog()) {
+            System.out.println(eventString);
+        }
+        //ExEnd:PrintPagesRemaining
     }
 }

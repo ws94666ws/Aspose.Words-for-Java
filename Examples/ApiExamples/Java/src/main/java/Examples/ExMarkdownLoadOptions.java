@@ -61,5 +61,23 @@ class ExMarkdownLoadOptions extends ApiExampleBase
         }
         //ExEnd:ImportUnderlineFormatting
     }
+
+    @Test
+    public void softLineBreakCharacter() throws Exception
+    {
+        //ExStart:SoftLineBreakCharacter
+        //GistId:571cc6e23284a2ec075d15d4c32e3bbf
+        //ExFor:MarkdownLoadOptions.SoftLineBreakCharacter
+        //ExSummary:Shows how to set soft line break character.
+        try (ByteArrayInputStream stream = new ByteArrayInputStream("line1\nline2".getBytes(StandardCharsets.UTF_8)))
+        {
+            MarkdownLoadOptions loadOptions = new MarkdownLoadOptions();
+            loadOptions.setSoftLineBreakCharacter(ControlChar.LINE_BREAK_CHAR);
+            Document doc = new Document(stream, loadOptions);
+
+            Assert.assertEquals("line1\u000bline2", doc.getText().trim());
+        }
+        //ExEnd:SoftLineBreakCharacter
+    }
 }
 
