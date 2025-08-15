@@ -21,18 +21,16 @@ public class WorkingWithShapes extends DocsExamplesBase {
 
         GroupShape groupShape = new GroupShape(doc);
         Shape accentBorderShape = new Shape(doc, ShapeType.ACCENT_BORDER_CALLOUT_1);
-        {
-            accentBorderShape.setWidth(100.0);
-            accentBorderShape.setHeight(100.0);
-        }
+        accentBorderShape.setWidth(100.0);
+        accentBorderShape.setHeight(100.0);
+
         groupShape.appendChild(accentBorderShape);
 
         Shape actionButtonShape = new Shape(doc, ShapeType.ACTION_BUTTON_BEGINNING);
-        {
-            actionButtonShape.setLeft(100.0);
-            actionButtonShape.setWidth(100.0);
-            actionButtonShape.setHeight(200.0);
-        }
+        actionButtonShape.setLeft(100.0);
+        actionButtonShape.setWidth(100.0);
+        actionButtonShape.setHeight(200.0);
+
         groupShape.appendChild(actionButtonShape);
 
         groupShape.setWidth(200.0);
@@ -63,9 +61,7 @@ public class WorkingWithShapes extends DocsExamplesBase {
         shape.setRotation(30.0);
 
         OoxmlSaveOptions saveOptions = new OoxmlSaveOptions(SaveFormat.DOCX);
-        {
-            saveOptions.setCompliance(OoxmlCompliance.ISO_29500_2008_TRANSITIONAL);
-        }
+        saveOptions.setCompliance(OoxmlCompliance.ISO_29500_2008_TRANSITIONAL);
 
         doc.save(getArtifactsDir() + "WorkingWithShapes.InsertShape.docx", saveOptions);
         //ExEnd:InsertShape
@@ -105,16 +101,14 @@ public class WorkingWithShapes extends DocsExamplesBase {
         builder.endTable();
 
         Shape watermark = new Shape(doc, ShapeType.TEXT_PLAIN_TEXT);
-        {
-            watermark.setRelativeHorizontalPosition(RelativeHorizontalPosition.PAGE);
-            watermark.setRelativeVerticalPosition(RelativeVerticalPosition.PAGE);
-            watermark.isLayoutInCell(true); // Display the shape outside of the table cell if it will be placed into a cell.
-            watermark.setWidth(300.0);
-            watermark.setHeight(70.0);
-            watermark.setHorizontalAlignment(HorizontalAlignment.CENTER);
-            watermark.setVerticalAlignment(VerticalAlignment.CENTER);
-            watermark.setRotation(-40);
-        }
+        watermark.setRelativeHorizontalPosition(RelativeHorizontalPosition.PAGE);
+        watermark.setRelativeVerticalPosition(RelativeVerticalPosition.PAGE);
+        watermark.isLayoutInCell(true); // Display the shape outside of the table cell if it will be placed into a cell.
+        watermark.setWidth(300.0);
+        watermark.setHeight(70.0);
+        watermark.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        watermark.setVerticalAlignment(VerticalAlignment.CENTER);
+        watermark.setRotation(-40);
 
         watermark.setFillColor(Color.GRAY);
         watermark.setStrokeColor(Color.GRAY);
@@ -145,9 +139,7 @@ public class WorkingWithShapes extends DocsExamplesBase {
         builder.insertShape(ShapeType.TOP_CORNERS_SNIPPED, 50.0, 50.0);
 
         OoxmlSaveOptions saveOptions = new OoxmlSaveOptions(SaveFormat.DOCX);
-        {
-            saveOptions.setCompliance(OoxmlCompliance.ISO_29500_2008_TRANSITIONAL);
-        }
+        saveOptions.setCompliance(OoxmlCompliance.ISO_29500_2008_TRANSITIONAL);
 
         doc.save(getArtifactsDir() + "WorkingWithShapes.AddCornersSnipped.docx", saveOptions);
         //ExEnd:AddCornersSnipped

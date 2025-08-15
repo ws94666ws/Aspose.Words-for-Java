@@ -345,8 +345,8 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     //ExStart:InsertTCFieldHandler
     public final static class InsertTCFieldHandler implements IReplacingCallback {
         // Store the text and switches to be used for the TC fields.
-        private /*final*/ String mFieldText;
-        private /*final*/ String mFieldSwitches;
+        private String mFieldText;
+        private String mFieldSwitches;
 
         /// <summary>
         /// The display text and switches to use for each TC field. Display name can be an empty string or null.
@@ -356,7 +356,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
             mFieldSwitches = switches;
         }
 
-        public /*ReplaceAction*/int /*IReplacingCallback.*/replacing(ReplacingArgs args) throws Exception {
+        public int replacing(ReplacingArgs args) throws Exception {
             DocumentBuilder builder = new DocumentBuilder((Document) args.getMatchNode().getDocument());
             builder.moveTo(args.getMatchNode());
 

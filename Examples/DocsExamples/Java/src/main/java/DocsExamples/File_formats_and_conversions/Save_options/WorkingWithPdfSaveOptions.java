@@ -10,17 +10,15 @@ import java.util.Date;
 @Test
 public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
     @Test
-    public void displayDocTitleInWindowTitlebar() throws Exception {
-        //ExStart:DisplayDocTitleInWindowTitlebar
+    public void displayDocTitleInWindowTitleBar() throws Exception {
+        //ExStart:DisplayDocTitleInWindowTitleBar
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setDisplayDocTitle(true);
-        }
+        saveOptions.setDisplayDocTitle(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.DisplayDocTitleInWindowTitlebar.pdf", saveOptions);
-        //ExEnd:DisplayDocTitleInWindowTitlebar
+        //ExEnd:DisplayDocTitleInWindowTitleBar
     }
 
     @Test
@@ -30,15 +28,11 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "WMF with image.docx");
 
         MetafileRenderingOptions metafileRenderingOptions = new MetafileRenderingOptions();
-        {
-            metafileRenderingOptions.setEmulateRasterOperations(false);
-            metafileRenderingOptions.setRenderingMode(MetafileRenderingMode.VECTOR_WITH_FALLBACK);
-        }
+        metafileRenderingOptions.setEmulateRasterOperations(false);
+        metafileRenderingOptions.setRenderingMode(MetafileRenderingMode.VECTOR_WITH_FALLBACK);
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setMetafileRenderingOptions(metafileRenderingOptions);
-        }
+        saveOptions.setMetafileRenderingOptions(metafileRenderingOptions);
 
         // If Aspose.Words cannot correctly render some of the metafile records
         // to vector graphics then Aspose.Words renders this metafile to a bitmap.
@@ -82,11 +76,9 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         builder.writeln("Test Signed PDF.");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setDigitalSignatureDetails(new PdfDigitalSignatureDetails(
-                    CertificateHolder.create(getMyDir() + "morzal.pfx", "aw"), "reason", "location",
-                    new Date()));
-        }
+        saveOptions.setDigitalSignatureDetails(new PdfDigitalSignatureDetails(
+                CertificateHolder.create(getMyDir() + "morzal.pfx", "aw"), "reason", "location",
+                new Date()));
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.DigitallySignedPdfUsingCertificateHolder.pdf", saveOptions);
         //ExEnd:DigitallySignedPdfUsingCertificateHolder
@@ -100,9 +92,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
 
         // The output PDF will be embedded with all fonts found in the document.
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setEmbedFullFonts(true);
-        }
+        saveOptions.setEmbedFullFonts(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.EmbeddedAllFonts.pdf", saveOptions);
         //ExEnd:EmbeddedAllFonts
@@ -117,9 +107,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         // The output PDF will contain subsets of the fonts in the document.
         // Only the glyphs used in the document are included in the PDF fonts.
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setEmbedFullFonts(false);
-        }
+        saveOptions.setEmbedFullFonts(false);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.EmbeddedSubsetFonts.pdf", saveOptions);
         //ExEnd:EmbeddedSubsetFonts
@@ -133,9 +121,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
 
         // The output PDF will be saved without embedding standard windows fonts.
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setFontEmbeddingMode(PdfFontEmbeddingMode.EMBED_NONE);
-        }
+        saveOptions.setFontEmbeddingMode(PdfFontEmbeddingMode.EMBED_NONE);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.DisableEmbedWindowsFonts.pdf", saveOptions);
         //ExEnd:DisableEmbedWindowsFonts
@@ -147,9 +133,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setFontEmbeddingMode(PdfFontEmbeddingMode.EMBED_ALL);
-        }
+        saveOptions.setFontEmbeddingMode(PdfFontEmbeddingMode.EMBED_ALL);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.SkipEmbeddedArialAndTimesRomanFonts.pdf", saveOptions);
         //ExEnd:SkipEmbeddedArialAndTimesRomanFonts
@@ -163,9 +147,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
 
         // The output PDF will not be embedded with core fonts such as Arial, Times New Roman etc.
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setUseCoreFonts(true);
-        }
+        saveOptions.setUseCoreFonts(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.AvoidEmbeddingCoreFonts.pdf", saveOptions);
         //ExEnd:AvoidEmbeddingCoreFonts
@@ -177,8 +159,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
-        builder.insertHyperlink("Testlink",
-                "https://www.google.com/search?q= aspose", false);
+        builder.insertHyperlink("Testlink", "https://www.google.com/search?q= aspose", false);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.EscapeUri.pdf");
         //ExEnd:EscapeUri
@@ -204,16 +185,12 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "WMF with text.docx");
 
         MetafileRenderingOptions metafileRenderingOptions = new MetafileRenderingOptions();
-        {
-            metafileRenderingOptions.setEmulateRenderingToSizeOnPage(false);
-        }
+        metafileRenderingOptions.setEmulateRenderingToSizeOnPage(false);
 
         // If Aspose.Words cannot correctly render some of the metafile records to vector graphics
         // then Aspose.Words renders this metafile to a bitmap.
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setMetafileRenderingOptions(metafileRenderingOptions);
-        }
+        saveOptions.setMetafileRenderingOptions(metafileRenderingOptions);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.EmulateRenderingToSizeOnPage.pdf", saveOptions);
         //ExEnd:EmulateRenderingToSizeOnPage
@@ -225,9 +202,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setAdditionalTextPositioning(true);
-        }
+        saveOptions.setAdditionalTextPositioning(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.AdditionalTextPositioning.pdf", saveOptions);
         //ExEnd:AdditionalTextPositioning
@@ -240,9 +215,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setCompliance(PdfCompliance.PDF_17);
-        }
+        saveOptions.setCompliance(PdfCompliance.PDF_17);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.ConversionToPdf17.pdf", saveOptions);
         //ExEnd:ConversionToPdf17
@@ -257,10 +230,8 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         // We can set a minimum threshold for downsampling.
         // This value will prevent the second image in the input document from being downsampled.
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.getDownsampleOptions().setResolution(36);
-            saveOptions.getDownsampleOptions().setResolutionThreshold(128);
-        }
+        saveOptions.getDownsampleOptions().setResolution(36);
+        saveOptions.getDownsampleOptions().setResolutionThreshold(128);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.DownsamplingImages.pdf", saveOptions);
         //ExEnd:DownsamplingImages
@@ -288,9 +259,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         doc.getCustomDocumentProperties().add("Company", "Aspose");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setCustomPropertiesExport(PdfCustomPropertiesExport.STANDARD);
-        }
+        saveOptions.setCustomPropertiesExport(PdfCustomPropertiesExport.STANDARD);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.CustomPropertiesExport.pdf", saveOptions);
         //ExEnd:CustomPropertiesExport
@@ -305,9 +274,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         // The file size will be increased and the structure will be visible in the "Content" navigation pane
         // of Adobe Acrobat Pro, while editing the .pdf.
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setExportDocumentStructure(true);
-        }
+        saveOptions.setExportDocumentStructure(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.ExportDocumentStructure.pdf", saveOptions);
         //ExEnd:ExportDocumentStructure
@@ -320,19 +287,15 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setImageCompression(PdfImageCompression.JPEG);
-            saveOptions.setPreserveFormFields(true);
-        }
+        saveOptions.setImageCompression(PdfImageCompression.JPEG);
+        saveOptions.setPreserveFormFields(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.ImageCompression.pdf", saveOptions);
 
         PdfSaveOptions saveOptionsA2U = new PdfSaveOptions();
-        {
-            saveOptionsA2U.setCompliance(PdfCompliance.PDF_A_2_U);
-            saveOptionsA2U.setImageCompression(PdfImageCompression.JPEG);
-            saveOptionsA2U.setJpegQuality(100); // Use JPEG compression at 50% quality to reduce file size.
-        }
+        saveOptionsA2U.setCompliance(PdfCompliance.PDF_A_2_U);
+        saveOptionsA2U.setImageCompression(PdfImageCompression.JPEG);
+        saveOptionsA2U.setJpegQuality(100); // Use JPEG compression at 50% quality to reduce file size.
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.ImageCompression_A2u.pdf", saveOptionsA2U);
         //ExEnd:ImageCompression
@@ -345,9 +308,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setUpdateLastPrintedProperty(true);
-        }
+        saveOptions.setUpdateLastPrintedProperty(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.UpdateLastPrinted.pdf", saveOptions);
         //ExEnd:UpdateLastPrinted
@@ -359,9 +320,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setDml3DEffectsRenderingMode(Dml3DEffectsRenderingMode.ADVANCED);
-        }
+        saveOptions.setDml3DEffectsRenderingMode(Dml3DEffectsRenderingMode.ADVANCED);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.Dml3DEffectsRendering.pdf", saveOptions);
         //ExEnd:Dml3DEffectsRendering
@@ -373,9 +332,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setInterpolateImages(true);
-        }
+        saveOptions.setInterpolateImages(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.InterpolateImages.pdf", saveOptions);
         //ExEnd:SetImageInterpolation
@@ -388,9 +345,7 @@ public class WorkingWithPdfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PdfSaveOptions saveOptions = new PdfSaveOptions();
-        {
-            saveOptions.setOptimizeOutput(true);
-        }
+        saveOptions.setOptimizeOutput(true);
 
         doc.save(getArtifactsDir() + "WorkingWithPdfSaveOptions.OptimizeOutput.pdf", saveOptions);
         //ExEnd:OptimizeOutput

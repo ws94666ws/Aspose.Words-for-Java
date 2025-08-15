@@ -52,7 +52,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
             switch (sdt.getSdtType()) {
                 case SdtType.PLAIN_TEXT: {
                     sdt.removeAllChildren();
-                    Paragraph para = (Paragraph) sdt.appendChild(new Paragraph(doc));
+                    Paragraph para = sdt.appendChild(new Paragraph(doc));
                     Run run = new Run(doc, "new text goes here");
                     para.appendChild(run);
                     break;

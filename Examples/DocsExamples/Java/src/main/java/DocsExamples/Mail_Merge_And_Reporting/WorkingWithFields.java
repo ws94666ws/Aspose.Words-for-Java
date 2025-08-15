@@ -54,7 +54,7 @@ public class WorkingWithFields extends DocsExamplesBase {
         /// This handler is called for every mail merge field found in the document,
         /// for every record found in the data source.
         /// </summary>
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception {
+        public void fieldMerging(FieldMergingArgs e) throws Exception {
             if (mBuilder == null)
                 mBuilder = new DocumentBuilder(e.getDocument());
 
@@ -132,11 +132,9 @@ public class WorkingWithFields extends DocsExamplesBase {
 
         public void imageFieldMerging(ImageFieldMergingArgs args) throws Exception {
             Shape shape = new Shape(args.getDocument(), ShapeType.IMAGE);
-            {
-                shape.setWidth(126.0);
-                shape.setHeight(126.0);
-                shape.setWrapType(WrapType.SQUARE);
-            }
+            shape.setWidth(126.0);
+            shape.setHeight(126.0);
+            shape.setWrapType(WrapType.SQUARE);
 
             shape.getImageData().setImage(getMyDir() + "Mail merge image.png");
 
@@ -240,7 +238,7 @@ public class WorkingWithFields extends DocsExamplesBase {
     //ExStart:HandleMergeImageFieldFromBlob
     //GistId:8a66b5cea0f9f8b862c092c9b93ccb3c
     public static class HandleMergeImageFieldFromBlob implements IFieldMergingCallback {
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs args) {
+        public void fieldMerging(FieldMergingArgs args) {
             // Do nothing.
         }
 
@@ -248,7 +246,7 @@ public class WorkingWithFields extends DocsExamplesBase {
         /// This is called when mail merge engine encounters Image:XXX merge field in the document.
         /// You have a chance to return an Image object, file name, or a stream that contains the image.
         /// </summary>
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs e) throws Exception {
+        public void imageFieldMerging(ImageFieldMergingArgs e) throws Exception {
             // The field value is a byte array, just cast it and create a stream on it.
             ByteArrayInputStream imageStream = new ByteArrayInputStream((byte[]) e.getFieldValue());
             // Now the mail merge engine will retrieve the image from the stream.
@@ -263,16 +261,17 @@ public class WorkingWithFields extends DocsExamplesBase {
 
         doc.getMailMerge().setFieldMergingCallback(new MailMergeSwitches());
 
-        final String HTML = "<html>\r\n                    <h1>Hello world!</h1>\r\n            </html>";
-
-        doc.getMailMerge().execute(new String[]{"htmlField1"}, new Object[]{HTML});
+        String html = "<html>" +
+                "<h1>Hello world!</h1>" +
+                "</html>";
+        doc.getMailMerge().execute(new String[]{"htmlField1"}, new Object[]{ html });
 
         doc.save(getArtifactsDir() + "WorkingWithFields.HandleMailMergeSwitches.docx");
     }
 
     //ExStart:HandleMailMergeSwitches
     public static class MailMergeSwitches implements IFieldMergingCallback {
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception {
+        public void fieldMerging(FieldMergingArgs e) throws Exception {
             if (e.getFieldName().startsWith("HTML")) {
                 if (e.getField().getFieldCode().contains("\\b")) {
                     FieldMergeField field = e.getField();
@@ -287,7 +286,7 @@ public class WorkingWithFields extends DocsExamplesBase {
             }
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args) {
+        public void imageFieldMerging(ImageFieldMergingArgs args) {
         }
     }
     //ExEnd:HandleMailMergeSwitches
@@ -313,7 +312,7 @@ public class WorkingWithFields extends DocsExamplesBase {
         /// We can either return some data to the mail merge engine or do something else with the document.
         /// In this case we modify cell formatting.
         /// </summary>
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) {
+        public void fieldMerging(FieldMergingArgs e) {
             if (mBuilder == null)
                 mBuilder = new DocumentBuilder(e.getDocument());
 
@@ -333,7 +332,7 @@ public class WorkingWithFields extends DocsExamplesBase {
             }
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args) {
+        public void imageFieldMerging(ImageFieldMergingArgs args) {
             // Do nothing.
         }
 

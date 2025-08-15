@@ -36,9 +36,7 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
         // will only be detected as a list if "DetectNumberingWithWhitespaces" in a LoadOptions object is set to true,
         // to avoid paragraphs that start with numbers being mistakenly detected as lists.
         TxtLoadOptions loadOptions = new TxtLoadOptions();
-        {
-            loadOptions.setDetectNumberingWithWhitespaces(true);
-        }
+        loadOptions.setDetectNumberingWithWhitespaces(true);
 
         // Load the document while applying LoadOptions as a parameter and verify the result.
         Document doc = new Document(new ByteArrayInputStream(TEXT_DOC.getBytes()), loadOptions);
@@ -56,10 +54,8 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
                 " Line 3       ";
 
         TxtLoadOptions loadOptions = new TxtLoadOptions();
-        {
-            loadOptions.setLeadingSpacesOptions(TxtLeadingSpacesOptions.TRIM);
-            loadOptions.setTrailingSpacesOptions(TxtTrailingSpacesOptions.TRIM);
-        }
+        loadOptions.setLeadingSpacesOptions(TxtLeadingSpacesOptions.TRIM);
+        loadOptions.setTrailingSpacesOptions(TxtTrailingSpacesOptions.TRIM);
 
         Document doc = new Document(new ByteArrayInputStream(TEXT_DOC.getBytes()), loadOptions);
 
@@ -72,9 +68,7 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
         //ExStart:DocumentTextDirection
         //GistId:ddafc3430967fb4f4f70085fa577d01a
         TxtLoadOptions loadOptions = new TxtLoadOptions();
-        {
-            loadOptions.setDocumentDirection(DocumentDirection.AUTO);
-        }
+        loadOptions.setDocumentDirection(DocumentDirection.AUTO);
 
         Document doc = new Document(getMyDir() + "Hebrew text.txt", loadOptions);
 

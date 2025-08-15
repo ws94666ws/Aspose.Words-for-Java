@@ -14,9 +14,7 @@ public class WorkingWithRtfSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Document.docx");
 
         RtfSaveOptions saveOptions = new RtfSaveOptions();
-        {
-            saveOptions.setSaveImagesAsWmf(true);
-        }
+        saveOptions.setSaveImagesAsWmf(true);
 
         doc.save(getArtifactsDir() + "WorkingWithRtfSaveOptions.SavingImagesAsWmf.rtf", saveOptions);
         //ExEnd:SavingImagesAsWmf

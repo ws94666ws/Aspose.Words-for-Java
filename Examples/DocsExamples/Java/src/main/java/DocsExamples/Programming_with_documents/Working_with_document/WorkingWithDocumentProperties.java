@@ -81,9 +81,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
         //ExStart:RemovePersonalInformation
         //GistId:0593a8803015363f3026f648332e7026
         Document doc = new Document(getMyDir() + "Properties.docx");
-        {
-            doc.setRemovePersonalInformation(true);
-        }
+        doc.setRemovePersonalInformation(true);
 
         doc.save(getArtifactsDir() + "DocumentPropertiesAndVariables.RemovePersonalInformation.docx");
         //ExEnd:RemovePersonalInformation
@@ -133,9 +131,9 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     public void useControlCharacters() {
         //ExStart:UseControlCharacters
         //GistId:6269ddb6427f9ad20623d975774a615e
-        final String TEXT = "test\r";
+        String text = "test\r";
         // Replace "\r" control character with "\r\n".
-        String replace = TEXT.replace(ControlChar.CR, ControlChar.CR_LF);
+        String replace = text.replace(ControlChar.CR, ControlChar.CR_LF);
         //ExEnd:UseControlCharacters
     }
 }

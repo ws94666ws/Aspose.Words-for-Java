@@ -15,10 +15,8 @@ public class WorkingWithPclSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PclSaveOptions saveOptions = new PclSaveOptions();
-        {
-            saveOptions.setSaveFormat(SaveFormat.PCL);
-            saveOptions.setRasterizeTransformedElements(false);
-        }
+        saveOptions.setSaveFormat(SaveFormat.PCL);
+        saveOptions.setRasterizeTransformedElements(false);
 
         doc.save(getArtifactsDir() + "WorkingWithPclSaveOptions.RasterizeTransformedElements.pcl", saveOptions);
         //ExEnd:RasterizeTransformedElements

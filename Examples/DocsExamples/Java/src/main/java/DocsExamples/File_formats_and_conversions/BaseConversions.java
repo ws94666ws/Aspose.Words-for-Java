@@ -37,7 +37,7 @@ public class BaseConversions extends DocsExamplesBase {
         Document doc = new Document(stream);
         // You can close the stream now, it is no longer needed because the document is in memory.
         stream.close();
-        //ExEnd:OpeningFromStream 
+        //ExEnd:OpeningFromStream
 
         // ... do something with the document.
 

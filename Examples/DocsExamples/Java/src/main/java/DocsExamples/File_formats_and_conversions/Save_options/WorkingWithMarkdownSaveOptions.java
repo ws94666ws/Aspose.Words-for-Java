@@ -24,9 +24,8 @@ public class WorkingWithMarkdownSaveOptions extends DocsExamplesBase {
 
         // Makes all paragraphs inside the table to be aligned.
         MarkdownSaveOptions saveOptions = new MarkdownSaveOptions();
-        {
-            saveOptions.setTableContentAlignment(TableContentAlignment.LEFT);
-        }
+        saveOptions.setTableContentAlignment(TableContentAlignment.LEFT);
+
         doc.save(getArtifactsDir() + "WorkingWithMarkdownSaveOptions.LeftTableContentAlignment.md", saveOptions);
 
         saveOptions.setTableContentAlignment(TableContentAlignment.RIGHT);
@@ -48,9 +47,7 @@ public class WorkingWithMarkdownSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Image bullet points.docx");
 
         MarkdownSaveOptions saveOptions = new MarkdownSaveOptions();
-        {
-            saveOptions.setImagesFolder(getArtifactsDir() + "Images");
-        }
+        saveOptions.setImagesFolder(getArtifactsDir() + "Images");
 
         try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
             doc.save(stream, saveOptions);

@@ -15,7 +15,7 @@ public class CreateMailMergeTemplate {
         DocumentBuilder builder = new DocumentBuilder();
 
         // Insert a text input field the unique name of this field is "Hello", the other parameters define
-        // what type of FormField it is, the format of the text, the field result and the maximum text length (0 = no limit)
+        // what type of FormField it is, the format of the text, the field result and the maximum text length (0 = no limit).
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", "Hello", 0);
         builder.insertField("MERGEFIELD CustomerFirstName \\* MERGEFORMAT");
 
@@ -24,10 +24,10 @@ public class CreateMailMergeTemplate {
 
         builder.insertTextInput("TextInput1", TextFormFieldType.REGULAR, "", " , ", 0);
 
-        // Inserts a paragraph break into the document
+        // Inserts a paragraph break into the document.
         builder.insertParagraph();
 
-        // Insert mail body
+        // Insert mail body.
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", "Thanks for purchasing our ", 0);
         builder.insertField("MERGEFIELD ProductName \\* MERGEFORMAT");
 
@@ -46,7 +46,7 @@ public class CreateMailMergeTemplate {
 
         builder.insertParagraph();
 
-        // Insert mail ending
+        // Insert mail ending.
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", "Best regards,", 0);
         builder.insertBreak(BreakType.LINE_BREAK);
         builder.insertField("MERGEFIELD EmployeeFullname \\* MERGEFORMAT");

@@ -13,9 +13,7 @@ public class WorkingWithHtmlFixedSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Bullet points with alternative font.docx");
 
         HtmlFixedSaveOptions saveOptions = new HtmlFixedSaveOptions();
-        {
-            saveOptions.setUseTargetMachineFonts(true);
-        }
+        saveOptions.setUseTargetMachineFonts(true);
 
         doc.save(getArtifactsDir() + "WorkingWithHtmlFixedSaveOptions.UseFontFromTargetMachine.html", saveOptions);
         //ExEnd:UseFontFromTargetMachine
@@ -29,9 +27,7 @@ public class WorkingWithHtmlFixedSaveOptions extends DocsExamplesBase {
         // Setting this property to true restores the old behavior (separate files) for compatibility with legacy code.
         // All CSS rules are written into single file "styles.css.
         HtmlFixedSaveOptions saveOptions = new HtmlFixedSaveOptions();
-        {
-            saveOptions.setSaveFontFaceCssSeparately(false);
-        }
+        saveOptions.setSaveFontFaceCssSeparately(false);
 
         doc.save(getArtifactsDir() + "WorkingWithHtmlFixedSaveOptions.WriteAllCssRulesInSingleFile.html", saveOptions);
         //ExEnd:WriteAllCssRulesInSingleFile

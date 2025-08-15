@@ -30,16 +30,14 @@ public class CompareDocuments extends DocsExamplesBase {
         Document docB = docA.deepClone();
 
         CompareOptions options = new CompareOptions();
-        {
-            options.setIgnoreFormatting(true);
-            options.setIgnoreHeadersAndFooters(true);
-            options.setIgnoreCaseChanges(true);
-            options.setIgnoreTables(true);
-            options.setIgnoreFields(true);
-            options.setIgnoreComments(true);
-            options.setIgnoreTextboxes(true);
-            options.setIgnoreFootnotes(true);
-        }
+        options.setIgnoreFormatting(true);
+        options.setIgnoreHeadersAndFooters(true);
+        options.setIgnoreCaseChanges(true);
+        options.setIgnoreTables(true);
+        options.setIgnoreFields(true);
+        options.setIgnoreComments(true);
+        options.setIgnoreTextboxes(true);
+        options.setIgnoreFootnotes(true);
 
         docA.compare(docB, "user", new Date(), options);
 
@@ -55,10 +53,8 @@ public class CompareDocuments extends DocsExamplesBase {
 
         // Relates to Microsoft Word "Show changes in" option in "Compare Documents" dialog box.
         CompareOptions options = new CompareOptions();
-        {
-            options.setIgnoreFormatting(true);
-            options.setTarget(ComparisonTargetType.NEW);
-        }
+        options.setIgnoreFormatting(true);
+        options.setTarget(ComparisonTargetType.NEW);
 
         docA.compare(docB, "user", new Date(), options);
         //ExEnd:ComparisonTarget
@@ -74,9 +70,7 @@ public class CompareDocuments extends DocsExamplesBase {
         builderB.writeln("This is B simple words");
 
         CompareOptions compareOptions = new CompareOptions();
-        {
-            compareOptions.setGranularity(Granularity.CHAR_LEVEL);
-        }
+        compareOptions.setGranularity(Granularity.CHAR_LEVEL);
 
         builderA.getDocument().compare(builderB.getDocument(), "author", new Date(), compareOptions);
         //ExEnd:ComparisonGranularity      

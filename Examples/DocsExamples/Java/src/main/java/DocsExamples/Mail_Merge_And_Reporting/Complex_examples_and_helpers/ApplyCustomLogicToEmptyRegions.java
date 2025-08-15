@@ -269,8 +269,8 @@ public class ApplyCustomLogicToEmptyRegions extends DocsExamplesBase {
         return data;
     }
 
-    private /*final*/ DataTable orderTable = null;
-    private /*final*/ DataTable itemTable = null;
+    private DataTable orderTable = null;
+    private DataTable itemTable = null;
 
     private void disableForeignKeyConstraints(DataSet dataSet) {
         //ExStart:DisableForeignKeyConstraints

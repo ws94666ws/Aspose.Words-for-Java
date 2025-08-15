@@ -19,10 +19,8 @@ public class SplitDocument extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         HtmlSaveOptions options = new HtmlSaveOptions();
-        {
-            // Split a document into smaller parts, in this instance split by heading.
-            options.setDocumentSplitCriteria(DocumentSplitCriteria.HEADING_PARAGRAPH);
-        }
+        // Split a document into smaller parts, in this instance split by heading.
+        options.setDocumentSplitCriteria(DocumentSplitCriteria.HEADING_PARAGRAPH);
 
         doc.save(getArtifactsDir() + "SplitDocument.ByHeadings.epub", options);
         //ExEnd:SplitDocumentByHeadings
@@ -35,9 +33,7 @@ public class SplitDocument extends DocsExamplesBase {
         //ExStart:SplitDocumentBySectionsHtml
         //GistId:6759a1a6b7f448798751d54922a8efcb
         HtmlSaveOptions options = new HtmlSaveOptions();
-        {
-            options.setDocumentSplitCriteria(DocumentSplitCriteria.SECTION_BREAK);
-        }
+        options.setDocumentSplitCriteria(DocumentSplitCriteria.SECTION_BREAK);
         //ExEnd:SplitDocumentBySectionsHtml
 
         doc.save(getArtifactsDir() + "SplitDocument.BySections.html", options);

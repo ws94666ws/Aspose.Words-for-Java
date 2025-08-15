@@ -94,10 +94,8 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
 
         // We will be adding to this document.
         Document dstDoc = new Document();
-
         // Let's say we will be appended to the end of the body of the last section.
         CompositeNode dstNode = dstDoc.getLastSection().getBody();
-
         // If you import multiple times without a single context, it will result in many styles created.
         NodeImporter importer = new NodeImporter(srcDoc, dstDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
 
@@ -201,10 +199,8 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
 
         // This performs the custom task of putting the row bookmark ends into the same row with the bookmark starts.
         untangle(doc);
-
         // Now we can easily delete rows by a bookmark without damaging any other row's bookmarks.
         deleteRowByBookmark(doc, "ROW2");
-
         // This is just to check that the other bookmark was not damaged.
         if (doc.getRange().getBookmarks().get("ROW1").getBookmarkEnd() == null)
             throw new Exception("Wrong, the end of the bookmark was deleted.");

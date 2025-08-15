@@ -17,7 +17,6 @@ public class Tables extends DocsExamplesBase {
 
         ReportingEngine engine = new ReportingEngine();
         engine.getKnownTypes().add(ContractTestClass.class);
-
         engine.buildReport(doc, Common.getContracts(), "Contracts");
 
         doc.save(getArtifactsDir() + "ReportingEngine.InTableAlternateContent.docx");
@@ -32,7 +31,6 @@ public class Tables extends DocsExamplesBase {
         ReportingEngine engine = new ReportingEngine();
         engine.getKnownTypes().add(ManagerTestClass.class);
         engine.getKnownTypes().add(ContractTestClass.class);
-
         engine.buildReport(doc, Common.getManagers(), "Managers");
 
         doc.save(getArtifactsDir() + "ReportingEngine.InTableMasterDetail.docx");
@@ -46,7 +44,6 @@ public class Tables extends DocsExamplesBase {
 
         ReportingEngine engine = new ReportingEngine();
         engine.getKnownTypes().add(ContractTestClass.class);
-
         engine.buildReport(doc, Common.getContracts(), "contracts");
 
         doc.save(getArtifactsDir() + "ReportingEngine.InTableWithFilteringGroupingSorting.docx");

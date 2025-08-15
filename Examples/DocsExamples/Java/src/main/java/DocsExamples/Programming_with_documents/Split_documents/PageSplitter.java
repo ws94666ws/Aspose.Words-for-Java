@@ -25,7 +25,6 @@ public class PageSplitter extends DocsExamplesBase {
         System.out.println("Processing document: " + fileName + "." + extensionName);
 
         Document doc = new Document(docName);
-
         // Split nodes in the document into separate pages.
         DocumentPageSplitter splitter = new DocumentPageSplitter(doc);
 
@@ -277,7 +276,7 @@ class PageNumberFinder {
             return;
         }
 
-        reversePageLookup = new HashMap<Integer, ArrayList<Node>>();
+        reversePageLookup = new HashMap<>();
 
         // Add each node to a list that represent the nodes found on each page.
         for (Node node : (Iterable<Node>) collector.getDocument().getChildNodes(NodeType.ANY, true)) {
@@ -499,7 +498,7 @@ class SectionSplitter extends DocumentVisitor {
         return VisitorAction.CONTINUE;
     }
 
-    private /*VisitorAction*/int continueIfCompositeAcrossPageElseSkip(CompositeNode composite) throws Exception {
+    private int continueIfCompositeAcrossPageElseSkip(CompositeNode composite) throws Exception {
         return pageNumberFinder.pageSpan(composite) > 1
                 ? VisitorAction.CONTINUE
                 : VisitorAction.SKIP_THIS_NODE;

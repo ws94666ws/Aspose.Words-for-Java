@@ -120,7 +120,7 @@ public class ExtractContent extends DocsExamplesBase {
     //GistId:1975a35426bcd195a2e7c61d20a1580c
     public static ArrayList<Paragraph> paragraphsByStyleName(Document doc, String styleName) {
         // Create an array to collect paragraphs of the specified style.
-        ArrayList<Paragraph> paragraphsWithStyle = new ArrayList<Paragraph>();
+        ArrayList<Paragraph> paragraphsWithStyle = new ArrayList<>();
 
         NodeCollection paragraphs = doc.getChildNodes(NodeType.PARAGRAPH, true);
 
@@ -302,7 +302,6 @@ public class ExtractContent extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         builder.insertField("MERGEFIELD Field");
-
         // When converted to text it will not retrieve fields code or special characters,
         // but will still contain some natural formatting characters such as paragraph markers etc. 
         // This is the same as "viewing" the document as if it was opened in a text editor.

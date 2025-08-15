@@ -59,10 +59,8 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Tables.docx");
 
         Table table = (Table) doc.getChild(NodeType.TABLE, 0, true);
-
         // Clear any existing borders from the table.
         table.clearBorders();
-
         // Set a green border around and inside the table.
         table.setBorders(LineStyle.SINGLE, 1.5, Color.GREEN);
 
@@ -210,9 +208,7 @@ public class WorkingWithTableStylesAndFormatting extends DocsExamplesBase {
         table.setDescription("Test description");
 
         OoxmlSaveOptions options = new OoxmlSaveOptions();
-        {
-            options.setCompliance(OoxmlCompliance.ISO_29500_2008_STRICT);
-        }
+        options.setCompliance(OoxmlCompliance.ISO_29500_2008_STRICT);
 
         doc.getCompatibilityOptions().optimizeFor(com.aspose.words.MsWordVersion.WORD_2016);
 

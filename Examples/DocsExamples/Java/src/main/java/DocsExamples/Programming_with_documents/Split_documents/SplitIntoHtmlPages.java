@@ -51,7 +51,6 @@ class WordToHtmlConverter {
         ArrayList<Paragraph> topicStartParas = new ArrayList<Paragraph>();
 
         for (Paragraph para : (Iterable<Paragraph>) paras) {
-            /*StyleIdentifier*/
             int style = para.getParagraphFormat().getStyleIdentifier();
             if (style == StyleIdentifier.HEADING_1)
                 topicStartParas.add(para);
@@ -151,11 +150,9 @@ class WordToHtmlConverter {
         dummyDoc.getBuiltInDocumentProperties().setTitle(topic.getTitle());
 
         HtmlSaveOptions saveOptions = new HtmlSaveOptions();
-        {
-            saveOptions.setPrettyFormat(true);
-            saveOptions.setAllowNegativeIndent(true); // This is to allow headings to appear to the left of the main text.
-            saveOptions.setExportHeadersFootersMode(ExportHeadersFootersMode.NONE);
-        }
+        saveOptions.setPrettyFormat(true);
+        saveOptions.setAllowNegativeIndent(true); // This is to allow headings to appear to the left of the main text.
+        saveOptions.setExportHeadersFootersMode(ExportHeadersFootersMode.NONE);
 
         dummyDoc.save(topic.getFileName(), saveOptions);
     }
@@ -175,7 +172,7 @@ class WordToHtmlConverter {
     }
 
     private static class HandleTocMergeField implements IFieldMergingCallback {
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception {
+        public void fieldMerging(FieldMergingArgs e) throws Exception {
             if (mBuilder == null)
                 mBuilder = new DocumentBuilder(e.getDocument());
 
@@ -189,7 +186,7 @@ class WordToHtmlConverter {
             e.setText("");
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args) {
+        public void imageFieldMerging(ImageFieldMergingArgs args) {
             // Do nothing.
         }
 
@@ -210,17 +207,11 @@ class Topic {
     String getTitle() {
         return mTitle;
     }
-
-    ;
-
     private String mTitle;
 
     String getFileName() {
         return mFileName;
     }
-
-    ;
-
     private String mFileName;
 }
 
@@ -231,7 +222,7 @@ class TocMailMergeDataSource implements IMailMergeDataSource {
     }
 
     @Override
-    public String getTableName() throws Exception {
+    public String getTableName() {
         return "TOC";
     }
 

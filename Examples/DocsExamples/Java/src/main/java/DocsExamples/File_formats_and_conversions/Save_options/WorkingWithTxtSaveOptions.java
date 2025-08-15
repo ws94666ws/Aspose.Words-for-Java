@@ -21,9 +21,7 @@ public class WorkingWithTxtSaveOptions extends DocsExamplesBase {
         builder.writeln("مرحبا بالعالم!");
 
         TxtSaveOptions saveOptions = new TxtSaveOptions();
-        {
-            saveOptions.setAddBidiMarks(true);
-        }
+        saveOptions.setAddBidiMarks(true);
 
         doc.save(getArtifactsDir() + "WorkingWithTxtSaveOptions.AddBidiMarks.txt", saveOptions);
         //ExEnd:AddBidiMarks
