@@ -49,10 +49,8 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
         Document mainDoc = new Document(getMyDir() + "Document insertion 1.docx");
 
         FindReplaceOptions options = new FindReplaceOptions();
-        {
-            options.setDirection(FindReplaceDirection.BACKWARD);
-            options.setReplacingCallback(new InsertDocumentAtReplaceHandler());
-        }
+        options.setDirection(FindReplaceDirection.BACKWARD);
+        options.setReplacingCallback(new InsertDocumentAtReplaceHandler());
 
         mainDoc.getRange().replace(Pattern.compile("\\[MY_DOCUMENT\\]"), "", options);
         mainDoc.save(getArtifactsDir() + "CloneAndCombineDocuments.InsertDocumentAtReplace.docx");
@@ -145,7 +143,6 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
 
         // Don't clone the content inside the section, we just want the properties of the section retained.
         Section cloneSection = (Section) currentSection.deepClone(false);
-
         // However, make sure the clone section has a body but no empty first paragraph.
         cloneSection.ensureMinimum();
         cloneSection.getBody().getFirstParagraph().remove();
@@ -163,7 +160,6 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
 
         // This object will be translating styles and lists during the import.
         NodeImporter importer = new NodeImporter(srcDoc, dstDoc, ImportFormatMode.USE_DESTINATION_STYLES);
-
         for (Section srcSection : srcDoc.getSections()) {
             Node newNode = importer.importNode(srcSection, true);
 
@@ -179,7 +175,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
         // This handler makes special processing for the "Document_1" field.
         // The field value contains the path to load the document. 
         // We load the document and insert it into the current merge field.
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs args) throws Exception {
+        public void fieldMerging(FieldMergingArgs args) throws Exception {
             if ("Document_1".equals(args.getDocumentFieldName())) {
                 // Use document builder to navigate to the merge field with the specified name.
                 DocumentBuilder builder = new DocumentBuilder(args.getDocument());
@@ -199,7 +195,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
             }
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args) {
+        public void imageFieldMerging(ImageFieldMergingArgs args) {
             // Do nothing.
         }
     }
@@ -212,7 +208,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
         /// The field value contains the path to load the document.
         /// We load the document and insert it into the current merge field.
         /// </summary>
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception {
+        public void fieldMerging(FieldMergingArgs e) throws Exception {
             if ("Document_1".equals(e.getDocumentFieldName())) {
                 DocumentBuilder builder = new DocumentBuilder(e.getDocument());
                 builder.moveToMergeField(e.getDocumentFieldName());
@@ -230,7 +226,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
             }
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args) {
+        public void imageFieldMerging(ImageFieldMergingArgs args) {
             // Do nothing.
         }
     }
@@ -239,7 +235,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
     //ExStart:InsertDocumentAtReplaceHandler
     //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
     private static class InsertDocumentAtReplaceHandler implements IReplacingCallback {
-        public /*ReplaceAction*/int /*IReplacingCallback.*/replacing(ReplacingArgs args) throws Exception {
+        public int replacing(ReplacingArgs args) throws Exception {
             Document subDoc = new Document(getMyDir() + "Document insertion 2.docx");
 
             // Insert a document after the paragraph, containing the match text.

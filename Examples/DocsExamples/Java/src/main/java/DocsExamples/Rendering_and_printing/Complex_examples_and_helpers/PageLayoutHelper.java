@@ -232,13 +232,9 @@ abstract class LayoutEntity {
         return mLayoutObject;
     }
 
-    ;
-
     void setLayoutObject(Object value) {
         mLayoutObject = value;
     }
-
-    ;
 
     private Object mLayoutObject;
 

@@ -47,10 +47,9 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
 
         // Cleans unused styles and lists from the document depending on given CleanupOptions. 
         CleanupOptions cleanupOptions = new CleanupOptions();
-        {
-            cleanupOptions.setUnusedLists(false);
-            cleanupOptions.setUnusedStyles(true);
-        }
+        cleanupOptions.setUnusedLists(false);
+        cleanupOptions.setUnusedStyles(true);
+
         doc.cleanup(cleanupOptions);
 
         System.out.println(MessageFormat.format("Count of styles after Cleanup was decreased: {0}\n", doc.getStyles().getCount()) +
@@ -71,9 +70,8 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
 
         // Cleans duplicate styles from the document.
         CleanupOptions options = new CleanupOptions();
-        {
-            options.setDuplicateStyle(true);
-        }
+        options.setDuplicateStyle(true);
+
         doc.cleanup(options);
 
         // Count of styles after Cleanup was decreased.

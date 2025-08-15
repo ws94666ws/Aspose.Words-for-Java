@@ -31,9 +31,7 @@ public class WorkingWithDigitalSinatures extends DocsExamplesBase {
     public void signingEncryptedDocument() throws Exception {
         //ExStart:SigningEncryptedDocument
         SignOptions signOptions = new SignOptions();
-        {
-            signOptions.setDecryptionPassword("decryptionPassword");
-        }
+        signOptions.setDecryptionPassword("decryptionPassword");
 
         CertificateHolder certHolder = CertificateHolder.create(getMyDir() + "morzal.pfx", "aw");
 
@@ -53,10 +51,8 @@ public class WorkingWithDigitalSinatures extends DocsExamplesBase {
         doc.save(getArtifactsDir() + "SignDocuments.SignatureLine.docx");
 
         SignOptions signOptions = new SignOptions();
-        {
-            signOptions.setSignatureLineId(signatureLine.getId());
-            signOptions.setSignatureLineImage(FileUtils.readFileToByteArray(new File(getImagesDir() + "Enhanced Windows MetaFile.emf")));
-        }
+        signOptions.setSignatureLineId(signatureLine.getId());
+        signOptions.setSignatureLineImage(FileUtils.readFileToByteArray(new File(getImagesDir() + "Enhanced Windows MetaFile.emf")));
 
         CertificateHolder certHolder = CertificateHolder.create(getMyDir() + "morzal.pfx", "aw");
 
@@ -74,10 +70,8 @@ public class WorkingWithDigitalSinatures extends DocsExamplesBase {
                 ((Shape) doc.getFirstSection().getBody().getChild(NodeType.SHAPE, 0, true)).getSignatureLine();
 
         SignOptions signOptions = new SignOptions();
-        {
-            signOptions.setSignatureLineId(signatureLine.getId());
-            signOptions.setSignatureLineImage(FileUtils.readFileToByteArray(new File(getImagesDir() + "Enhanced Windows MetaFile.emf")));
-        }
+        signOptions.setSignatureLineId(signatureLine.getId());
+        signOptions.setSignatureLineImage(FileUtils.readFileToByteArray(new File(getImagesDir() + "Enhanced Windows MetaFile.emf")));
 
         CertificateHolder certHolder = CertificateHolder.create(getMyDir() + "morzal.pfx", "aw");
 
@@ -95,10 +89,8 @@ public class WorkingWithDigitalSinatures extends DocsExamplesBase {
                 ((Shape) doc.getFirstSection().getBody().getChild(NodeType.SHAPE, 0, true)).getSignatureLine();
 
         SignOptions signOptions = new SignOptions();
-        {
-            signOptions.setProviderId(signatureLine.getProviderId());
-            signOptions.setSignatureLineId(signatureLine.getId());
-        }
+        signOptions.setProviderId(signatureLine.getProviderId());
+        signOptions.setSignatureLineId(signatureLine.getId());
 
         CertificateHolder certHolder = CertificateHolder.create(getMyDir() + "morzal.pfx", "aw");
 
@@ -115,15 +107,13 @@ public class WorkingWithDigitalSinatures extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         SignatureLineOptions signatureLineOptions = new SignatureLineOptions();
-        {
-            signatureLineOptions.setSigner("yourname");
-            signatureLineOptions.setSignerTitle("Worker");
-            signatureLineOptions.setEmail("yourname@aspose.com");
-            signatureLineOptions.setShowDate(true);
-            signatureLineOptions.setDefaultInstructions(false);
-            signatureLineOptions.setInstructions("Please sign here.");
-            signatureLineOptions.setAllowComments(true);
-        }
+        signatureLineOptions.setSigner("yourname");
+        signatureLineOptions.setSignerTitle("Worker");
+        signatureLineOptions.setEmail("yourname@aspose.com");
+        signatureLineOptions.setShowDate(true);
+        signatureLineOptions.setDefaultInstructions(false);
+        signatureLineOptions.setInstructions("Please sign here.");
+        signatureLineOptions.setAllowComments(true);
 
         SignatureLine signatureLine = builder.insertSignatureLine(signatureLineOptions).getSignatureLine();
         signatureLine.setProviderId(UUID.fromString("CF5A7BB4-8F3C-4756-9DF6-BEF7F13259A2"));
@@ -131,12 +121,10 @@ public class WorkingWithDigitalSinatures extends DocsExamplesBase {
         doc.save(getArtifactsDir() + "SignDocuments.SignatureLineProviderId.docx");
 
         SignOptions signOptions = new SignOptions();
-        {
-            signOptions.setSignatureLineId(signatureLine.getId());
-            signOptions.setProviderId(signatureLine.getProviderId());
-            signOptions.setComments("Document was signed by Aspose");
-            signOptions.setSignTime(new Date());
-        }
+        signOptions.setSignatureLineId(signatureLine.getId());
+        signOptions.setProviderId(signatureLine.getProviderId());
+        signOptions.setComments("Document was signed by Aspose");
+        signOptions.setSignTime(new Date());
 
         CertificateHolder certHolder = CertificateHolder.create(getMyDir() + "morzal.pfx", "aw");
 

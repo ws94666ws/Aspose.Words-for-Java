@@ -34,7 +34,6 @@ public class Lists extends DocsExamplesBase {
 
         ReportingEngine engine = new ReportingEngine();
         engine.getKnownTypes().add(ClientTestClass.class);
-
         engine.buildReport(doc, Common.getClients(), "clients");
 
         doc.save(getArtifactsDir() + "ReportingEngine.InParagraphList.docx");

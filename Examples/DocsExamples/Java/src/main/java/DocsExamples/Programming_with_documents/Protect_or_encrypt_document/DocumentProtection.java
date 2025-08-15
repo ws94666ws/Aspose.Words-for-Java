@@ -113,7 +113,6 @@ public class DocumentProtection extends DocsExamplesBase {
     public void getProtectionType() throws Exception {
         //ExStart:GetProtectionType
         Document doc = new Document(getMyDir() + "Document.docx");
-        /*ProtectionType*/
         int protectionType = doc.getProtectionType();
         //ExEnd:GetProtectionType
     }
@@ -147,7 +146,6 @@ public class DocumentProtection extends DocsExamplesBase {
 
         // Enter a password that's up to 15 characters long.
         doc.getWriteProtection().setPassword("MyPassword");
-
         // Remove the read-only option.
         doc.getWriteProtection().setReadOnlyRecommended(false);
 

@@ -11,9 +11,7 @@ public class WorkingWithRtfLoadOptions extends DocsExamplesBase {
     public void recognizeUtf8Text() throws Exception {
         //ExStart:RecognizeUtf8Text
         RtfLoadOptions loadOptions = new RtfLoadOptions();
-        {
-            loadOptions.setRecognizeUtf8Text(true);
-        }
+        loadOptions.setRecognizeUtf8Text(true);
 
         Document doc = new Document(getMyDir() + "UTF-8 characters.rtf", loadOptions);
 

@@ -15,14 +15,17 @@ public class WorkingWithHtmlLoadOptions extends DocsExamplesBase {
     @Test
     public void preferredControlType() throws Exception {
         //ExStart:LoadHtmlElementsWithPreferredControlType
-        final String HTML = "\r\n                <html>\r\n                    <select name='ComboBox' size='1'>\r\n                        <option value='val1'>item1</option>\r\n                        <option value='val2'></option>                        \r\n                    </select>\r\n                </html>\r\n            ";
+        final String html = "<html>" +
+                "<select name='ComboBox' size='1'>" +
+                "<option value='val1'>item1</option>" +
+                "<option value='val2'></option>" +
+                "</select>" +
+                "</html>";
 
         HtmlLoadOptions loadOptions = new HtmlLoadOptions();
-        {
-            loadOptions.setPreferredControlType(HtmlControlType.STRUCTURED_DOCUMENT_TAG);
-        }
+        loadOptions.setPreferredControlType(HtmlControlType.STRUCTURED_DOCUMENT_TAG);
 
-        Document doc = new Document(new ByteArrayInputStream(HTML.getBytes(StandardCharsets.UTF_8)), loadOptions);
+        Document doc = new Document(new ByteArrayInputStream(html.getBytes(StandardCharsets.UTF_8)), loadOptions);
 
         doc.save(getArtifactsDir() + "WorkingWithHtmlLoadOptions.PreferredControlType.docx", SaveFormat.DOCX);
         //ExEnd:LoadHtmlElementsWithPreferredControlType

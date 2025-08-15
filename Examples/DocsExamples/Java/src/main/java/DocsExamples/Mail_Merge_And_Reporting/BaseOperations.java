@@ -258,7 +258,7 @@ public class BaseOperations extends DocsExamplesBase {
     }
 }
 
-// Custom data source for Orders
+// Custom data source for Orders.
 class OrderDataSource implements com.aspose.words.IMailMergeDataSource {
     private ResultSet resultSet;
     private String tableName;
@@ -300,7 +300,7 @@ class OrderDataSource implements com.aspose.words.IMailMergeDataSource {
     }
 }
 
-// Custom data source for OrderDetails
+// Custom data source for OrderDetails.
 class OrderDetailsDataSource implements IMailMergeDataSource {
     private ResultSet resultSet;
     private String tableName;

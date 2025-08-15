@@ -16,9 +16,7 @@ public class BuildOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Reporting engine template - Remove empty paragraphs (Java).docx");
 
         ReportingEngine engine = new ReportingEngine();
-        {
-            engine.setOptions(ReportBuildOptions.REMOVE_EMPTY_PARAGRAPHS);
-        }
+        engine.setOptions(ReportBuildOptions.REMOVE_EMPTY_PARAGRAPHS);
         engine.getKnownTypes().add(ManagerTestClass.class);
         engine.buildReport(doc, Common.getManagers(), "Managers");
 

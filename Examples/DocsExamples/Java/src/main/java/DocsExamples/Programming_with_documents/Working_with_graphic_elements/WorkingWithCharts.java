@@ -25,19 +25,19 @@ public class WorkingWithCharts extends DocsExamplesBase {
         // Delete default generated series.
         chart.getSeries().clear();
 
-        ChartSeries series1 = chart.getSeries().add("Aspose Series 1",
+        ChartSeries series = chart.getSeries().add("Aspose Series 1",
                 new String[]{"Category 1", "Category 2", "Category 3"},
                 new double[]{2.5, 1.5, 3.5});
 
-        series1.hasDataLabels(true);
-        series1.getDataLabels().setShowValue(true);
-        series1.getDataLabels().get(0).getNumberFormat().setFormatCode("\"$\"#,##0.00");
-        series1.getDataLabels().get(1).getNumberFormat().setFormatCode("dd/mm/yyyy");
-        series1.getDataLabels().get(2).getNumberFormat().setFormatCode("0.00%");
+        series.hasDataLabels(true);
+        series.getDataLabels().setShowValue(true);
+        series.getDataLabels().get(0).getNumberFormat().setFormatCode("\"$\"#,##0.00");
+        series.getDataLabels().get(1).getNumberFormat().setFormatCode("dd/mm/yyyy");
+        series.getDataLabels().get(2).getNumberFormat().setFormatCode("0.00%");
 
         // Or you can set format code to be linked to a source cell,
         // in this case NumberFormat will be reset to general and inherited from a source cell.
-        series1.getDataLabels().get(2).getNumberFormat().isLinkedToSource(true);
+        series.getDataLabels().get(2).getNumberFormat().isLinkedToSource(true);
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.FormatNumberOfDataLabel.docx");
         //ExEnd:FormatNumberOfDataLabel
@@ -58,7 +58,6 @@ public class WorkingWithCharts extends DocsExamplesBase {
         chart.getTitle().setOverlay(false);
 
         // Please note if null or empty value is specified as title text, auto generated title will be shown.
-
         chart.getLegend().setPosition(LegendPosition.LEFT);
         chart.getLegend().setOverlay(true);
 
@@ -261,15 +260,12 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
                 new String[]{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"},
                 new double[]{1900000.0, 850000.0, 2100000.0, 600000.0, 1500000.0});
-
         chart.getAxisY().getNumberFormat().setFormatCode("#,##0");
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.NumberFormatForAxis.docx");
@@ -284,15 +280,12 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
                 new String[]{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"},
                 new double[]{1.2, 0.3, 2.1, 2.9, 4.2});
-
         chart.getAxisY().getScaling().setMinimum(new AxisBound(0.0));
         chart.getAxisY().getScaling().setMaximum(new AxisBound(6.0));
 
@@ -308,15 +301,12 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
                 new String[]{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"},
                 new double[]{1.2, 0.3, 2.1, 2.9, 4.2});
-
         chart.getAxisX().getTickLabels().setSpacing(2);
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.IntervalUnitBetweenLabelsOnAxis.docx");
@@ -331,15 +321,12 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
                 new String[]{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"},
                 new double[]{1.2, 0.3, 2.1, 2.9, 4.2});
-
         chart.getAxisY().setHidden(true);
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.HideChartAxis.docx");
@@ -371,9 +358,8 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.BAR, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-        ChartSeries series0 = shape.getChart().getSeries().get(0);
+        ChartSeries series0 = chart.getSeries().get(0);
 
         ChartDataLabelCollection labels = series0.getDataLabels();
         labels.setShowLegendKey(true);
@@ -400,9 +386,7 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.PIE, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         ChartSeries series = chart.getSeries().add("Aspose Series 1",
@@ -458,7 +442,6 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.LINE, 432.0, 252.0);
-
         Chart chart = shape.getChart();
 
         //ExStart:WorkWithSingleChartSeries
@@ -497,7 +480,6 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
         ChartSeriesCollection seriesColl = chart.getSeries();
 
@@ -529,7 +511,6 @@ public class WorkingWithCharts extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.LINE, 432.0, 252.0);
-
         Chart chart = shape.getChart();
         ChartSeriesCollection seriesColl = chart.getSeries();
 

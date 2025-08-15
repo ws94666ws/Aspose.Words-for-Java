@@ -16,13 +16,11 @@ public class WorkingWithWatermark extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Document.docx");
 
         TextWatermarkOptions options = new TextWatermarkOptions();
-        {
-            options.setFontFamily("Arial");
-            options.setFontSize(36f);
-            options.setColor(Color.BLACK);
-            options.setLayout(WatermarkLayout.HORIZONTAL);
-            options.isSemitrasparent(false);
-        }
+        options.setFontFamily("Arial");
+        options.setFontSize(36f);
+        options.setColor(Color.BLACK);
+        options.setLayout(WatermarkLayout.HORIZONTAL);
+        options.isSemitrasparent(false);
 
         doc.getWatermark().setText("Test", options);
 
@@ -54,9 +52,7 @@ public class WorkingWithWatermark extends DocsExamplesBase {
         //GistId:1f690a31c188a851d80d7aed4ff7e44c
         // Create a watermark shape, this will be a WordArt shape.
         Shape watermark = new Shape(doc, ShapeType.TEXT_PLAIN_TEXT);
-        {
-            watermark.setName("Watermark");
-        }
+        watermark.setName("Watermark");
         //ExEnd:SetShapeName
 
         watermark.getTextPath().setText(watermarkText);
@@ -83,7 +79,7 @@ public class WorkingWithWatermark extends DocsExamplesBase {
         watermarkPara.appendChild(watermark);
 
         // Insert the watermark into all headers of each document section.
-        for (Section sect : (Iterable<Section>) doc.getSections()) {
+        for (Section sect : doc.getSections()) {
             // There could be up to three different headers in each section.
             // Since we want the watermark to appear on all pages, insert it into all headers.
             insertWatermarkIntoHeader(watermarkPara, sect, HeaderFooterType.HEADER_PRIMARY);
@@ -92,8 +88,7 @@ public class WorkingWithWatermark extends DocsExamplesBase {
         }
     }
 
-    private void insertWatermarkIntoHeader(Paragraph watermarkPara, Section sect,
-            /*HeaderFooterType*/int headerType) {
+    private void insertWatermarkIntoHeader(Paragraph watermarkPara, Section sect, int headerType) {
         HeaderFooter header = sect.getHeadersFooters().getByHeaderFooterType(headerType);
 
         if (header == null) {

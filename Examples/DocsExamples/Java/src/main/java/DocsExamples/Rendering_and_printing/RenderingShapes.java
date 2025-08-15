@@ -25,9 +25,7 @@ public class RenderingShapes extends DocsExamplesBase {
         //GistId:7fc867ac8ef1b729b6f70580fbc5b3f9
         ShapeRenderer render = shape.getShapeRenderer();
         ImageSaveOptions imageOptions = new ImageSaveOptions(SaveFormat.EMF);
-        {
-            imageOptions.setScale(1.5f);
-        }
+        imageOptions.setScale(1.5f);
 
         render.save(getArtifactsDir() + "RenderShape.RenderShapeAsEmf.emf", imageOptions);
         //ExEnd:RenderShapeAsEmf
@@ -43,12 +41,10 @@ public class RenderingShapes extends DocsExamplesBase {
         //GistId:7fc867ac8ef1b729b6f70580fbc5b3f9
         ShapeRenderer render = new ShapeRenderer(shape);
         ImageSaveOptions imageOptions = new ImageSaveOptions(SaveFormat.JPEG);
-        {
-            // Output the image in gray scale
-            imageOptions.setImageColorMode(ImageColorMode.GRAYSCALE);
-            // Reduce the brightness a bit (default is 0.5f)
-            imageOptions.setImageBrightness(0.45f);
-        }
+        // Output the image in gray scale
+        imageOptions.setImageColorMode(ImageColorMode.GRAYSCALE);
+        // Reduce the brightness a bit (default is 0.5f)
+        imageOptions.setImageBrightness(0.45f);
 
         try (FileOutputStream stream = new FileOutputStream(getArtifactsDir() + "RenderShape.RenderShapeAsJpeg.jpg")) {
             render.save(stream, imageOptions);
@@ -132,9 +128,7 @@ public class RenderingShapes extends DocsExamplesBase {
         builder.write("Vertical text");
 
         ImageSaveOptions options = new ImageSaveOptions(SaveFormat.PNG);
-        {
-            options.setPaperColor(new Color(255, 182, 193));
-        }
+        options.setPaperColor(new Color(255, 182, 193));
 
         Document tmp = convertToImage(doc, textBoxShape.getLastParagraph());
         tmp.save(getArtifactsDir() + "RenderShape.RenderParagraphToImage.png");

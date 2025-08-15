@@ -321,7 +321,7 @@ public class WorkingWithTables extends DocsExamplesBase {
 
         Row clonedRow = (Row) table.getLastRow().deepClone(true);
         // Remove all content from the cloned row's cells. This makes the row ready for new content to be inserted into.
-        for (Cell cell : (Iterable<Cell>) clonedRow.getCells())
+        for (Cell cell : clonedRow.getCells())
             cell.removeAllChildren();
 
         table.appendChild(clonedRow);
@@ -593,13 +593,10 @@ public class WorkingWithTables extends DocsExamplesBase {
 
         // We will split the table at the third row (inclusive).
         Row row = firstTable.getRows().get(2);
-
         // Create a new container for the split table.
         Table table = (Table) firstTable.deepClone(false);
-
         // Insert the container after the original.
         firstTable.getParentNode().insertAfter(table, firstTable);
-
         // Add a buffer paragraph to ensure the tables stay apart.
         firstTable.getParentNode().insertAfter(new Paragraph(doc), firstTable);
 
@@ -620,9 +617,8 @@ public class WorkingWithTables extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Table spanning two pages.docx");
 
         Table table = (Table) doc.getChild(NodeType.TABLE, 0, true);
-
         // Disable breaking across pages for all rows in the table.
-        for (Row row : (Iterable<Row>) table.getRows())
+        for (Row row : table.getRows())
             row.getRowFormat().setAllowBreakAcrossPages(false);
 
         doc.save(getArtifactsDir() + "WorkingWithTables.RowFormatDisableBreakAcrossPages.docx");
@@ -636,13 +632,12 @@ public class WorkingWithTables extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Table spanning two pages.docx");
 
         Table table = (Table) doc.getChild(NodeType.TABLE, 0, true);
-
         // We need to enable KeepWithNext for every paragraph in the table to keep it from breaking across a page,
         // except for the last paragraphs in the last row of the table.
         for (Cell cell : (Iterable<Cell>) table.getChildNodes(NodeType.CELL, true)) {
             cell.ensureMinimum();
 
-            for (Paragraph para : (Iterable<Paragraph>) cell.getParagraphs())
+            for (Paragraph para : cell.getParagraphs())
                 if (!(cell.getParentRow().isLastRow() && para.isEndOfCell()))
                     para.getParagraphFormat().setKeepWithNext(true);
         }
@@ -658,9 +653,8 @@ public class WorkingWithTables extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Table with merged cells.docx");
 
         Table table = (Table) doc.getChild(NodeType.TABLE, 0, true);
-
-        for (Row row : (Iterable<Row>) table.getRows()) {
-            for (Cell cell : (Iterable<Cell>) row.getCells()) {
+        for (Row row : table.getRows()) {
+            for (Cell cell : row.getCells()) {
                 System.out.println(printCellMergeType(cell));
             }
         }
@@ -886,9 +880,7 @@ public class WorkingWithTables extends DocsExamplesBase {
             ByteArrayOutputStream htmlStream = new ByteArrayOutputStream();
 
             HtmlSaveOptions options = new HtmlSaveOptions();
-            {
-                options.setImagesFolder(System.getProperty("java.io.tmpdir"));
-            }
+            options.setImagesFolder(System.getProperty("java.io.tmpdir"));
 
             doc.save(htmlStream, options);
 
@@ -1056,7 +1048,6 @@ public class WorkingWithTables extends DocsExamplesBase {
         //ExEnd:AllowAutoFit
 
         Cell firstCell = table.getFirstRow().getFirstCell();
-        /*PreferredWidthType*/
         int type = firstCell.getCellFormat().getPreferredWidth().getType();
         double value = firstCell.getCellFormat().getPreferredWidth().getValue();
         //ExEnd:RetrievePreferredWidthType

@@ -11,7 +11,6 @@ public class ExtractContentHelper {
 
         // Create a list to store the extracted nodes.
         ArrayList<Node> nodes = new ArrayList<>();
-
         // If either marker is part of a comment, including the comment itself, we need to move the pointer
         // forward to the Comment Node found after the CommentRangeEnd node.
         if (endNode.getNodeType() == NodeType.COMMENT_RANGE_END && isInclusive) {
@@ -127,7 +126,7 @@ public class ExtractContentHelper {
             throw new IllegalArgumentException("The section of end node must be after the section start node");
     }
 
-    private static Node findNextNode(/*NodeType*/int nodeType, Node fromNode) {
+    private static Node findNextNode(int nodeType, Node fromNode) {
         if (fromNode == null || fromNode.getNodeType() == nodeType)
             return fromNode;
 
@@ -185,8 +184,7 @@ public class ExtractContentHelper {
         }
 
         // After processing, the composite node may become empty if it has doesn't include it.
-        if (canAdd &&
-                (forceAdd || ((CompositeNode) cloneNode).hasChildNodes()))
+        if (canAdd && (forceAdd || ((CompositeNode) cloneNode).hasChildNodes()))
             nodes.add(cloneNode);
     }
 
@@ -218,7 +216,7 @@ public class ExtractContentHelper {
     }
 
     private static ArrayList<Node> fillSelfAndParents(Node node, Node tillNode) {
-        ArrayList<Node> list = new ArrayList<Node>();
+        ArrayList<Node> list = new ArrayList<>();
         Node currentNode = node;
 
         while (currentNode != tillNode) {

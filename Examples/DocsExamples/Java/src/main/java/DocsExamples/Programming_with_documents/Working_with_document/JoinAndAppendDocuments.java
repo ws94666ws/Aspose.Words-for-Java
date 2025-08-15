@@ -73,9 +73,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
         // Specify that if numbering clashes in source and destination documents,
         // then numbering from the source document will be used.
         ImportFormatOptions options = new ImportFormatOptions();
-        {
-            options.setKeepSourceNumbering(true);
-        }
+        options.setKeepSourceNumbering(true);
 
         dstDoc.appendDocument(srcDoc, ImportFormatMode.USE_DESTINATION_STYLES, options);
         //ExEnd:AppendWithImportFormatOptions
@@ -109,9 +107,9 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
     private void convertNumPageFieldsToPageRef(Document doc) throws Exception {
         // This is the prefix for each bookmark, which signals where page numbering restarts.
         // The underscore "_" at the start inserts this bookmark as hidden in MS Word.
-        final String BOOKMARK_PREFIX = "_SubDocumentEnd";
-        final String NUM_PAGES_FIELD_NAME = "NUMPAGES";
-        final String PAGE_REF_FIELD_NAME = "PAGEREF";
+        String bookmarkPrefix = "_SubDocumentEnd";
+        String numpagesFieldName = "NUMPAGES";
+        String pagerefFieldName = "PAGEREF";
 
         // Defines the number of page restarts encountered and, therefore,
         // the number of "sub" documents found within this document.
@@ -134,8 +132,8 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
                     builder.moveTo(lastNode);
 
                     // This bookmark represents the end of the sub-document.
-                    builder.startBookmark(BOOKMARK_PREFIX + subDocumentCount);
-                    builder.endBookmark(BOOKMARK_PREFIX + subDocumentCount);
+                    builder.startBookmark(bookmarkPrefix + subDocumentCount);
+                    builder.endBookmark(bookmarkPrefix + subDocumentCount);
 
                     // Increase the sub-document count to insert the correct bookmarks.
                     subDocumentCount++;
@@ -149,8 +147,8 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
                 Node lastNode = doc.getLastSection().getBody().getLastChild();
 
                 builder.moveTo(lastNode);
-                builder.startBookmark(BOOKMARK_PREFIX + subDocumentCount);
-                builder.endBookmark(BOOKMARK_PREFIX + subDocumentCount);
+                builder.startBookmark(bookmarkPrefix + subDocumentCount);
+                builder.endBookmark(bookmarkPrefix + subDocumentCount);
             }
 
             // Iterate through each NUMPAGES field in the section and replace it with a PAGEREF field
@@ -167,7 +165,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
                     // Since the NUMPAGES field does not take any additional parameters,
                     // we can assume the field's remaining part. Code after the field name is the switches.
                     // We will use these to help recreate the NUMPAGES field as a PAGEREF field.
-                    String fieldSwitches = fieldCode.replace(NUM_PAGES_FIELD_NAME, "").trim();
+                    String fieldSwitches = fieldCode.replace(numpagesFieldName, "").trim();
 
                     // Inserting the new field directly at the FieldStart node of the original field will cause
                     // the new field not to pick up the original field's formatting. To counter this,
@@ -179,7 +177,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
                     builder.moveTo(previousNode);
 
                     Field newField = builder.insertField(
-                            MessageFormat.format(" {0} {1}{2} {3} ", PAGE_REF_FIELD_NAME, BOOKMARK_PREFIX, subDocumentCount, fieldSwitches));
+                            MessageFormat.format(" {0} {1}{2} {3} ", pagerefFieldName, bookmarkPrefix, subDocumentCount, fieldSwitches));
 
                     // The field will be inserted before the referenced node. Move the node before the field instead.
                     previousNode.getParentNode().insertBefore(previousNode, newField.getStart());
@@ -249,7 +247,6 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
         for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true)) {
             para.getParagraphFormat().setKeepWithNext(true);
         }
-
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
 
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.DifferentPageSetup.docx");
@@ -295,7 +292,6 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
 
         Document srcDoc = new Document();
         srcDoc.getFirstSection().getBody().appendParagraph("Source document text. ");
-
         // Append the source document to the destination document.
         // Pass format mode to retain the original formatting of the source document when importing it.
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
@@ -316,7 +312,6 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
         for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true)) {
             para.getParagraphFormat().setKeepWithNext(true);
         }
-
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
 
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.KeepSourceTogether.docx");
@@ -348,7 +343,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
         srcDoc.getFirstSection().getPageSetup().setSectionStart(SectionStart.CONTINUOUS);
 
         // Keep track of the lists that are created.
-        HashMap<Integer, List> newLists = new HashMap<Integer, List>();
+        HashMap<Integer, List> newLists = new HashMap<>();
 
         for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true)) {
             if (para.isListItem()) {
@@ -529,15 +524,13 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
 
         // Keep the source text boxes formatting when importing.
         ImportFormatOptions importFormatOptions = new ImportFormatOptions();
-        {
-            importFormatOptions.setIgnoreTextBoxes(false);
-        }
+        importFormatOptions.setIgnoreTextBoxes(false);
 
         NodeImporter importer = new NodeImporter(srcDoc, dstDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING,
                 importFormatOptions);
 
         ParagraphCollection srcParas = srcDoc.getFirstSection().getBody().getParagraphs();
-        for (Paragraph srcPara : (Iterable<Paragraph>) srcParas) {
+        for (Paragraph srcPara : srcParas) {
             Node importedNode = importer.importNode(srcPara, true);
             dstDoc.getFirstSection().getBody().appendChild(importedNode);
         }
@@ -553,9 +546,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase {
         Document dstDocument = new Document(getMyDir() + "Northwind traders.docx");
 
         ImportFormatOptions importFormatOptions = new ImportFormatOptions();
-        {
-            importFormatOptions.setIgnoreHeaderFooter(false);
-        }
+        importFormatOptions.setIgnoreHeaderFooter(false);
 
         dstDocument.appendDocument(srcDocument, ImportFormatMode.KEEP_SOURCE_FORMATTING, importFormatOptions);
 
