@@ -1,4 +1,4 @@
-package DocsExamples.File_formats_and_conversions;
+﻿package DocsExamples.File_formats_and_conversions;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.email.*;
@@ -16,7 +16,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test
     public void docToDocx() throws Exception {
         //ExStart:LoadAndSave
-        //GistId:7ee438947078cf070c5bc36a4e45a18c
+        //GistId:9d2a393f6dff9d785e7747a48e590d9d
         //ExStart:OpenDocument
         Document doc = new Document(getMyDir() + "Document.doc");
         //ExEnd:OpenDocument
@@ -28,7 +28,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test
     public void docxToRtf() throws Exception {
         //ExStart:LoadAndSaveToStream
-        //GistId:7ee438947078cf070c5bc36a4e45a18c
+        //GistId:9d2a393f6dff9d785e7747a48e590d9d
         //ExStart:OpenFromStream
         //GistId:1d626c7186a318d22d022dc96dd91d55
         // Read only access is enough for Aspose.Words to load a document.
@@ -61,7 +61,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test
     public void docxToByte() throws Exception {
         //ExStart:DocxToByte
-        //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
+        //GistId:86d59d944009f305e7e24b3e276cd17d
         Document doc = new Document(getMyDir() + "Document.docx");
 
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -85,7 +85,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test
     public void docxToHtml() throws Exception {
         //ExStart:DocxToHtml
-        //GistId:c0df00d37081f41a7683339fd7ef66c1
+        //GistId:c2ec8aa36ef37670eceec8da5c612b86
         Document doc = new Document(getMyDir() + "Document.docx");
 
         doc.save(getArtifactsDir() + "BaseConversions.DocxToHtml.html");
@@ -95,7 +95,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test(enabled = false, description = "Only for example")
     public void docxToMhtml() throws Exception {
         //ExStart:DocxToMhtml
-        //GistId:537e7d4e2ddd23fa701dc4bf315064b9
+        //GistId:1bcfd5d0ec402f0f54cd747eb22d8da5
         Document doc = new Document(getMyDir() + "Document.docx");
 
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -119,7 +119,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test
     public void docxToMarkdown() throws Exception {
         //ExStart:DocxToMarkdown
-        //GistId:51b4cb9c451832f23527892e19c7bca6
+        //GistId:642767bbe8d8bec8eab080120b707990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -141,7 +141,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test
     public void docxToXlsx() throws Exception {
         //ExStart:DocxToXlsx
-        //GistId:f5a08835e924510d3809e41c3b8b81a2
+        //GistId:82fb3ee435d5abdc1472a58774ebe98c
         Document doc = new Document(getMyDir() + "Document.docx");
         doc.save(getArtifactsDir() + "BaseConversions.DocxToXlsx.xlsx");
         //ExEnd:DocxToXlsx
@@ -160,7 +160,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test
     public void findReplaceXlsx() throws Exception {
         //ExStart:FindReplaceXlsx
-        //GistId:a50652f28531278511605e0fd778bbdf
+        //GistId:50971daf8f0c9ef4b0250c4a526b1652
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -182,7 +182,7 @@ public class BaseConversions extends DocsExamplesBase {
     @Test
     public void compressXlsx() throws Exception {
         //ExStart:CompressXlsx
-        //GistId:a50652f28531278511605e0fd778bbdf
+        //GistId:50971daf8f0c9ef4b0250c4a526b1652
         Document doc = new Document(getMyDir() + "Document.docx");
 
         XlsxSaveOptions saveOptions = new XlsxSaveOptions();

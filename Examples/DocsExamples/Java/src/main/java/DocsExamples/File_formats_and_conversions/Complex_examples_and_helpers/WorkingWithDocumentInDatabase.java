@@ -1,4 +1,4 @@
-package DocsExamples.File_formats_and_conversions.Complex_examples_and_helpers;
+﻿package DocsExamples.File_formats_and_conversions.Complex_examples_and_helpers;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.Document;
@@ -18,7 +18,7 @@ public class WorkingWithDocumentInDatabase extends DocsExamplesBase {
     public void loadAndSaveDocToDatabase() throws Exception {
         Document doc = new Document(getMyDir() + "Document.docx");
         //ExStart:OpenDatabaseConnection
-        //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
+        //GistId:86d59d944009f305e7e24b3e276cd17d
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         String connString = "jdbc:ucanaccess://" + getDatabaseDir() + "Northwind.accdb";
 
@@ -26,7 +26,7 @@ public class WorkingWithDocumentInDatabase extends DocsExamplesBase {
         //ExEnd:OpenDatabaseConnection
 
         //ExStart:OpenRetrieveAndDelete
-        //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2 
+        //GistId:86d59d944009f305e7e24b3e276cd17d
         storeToDatabase(doc, connection);
 
         Document dbDoc = readFromDatabase("Document.docx", connection);
@@ -39,7 +39,7 @@ public class WorkingWithDocumentInDatabase extends DocsExamplesBase {
     }
 
     //ExStart:StoreToDatabase
-    //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
+    //GistId:86d59d944009f305e7e24b3e276cd17d
     private void storeToDatabase(Document doc, Connection connection) throws Exception {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         doc.save(stream, SaveFormat.DOCX);
@@ -56,7 +56,7 @@ public class WorkingWithDocumentInDatabase extends DocsExamplesBase {
     //ExEnd:StoreToDatabase
 
     //ExStart:ReadFromDatabase 
-    //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
+    //GistId:86d59d944009f305e7e24b3e276cd17d
     private Document readFromDatabase(String fileName, Connection connection) throws Exception {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Documents WHERE Name='" + fileName + "'");
@@ -80,7 +80,7 @@ public class WorkingWithDocumentInDatabase extends DocsExamplesBase {
     //ExEnd:ReadFromDatabase
 
     //ExStart:DeleteFromDatabase 
-    //GistId:f8a622f8bc1cf3c2fa8a7a9be359faa2
+    //GistId:86d59d944009f305e7e24b3e276cd17d
     private void deleteFromDatabase(String fileName, Connection connection) throws SQLException {
         Statement statement = connection.createStatement();
         statement.execute("DELETE * FROM Documents WHERE Name='" + fileName + "'");
