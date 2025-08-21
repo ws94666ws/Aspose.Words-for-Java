@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Split_documents;
+﻿package DocsExamples.Programming_with_documents.Split_documents;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -15,7 +15,7 @@ public class SplitDocument extends DocsExamplesBase {
     @Test
     public void byHeadings() throws Exception {
         //ExStart:SplitDocumentByHeadings
-        //GistId:c0df00d37081f41a7683339fd7ef66c1
+        //GistId:c2ec8aa36ef37670eceec8da5c612b86
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         HtmlSaveOptions options = new HtmlSaveOptions();
@@ -31,7 +31,7 @@ public class SplitDocument extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         //ExStart:SplitDocumentBySectionsHtml
-        //GistId:6759a1a6b7f448798751d54922a8efcb
+        //GistId:961539231ee8e8975461be3947e750f6
         HtmlSaveOptions options = new HtmlSaveOptions();
         options.setDocumentSplitCriteria(DocumentSplitCriteria.SECTION_BREAK);
         //ExEnd:SplitDocumentBySectionsHtml
@@ -42,7 +42,7 @@ public class SplitDocument extends DocsExamplesBase {
     @Test
     public void bySections() throws Exception {
         //ExStart:SplitDocumentBySections
-        //GistId:6759a1a6b7f448798751d54922a8efcb
+        //GistId:961539231ee8e8975461be3947e750f6
         Document doc = new Document(getMyDir() + "Big document.docx");
 
         for (int i = 0; i < doc.getSections().getCount(); i++) {
@@ -64,7 +64,7 @@ public class SplitDocument extends DocsExamplesBase {
     @Test
     public void pageByPage() throws Exception {
         //ExStart:SplitDocumentPageByPage
-        //GistId:6759a1a6b7f448798751d54922a8efcb
+        //GistId:961539231ee8e8975461be3947e750f6
         Document doc = new Document(getMyDir() + "Big document.docx");
 
         int pageCount = doc.getPageCount();
@@ -80,7 +80,7 @@ public class SplitDocument extends DocsExamplesBase {
     }
 
     //ExStart:MergeSplitDocuments
-    //GistId:6759a1a6b7f448798751d54922a8efcb
+    //GistId:961539231ee8e8975461be3947e750f6
     private void mergeDocuments() throws Exception {
         // Find documents using for merge.
         File directory = new File(getArtifactsDir());
@@ -113,7 +113,7 @@ public class SplitDocument extends DocsExamplesBase {
     @Test
     public void byPageRange() throws Exception {
         //ExStart:SplitDocumentByPageRange
-        //GistId:6759a1a6b7f448798751d54922a8efcb
+        //GistId:961539231ee8e8975461be3947e750f6
         Document doc = new Document(getMyDir() + "Big document.docx");
 
         // Get part of the document.

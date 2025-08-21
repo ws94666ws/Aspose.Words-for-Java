@@ -152,9 +152,17 @@ public class BaseConversions extends DocsExamplesBase {
         //ExStart:TxtToDocx
         // The encoding of the text file is automatically detected.
         Document doc = new Document(getMyDir() + "English text.txt");
-
         doc.save(getArtifactsDir() + "BaseConversions.TxtToDocx.docx");
         //ExEnd:TxtToDocx
+    }
+
+    @Test
+    public void DocxToJpeg() throws Exception {
+        //ExStart:DocxToJpeg
+        //GistId:b237846932dfcde42358bd0c887661a5
+        Document doc = new Document(getMyDir() + "Document.docx");
+        doc.save(getArtifactsDir() + "BaseConversions.DocxToJpeg.jpeg");
+        //ExEnd:DocxToJpeg
     }
 
     @Test
