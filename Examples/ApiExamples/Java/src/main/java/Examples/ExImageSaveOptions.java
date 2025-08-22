@@ -638,7 +638,7 @@ public class ExImageSaveOptions extends ApiExampleBase {
     public void gridLayout() throws Exception
     {
         //ExStart:GridLayout
-        //GistId:70330eacdfc2e253f00a9adea8972975
+        //GistId:8abf985c6b9db41b7b20b19227e95ebc
         //ExFor:ImageSaveOptions.PageLayout
         //ExFor:MultiPageLayout
         //ExSummary:Shows how to save the document into JPG image with multi-page layout settings.

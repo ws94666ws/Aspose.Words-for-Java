@@ -36,6 +36,7 @@ import com.aspose.words.Node;
 import com.aspose.words.Paragraph;
 import com.aspose.ms.System.msConsole;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 import com.aspose.words.NodeType;
 import com.aspose.words.Section;
 import com.aspose.words.ParagraphCollection;

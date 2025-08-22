@@ -4,6 +4,10 @@ import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
 import org.testng.annotations.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
 
@@ -12,7 +16,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     @Test
     public void updateDirtyFields() throws Exception {
         //ExStart:UpdateDirtyFields
-        //GistId:08db64c4d86842c4afd1ecb925ed07c4
+        //GistId:cffe9d4fecedd3037a074e56c4c92054
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setUpdateDirtyFields(true);
 
@@ -27,7 +31,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
         //ExStart:LoadSaveEncryptedDocument
         //GistId:821ff3a1df0c75b2af641299b393fb60
         //ExStart:OpenEncryptedDocument
-        //GistId:40be8275fc43f78f5e5877212e4e1bf3
+        //GistId:9216df344e0dc0025f5eda608b9f33d8
         Document doc = new Document(getMyDir() + "Encrypted.docx", new LoadOptions("docPassword"));
         //ExEnd:OpenEncryptedDocument
 
@@ -48,7 +52,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     @Test
     public void convertShapeToOfficeMath() throws Exception {
         //ExStart:ConvertShapeToOfficeMath
-        //GistId:ad463bf5f128fe6e6c1485df3c046a4c
+        //GistId:ae9835338c044aaa3ac54592b7062db8
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setConvertShapeToOfficeMath(true);
 
@@ -61,7 +65,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     @Test
     public void setMsWordVersion() throws Exception {
         //ExStart:SetMsWordVersion
-        //GistId:40be8275fc43f78f5e5877212e4e1bf3
+        //GistId:9216df344e0dc0025f5eda608b9f33d8
         // Create a new LoadOptions object, which will load documents according to MS Word 2019 specification by default
         // and change the loading version to Microsoft Word 2010.
         LoadOptions loadOptions = new LoadOptions();
@@ -76,7 +80,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     @Test
     public void tempFolder() throws Exception {
         //ExStart:TempFolder
-        //GistId:40be8275fc43f78f5e5877212e4e1bf3
+        //GistId:9216df344e0dc0025f5eda608b9f33d8
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setTempFolder(getArtifactsDir());
 
@@ -87,7 +91,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     @Test
     public void warningCallback() throws Exception {
         //ExStart:WarningCallback
-        //GistId:40be8275fc43f78f5e5877212e4e1bf3
+        //GistId:9216df344e0dc0025f5eda608b9f33d8
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setWarningCallback(new DocumentLoadingWarningCallback());
 
@@ -96,7 +100,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     }
 
     //ExStart:IWarningCallback
-    //GistId:40be8275fc43f78f5e5877212e4e1bf3
+    //GistId:9216df344e0dc0025f5eda608b9f33d8
     public static class DocumentLoadingWarningCallback implements IWarningCallback {
         public void warning(WarningInfo info) {
             // Prints warnings and their details as they arise during document loading.
@@ -106,12 +110,59 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     }
     //ExEnd:IWarningCallback
 
+    @Test
+    public void resourceLoadingCallback() throws Exception {
+        //ExStart:ResourceLoadingCallback
+        //GistId:9216df344e0dc0025f5eda608b9f33d8
+        LoadOptions loadOptions = new LoadOptions();
+        loadOptions.setResourceLoadingCallback(new HtmlLinkedResourceLoadingCallback());
+
+        // When we open an Html document, external resources such as references to CSS stylesheet files
+        // and external images will be handled customarily by the loading callback as the document is loaded.
+        Document doc = new Document(getMyDir() + "Images.html", loadOptions);
+        doc.save(getArtifactsDir() + "WorkingWithLoadOptions.ResourceLoadingCallback.pdf");
+        //ExEnd:ResourceLoadingCallback
+    }
+
+    //ExStart:IResourceLoadingCallback
+    //GistId:9216df344e0dc0025f5eda608b9f33d8
+    private static class HtmlLinkedResourceLoadingCallback implements IResourceLoadingCallback {
+        public int resourceLoading(ResourceLoadingArgs args) throws Exception {
+            switch (args.getResourceType()) {
+                case ResourceType.CSS_STYLE_SHEET:
+                    System.out.println("External CSS Stylesheet found upon loading: " + args.getOriginalUri());
+                    // CSS file will don't used in the document.
+                    return ResourceLoadingAction.SKIP;
+
+                case ResourceType.IMAGE:
+                    // Replaces all images with a substitute.
+                    BufferedImage newImage = ImageIO.read(new File(getImagesDir() + "Logo.jpg"));
+
+                    try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                        ImageIO.write(newImage, "jpg", baos);
+                        byte[] imageBytes = baos.toByteArray();
+                        args.setData(imageBytes);
+                    }
+
+                    // New images will be used instead of presented in the document.
+                    return ResourceLoadingAction.USER_PROVIDED;
+
+                case ResourceType.DOCUMENT:
+                    System.out.println("External document found upon loading: " + args.getOriginalUri());
+                    // Will be used as usual.
+                    return ResourceLoadingAction.DEFAULT;
+
+                default:
+                    throw new IllegalArgumentException("Unexpected ResourceType value.");
+            }
+        }
+    }
+    //ExEnd:IResourceLoadingCallback
 
     @Test
-    public void loadWithEncoding() throws Exception
-    {
+    public void loadWithEncoding() throws Exception {
         //ExStart:LoadWithEncoding
-        //GistId:40be8275fc43f78f5e5877212e4e1bf3
+        //GistId:9216df344e0dc0025f5eda608b9f33d8
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setEncoding(Charset.forName("US-ASCII"));
 
@@ -121,8 +172,7 @@ public class WorkingWithLoadOptions extends DocsExamplesBase {
     }
 
     @Test
-    public void convertMetafilesToPng() throws Exception
-    {
+    public void convertMetafilesToPng() throws Exception {
         //ExStart:ConvertMetafilesToPng
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.setConvertMetafilesToPng(true);

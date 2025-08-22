@@ -9,13 +9,11 @@ import java.io.ByteArrayInputStream;
 import java.util.regex.Pattern;
 
 @Test
-public class CloneAndCombineDocuments extends DocsExamplesBase
-{
+public class CloneAndCombineDocuments extends DocsExamplesBase {
     @Test
-    public void cloneDocument() throws Exception
-    {
+    public void cloneDocument() throws Exception {
         //ExStart:CloneDocument
-        //GistId:b2f62f736a2090163de7b0f221cf46d4
+        //GistId:faf236ea6d4dc5da50bae0db08b5e0a5
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
         builder.writeln("This is the original document before applying the clone method");
@@ -39,23 +37,20 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
 
         // Check what the document contains after we changed it.
         Assert.assertEquals("Section 1\fSection 2This is the original document before applying the clone method" +
-            "\r\fSection 2This is the original document before applying the clone method", clone.getText().trim());
+                "\r\fSection 2This is the original document before applying the clone method", clone.getText().trim());
         clone.save(getArtifactsDir() + "CloneAndCombineDocuments.CloningDocument.docx");
         //ExEnd:CloneDocument
     }
 
     @Test
-    public void insertDocumentAtReplace() throws Exception
-    {
+    public void insertDocumentAtReplace() throws Exception {
         //ExStart:InsertDocumentAtReplace
         //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
         Document mainDoc = new Document(getMyDir() + "Document insertion 1.docx");
-                    
+
         FindReplaceOptions options = new FindReplaceOptions();
-        {
-            options.setDirection(FindReplaceDirection.BACKWARD); 
-            options.setReplacingCallback(new InsertDocumentAtReplaceHandler());
-        }
+        options.setDirection(FindReplaceDirection.BACKWARD);
+        options.setReplacingCallback(new InsertDocumentAtReplaceHandler());
 
         mainDoc.getRange().replace(Pattern.compile("\\[MY_DOCUMENT\\]"), "", options);
         mainDoc.save(getArtifactsDir() + "CloneAndCombineDocuments.InsertDocumentAtReplace.docx");
@@ -63,8 +58,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void insertDocumentAtBookmark() throws Exception
-    {
+    public void insertDocumentAtBookmark() throws Exception {
         //ExStart:InsertDocumentAtBookmark
         //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
         Document mainDoc = new Document(getMyDir() + "Document insertion 1.docx");
@@ -72,14 +66,13 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
 
         Bookmark bookmark = mainDoc.getRange().getBookmarks().get("insertionPlace");
         insertDocument(bookmark.getBookmarkStart().getParentNode(), subDoc);
-        
+
         mainDoc.save(getArtifactsDir() + "CloneAndCombineDocuments.InsertDocumentAtBookmark.docx");
         //ExEnd:InsertDocumentAtBookmark
     }
 
     @Test
-    public void insertDocumentAtMailMerge() throws Exception
-    {
+    public void insertDocumentAtMailMerge() throws Exception {
         //ExStart:InsertDocumentAtMailMerge
         //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
         Document mainDoc = new Document(getMyDir() + "Document insertion 1.docx");
@@ -88,7 +81,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
         // The main document has a merge field in it called "Document_1".
         // The corresponding data for this field contains a fully qualified path to the document.
         // That should be inserted to this field.
-        mainDoc.getMailMerge().execute(new String[] { "Document_1" }, new Object[] { getMyDir() + "Document insertion 2.docx" });
+        mainDoc.getMailMerge().execute(new String[]{"Document_1"}, new Object[]{getMyDir() + "Document insertion 2.docx"});
 
         mainDoc.save(getArtifactsDir() + "CloneAndCombineDocuments.InsertDocumentAtMailMerge.doc");
         //ExEnd:InsertDocumentAtMailMerge
@@ -103,35 +96,29 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
     /// <param name="insertionDestination">Node in the destination document after which the content
     /// Should be inserted. This node should be a block level node (paragraph or table).</param>
     /// <param name="docToInsert">The document to insert.</param>
-    private static void insertDocument(Node insertionDestination, Document docToInsert)
-    {
-        if (insertionDestination.getNodeType() == NodeType.PARAGRAPH || insertionDestination.getNodeType() == NodeType.TABLE)
-        {
+    private static void insertDocument(Node insertionDestination, Document docToInsert) {
+        if (insertionDestination.getNodeType() == NodeType.PARAGRAPH || insertionDestination.getNodeType() == NodeType.TABLE) {
             CompositeNode destinationParent = insertionDestination.getParentNode();
 
             NodeImporter importer =
-                new NodeImporter(docToInsert, insertionDestination.getDocument(), ImportFormatMode.KEEP_SOURCE_FORMATTING);
+                    new NodeImporter(docToInsert, insertionDestination.getDocument(), ImportFormatMode.KEEP_SOURCE_FORMATTING);
 
             // Loop through all block-level nodes in the section's body,
             // then clone and insert every node that is not the last empty paragraph of a section.
             for (Section srcSection : docToInsert.getSections())
-            for (Node srcNode : srcSection.getBody())
-            {
-                if (srcNode.getNodeType() == NodeType.PARAGRAPH)
-                {
-                    Paragraph para = (Paragraph)srcNode;
-                    if (para.isEndOfSection() && !para.hasChildNodes())
-                        continue;
+                for (Node srcNode : srcSection.getBody()) {
+                    if (srcNode.getNodeType() == NodeType.PARAGRAPH) {
+                        Paragraph para = (Paragraph) srcNode;
+                        if (para.isEndOfSection() && !para.hasChildNodes())
+                            continue;
+                    }
+
+                    Node newNode = importer.importNode(srcNode, true);
+
+                    destinationParent.insertAfter(newNode, insertionDestination);
+                    insertionDestination = newNode;
                 }
-
-                Node newNode = importer.importNode(srcNode, true);
-
-                destinationParent.insertAfter(newNode, insertionDestination);
-                insertionDestination = newNode;
-            }
-        }
-        else
-        {
+        } else {
             throw new IllegalArgumentException("The destination node should be either a paragraph or table.");
         }
     }
@@ -144,10 +131,9 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
     /// <param name="insertAfterNode">Node in the destination document after which the content
     /// Should be inserted. This node should be a block level node (paragraph or table).</param>
     /// <param name="srcDoc">The document to insert.</param>
-    private void insertDocumentWithSectionFormatting(Node insertAfterNode, Document srcDoc)
-    {
+    private void insertDocumentWithSectionFormatting(Node insertAfterNode, Document srcDoc) {
         if (insertAfterNode.getNodeType() != NodeType.PARAGRAPH &&
-            insertAfterNode.getNodeType() != NodeType.TABLE)
+                insertAfterNode.getNodeType() != NodeType.TABLE)
             throw new IllegalArgumentException("The destination node should be either a paragraph or table.");
 
         Document dstDoc = (Document) insertAfterNode.getDocument();
@@ -157,7 +143,6 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
 
         // Don't clone the content inside the section, we just want the properties of the section retained.
         Section cloneSection = (Section) currentSection.deepClone(false);
-
         // However, make sure the clone section has a body but no empty first paragraph.
         cloneSection.ensureMinimum();
         cloneSection.getBody().getFirstParagraph().remove();
@@ -167,8 +152,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
         // Append all nodes after the marker node to the new section. This will split the content at the section level at.
         // The marker so the sections from the other document can be inserted directly.
         Node currentNode = insertAfterNode.getNextSibling();
-        while (currentNode != null)
-        {
+        while (currentNode != null) {
             Node nextNode = currentNode.getNextSibling();
             cloneSection.getBody().appendChild(currentNode);
             currentNode = nextNode;
@@ -176,9 +160,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
 
         // This object will be translating styles and lists during the import.
         NodeImporter importer = new NodeImporter(srcDoc, dstDoc, ImportFormatMode.USE_DESTINATION_STYLES);
-
-        for (Section srcSection : srcDoc.getSections())
-        {
+        for (Section srcSection : srcDoc.getSections()) {
             Node newNode = importer.importNode(srcSection, true);
 
             dstDoc.insertAfter(newNode, currentSection);
@@ -189,22 +171,19 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
 
     //ExStart:InsertDocumentAtMailMergeHandler
     //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
-    private static class InsertDocumentAtMailMergeHandler implements IFieldMergingCallback
-    {
+    private static class InsertDocumentAtMailMergeHandler implements IFieldMergingCallback {
         // This handler makes special processing for the "Document_1" field.
         // The field value contains the path to load the document. 
         // We load the document and insert it into the current merge field.
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs args) throws Exception
-        {
-            if ("Document_1".equals(args.getDocumentFieldName()))
-            {
+        public void fieldMerging(FieldMergingArgs args) throws Exception {
+            if ("Document_1".equals(args.getDocumentFieldName())) {
                 // Use document builder to navigate to the merge field with the specified name.
                 DocumentBuilder builder = new DocumentBuilder(args.getDocument());
                 builder.moveToMergeField(args.getDocumentFieldName());
 
                 // The name of the document to load and insert is stored in the field value.
-                Document subDoc = new Document((String)args.getFieldValue());
-                
+                Document subDoc = new Document((String) args.getFieldValue());
+
                 insertDocument(builder.getCurrentParagraph(), subDoc);
 
                 // The paragraph that contained the merge field might be empty now, and you probably want to delete it.
@@ -216,25 +195,21 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
             }
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args)
-        {
+        public void imageFieldMerging(ImageFieldMergingArgs args) {
             // Do nothing.
         }
     }
     //ExEnd:InsertDocumentAtMailMergeHandler
 
     //ExStart:InsertDocumentAtMailMergeBlobHandler
-    private static class InsertDocumentAtMailMergeBlobHandler implements IFieldMergingCallback
-    {
+    private static class InsertDocumentAtMailMergeBlobHandler implements IFieldMergingCallback {
         /// <summary>
         /// This handler makes special processing for the "Document_1" field.
         /// The field value contains the path to load the document.
         /// We load the document and insert it into the current merge field.
         /// </summary>
-        public void /*IFieldMergingCallback.*/fieldMerging(FieldMergingArgs e) throws Exception
-        {
-            if ("Document_1".equals(e.getDocumentFieldName()))
-            {
+        public void fieldMerging(FieldMergingArgs e) throws Exception {
+            if ("Document_1".equals(e.getDocumentFieldName())) {
                 DocumentBuilder builder = new DocumentBuilder(e.getDocument());
                 builder.moveToMergeField(e.getDocumentFieldName());
 
@@ -251,25 +226,22 @@ public class CloneAndCombineDocuments extends DocsExamplesBase
             }
         }
 
-        public void /*IFieldMergingCallback.*/imageFieldMerging(ImageFieldMergingArgs args)
-        {
+        public void imageFieldMerging(ImageFieldMergingArgs args) {
             // Do nothing.
         }
     }
     //ExEnd:InsertDocumentAtMailMergeBlobHandler
-    
+
     //ExStart:InsertDocumentAtReplaceHandler
     //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
-    private static class InsertDocumentAtReplaceHandler implements IReplacingCallback
-    {
-        public /*ReplaceAction*/int /*IReplacingCallback.*/replacing(ReplacingArgs args) throws Exception
-        {
+    private static class InsertDocumentAtReplaceHandler implements IReplacingCallback {
+        public int replacing(ReplacingArgs args) throws Exception {
             Document subDoc = new Document(getMyDir() + "Document insertion 2.docx");
 
             // Insert a document after the paragraph, containing the match text.
-            Paragraph para = (Paragraph)args.getMatchNode().getParentNode();
+            Paragraph para = (Paragraph) args.getMatchNode().getParentNode();
             insertDocument(para, subDoc);
-            
+
             // Remove the paragraph with the match text.
             para.remove();
             return ReplaceAction.SKIP;

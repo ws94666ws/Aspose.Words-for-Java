@@ -851,7 +851,7 @@ public class ExRange extends ApiExampleBase {
     //ExEnd
 
     //ExStart:MatchEndNode
-    //GistId:67c1d01ce69d189983b497fd497a7768
+    //GistId:2af5a850f2e0a83c3b114274a838c092
     //ExFor:ReplacingArgs.MatchEndNode
     //ExSummary:Shows how to get match end node.
     @Test
@@ -893,4 +893,35 @@ public class ExRange extends ApiExampleBase {
         String getEndNodeText() { return mEndNodeText; }; private void setEndNodeText(String value) { mEndNodeText = value; };
     }
     //ExEnd:MatchEndNode
+
+    @Test (dataProvider = "ignoreOfficeMathDataProvider")
+    public void ignoreOfficeMath(boolean isIgnoreOfficeMath) throws Exception
+    {
+        //ExStart:IgnoreOfficeMath
+        //GistId:571cc6e23284a2ec075d15d4c32e3bbf
+        //ExFor:FindReplaceOptions.IgnoreOfficeMath
+        //ExSummary:Shows how to find and replace text within OfficeMath.
+        Document doc = new Document(getMyDir() + "Office math.docx");
+
+        Assert.assertEquals("i+b-c≥iM+bM-cM", doc.getFirstSection().getBody().getFirstParagraph().getText().trim());
+
+        FindReplaceOptions options = new FindReplaceOptions();
+        options.setIgnoreOfficeMath(isIgnoreOfficeMath);
+        doc.getRange().replace("b", "x", options);
+
+        if (isIgnoreOfficeMath)
+            Assert.assertEquals("i+b-c≥iM+bM-cM", doc.getFirstSection().getBody().getFirstParagraph().getText().trim());
+        else
+            Assert.assertEquals("i+x-c≥iM+xM-cM", doc.getFirstSection().getBody().getFirstParagraph().getText().trim());
+        //ExEnd:IgnoreOfficeMath
+    }
+
+    @DataProvider(name = "ignoreOfficeMathDataProvider")
+    public static Object[][] ignoreOfficeMathDataProvider() {
+        return new Object[][]
+                {
+                        {true},
+                        {false},
+                };
+    }
 }

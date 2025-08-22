@@ -7,11 +7,9 @@ import org.testng.annotations.Test;
 import java.text.MessageFormat;
 
 @Test
-public class WorkingWithSection extends DocsExamplesBase
-{
+public class WorkingWithSection extends DocsExamplesBase {
     @Test
-    public void addSection() throws Exception
-    {
+    public void addSection() throws Exception {
         //ExStart:AddSection
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -25,8 +23,7 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void deleteSection() throws Exception
-    {
+    public void deleteSection() throws Exception {
         //ExStart:DeleteSection
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -41,8 +38,7 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void deleteAllSections() throws Exception
-    {
+    public void deleteAllSections() throws Exception {
         //ExStart:DeleteAllSections
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -57,8 +53,7 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void appendSectionContent() throws Exception
-    {
+    public void appendSectionContent() throws Exception {
         //ExStart:AppendSectionContent
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document();
@@ -84,8 +79,7 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void cloneSection() throws Exception
-    {
+    public void cloneSection() throws Exception {
         //ExStart:CloneSection
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -94,8 +88,7 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void copySection() throws Exception
-    {
+    public void copySection() throws Exception {
         //ExStart:CopySection
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document srcDoc = new Document(getMyDir() + "Document.docx");
@@ -104,26 +97,24 @@ public class WorkingWithSection extends DocsExamplesBase
         Section sourceSection = srcDoc.getSections().get(0);
         Section newSection = (Section) dstDoc.importNode(sourceSection, true);
         dstDoc.getSections().add(newSection);
-        
+
         dstDoc.save(getArtifactsDir() + "WorkingWithSection.CopySection.docx");
         //ExEnd:CopySection
     }
 
     @Test
-    public void deleteHeaderFooterContent() throws Exception
-    {
+    public void deleteHeaderFooterContent() throws Exception {
         //ExStart:DeleteHeaderFooterContent
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document(getMyDir() + "Document.docx");
-        
+
         Section section = doc.getSections().get(0);
         section.clearHeadersFooters();
         //ExEnd:DeleteHeaderFooterContent
     }
 
     @Test
-    public void deleteHeaderFooterShapes() throws Exception
-    {
+    public void deleteHeaderFooterShapes() throws Exception {
         //ExStart:DeleteHeaderFooterShapes
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -134,19 +125,17 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void deleteSectionContent() throws Exception
-    {
+    public void deleteSectionContent() throws Exception {
         //ExStart:DeleteSectionContent
         Document doc = new Document(getMyDir() + "Document.docx");
-        
+
         Section section = doc.getSections().get(0);
         section.clearContent();
         //ExEnd:DeleteSectionContent
     }
 
     @Test
-    public void modifyPageSetupInAllSections() throws Exception
-    {
+    public void modifyPageSetupInAllSections() throws Exception {
         //ExStart:ModifyPageSetupInAllSections
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document();
@@ -170,11 +159,10 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void sectionsAccessByIndex() throws Exception
-    {
+    public void sectionsAccessByIndex() throws Exception {
         //ExStart:SectionsAccessByIndex
         Document doc = new Document(getMyDir() + "Document.docx");
-        
+
         Section section = doc.getSections().get(0);
         section.getPageSetup().setLeftMargin(90.0); // 3.17 cm
         section.getPageSetup().setRightMargin(90.0); // 3.17 cm
@@ -187,8 +175,7 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void sectionChildNodes() throws Exception
-    {
+    public void sectionChildNodes() throws Exception {
         //ExStart:SectionChildNodes
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document();
@@ -204,28 +191,23 @@ public class WorkingWithSection extends DocsExamplesBase
 
         // A Section is a composite node and can contain child nodes,
         // but only if those child nodes are of a "Body" or "HeaderFooter" node type.
-        for (Node node : section)
-        {
-            switch (node.getNodeType())
-            {
-                case NodeType.BODY:
-                {
-                    Body body = (Body)node;
+        for (Node node : section) {
+            switch (node.getNodeType()) {
+                case NodeType.BODY: {
+                    Body body = (Body) node;
 
                     System.out.println("Body:");
                     System.out.println(MessageFormat.format("\t\"{0}\"", body.getText().trim()));
                     break;
                 }
-                case NodeType.HEADER_FOOTER:
-                {
-                    HeaderFooter headerFooter = (HeaderFooter)node;
+                case NodeType.HEADER_FOOTER: {
+                    HeaderFooter headerFooter = (HeaderFooter) node;
 
                     System.out.println(MessageFormat.format("HeaderFooter type: {0}:", headerFooter.getHeaderFooterType()));
                     System.out.println(MessageFormat.format("\t\"{0}\"", headerFooter.getText().trim()));
                     break;
                 }
-                default:
-                {
+                default: {
                     throw new Exception("Unexpected node type in a section.");
                 }
             }
@@ -234,8 +216,7 @@ public class WorkingWithSection extends DocsExamplesBase
     }
 
     @Test
-    public void ensureMinimum() throws Exception
-    {
+    public void ensureMinimum() throws Exception {
         //ExStart:EnsureMinimum
         //GistId:7c0668453e53ed7a57d3ea3a05520f21
         Document doc = new Document();

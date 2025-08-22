@@ -105,11 +105,11 @@ public class ExtractContent extends DocsExamplesBase {
         ArrayList<Paragraph> parasStyleHeading3 = paragraphsByStyleName(doc, "Heading 3");
 
         // Use the first instance of the paragraphs with those styles.
-        Node startPara1 = parasStyleHeading1.get(0);
-        Node endPara1 = parasStyleHeading3.get(0);
+        Node startPara = parasStyleHeading1.get(0);
+        Node endPara = parasStyleHeading3.get(0);
 
         // Extract the content between these nodes in the document. Don't include these markers in the extraction.
-        ArrayList<Node> extractedNodes = ExtractContentHelper.extractContent(startPara1, endPara1, false, true);
+        ArrayList<Node> extractedNodes = ExtractContentHelper.extractContent(startPara, endPara, false, true);
 
         Document dstDoc = ExtractContentHelper.generateDocument(doc, extractedNodes);
         dstDoc.save(getArtifactsDir() + "ExtractContent.ExtractContentBetweenParagraphStyles.docx");
@@ -118,16 +118,14 @@ public class ExtractContent extends DocsExamplesBase {
 
     //ExStart:ParagraphsByStyleName
     //GistId:1975a35426bcd195a2e7c61d20a1580c
-    public static ArrayList<Paragraph> paragraphsByStyleName(Document doc, String styleName)
-    {
+    public static ArrayList<Paragraph> paragraphsByStyleName(Document doc, String styleName) {
         // Create an array to collect paragraphs of the specified style.
-        ArrayList<Paragraph> paragraphsWithStyle = new ArrayList<Paragraph>();
+        ArrayList<Paragraph> paragraphsWithStyle = new ArrayList<>();
 
         NodeCollection paragraphs = doc.getChildNodes(NodeType.PARAGRAPH, true);
 
         // Look through all paragraphs to find those with the specified style.
-        for (Paragraph paragraph : (Iterable<Paragraph>) paragraphs)
-        {
+        for (Paragraph paragraph : (Iterable<Paragraph>) paragraphs) {
             if (paragraph.getParagraphFormat().getStyle().getName().equals(styleName))
                 paragraphsWithStyle.add(paragraph);
         }
@@ -304,7 +302,6 @@ public class ExtractContent extends DocsExamplesBase {
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         builder.insertField("MERGEFIELD Field");
-
         // When converted to text it will not retrieve fields code or special characters,
         // but will still contain some natural formatting characters such as paragraph markers etc. 
         // This is the same as "viewing" the document as if it was opened in a text editor.
@@ -362,7 +359,7 @@ public class ExtractContent extends DocsExamplesBase {
     @Test
     public void extractContentBasedOnStyles() throws Exception {
         //ExStart:ExtractContentBasedOnStyles
-        //GistId:a73b495f610523670f0847331ef4d6fc
+        //GistId:f1e523d4c5e156a1e42b86f56c70bf53
         Document doc = new Document(getMyDir() + "Styles.docx");
 
         ArrayList<Paragraph> paragraphs = paragraphsByStyleName(doc, "Heading 1");
@@ -380,9 +377,8 @@ public class ExtractContent extends DocsExamplesBase {
     }
 
     //ExStart:RunsByStyleName
-    //GistId:a73b495f610523670f0847331ef4d6fc
-    public ArrayList<Run> runsByStyleName(Document doc, String styleName)
-    {
+    //GistId:f1e523d4c5e156a1e42b86f56c70bf53
+    public ArrayList<Run> runsByStyleName(Document doc, String styleName) {
         ArrayList<Run> runsWithStyle = new ArrayList<>();
         NodeCollection runs = doc.getChildNodes(NodeType.RUN, true);
 

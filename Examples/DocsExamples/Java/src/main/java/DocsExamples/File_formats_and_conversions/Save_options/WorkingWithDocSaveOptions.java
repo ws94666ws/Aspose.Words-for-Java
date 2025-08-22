@@ -1,10 +1,10 @@
 package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
-import org.testng.annotations.Test;
+import com.aspose.words.DocSaveOptions;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
-import com.aspose.words.DocSaveOptions;
+import org.testng.annotations.Test;
 
 @Test
 public class WorkingWithDocSaveOptions extends DocsExamplesBase {
@@ -30,9 +30,7 @@ public class WorkingWithDocSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Microsoft equation object.docx");
 
         DocSaveOptions saveOptions = new DocSaveOptions();
-        {
-            saveOptions.setAlwaysCompressMetafiles(false);
-        }
+        saveOptions.setAlwaysCompressMetafiles(false);
 
         doc.save(getArtifactsDir() + "WorkingWithDocSaveOptions.NotCompressSmallMetafiles.docx", saveOptions);
         //ExEnd:DoNotCompressSmallMetafiles
@@ -44,9 +42,7 @@ public class WorkingWithDocSaveOptions extends DocsExamplesBase {
         Document doc = new Document(getMyDir() + "Image bullet points.docx");
 
         DocSaveOptions saveOptions = new DocSaveOptions();
-        {
-            saveOptions.setSavePictureBullet(false);
-        }
+        saveOptions.setSavePictureBullet(false);
 
         doc.save(getArtifactsDir() + "WorkingWithDocSaveOptions.DoNotSavePictureBullet.docx", saveOptions);
         //ExEnd:DoNotSavePictureBullet

@@ -14,11 +14,9 @@ import java.io.File;
 import java.text.MessageFormat;
 
 @Test
-public class EnumerateLayoutElements extends DocsExamplesBase
-{
+public class EnumerateLayoutElements extends DocsExamplesBase {
     @Test
-    public void getLayoutElements() throws Exception
-    {
+    public void getLayoutElements() throws Exception {
         Document doc = new Document(getMyDir() + "Document layout.docx");
 
         // Enumerator which is used to "walk" the elements of a rendered document.
@@ -32,24 +30,19 @@ public class EnumerateLayoutElements extends DocsExamplesBase
     }
 }
 
-class LayoutInfoWriter
-{
-    public static void run(LayoutEnumerator layoutEnumerator) throws Exception
-    {
+class LayoutInfoWriter {
+    public static void run(LayoutEnumerator layoutEnumerator) throws Exception {
         displayLayoutElements(layoutEnumerator, "");
     }
 
     /// <summary>
     /// Enumerates forward through each layout element in the document and prints out details of each element. 
     /// </summary>
-    private static void displayLayoutElements(LayoutEnumerator layoutEnumerator, String padding) throws Exception
-    {
-        do
-        {
+    private static void displayLayoutElements(LayoutEnumerator layoutEnumerator, String padding) throws Exception {
+        do {
             displayEntityInfo(layoutEnumerator, padding);
 
-            if (layoutEnumerator.moveFirstChild())
-            {
+            if (layoutEnumerator.moveFirstChild()) {
                 // Recurse into this child element.
                 displayLayoutElements(layoutEnumerator, addPadding(padding));
                 layoutEnumerator.moveParent();
@@ -60,8 +53,7 @@ class LayoutInfoWriter
     /// <summary>
     /// Displays information about the current layout entity to the console.
     /// </summary>
-    private static void displayEntityInfo(LayoutEnumerator layoutEnumerator, String padding) throws Exception
-    {
+    private static void displayEntityInfo(LayoutEnumerator layoutEnumerator, String padding) throws Exception {
         System.out.print(padding + layoutEnumerator.getType() + " - " + layoutEnumerator.getKind());
 
         if (layoutEnumerator.getType() == LayoutEntityType.SPAN)
@@ -73,14 +65,12 @@ class LayoutInfoWriter
     /// <summary>
     /// Returns a string of spaces for padding purposes.
     /// </summary>
-    private static String addPadding(String padding)
-    {
+    private static String addPadding(String padding) {
         return padding + StringUtils.repeat(' ', 4);
     }
 }
 
-class OutlineLayoutEntitiesRenderer
-{
+class OutlineLayoutEntitiesRenderer {
     public static void run(Document doc, LayoutEnumerator layoutEnumerator, String folderPath) throws Exception {
         // Make sure the enumerator is at the beginning of the document.
         layoutEnumerator.reset();
@@ -119,14 +109,11 @@ class OutlineLayoutEntitiesRenderer
     /// <summary>
     /// Adds a colored border around each layout element on the page.
     /// </summary>
-    private static void addBoundingBoxToElementsOnPage(LayoutEnumerator layoutEnumerator, Graphics2D graphics) throws Exception
-    {
-        do
-        {
+    private static void addBoundingBoxToElementsOnPage(LayoutEnumerator layoutEnumerator, Graphics2D graphics) throws Exception {
+        do {
             // Use MoveLastChild and MovePrevious to enumerate from last to the first enumeration is done backward,
             // so the lines of child entities are drawn first and don't overlap the parent's lines.
-            if (layoutEnumerator.moveLastChild())
-            {
+            if (layoutEnumerator.moveLastChild()) {
                 addBoundingBoxToElementsOnPage(layoutEnumerator, graphics);
                 layoutEnumerator.moveParent();
             }
@@ -149,10 +136,8 @@ class OutlineLayoutEntitiesRenderer
     /// <summary>
     /// Returns a different colored pen for each entity type.
     /// </summary>
-    private static Color getColorFromType(int type)
-    {
-        switch (type)
-        {
+    private static Color getColorFromType(int type) {
+        switch (type) {
             case LayoutEntityType.CELL:
                 return Color.PINK;
             case LayoutEntityType.COLUMN:
@@ -185,8 +170,7 @@ class OutlineLayoutEntitiesRenderer
     /// <summary>
     /// Converts a value in points to pixels.
     /// </summary>
-    private static int pointToPixel(float value, double resolution)
-    {
+    private static int pointToPixel(float value, double resolution) {
         return (int) ConvertUtil.pointToPixel(value, resolution);
     }
 }

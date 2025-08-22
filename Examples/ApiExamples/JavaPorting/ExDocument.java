@@ -120,6 +120,7 @@ import com.aspose.words.BookmarkEnd;
 import com.aspose.ms.System.msString;
 import com.aspose.words.HtmlFixedSaveOptions;
 import com.aspose.words.XamlFixedSaveOptions;
+import com.aspose.words.PageExtractOptions;
 import org.testng.annotations.DataProvider;
 
 
@@ -2472,7 +2473,7 @@ public class ExDocument extends ApiExampleBase
     public void extractPages() throws Exception
     {
         //ExStart
-        //ExFor:Document.ExtractPages
+        //ExFor:Document.ExtractPages(int, int)
         //ExSummary:Shows how to get specified range of pages from the document.
         Document doc = new Document(getMyDir() + "Layout entities.docx");
 
@@ -2843,6 +2844,42 @@ public class ExDocument extends ApiExampleBase
         doc.updatePageLayout();
         Assert.assertEquals(1, doc.getPageCount());
         //ExEnd
+    }
+
+    @Test
+    public void extractPagesWithOptions() throws Exception
+    {
+        //ExStart:ExtractPagesWithOptions
+        //GistId:571cc6e23284a2ec075d15d4c32e3bbf
+        //ExFor:Document.ExtractPages(int, int)
+        //ExFor:PageExtractOptions
+        //ExFor:PageExtractOptions.UpdatePageStartingNumber
+        //ExFor:PageExtractOptions.UnlinkPagesNumberFields
+        //ExSummary:Show how to reset the initial page numbering and save the NUMPAGE field.
+        Document doc = new Document(getMyDir() + "Page fields.docx");
+
+        // Default behavior:
+        // The extracted page numbering is the same as in the original document, as if we had selected "Print 2 pages" in MS Word.
+        // The start page will be set to 2 and the field indicating the number of pages will be removed
+        // and replaced with a constant value equal to the number of pages.
+        Document extractedDoc1 = doc.extractPages(1, 1);
+        extractedDoc1.save(getArtifactsDir() + "Document.ExtractPagesWithOptions.Default.docx");
+
+        Assert.assertEquals(1, extractedDoc1.getRange().getFields().getCount()); //ExSkip
+
+        // Altered behavior:
+        // The extracted page numbering is reset and a new one begins,
+        // as if we had copied the contents of the second page and pasted it into a new document.
+        // The start page will be set to 1 and the field indicating the number of pages will be left unchanged
+        // and will show the current number of pages.
+        PageExtractOptions extractOptions = new PageExtractOptions();
+        extractOptions.setUpdatePageStartingNumber(false);
+        extractOptions.setUnlinkPagesNumberFields(false);
+        Document extractedDoc2 = doc.extractPages(1, 1, extractOptions);
+        extractedDoc2.save(getArtifactsDir() + "Document.ExtractPagesWithOptions.Options.docx");
+        //ExEnd:ExtractPagesWithOptions
+
+        Assert.assertEquals(2, extractedDoc2.getRange().getFields().getCount());
     }
 }
 

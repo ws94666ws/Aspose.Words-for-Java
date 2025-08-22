@@ -1,21 +1,21 @@
 package DocsExamples.Mail_Merge_And_Reporting.Complex_examples_and_helpers;
 
+import com.aspose.words.BreakType;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.TextFormFieldType;
-import com.aspose.words.BreakType;
 import org.testng.annotations.Test;
 
 @Test
-public class CreateMailMergeTemplate
-{
-    //ExStart:CreateMailMergeTemplate
-    public Document template() throws Exception
-    {
+public class CreateMailMergeTemplate {
+
+    public Document template() throws Exception {
+        //ExStart:CreateMailMergeTemplate
+        //GistId:0a1baaa127443b485cc692c8d98ee353
         DocumentBuilder builder = new DocumentBuilder();
 
         // Insert a text input field the unique name of this field is "Hello", the other parameters define
-        // what type of FormField it is, the format of the text, the field result and the maximum text length (0 = no limit)
+        // what type of FormField it is, the format of the text, the field result and the maximum text length (0 = no limit).
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", "Hello", 0);
         builder.insertField("MERGEFIELD CustomerFirstName \\* MERGEFORMAT");
 
@@ -24,19 +24,19 @@ public class CreateMailMergeTemplate
 
         builder.insertTextInput("TextInput1", TextFormFieldType.REGULAR, "", " , ", 0);
 
-        // Inserts a paragraph break into the document
+        // Inserts a paragraph break into the document.
         builder.insertParagraph();
 
-        // Insert mail body
+        // Insert mail body.
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", "Thanks for purchasing our ", 0);
         builder.insertField("MERGEFIELD ProductName \\* MERGEFORMAT");
 
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", ", please download your Invoice at ",
-            0);
+                0);
         builder.insertField("MERGEFIELD InvoiceURL \\* MERGEFORMAT");
 
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "",
-            ". If you have any questions please call ", 0);
+                ". If you have any questions please call ", 0);
         builder.insertField("MERGEFIELD Supportphone \\* MERGEFORMAT");
 
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", ", or email us at ", 0);
@@ -46,7 +46,7 @@ public class CreateMailMergeTemplate
 
         builder.insertParagraph();
 
-        // Insert mail ending
+        // Insert mail ending.
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", "Best regards,", 0);
         builder.insertBreak(BreakType.LINE_BREAK);
         builder.insertField("MERGEFIELD EmployeeFullname \\* MERGEFORMAT");
@@ -55,7 +55,7 @@ public class CreateMailMergeTemplate
         builder.insertField("MERGEFIELD EmployeeDepartment \\* MERGEFORMAT");
 
         return builder.getDocument();
+        //ExEnd:CreateMailMergeTemplate
     }
-    //ExEnd:CreateMailMergeTemplate
 }
 

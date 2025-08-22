@@ -1,27 +1,27 @@
 package DocsExamples.Mail_Merge_And_Reporting;
 
 import DocsExamples.DocsExamplesBase;
-import org.testng.annotations.Test;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
-import com.aspose.words.net.System.Data.DataTable;
+import com.aspose.words.IMailMergeDataSource;
+import com.aspose.words.MailMergeRegionInfo;
 import com.aspose.words.net.System.Data.DataRow;
-import com.aspose.words.net.System.Data.DataView;
+import com.aspose.words.net.System.Data.DataSet;
+import com.aspose.words.net.System.Data.DataTable;
+import com.aspose.words.ref.Ref;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.sql.*;
 import java.text.MessageFormat;
-import com.aspose.words.net.System.Data.DataSet;
 import java.util.ArrayList;
-import com.aspose.words.MailMergeRegionInfo;
-import org.testng.Assert;
 
 @Test
-public class BaseOperations extends DocsExamplesBase
-{
+public class BaseOperations extends DocsExamplesBase {
     @Test
-    public void simpleMailMerge() throws Exception
-    {
-        //ExStart:SimpleMailMerge
+    public void simpleMailMerge() throws Exception {
+        //ExStart:ExecuteSimpleMailMerge
+        //GistId:341b834e9b6a84ac6885e907e0ea4229
         // Include the code for our template.
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -34,37 +34,36 @@ public class BaseOperations extends DocsExamplesBase
         builder.insertField(" MERGEFIELD Quantity ");
 
         // Fill the fields in the document with user data.
-        doc.getMailMerge().execute(new String[] { "CustomerName", "Item", "Quantity" },
-            new Object[] { "John Doe", "Hawaiian", "2" });
+        doc.getMailMerge().execute(new String[]{"CustomerName", "Item", "Quantity"},
+                new Object[]{"John Doe", "Hawaiian", "2"});
 
         doc.save(getArtifactsDir() + "BaseOperations.SimpleMailMerge.docx");
-        //ExEnd:SimpleMailMerge
+        //ExEnd:ExecuteSimpleMailMerge
     }
 
     @Test
-    public void useIfElseMustache() throws Exception
-    {
-        //ExStart:UseOfifelseMustacheSyntax
+    public void useIfElseMustache() throws Exception {
+        //ExStart:UseIfElseMustache
+        //GistId:544788f602e697802e313a641cedb9b8
         Document doc = new Document(getMyDir() + "Mail merge destinations - Mustache syntax.docx");
 
         doc.getMailMerge().setUseNonMergeFields(true);
-        doc.getMailMerge().execute(new String[] { "GENDER" }, new Object[] { "MALE" });
+        doc.getMailMerge().execute(new String[]{"GENDER"}, new Object[]{"MALE"});
 
         doc.save(getArtifactsDir() + "BaseOperations.IfElseMustache.docx");
-        //ExEnd:UseOfifelseMustacheSyntax
+        //ExEnd:UseIfElseMustache
     }
 
     @Test
-    public void mustacheSyntaxUsingDataTable() throws Exception
-    {
+    public void mustacheSyntaxUsingDataTable() throws Exception {
         //ExStart:MustacheSyntaxUsingDataTable
+        //GistId:544788f602e697802e313a641cedb9b8
         Document doc = new Document(getMyDir() + "Mail merge destinations - Vendor.docx");
 
         // Loop through each row and fill it with data.
         DataTable dataTable = new DataTable("list");
         dataTable.getColumns().add("Number");
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             DataRow dataRow = dataTable.newRow();
             dataTable.getRows().add(dataRow);
             dataRow.set(0, "Number " + i);
@@ -79,14 +78,60 @@ public class BaseOperations extends DocsExamplesBase
         //ExEnd:MustacheSyntaxUsingDataTable
     }
 
-    @Test (enabled = false)
-    public void produceMultipleDocuments() throws Exception
-    {
+    @Test
+    public void executeWithRegionsDataTable() throws Exception {
+        //ExStart:ExecuteWithRegionsDataTable
+        //GistId:de5e13f5d5bb7d8cb88da900b4f9ed8b
+        Document doc = new Document(getMyDir() + "Mail merge destinations - Orders.docx");
+
+        // Use custom data source implementation
+        int orderId = 10444;
+
+        // Execute mail merge with Orders data
+        OrderDataSource orderData = getTestOrder(orderId);
+        doc.getMailMerge().executeWithRegions(orderData);
+
+        // Execute mail merge with OrderDetails data (sorted by ExtendedPrice DESC)
+        OrderDetailsDataSource orderDetailsData = getTestOrderDetails(orderId, "ExtendedPrice DESC");
+        doc.getMailMerge().executeWithRegions(orderDetailsData);
+
+        doc.save(getArtifactsDir() + "MailMerge.ExecuteWithRegions.docx");
+        //ExEnd:ExecuteWithRegionsDataTable
+    }
+
+    //ExStart:ExecuteWithRegionsDataTableMethods
+    private OrderDataSource getTestOrder(int orderId) throws SQLException {
+        String sql = "SELECT * FROM AsposeWordOrders WHERE OrderId = " + orderId;
+        ResultSet rs = executeQuery(sql);
+        return new OrderDataSource(rs, "Orders");
+    }
+
+    private OrderDetailsDataSource getTestOrderDetails(int orderId, String sortOrder) throws SQLException {
+        String sql = "SELECT * FROM AsposeWordOrderDetails WHERE OrderId = " + orderId +
+                " ORDER BY " + (sortOrder != null ? sortOrder.replace(" DESC", " DESC") : "ProductID");
+        ResultSet rs = executeQuery(sql);
+        return new OrderDetailsDataSource(rs, "OrderDetails");
+    }
+
+    /// <summary>
+    /// Utility function that creates a connection, command, executes the command and returns the result in a DataTable.
+    /// </summary>
+    private ResultSet executeQuery(String commandText) throws SQLException {
+        String connString = "jdbc:ucanaccess://" + getDatabaseDir() + "Northwind.accdb";
+        Connection conn = DriverManager.getConnection(connString, "Admin", "");
+        Statement stmt = conn.createStatement();
+        return stmt.executeQuery(commandText);
+    }
+    //ExEnd:ExecuteWithRegionsDataTableMethods
+
+    @Test
+    public void produceMultipleDocuments() throws Exception {
         //ExStart:ProduceMultipleDocuments
+        //GistId:341b834e9b6a84ac6885e907e0ea4229
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         String connString = "jdbc:ucanaccess://" + getDatabaseDir() + "Northwind.accdb";
 
-        Document doc = new Document(getMyDir() + "Mail merge destination - Northwind suppliers.docx");
+        Document doc = new Document(getMyDir() + "Mail merge destination - Suppliers.docx");
 
         Connection connection = DriverManager.getConnection(connString, "Admin", "");
 
@@ -100,8 +145,7 @@ public class BaseOperations extends DocsExamplesBase
         // You can load the template document from a file or stream but it is faster to load the document
         // only once and then clone it in memory before each mail merge operation.
         int counter = 1;
-        for (DataRow row : dataTable.getRows())
-        {
+        for (DataRow row : dataTable.getRows()) {
             Document dstDoc = (Document) doc.deepClone(true);
 
             dstDoc.getMailMerge().execute(row);
@@ -113,16 +157,16 @@ public class BaseOperations extends DocsExamplesBase
         //ExEnd:ProduceMultipleDocuments
     }
 
-    //ExStart:MailMergeWithRegions
     @Test
-    public void mailMergeWithRegions() throws Exception
-    {
+    public void mailMergeWithRegions() throws Exception {
+        //ExStart:MailMergeWithRegions
+        //GistId:341b834e9b6a84ac6885e907e0ea4229
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         // The start point of mail merge with regions the dataset.
         builder.insertField(" MERGEFIELD TableStart:Customers");
-        
+
         // Data from rows of the "CustomerName" column of the "Customers" table will go in this MERGEFIELD.
         builder.write("Orders for ");
         builder.insertField(" MERGEFIELD CustomerName");
@@ -149,32 +193,32 @@ public class BaseOperations extends DocsExamplesBase
         // The end point of mail merge with regions.
         builder.insertField(" MERGEFIELD TableEnd:Customers");
 
-        // Pass our dataset to perform mail merge with regions.          
+        // Pass our dataset to perform mail merge with regions.
         DataSet customersAndOrders = createDataSet();
         doc.getMailMerge().executeWithRegions(customersAndOrders);
 
         doc.save(getArtifactsDir() + "BaseOperations.MailMergeWithRegions.docx");
+        //ExEnd:MailMergeWithRegions
     }
-    //ExEnd:MailMergeWithRegions
 
     //ExStart:CreateDataSet
-    private DataSet createDataSet()
-    {
+    //GistId:341b834e9b6a84ac6885e907e0ea4229
+    private DataSet createDataSet() {
         // Create the customers table.
         DataTable tableCustomers = new DataTable("Customers");
         tableCustomers.getColumns().add("CustomerID");
         tableCustomers.getColumns().add("CustomerName");
-        tableCustomers.getRows().add(new Object[] { 1, "John Doe" });
-        tableCustomers.getRows().add(new Object[] { 2, "Jane Doe" });
+        tableCustomers.getRows().add(new Object[]{1, "John Doe"});
+        tableCustomers.getRows().add(new Object[]{2, "Jane Doe"});
 
         // Create the orders table.
         DataTable tableOrders = new DataTable("Orders");
         tableOrders.getColumns().add("CustomerID");
         tableOrders.getColumns().add("ItemName");
         tableOrders.getColumns().add("Quantity");
-        tableOrders.getRows().add(new Object[] { 1, "Hawaiian", 2 });
-        tableOrders.getRows().add(new Object[] { 2, "Pepperoni", 1 });
-        tableOrders.getRows().add(new Object[] { 2, "Chicago", 1 });
+        tableOrders.getRows().add(new Object[]{1, "Hawaiian", 2});
+        tableOrders.getRows().add(new Object[]{2, "Pepperoni", 1});
+        tableOrders.getRows().add(new Object[]{2, "Chicago", 1});
 
         // Add both tables to a data set.
         DataSet dataSet = new DataSet();
@@ -189,10 +233,15 @@ public class BaseOperations extends DocsExamplesBase
     //ExEnd:CreateDataSet
 
     @Test
-    public void getRegionsByName() throws Exception
-    {
+    public void getRegionsByName() throws Exception {
         //ExStart:GetRegionsByName
+        //GistId:b4bab1bf22437a86d8062e91cf154494
         Document doc = new Document(getMyDir() + "Mail merge regions.docx");
+
+        //ExStart:GetRegionsHierarchy
+        //GistId:b4bab1bf22437a86d8062e91cf154494
+        MailMergeRegionInfo regionInfo = doc.getMailMerge().getRegionsHierarchy();
+        //ExEnd:GetRegionsHierarchy
 
         ArrayList<MailMergeRegionInfo> regions = doc.getMailMerge().getRegionsByName("Region1");
         Assert.assertEquals(1, doc.getMailMerge().getRegionsByName("Region1").size());
@@ -206,5 +255,89 @@ public class BaseOperations extends DocsExamplesBase
         Assert.assertEquals(2, doc.getMailMerge().getRegionsByName("NestedRegion1").size());
         for (MailMergeRegionInfo region : regions) Assert.assertEquals("NestedRegion1", region.getName());
         //ExEnd:GetRegionsByName
+    }
+}
+
+// Custom data source for Orders.
+class OrderDataSource implements com.aspose.words.IMailMergeDataSource {
+    private ResultSet resultSet;
+    private String tableName;
+    private boolean isFirst = true;
+
+    public OrderDataSource(ResultSet rs, String tableName) {
+        this.resultSet = rs;
+        this.tableName = tableName;
+    }
+
+    @Override
+    public String getTableName() {
+        return tableName;
+    }
+
+    @Override
+    public boolean moveNext() throws Exception {
+        if (isFirst) {
+            isFirst = false;
+            return resultSet.next();
+        }
+        return resultSet.next();
+    }
+
+    @Override
+    public boolean getValue(String fieldName, Ref<Object> fieldValue) {
+        try {
+            Object value = resultSet.getObject(fieldName);
+            fieldValue.set(value);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public com.aspose.words.IMailMergeDataSource getChildDataSource(String tableName) {
+        return null;
+    }
+}
+
+// Custom data source for OrderDetails.
+class OrderDetailsDataSource implements IMailMergeDataSource {
+    private ResultSet resultSet;
+    private String tableName;
+    private boolean isFirst = true;
+
+    public OrderDetailsDataSource(ResultSet rs, String tableName) {
+        this.resultSet = rs;
+        this.tableName = tableName;
+    }
+
+    @Override
+    public String getTableName() {
+        return tableName;
+    }
+
+    @Override
+    public boolean moveNext() throws Exception {
+        if (isFirst) {
+            isFirst = false;
+            return resultSet.next();
+        }
+        return resultSet.next();
+    }
+
+    @Override
+    public boolean getValue(String fieldName, Ref<Object> fieldValue) {
+        try {
+            Object value = resultSet.getObject(fieldName);
+            fieldValue.set(value);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public com.aspose.words.IMailMergeDataSource getChildDataSource(String tableName) {
+        return null;
     }
 }

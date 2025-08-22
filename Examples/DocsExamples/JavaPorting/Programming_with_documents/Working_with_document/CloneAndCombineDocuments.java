@@ -8,6 +8,7 @@ import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.BreakType;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 import com.aspose.words.Section;
 import com.aspose.words.FindReplaceOptions;
 import com.aspose.words.FindReplaceDirection;
@@ -58,7 +59,7 @@ class CloneAndCombineDocuments extends DocsExamplesBase
 
         // Check what the document contains after we changed it.
         Assert.assertEquals("Section 1\fSection 2This is the original document before applying the clone method" +
-            "\r\fSection 2This is the original document before applying the clone method", clone.getText().trim());
+                "\r\fSection 2This is the original document before applying the clone method", clone.getText().trim());
         clone.save(getArtifactsDir() + "CloneAndCombineDocuments.CloningDocument.docx");
         //ExEnd:CloneDocument
     }

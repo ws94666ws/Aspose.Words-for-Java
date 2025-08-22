@@ -7,13 +7,11 @@ import org.testng.annotations.Test;
 import java.text.MessageFormat;
 
 @Test
-public class WorkingWithWebExtension extends DocsExamplesBase
-{
+public class WorkingWithWebExtension extends DocsExamplesBase {
     @Test
-    public void webExtensionTaskPanes() throws Exception
-    {
+    public void webExtensionTaskPanes() throws Exception {
         //ExStart:WebExtensionTaskPanes
-        //GistId:8c31c018ea71c92828223776b1a113f7
+        //GistId:b91d438dcc82b6b4a3c8db34ad732c7d
         Document doc = new Document();
 
         TaskPane taskPane = new TaskPane();
@@ -29,19 +27,18 @@ public class WorkingWithWebExtension extends DocsExamplesBase
         taskPane.getWebExtension().getReference().setStore("th-TH");
         taskPane.getWebExtension().getProperties().add(new WebExtensionProperty("mailchimpCampaign", "mailchimpCampaign"));
         taskPane.getWebExtension().getBindings().add(new WebExtensionBinding("UnnamedBinding_0_1506535429545",
-            WebExtensionBindingType.TEXT, "194740422"));
+                WebExtensionBindingType.TEXT, "194740422"));
 
         doc.save(getArtifactsDir() + "WorkingWithWebExtension.WebExtensionTaskPanes.docx");
         //ExEnd:WebExtensionTaskPanes
 
         //ExStart:GetListOfAddins
-        //GistId:8c31c018ea71c92828223776b1a113f7
+        //GistId:b91d438dcc82b6b4a3c8db34ad732c7d
         doc = new Document(getArtifactsDir() + "WorkingWithWebExtension.WebExtensionTaskPanes.docx");
-        
+
         System.out.println("Task panes sources:\n");
 
-        for (TaskPane taskPaneInfo : doc.getWebExtensionTaskPanes())
-        {
+        for (TaskPane taskPaneInfo : doc.getWebExtensionTaskPanes()) {
             WebExtensionReference reference = taskPaneInfo.getWebExtension().getReference();
             System.out.println(MessageFormat.format("Provider: \"{0}\", version: \"{1}\", catalog identifier: \"{2}\";", reference.getStore(), reference.getVersion(), reference.getId()));
         }

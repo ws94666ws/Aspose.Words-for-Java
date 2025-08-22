@@ -7,13 +7,11 @@ import org.testng.annotations.Test;
 import java.awt.*;
 
 @Test
-public class DocumentFormatting extends DocsExamplesBase
-{
+public class DocumentFormatting extends DocsExamplesBase {
     @Test
-    public void spaceBetweenAsianAndLatinText() throws Exception
-    {
+    public void spaceBetweenAsianAndLatinText() throws Exception {
         //ExStart:SpaceBetweenAsianAndLatinText
-        //GistId:4f54ffd5c7580f0d146b53e52d986f38
+        //GistId:93caa5d439a29d1632a48bdcf8a5efe9
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -29,10 +27,9 @@ public class DocumentFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void asianTypographyLineBreakGroup() throws Exception
-    {
+    public void asianTypographyLineBreakGroup() throws Exception {
         //ExStart:AsianTypographyLineBreakGroup
-        //GistId:4f54ffd5c7580f0d146b53e52d986f38
+        //GistId:93caa5d439a29d1632a48bdcf8a5efe9
         Document doc = new Document(getMyDir() + "Asian typography.docx");
 
         ParagraphFormat format = doc.getFirstSection().getBody().getParagraphs().get(0).getParagraphFormat();
@@ -45,10 +42,9 @@ public class DocumentFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void paragraphFormatting() throws Exception
-    {
+    public void paragraphFormatting() throws Exception {
         //ExStart:ParagraphFormatting
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -59,19 +55,18 @@ public class DocumentFormatting extends DocsExamplesBase
         paragraphFormat.setSpaceAfter(25.0);
 
         builder.writeln(
-            "I'm a very nice formatted paragraph. I'm intended to demonstrate how the left and right indents affect word wrapping.");
+                "I'm a very nice formatted paragraph. I'm intended to demonstrate how the left and right indents affect word wrapping.");
         builder.writeln(
-            "I'm another nice formatted paragraph. I'm intended to demonstrate how the space after paragraph looks like.");
+                "I'm another nice formatted paragraph. I'm intended to demonstrate how the space after paragraph looks like.");
 
         doc.save(getArtifactsDir() + "DocumentFormatting.ParagraphFormatting.docx");
         //ExEnd:ParagraphFormatting
     }
 
     @Test
-    public void multilevelListFormatting() throws Exception
-    {
+    public void multilevelListFormatting() throws Exception {
         //ExStart:MultilevelListFormatting
-        //GistId:a1dfeba1e0480d5b277a61742c8921af
+        //GistId:bcc8db50f6937463ef0f1acd71da30a8
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -82,7 +77,7 @@ public class DocumentFormatting extends DocsExamplesBase
         builder.getListFormat().listIndent();
         builder.writeln("Item 2.1");
         builder.writeln("Item 2.2");
-        
+
         builder.getListFormat().listIndent();
         builder.writeln("Item 2.2.1");
         builder.writeln("Item 2.2.2");
@@ -94,31 +89,29 @@ public class DocumentFormatting extends DocsExamplesBase
         builder.writeln("Item 3");
 
         builder.getListFormat().removeNumbers();
-        
+
         doc.save(getArtifactsDir() + "DocumentFormatting.MultilevelListFormatting.docx");
         //ExEnd:MultilevelListFormatting
     }
 
     @Test
-    public void applyParagraphStyle() throws Exception
-    {
+    public void applyParagraphStyle() throws Exception {
         //ExStart:ApplyParagraphStyle
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         builder.getParagraphFormat().setStyleIdentifier(StyleIdentifier.TITLE);
         builder.write("Hello");
-        
+
         doc.save(getArtifactsDir() + "DocumentFormatting.ApplyParagraphStyle.docx");
         //ExEnd:ApplyParagraphStyle
     }
 
     @Test
-    public void applyBordersAndShadingToParagraph() throws Exception
-    {
+    public void applyBordersAndShadingToParagraph() throws Exception {
         //ExStart:ApplyBordersAndShadingToParagraph
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -135,14 +128,13 @@ public class DocumentFormatting extends DocsExamplesBase
         shading.setForegroundPatternColor(Color.orange);
 
         builder.write("I'm a formatted paragraph with double border and nice shading.");
-        
+
         doc.save(getArtifactsDir() + "DocumentFormatting.ApplyBordersAndShadingToParagraph.doc");
         //ExEnd:ApplyBordersAndShadingToParagraph
     }
-    
+
     @Test
-    public void changeAsianParagraphSpacingAndIndents() throws Exception
-    {
+    public void changeAsianParagraphSpacingAndIndents() throws Exception {
         //ExStart:ChangeAsianParagraphSpacingAndIndents
         Document doc = new Document(getMyDir() + "Asian typography.docx");
 
@@ -158,8 +150,7 @@ public class DocumentFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void snapToGrid() throws Exception
-    {
+    public void snapToGrid() throws Exception {
         //ExStart:SetSnapToGrid
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -169,8 +160,8 @@ public class DocumentFormatting extends DocsExamplesBase
         par.getParagraphFormat().setSnapToGrid(true);
 
         builder.writeln("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod " +
-                        "tempor incididunt ut labore et dolore magna aliqua.");
-        
+                "tempor incididunt ut labore et dolore magna aliqua.");
+
         par.getRuns().get(0).getFont().setSnapToGrid(true);
 
         doc.save(getArtifactsDir() + "Paragraph.SnapToGrid.docx");
@@ -178,16 +169,13 @@ public class DocumentFormatting extends DocsExamplesBase
     }
 
     @Test
-    public void getParagraphStyleSeparator() throws Exception
-    {
+    public void getParagraphStyleSeparator() throws Exception {
         //ExStart:GetParagraphStyleSeparator
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document(getMyDir() + "Document.docx");
 
-        for (Paragraph paragraph : (Iterable<Paragraph>) doc.getChildNodes(NodeType.PARAGRAPH, true))
-        {
-            if (paragraph.getBreakIsStyleSeparator())
-            {
+        for (Paragraph paragraph : (Iterable<Paragraph>) doc.getChildNodes(NodeType.PARAGRAPH, true)) {
+            if (paragraph.getBreakIsStyleSeparator()) {
                 System.out.println("Separator Found!");
             }
         }
@@ -196,9 +184,8 @@ public class DocumentFormatting extends DocsExamplesBase
 
     @Test
     //ExStart:GetParagraphLines
-    //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
-    public void getParagraphLines() throws Exception
-    {
+    //GistId:75080b633887e95c397bce7d14d7cbf1
+    public void getParagraphLines() throws Exception {
         Document doc = new Document(getMyDir() + "Properties.docx");
 
         LayoutCollector collector = new LayoutCollector(doc);

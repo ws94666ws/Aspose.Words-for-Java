@@ -14,6 +14,7 @@ import com.aspose.words.net.System.Data.DataSet;
 import com.aspose.words.MailMergeRegionInfo;
 import java.util.ArrayList;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 
 
 public class BaseOperations extends DocsExamplesBase
@@ -152,7 +153,7 @@ public class BaseOperations extends DocsExamplesBase
         //GistId:341b834e9b6a84ac6885e907e0ea4229
         String connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + getDatabaseDir() + "Northwind.accdb";
 
-        Document doc = new Document(getMyDir() + "Mail merge destination - Northwind suppliers.docx");
+        Document doc = new Document(getMyDir() + "Mail merge destination - Suppliers.docx");
 
         OleDbConnection conn = new OleDbConnection(connString);
         conn.Open();

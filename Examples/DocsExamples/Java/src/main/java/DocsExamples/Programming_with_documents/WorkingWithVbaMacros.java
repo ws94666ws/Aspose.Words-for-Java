@@ -5,11 +5,9 @@ import com.aspose.words.*;
 import org.testng.annotations.Test;
 
 @Test
-public class WorkingWithVba extends DocsExamplesBase
-{
+public class WorkingWithVbaMacros extends DocsExamplesBase {
     @Test
-    public void createVbaProject() throws Exception
-    {
+    public void createVbaProject() throws Exception {
         //ExStart:CreateVbaProject
         //GistId:d9bac4ed890f81ea3de392ecfeedbc55
         Document doc = new Document();
@@ -32,16 +30,13 @@ public class WorkingWithVba extends DocsExamplesBase
     }
 
     @Test
-    public void readVbaMacros() throws Exception
-    {
+    public void readVbaMacros() throws Exception {
         //ExStart:ReadVbaMacros
         //GistId:d9bac4ed890f81ea3de392ecfeedbc55
         Document doc = new Document(getMyDir() + "VBA project.docm");
 
-        if (doc.getVbaProject() != null)
-        {
-            for (VbaModule module : doc.getVbaProject().getModules())
-            {
+        if (doc.getVbaProject() != null) {
+            for (VbaModule module : doc.getVbaProject().getModules()) {
                 System.out.println(module.getSourceCode());
             }
         }
@@ -49,8 +44,7 @@ public class WorkingWithVba extends DocsExamplesBase
     }
 
     @Test
-    public void modifyVbaMacros() throws Exception
-    {
+    public void modifyVbaMacros() throws Exception {
         //ExStart:ModifyVbaMacros
         //GistId:d9bac4ed890f81ea3de392ecfeedbc55
         Document doc = new Document(getMyDir() + "VBA project.docm");
@@ -60,31 +54,35 @@ public class WorkingWithVba extends DocsExamplesBase
         final String NEW_SOURCE_CODE = "Test change source code";
         project.getModules().get(0).setSourceCode(NEW_SOURCE_CODE);
         //ExEnd:ModifyVbaMacros
-        
+
         doc.save(getArtifactsDir() + "WorkingWithVba.ModifyVbaMacros.docm");
         //ExEnd:ModifyVbaMacros
     }
 
     @Test
-    public void cloneVbaProject() throws Exception
-    {
+    public void cloneVbaProject() throws Exception {
         //ExStart:CloneVbaProject
         //GistId:d9bac4ed890f81ea3de392ecfeedbc55
         Document doc = new Document(getMyDir() + "VBA project.docm");
-        Document destDoc = new Document(); { destDoc.setVbaProject(doc.getVbaProject().deepClone()); }
+        Document destDoc = new Document();
+        {
+            destDoc.setVbaProject(doc.getVbaProject().deepClone());
+        }
 
         destDoc.save(getArtifactsDir() + "WorkingWithVba.CloneVbaProject.docm");
         //ExEnd:CloneVbaProject
     }
 
     @Test
-    public void cloneVbaModule() throws Exception
-    {
+    public void cloneVbaModule() throws Exception {
         //ExStart:CloneVbaModule
         //GistId:d9bac4ed890f81ea3de392ecfeedbc55
         Document doc = new Document(getMyDir() + "VBA project.docm");
-        Document destDoc = new Document(); { destDoc.setVbaProject(new VbaProject()); }
-        
+        Document destDoc = new Document();
+        {
+            destDoc.setVbaProject(new VbaProject());
+        }
+
         VbaModule copyModule = doc.getVbaProject().getModules().get("Module1").deepClone();
         destDoc.getVbaProject().getModules().add(copyModule);
 
@@ -93,8 +91,7 @@ public class WorkingWithVba extends DocsExamplesBase
     }
 
     @Test
-    public void removeVbaReferences() throws Exception
-    {
+    public void removeVbaReferences() throws Exception {
         //ExStart:RemoveVbaReferences
         //GistId:d9bac4ed890f81ea3de392ecfeedbc55
         Document doc = new Document(getMyDir() + "VBA project.docm");
@@ -102,8 +99,7 @@ public class WorkingWithVba extends DocsExamplesBase
         // Find and remove the reference with some LibId path.
         final String BROKEN_PATH = "brokenPath.dll";
         VbaReferenceCollection references = doc.getVbaProject().getReferences();
-        for (int i = references.getCount() - 1; i >= 0; i--)
-        {
+        for (int i = references.getCount() - 1; i >= 0; i--) {
             VbaReference reference = doc.getVbaProject().getReferences().get(i);
 
             String path = getLibIdPath(reference);
@@ -114,15 +110,14 @@ public class WorkingWithVba extends DocsExamplesBase
         doc.save(getArtifactsDir() + "WorkingWithVba.RemoveVbaReferences.docm");
         //ExEnd:RemoveVbaReferences
     }
+
     //ExStart:GetLibIdAndReferencePath
     //GistId:d9bac4ed890f81ea3de392ecfeedbc55
     /// <summary>
     /// Returns string representing LibId path of a specified reference. 
     /// </summary>
-    private String getLibIdPath(VbaReference reference)
-    {
-        switch (reference.getType())
-        {
+    private String getLibIdPath(VbaReference reference) {
+        switch (reference.getType()) {
             case VbaReferenceType.REGISTERED:
             case VbaReferenceType.ORIGINAL:
             case VbaReferenceType.CONTROL:
@@ -140,10 +135,8 @@ public class WorkingWithVba extends DocsExamplesBase
     /// <remarks>
     /// Please see details for the syntax at [MS-OVBA], 2.1.1.8 LibidReference. 
     /// </remarks>
-    private String getLibIdReferencePath(String libIdReference)
-    {
-        if (libIdReference != null)
-        {
+    private String getLibIdReferencePath(String libIdReference) {
+        if (libIdReference != null) {
             String[] refParts = libIdReference.split("#");
             if (refParts.length > 3)
                 return refParts[3];
@@ -158,8 +151,7 @@ public class WorkingWithVba extends DocsExamplesBase
     /// <remarks>
     /// Please see details for the syntax at [MS-OVBA], 2.1.1.12 ProjectReference. 
     /// </remarks>
-    private String getLibIdProjectPath(String libIdProject)
-    {
+    private String getLibIdProjectPath(String libIdProject) {
         return (libIdProject != null) ? libIdProject.substring(3) : "";
     }
     //ExEnd:GetLibIdAndReferencePath

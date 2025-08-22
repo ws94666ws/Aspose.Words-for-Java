@@ -1,30 +1,21 @@
 package DocsExamples.Programming_with_documents;
 
 import DocsExamples.DocsExamplesBase;
-import org.testng.annotations.Test;
-import com.aspose.words.Document;
-import com.aspose.words.ListTemplate;
 import com.aspose.words.List;
-import com.aspose.words.DocumentBuilder;
-import com.aspose.words.BreakType;
-import com.aspose.words.OoxmlSaveOptions;
-import com.aspose.words.OoxmlCompliance;
-import java.awt.Color;
-import java.text.MessageFormat;
+import com.aspose.words.*;
+import org.testng.annotations.Test;
 
-import com.aspose.words.ListLevelAlignment;
+import java.awt.*;
 
 @Test
-public class WorkingWithList extends DocsExamplesBase
-{
+public class WorkingWithList extends DocsExamplesBase {
     @Test
-    public void restartListAtEachSection() throws Exception
-    {
+    public void restartListAtEachSection() throws Exception {
         //ExStart:RestartListAtEachSection
         //GistId:a1dfeba1e0480d5b277a61742c8921af
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         doc.getLists().add(ListTemplate.NUMBER_DEFAULT);
 
         List list = doc.getLists().get(0);
@@ -48,8 +39,7 @@ public class WorkingWithList extends DocsExamplesBase
     }
 
     @Test
-    public void specifyListLevel() throws Exception
-    {
+    public void specifyListLevel() throws Exception {
         //ExStart:SpecifyListLevel
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -59,8 +49,7 @@ public class WorkingWithList extends DocsExamplesBase
         builder.getListFormat().setList(doc.getLists().add(ListTemplate.NUMBER_ARABIC_DOT));
 
         // There are nine levels in this list, let's try them all.
-        for (int i = 0; i < 9; i++)
-        {
+        for (int i = 0; i < 9; i++) {
             builder.getListFormat().setListLevelNumber(i);
             builder.writeln("Level " + i);
         }
@@ -69,8 +58,7 @@ public class WorkingWithList extends DocsExamplesBase
         // and apply it to the document builder's current paragraph.
         builder.getListFormat().setList(doc.getLists().add(ListTemplate.BULLET_DIAMONDS));
 
-        for (int i = 0; i < 9; i++)
-        {
+        for (int i = 0; i < 9; i++) {
             builder.getListFormat().setListLevelNumber(i);
             builder.writeln("Level " + i);
         }
@@ -83,8 +71,7 @@ public class WorkingWithList extends DocsExamplesBase
     }
 
     @Test
-    public void restartListNumber() throws Exception
-    {
+    public void restartListNumber() throws Exception {
         //ExStart:RestartListNumber
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);

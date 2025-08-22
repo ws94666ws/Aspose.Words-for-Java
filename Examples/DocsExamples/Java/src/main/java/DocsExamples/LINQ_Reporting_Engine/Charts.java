@@ -4,30 +4,27 @@ import DocsExamples.DocsExamplesBase;
 import TestData.Common;
 import TestData.TestClasses.ContractTestClass;
 import TestData.TestClasses.ManagerTestClass;
-import org.testng.annotations.Test;
 import com.aspose.words.Document;
 import com.aspose.words.ReportingEngine;
+import org.testng.annotations.Test;
 
 @Test
-public class Charts extends DocsExamplesBase
-{
+public class Charts extends DocsExamplesBase {
     @Test
-    public void createBubbleChart() throws Exception
-    {
+    public void createBubbleChart() throws Exception {
         //ExStart:BubbleChart
         Document doc = new Document(getMyDir() + "Reporting engine template - Bubble chart (Java).docx");
 
         ReportingEngine engine = new ReportingEngine();
         engine.getKnownTypes().add(ManagerTestClass.class);
         engine.buildReport(doc, Common.getManagers(), "managers");
-        
+
         doc.save(getArtifactsDir() + "ReportingEngine.CreateBubbleChart.docx");
         //ExEnd:BubbleChart
     }
 
     @Test
-    public void setChartSeriesNameDynamically() throws Exception
-    {
+    public void setChartSeriesNameDynamically() throws Exception {
         //ExStart:SetChartSeriesNameDynamically
         Document doc = new Document(getMyDir() + "Reporting engine template - Chart (Java).docx");
 
@@ -40,8 +37,7 @@ public class Charts extends DocsExamplesBase
     }
 
     @Test
-    public void chartWithFilteringGroupingOrdering() throws Exception
-    {
+    public void chartWithFilteringGroupingOrdering() throws Exception {
         //ExStart:ChartWithFilteringGroupingOrdering
         Document doc = new Document(getMyDir() + "Reporting engine template - Chart with filtering (Java).docx");
 
@@ -54,8 +50,7 @@ public class Charts extends DocsExamplesBase
     }
 
     @Test
-    public void pieChart() throws Exception
-    {
+    public void pieChart() throws Exception {
         //ExStart:PieChart
         Document doc = new Document(getMyDir() + "Reporting engine template - Pie chart (Java).docx");
 
@@ -68,8 +63,7 @@ public class Charts extends DocsExamplesBase
     }
 
     @Test
-    public void scatterChart() throws Exception
-    {
+    public void scatterChart() throws Exception {
         //ExStart:ScatterChart
         Document doc = new Document(getMyDir() + "Reporting engine template - Scatter chart (Java).docx");
 

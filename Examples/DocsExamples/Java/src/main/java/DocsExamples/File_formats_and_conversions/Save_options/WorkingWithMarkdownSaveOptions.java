@@ -1,12 +1,8 @@
 package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
+import com.aspose.words.*;
 import org.testng.annotations.Test;
-import com.aspose.words.Document;
-import com.aspose.words.DocumentBuilder;
-import com.aspose.words.ParagraphAlignment;
-import com.aspose.words.MarkdownSaveOptions;
-import com.aspose.words.TableContentAlignment;
 
 import java.io.ByteArrayOutputStream;
 
@@ -15,7 +11,7 @@ public class WorkingWithMarkdownSaveOptions extends DocsExamplesBase {
     @Test
     public void markdownTableContentAlignment() throws Exception {
         //ExStart:MarkdownTableContentAlignment
-        //GistId:19de942ef8827201c1dca99f76c59133
+        //GistId:50b2b6a8785c07713e7c09d772e9a396
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -28,9 +24,8 @@ public class WorkingWithMarkdownSaveOptions extends DocsExamplesBase {
 
         // Makes all paragraphs inside the table to be aligned.
         MarkdownSaveOptions saveOptions = new MarkdownSaveOptions();
-        {
-            saveOptions.setTableContentAlignment(TableContentAlignment.LEFT);
-        }
+        saveOptions.setTableContentAlignment(TableContentAlignment.LEFT);
+
         doc.save(getArtifactsDir() + "WorkingWithMarkdownSaveOptions.LeftTableContentAlignment.md", saveOptions);
 
         saveOptions.setTableContentAlignment(TableContentAlignment.RIGHT);
@@ -48,13 +43,11 @@ public class WorkingWithMarkdownSaveOptions extends DocsExamplesBase {
     @Test
     public void imagesFolder() throws Exception {
         //ExStart:ImagesFolder
-        //GistId:51b4cb9c451832f23527892e19c7bca6
+        //GistId:642767bbe8d8bec8eab080120b707990
         Document doc = new Document(getMyDir() + "Image bullet points.docx");
 
         MarkdownSaveOptions saveOptions = new MarkdownSaveOptions();
-        {
-            saveOptions.setImagesFolder(getArtifactsDir() + "Images");
-        }
+        saveOptions.setImagesFolder(getArtifactsDir() + "Images");
 
         try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
             doc.save(stream, saveOptions);

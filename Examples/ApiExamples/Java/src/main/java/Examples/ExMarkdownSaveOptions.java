@@ -398,5 +398,28 @@ public class ExMarkdownSaveOptions extends ApiExampleBase
 			{MarkdownEmptyParagraphExportMode.MARKDOWN_HARD_LINE_BREAK},
 		};
 	}
+
+    @Test
+    public void nonCompatibleTables() throws Exception
+    {
+        //ExStart:NonCompatibleTables
+        //GistId:571cc6e23284a2ec075d15d4c32e3bbf
+        //ExFor:MarkdownExportAsHtml
+        //ExSummary:Shows how to export tables that cannot be correctly represented in pure Markdown as raw HTML.
+        String outputPath = getArtifactsDir() + "MarkdownSaveOptions.NonCompatibleTables.md";
+
+        Document doc = new Document(getMyDir() + "Non compatible table.docx");
+
+        // With the "NonCompatibleTables" option, you can export tables that have a complex structure with merged cells
+        // or nested tables to raw HTML and leave simple tables in Markdown format.
+        MarkdownSaveOptions saveOptions = new MarkdownSaveOptions();
+        saveOptions.setExportAsHtml(MarkdownExportAsHtml.NON_COMPATIBLE_TABLES);
+
+        doc.save(outputPath, saveOptions);
+        //ExEnd:NonCompatibleTables
+
+        DocumentHelper.findTextInFile(outputPath, "<table><tr><th rowspan=\"2\" valign=\"top\">Heading 1</th>");
+        DocumentHelper.findTextInFile(outputPath, "|Heading 1|Heading 2|");
+    }
 }
 

@@ -1,25 +1,11 @@
 package DocsExamples.Programming_with_documents;
 
 import DocsExamples.DocsExamplesBase;
+import com.aspose.words.*;
 import org.testng.annotations.Test;
-import com.aspose.words.Document;
-import com.aspose.words.DocumentBuilder;
-import com.aspose.words.Section;
-import com.aspose.words.PageSetup;
-import com.aspose.words.HeaderFooterType;
-import com.aspose.words.ParagraphAlignment;
-import com.aspose.words.RelativeHorizontalPosition;
-import com.aspose.words.RelativeVerticalPosition;
-import com.aspose.words.WrapType;
-import com.aspose.words.PreferredWidth;
-import com.aspose.words.BreakType;
-import com.aspose.words.Orientation;
-import com.aspose.words.HeaderFooter;
-import com.aspose.words.Row;
 
 @Test
-public class WorkingWithHeadersAndFooters extends DocsExamplesBase
-{
+public class WorkingWithHeadersAndFooters extends DocsExamplesBase {
     @Test
     public void CreateHeaderFooter() throws Exception {
         //ExStart:CreateHeaderFooter
@@ -206,6 +192,9 @@ public class WorkingWithHeadersAndFooters extends DocsExamplesBase
         builder.getFont().setSize(14);
         builder.write("Header for the first page.");
 
+        builder.moveToDocumentEnd();
+        builder.insertBreak(BreakType.SECTION_BREAK_NEW_PAGE);
+
         builder.moveToHeaderFooter(HeaderFooterType.HEADER_PRIMARY);
         // Insert a positioned image into the top/left corner of the header.
         // Distance from the top/left edges of the page is set to 10 points.
@@ -223,9 +212,8 @@ public class WorkingWithHeadersAndFooters extends DocsExamplesBase
     /// <summary>
     /// Clones and copies headers/footers form the previous section to the specified section.
     /// </summary>
-    private void copyHeadersFootersFromPreviousSection(Section section)
-    {
-        Section previousSection = (Section)section.getPreviousSibling();
+    private void copyHeadersFootersFromPreviousSection(Section section) {
+        Section previousSection = (Section) section.getPreviousSibling();
 
         if (previousSection == null)
             return;

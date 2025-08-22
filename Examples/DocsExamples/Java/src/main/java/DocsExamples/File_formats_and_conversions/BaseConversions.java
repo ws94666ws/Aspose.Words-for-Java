@@ -3,47 +3,39 @@ package DocsExamples.File_formats_and_conversions;
 import DocsExamples.DocsExamplesBase;
 import com.aspose.email.*;
 import com.aspose.words.*;
-import org.apache.batik.transcoder.TranscoderInput;
-import org.apache.batik.transcoder.TranscoderOutput;
-import org.apache.batik.transcoder.image.ImageTranscoder;
-import org.apache.batik.transcoder.wmf.tosvg.WMFTranscoder;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.testng.annotations.Test;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 
 @Test
-public class BaseConversions extends DocsExamplesBase
-{
+public class BaseConversions extends DocsExamplesBase {
     @Test
-    public void docToDocx() throws Exception
-    {
+    public void docToDocx() throws Exception {
         //ExStart:LoadAndSave
-        //ExStart:OpenDocument
+        //GistId:9d2a393f6dff9d785e7747a48e590d9d
         Document doc = new Document(getMyDir() + "Document.doc");
-        //ExEnd:OpenDocument
 
         doc.save(getArtifactsDir() + "BaseConversions.DocToDocx.docx");
         //ExEnd:LoadAndSave
     }
 
     @Test
-    public void docxToRtf() throws Exception
-    {
-        //ExStart:LoadAndSaveToStream 
-        //ExStart:OpeningFromStream
+    public void docxToRtf() throws Exception {
+        //ExStart:LoadAndSaveToStream
+        //GistId:9d2a393f6dff9d785e7747a48e590d9d
+        //ExStart:OpenFromStream
+        //GistId:ae20848f6cefd3f85ab9bcbbdda340c7
         // Read only access is enough for Aspose.Words to load a document.
         FileInputStream stream = new FileInputStream(getMyDir() + "Document.docx");
 
         Document doc = new Document(stream);
         // You can close the stream now, it is no longer needed because the document is in memory.
         stream.close();
-        //ExEnd:OpeningFromStream 
+        //ExEnd:OpenFromStream
 
         // ... do something with the document.
 
@@ -56,8 +48,7 @@ public class BaseConversions extends DocsExamplesBase
     }
 
     @Test
-    public void docxToPdf() throws Exception
-    {
+    public void docxToPdf() throws Exception {
         //ExStart:DocxToPdf
         //GistId:b237846932dfcde42358bd0c887661a5
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -66,9 +57,9 @@ public class BaseConversions extends DocsExamplesBase
     }
 
     @Test
-    public void docxToByte() throws Exception
-    {
+    public void docxToByte() throws Exception {
         //ExStart:DocxToByte
+        //GistId:86d59d944009f305e7e24b3e276cd17d
         Document doc = new Document(getMyDir() + "Document.docx");
 
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -81,8 +72,7 @@ public class BaseConversions extends DocsExamplesBase
     }
 
     @Test
-    public void docxToEpub() throws Exception
-    {
+    public void docxToEpub() throws Exception {
         //ExStart:DocxToEpub
         Document doc = new Document(getMyDir() + "Document.docx");
 
@@ -90,10 +80,20 @@ public class BaseConversions extends DocsExamplesBase
         //ExEnd:DocxToEpub
     }
 
-    @Test (enabled = false, description = "Only for example")
-    public void docxToMhtmlAndSendingEmail() throws Exception
-    {
-        //ExStart:DocxToMhtmlAndSendingEmail
+    @Test
+    public void docxToHtml() throws Exception {
+        //ExStart:DocxToHtml
+        //GistId:c2ec8aa36ef37670eceec8da5c612b86
+        Document doc = new Document(getMyDir() + "Document.docx");
+
+        doc.save(getArtifactsDir() + "BaseConversions.DocxToHtml.html");
+        //ExEnd:DocxToHtml
+    }
+
+    @Test(enabled = false, description = "Only for example")
+    public void docxToMhtml() throws Exception {
+        //ExStart:DocxToMhtml
+        //GistId:1bcfd5d0ec402f0f54cd747eb22d8da5
         Document doc = new Document(getMyDir() + "Document.docx");
 
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -111,25 +111,24 @@ public class BaseConversions extends DocsExamplesBase
         SmtpClient client = new SmtpClient();
         client.setHost("your_smtp.com");
         client.send(message);
-        //ExEnd:DocxToMhtmlAndSendingEmail
+        //ExEnd:DocxToMhtml
     }
 
     @Test
-    public void docxToMarkdown() throws Exception
-    {
-        //ExStart:SaveToMarkdownDocument
+    public void docxToMarkdown() throws Exception {
+        //ExStart:DocxToMarkdown
+        //GistId:642767bbe8d8bec8eab080120b707990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         builder.writeln("Some text!");
 
         doc.save(getArtifactsDir() + "BaseConversions.DocxToMarkdown.md");
-        //ExEnd:SaveToMarkdownDocument
+        //ExEnd:DocxToMarkdown
     }
 
     @Test
-    public void docxToTxt() throws Exception
-    {
+    public void docxToTxt() throws Exception {
         //ExStart:DocxToTxt
         //GistId:1975a35426bcd195a2e7c61d20a1580c
         Document doc = new Document(getMyDir() + "Document.docx");
@@ -138,29 +137,36 @@ public class BaseConversions extends DocsExamplesBase
     }
 
     @Test
-    public void docxToXlsx() throws Exception
-    {
+    public void docxToXlsx() throws Exception {
         //ExStart:DocxToXlsx
-        //GistId:f5a08835e924510d3809e41c3b8b81a2
+        //GistId:82fb3ee435d5abdc1472a58774ebe98c
         Document doc = new Document(getMyDir() + "Document.docx");
         doc.save(getArtifactsDir() + "BaseConversions.DocxToXlsx.xlsx");
         //ExEnd:DocxToXlsx
     }
 
     @Test
-    public void txtToDocx() throws Exception
-    {
+    public void txtToDocx() throws Exception {
         //ExStart:TxtToDocx
         // The encoding of the text file is automatically detected.
         Document doc = new Document(getMyDir() + "English text.txt");
-
         doc.save(getArtifactsDir() + "BaseConversions.TxtToDocx.docx");
         //ExEnd:TxtToDocx
     }
 
     @Test
-    public void findReplaceXlsx() throws Exception
-    {
+    public void DocxToJpeg() throws Exception {
+        //ExStart:DocxToJpeg
+        //GistId:b237846932dfcde42358bd0c887661a5
+        Document doc = new Document(getMyDir() + "Document.docx");
+        doc.save(getArtifactsDir() + "BaseConversions.DocxToJpeg.jpeg");
+        //ExEnd:DocxToJpeg
+    }
+
+    @Test
+    public void findReplaceXlsx() throws Exception {
+        //ExStart:FindReplaceXlsx
+        //GistId:50971daf8f0c9ef4b0250c4a526b1652
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -176,41 +182,45 @@ public class BaseConversions extends DocsExamplesBase
         doc.getRange().replace("Ruby", "Jade", options);
 
         doc.save(getArtifactsDir() + "BaseConversions.FindReplaceXlsx.xlsx");
+        //ExEnd:FindReplaceXlsx
     }
 
     @Test
-    public void compressXlsx() throws Exception
-    {
+    public void compressXlsx() throws Exception {
+        //ExStart:CompressXlsx
+        //GistId:50971daf8f0c9ef4b0250c4a526b1652
         Document doc = new Document(getMyDir() + "Document.docx");
 
         XlsxSaveOptions saveOptions = new XlsxSaveOptions();
         saveOptions.setCompressionLevel(CompressionLevel.MAXIMUM);
 
         doc.save(getArtifactsDir() + "BaseConversions.CompressXlsx.xlsx", saveOptions);
+        //ExEnd:CompressXlsx
     }
 
     @Test
-    public void ImagesToPdf() throws Exception {
+    public void imagesToPdf() throws Exception {
         //ExStart:ImageToPdf
         //GistId:b237846932dfcde42358bd0c887661a5
-        convertImageToPDF(getImagesDir() + "Logo.jpg", getArtifactsDir() + "BaseConversions.JpgToPdf.pdf");
-        convertImageToPDF(getImagesDir() + "Transparent background logo.png", getArtifactsDir() + "BaseConversions.PngToPdf.pdf");
-        convertImageToPDF(getImagesDir() + "Windows MetaFile.wmf", getArtifactsDir() + "BaseConversions.WmfToPdf.pdf");
-        convertImageToPDF(getImagesDir() + "Tagged Image File Format.tiff", getArtifactsDir() + "BaseConversions.TiffToPdf.pdf");
-        convertImageToPDF(getImagesDir() + "Graphics Interchange Format.gif", getArtifactsDir() + "BaseConversions.GifToPdf.pdf");
+        convertImageToPdf(getImagesDir() + "Logo.jpg", getArtifactsDir() + "BaseConversions.JpgToPdf.pdf");
+        convertImageToPdf(getImagesDir() + "Transparent background logo.png", getArtifactsDir() + "BaseConversions.PngToPdf.pdf");
+        convertImageToPdf(getImagesDir() + "Windows MetaFile.wmf", getArtifactsDir() + "BaseConversions.WmfToPdf.pdf");
+        convertImageToPdf(getImagesDir() + "Tagged Image File Format.tiff", getArtifactsDir() + "BaseConversions.TiffToPdf.pdf");
+        convertImageToPdf(getImagesDir() + "Graphics Interchange Format.gif", getArtifactsDir() + "BaseConversions.GifToPdf.pdf");
         //ExEnd:ImageToPdf
     }
 
     //ExStart:ConvertImageToPdf
     //GistId:b237846932dfcde42358bd0c887661a5
+
     /**
      * Converts an image to PDF using Aspose.Words for Java.
      *
-     * @param inputFileName File name of input image file.
+     * @param inputFileName  File name of input image file.
      * @param outputFileName Output PDF file name.
      * @throws Exception
      */
-    private void convertImageToPDF(String inputFileName, String outputFileName) throws Exception {
+    private void convertImageToPdf(String inputFileName, String outputFileName) throws Exception {
         // Create Aspose.Words.Document and DocumentBuilder.
         // The builder makes it simple to add content to the document.
         Document doc = new Document();

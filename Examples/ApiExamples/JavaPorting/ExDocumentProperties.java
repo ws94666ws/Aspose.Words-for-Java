@@ -395,7 +395,7 @@ public class ExDocumentProperties extends ApiExampleBase
         File.writeAllBytes(getArtifactsDir() + "DocumentProperties.Thumbnail.gif", thumbnail.toByteArray());
         //ExEnd
 
-        TestUtil.verifyImage(400, 400, getArtifactsDir() + "DocumentProperties.Thumbnail.gif");            
+        TestUtil.verifyImage(400, 400, getArtifactsDir() + "DocumentProperties.Thumbnail.gif");
     }
 
     @Test

@@ -105,6 +105,7 @@ public final class DocumentHelper {
             String line = sr.readLine();
             while (line != null) {
                 if (line.isEmpty()) {
+                    line = sr.readLine();
                     continue;
                 }
 
@@ -112,7 +113,12 @@ public final class DocumentHelper {
                     System.out.println(line);
                     break;
                 } else {
-                    Assert.fail();
+                    line = sr.readLine();
+                    if (line == null)
+                    {
+                        Assert.fail();
+                        break;
+                    }
                 }
             }
         } finally {

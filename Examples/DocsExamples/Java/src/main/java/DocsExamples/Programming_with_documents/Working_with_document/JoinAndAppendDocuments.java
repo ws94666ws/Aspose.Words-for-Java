@@ -1,8 +1,8 @@
 package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
-import com.aspose.words.*;
 import com.aspose.words.List;
+import com.aspose.words.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,11 +11,9 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 
 @Test
-public class JoinAndAppendDocuments extends DocsExamplesBase
-{
+public class JoinAndAppendDocuments extends DocsExamplesBase {
     @Test
-    public void simpleAppendDocument() throws Exception
-    {
+    public void simpleAppendDocument() throws Exception {
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
 
@@ -26,16 +24,14 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void appendDocument() throws Exception
-    {
+    public void appendDocument() throws Exception {
         //ExStart:AppendDocumentManually
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
-        
+
         // Loop through all sections in the source document.
         // Section nodes are immediate children of the Document node so we can just enumerate the Document.
-        for (Section srcSection : srcDoc.getSections())
-        {
+        for (Section srcSection : srcDoc.getSections()) {
             // Because we are copying a section from one document to another, 
             // it is required to import the Section node into the destination document.
             // This adjusts any document-specific references to styles, lists, etc.
@@ -53,40 +49,38 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void appendDocumentToBlank() throws Exception
-    {
+    public void appendDocumentToBlank() throws Exception {
         //ExStart:AppendDocumentToBlank
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document();
-        
+
         // The destination document is not empty, often causing a blank page to appear before the appended document.
         // This is due to the base document having an empty section and the new document being started on the next page.
         // Remove all content from the destination document before appending.
         dstDoc.removeAllChildren();
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
-        
+
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.AppendDocumentToBlank.docx");
         //ExEnd:AppendDocumentToBlank
     }
 
     @Test
-    public void appendWithImportFormatOptions() throws Exception
-    {
+    public void appendWithImportFormatOptions() throws Exception {
         //ExStart:AppendWithImportFormatOptions
         Document srcDoc = new Document(getMyDir() + "Document source with list.docx");
         Document dstDoc = new Document(getMyDir() + "Document destination with list.docx");
 
         // Specify that if numbering clashes in source and destination documents,
         // then numbering from the source document will be used.
-        ImportFormatOptions options = new ImportFormatOptions(); { options.setKeepSourceNumbering(true); }
-        
+        ImportFormatOptions options = new ImportFormatOptions();
+        options.setKeepSourceNumbering(true);
+
         dstDoc.appendDocument(srcDoc, ImportFormatMode.USE_DESTINATION_STYLES, options);
         //ExEnd:AppendWithImportFormatOptions
     }
 
     @Test
-    public void convertNumPageFields() throws Exception
-    {
+    public void convertNumPageFields() throws Exception {
         //ExStart:ConvertNumPageFields
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
@@ -110,40 +104,36 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     //ExStart:ConvertNumPageFieldsToPageRef
-    private void convertNumPageFieldsToPageRef(Document doc) throws Exception
-    {
+    private void convertNumPageFieldsToPageRef(Document doc) throws Exception {
         // This is the prefix for each bookmark, which signals where page numbering restarts.
         // The underscore "_" at the start inserts this bookmark as hidden in MS Word.
-        final String BOOKMARK_PREFIX = "_SubDocumentEnd";
-        final String NUM_PAGES_FIELD_NAME = "NUMPAGES";
-        final String PAGE_REF_FIELD_NAME = "PAGEREF";
+        String bookmarkPrefix = "_SubDocumentEnd";
+        String numpagesFieldName = "NUMPAGES";
+        String pagerefFieldName = "PAGEREF";
 
         // Defines the number of page restarts encountered and, therefore,
         // the number of "sub" documents found within this document.
         int subDocumentCount = 0;
 
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
-        for (Section section : doc.getSections())
-        {
+
+        for (Section section : doc.getSections()) {
             // This section has its page numbering restarted to treat this as the start of a sub-document.
             // Any PAGENUM fields in this inner document must be converted to special PAGEREF fields to correct numbering.
-            if (section.getPageSetup().getRestartPageNumbering())
-            {
+            if (section.getPageSetup().getRestartPageNumbering()) {
                 // Don't do anything if this is the first section of the document.
                 // This part of the code will insert the bookmark marking the end of the previous sub-document so,
                 // therefore, it does not apply to the first section in the document.
-                if (!section.equals(doc.getFirstSection()))
-                {
+                if (!section.equals(doc.getFirstSection())) {
                     // Get the previous section and the last node within the body of that section.
                     Section prevSection = (Section) section.getPreviousSibling();
                     Node lastNode = prevSection.getBody().getLastChild();
 
                     builder.moveTo(lastNode);
-                    
+
                     // This bookmark represents the end of the sub-document.
-                    builder.startBookmark(BOOKMARK_PREFIX + subDocumentCount);
-                    builder.endBookmark(BOOKMARK_PREFIX + subDocumentCount);
+                    builder.startBookmark(bookmarkPrefix + subDocumentCount);
+                    builder.endBookmark(bookmarkPrefix + subDocumentCount);
 
                     // Increase the sub-document count to insert the correct bookmarks.
                     subDocumentCount++;
@@ -151,15 +141,14 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
             }
 
             // The last section needs the ending bookmark to signal that it is the end of the current sub-document.
-            if (section.equals(doc.getLastSection()))
-            {
+            if (section.equals(doc.getLastSection())) {
                 // Insert the bookmark at the end of the body of the last section.
                 // Don't increase the count this time as we are just marking the end of the document.
                 Node lastNode = doc.getLastSection().getBody().getLastChild();
-                
+
                 builder.moveTo(lastNode);
-                builder.startBookmark(BOOKMARK_PREFIX + subDocumentCount);
-                builder.endBookmark(BOOKMARK_PREFIX + subDocumentCount);
+                builder.startBookmark(bookmarkPrefix + subDocumentCount);
+                builder.endBookmark(bookmarkPrefix + subDocumentCount);
             }
 
             // Iterate through each NUMPAGES field in the section and replace it with a PAGEREF field
@@ -167,30 +156,28 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
             // of the sub-document but does not exist yet. It is inserted when a section with restart page numbering
             // or the last section is encountered.
             Node[] nodes = section.getChildNodes(NodeType.FIELD_START, true).toArray();
-            
-            for (Node fieldStartNode : nodes)
-            {
+
+            for (Node fieldStartNode : nodes) {
                 FieldStart fieldStart = (FieldStart) fieldStartNode;
 
-                if (fieldStart.getFieldType() == FieldType.FIELD_NUM_PAGES)
-                {
+                if (fieldStart.getFieldType() == FieldType.FIELD_NUM_PAGES) {
                     String fieldCode = getFieldCode(fieldStart);
                     // Since the NUMPAGES field does not take any additional parameters,
                     // we can assume the field's remaining part. Code after the field name is the switches.
                     // We will use these to help recreate the NUMPAGES field as a PAGEREF field.
-                    String fieldSwitches = fieldCode.replace(NUM_PAGES_FIELD_NAME, "").trim();
+                    String fieldSwitches = fieldCode.replace(numpagesFieldName, "").trim();
 
                     // Inserting the new field directly at the FieldStart node of the original field will cause
                     // the new field not to pick up the original field's formatting. To counter this,
                     // insert the field just before the original field if a previous run cannot be found,
                     // we are forced to use the FieldStart node.
                     Node previousNode = (fieldStart.getPreviousSibling() != null ? fieldStart.getPreviousSibling() : fieldStart);
-                    
+
                     // Insert a PAGEREF field at the same position as the field.
                     builder.moveTo(previousNode);
-                    
+
                     Field newField = builder.insertField(
-                            MessageFormat.format(" {0} {1}{2} {3} ", PAGE_REF_FIELD_NAME, BOOKMARK_PREFIX, subDocumentCount, fieldSwitches));
+                            MessageFormat.format(" {0} {1}{2} {3} ", pagerefFieldName, bookmarkPrefix, subDocumentCount, fieldSwitches));
 
                     // The field will be inserted before the referenced node. Move the node before the field instead.
                     previousNode.getParentNode().insertBefore(previousNode, newField.getStart());
@@ -202,15 +189,13 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
         }
     }
     //ExEnd:ConvertNumPageFieldsToPageRef
-    
+
     //ExStart:GetRemoveField
-    private void removeField(FieldStart fieldStart)
-    {
+    private void removeField(FieldStart fieldStart) {
         boolean isRemoving = true;
-        
+
         Node currentNode = fieldStart;
-        while (currentNode != null && isRemoving)
-        {
+        while (currentNode != null && isRemoving) {
             if (currentNode.getNodeType() == NodeType.FIELD_END)
                 isRemoving = false;
 
@@ -220,15 +205,13 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
         }
     }
 
-    private String getFieldCode(FieldStart fieldStart)
-    {
+    private String getFieldCode(FieldStart fieldStart) {
         StringBuilder builder = new StringBuilder();
 
         for (Node node = fieldStart;
-            node != null && node.getNodeType() != NodeType.FIELD_SEPARATOR &&
-            node.getNodeType() != NodeType.FIELD_END;
-            node = node.nextPreOrder(node.getDocument()))
-        {
+             node != null && node.getNodeType() != NodeType.FIELD_SEPARATOR &&
+                     node.getNodeType() != NodeType.FIELD_END;
+             node = node.nextPreOrder(node.getDocument())) {
             // Use text only of Run nodes to avoid duplication.
             if (node.getNodeType() == NodeType.RUN)
                 builder.append(node.getText());
@@ -239,8 +222,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     //ExEnd:GetRemoveField
 
     @Test
-    public void differentPageSetup() throws Exception
-    {
+    public void differentPageSetup() throws Exception {
         //ExStart:DifferentPageSetup
         //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
@@ -262,20 +244,17 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
         srcDoc.getFirstSection().getPageSetup().setOrientation(dstDoc.getLastSection().getPageSetup().getOrientation());
 
         // Iterate through all sections in the source document.
-        for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true))
-        {
+        for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true)) {
             para.getParagraphFormat().setKeepWithNext(true);
         }
-
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
-        
+
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.DifferentPageSetup.docx");
         //ExEnd:DifferentPageSetup
     }
 
     @Test
-    public void joinContinuous() throws Exception
-    {
+    public void joinContinuous() throws Exception {
         //ExStart:JoinContinuous
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
@@ -284,14 +263,13 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
         srcDoc.getFirstSection().getPageSetup().setSectionStart(SectionStart.CONTINUOUS);
         // Append the source document using the original styles found in the source document.
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
-        
+
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.JoinContinuous.docx");
         //ExEnd:JoinContinuous
     }
 
     @Test
-    public void joinNewPage() throws Exception
-    {
+    public void joinNewPage() throws Exception {
         //ExStart:JoinNewPage
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
@@ -300,14 +278,13 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
         srcDoc.getFirstSection().getPageSetup().setSectionStart(SectionStart.NEW_PAGE);
         // Append the source document using the original styles found in the source document.
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
-        
+
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.JoinNewPage.docx");
         //ExEnd:JoinNewPage
     }
 
     @Test
-    public void keepSourceFormatting() throws Exception
-    {
+    public void keepSourceFormatting() throws Exception {
         //ExStart:KeepSourceFormatting
         //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
         Document dstDoc = new Document();
@@ -315,7 +292,6 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
 
         Document srcDoc = new Document();
         srcDoc.getFirstSection().getBody().appendParagraph("Source document text. ");
-
         // Append the source document to the destination document.
         // Pass format mode to retain the original formatting of the source document when importing it.
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
@@ -325,29 +301,25 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void keepSourceTogether() throws Exception
-    {
+    public void keepSourceTogether() throws Exception {
         //ExStart:KeepSourceTogether
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Document destination with list.docx");
-        
+
         // Set the source document to appear straight after the destination document's content.
         srcDoc.getFirstSection().getPageSetup().setSectionStart(SectionStart.CONTINUOUS);
 
-        for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true))
-        {
+        for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true)) {
             para.getParagraphFormat().setKeepWithNext(true);
         }
-
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
-        
+
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.KeepSourceTogether.docx");
         //ExEnd:KeepSourceTogether
-    }        
+    }
 
     @Test
-    public void listKeepSourceFormatting() throws Exception
-    {
+    public void listKeepSourceFormatting() throws Exception {
         //ExStart:ListKeepSourceFormatting
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Document destination with list.docx");
@@ -356,14 +328,13 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
         srcDoc.getFirstSection().getPageSetup().setSectionStart(SectionStart.CONTINUOUS);
 
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
-        
+
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.ListKeepSourceFormatting.docx");
         //ExEnd:ListKeepSourceFormatting
     }
 
     @Test
-    public void listUseDestinationStyles() throws Exception
-    {
+    public void listUseDestinationStyles() throws Exception {
         //ExStart:ListUseDestinationStyles
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Document destination with list.docx");
@@ -372,27 +343,21 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
         srcDoc.getFirstSection().getPageSetup().setSectionStart(SectionStart.CONTINUOUS);
 
         // Keep track of the lists that are created.
-        HashMap<Integer, List> newLists = new HashMap<Integer, List>();
+        HashMap<Integer, List> newLists = new HashMap<>();
 
-        for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true))
-        {
-            if (para.isListItem())
-            {
+        for (Paragraph para : (Iterable<Paragraph>) srcDoc.getChildNodes(NodeType.PARAGRAPH, true)) {
+            if (para.isListItem()) {
                 int listId = para.getListFormat().getList().getListId();
 
                 // Check if the destination document contains a list with this ID already. If it does, then this may
                 // cause the two lists to run together. Create a copy of the list in the source document instead.
-                if (dstDoc.getLists().getListByListId(listId) != null)
-                {
+                if (dstDoc.getLists().getListByListId(listId) != null) {
                     List currentList;
                     // A newly copied list already exists for this ID, retrieve the stored list,
                     // and use it on the current paragraph.
-                    if (newLists.containsKey(listId))
-                    {
+                    if (newLists.containsKey(listId)) {
                         currentList = newLists.get(listId);
-                    }
-                    else
-                    {
+                    } else {
                         // Add a copy of this list to the document and store it for later reference.
                         currentList = srcDoc.getLists().addCopy(para.getListFormat().getList());
                         newLists.put(listId, currentList);
@@ -412,8 +377,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void restartPageNumbering() throws Exception
-    {
+    public void restartPageNumbering() throws Exception {
         //ExStart:RestartPageNumbering
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
@@ -422,14 +386,13 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
         srcDoc.getFirstSection().getPageSetup().setRestartPageNumbering(true);
 
         dstDoc.appendDocument(srcDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING);
-        
+
         dstDoc.save(getArtifactsDir() + "JoinAndAppendDocuments.RestartPageNumbering.docx");
         //ExEnd:RestartPageNumbering
     }
 
     @Test
-    public void updatePageLayout() throws Exception
-    {
+    public void updatePageLayout() throws Exception {
         //ExStart:UpdatePageLayout
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
@@ -450,8 +413,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void useDestinationStyles() throws Exception
-    {
+    public void useDestinationStyles() throws Exception {
         //ExStart:UseDestinationStyles
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
@@ -464,8 +426,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void smartStyleBehavior() throws Exception
-    {
+    public void smartStyleBehavior() throws Exception {
         //ExStart:SmartStyleBehavior
         Document dstDoc = new Document();
         DocumentBuilder builder = new DocumentBuilder(dstDoc);
@@ -496,8 +457,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void insertDocument() throws Exception
-    {
+    public void insertDocument() throws Exception {
         //ExStart:InsertDocumentWithBuilder
         //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
@@ -513,8 +473,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void insertDocumentInline() throws Exception
-    {
+    public void insertDocumentInline() throws Exception {
         //ExStart:InsertDocumentInlineWithBuilder
         //GistId:6e5c8fd2462c6d7ba26da4d9f66ff77b
         DocumentBuilder srcDoc = new DocumentBuilder();
@@ -538,8 +497,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void keepSourceNumbering() throws Exception
-    {
+    public void keepSourceNumbering() throws Exception {
         //ExStart:KeepSourceNumbering
         Document srcDoc = new Document(getMyDir() + "List source.docx");
         Document dstDoc = new Document(getMyDir() + "List destination.docx");
@@ -559,21 +517,20 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void ignoreTextBoxes() throws Exception
-    {
+    public void ignoreTextBoxes() throws Exception {
         //ExStart:IgnoreTextBoxes
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
 
         // Keep the source text boxes formatting when importing.
-        ImportFormatOptions importFormatOptions = new ImportFormatOptions(); { importFormatOptions.setIgnoreTextBoxes(false); }
-        
+        ImportFormatOptions importFormatOptions = new ImportFormatOptions();
+        importFormatOptions.setIgnoreTextBoxes(false);
+
         NodeImporter importer = new NodeImporter(srcDoc, dstDoc, ImportFormatMode.KEEP_SOURCE_FORMATTING,
-            importFormatOptions);
+                importFormatOptions);
 
         ParagraphCollection srcParas = srcDoc.getFirstSection().getBody().getParagraphs();
-        for (Paragraph srcPara : (Iterable<Paragraph>) srcParas)
-        {
+        for (Paragraph srcPara : srcParas) {
             Node importedNode = importer.importNode(srcPara, true);
             dstDoc.getFirstSection().getBody().appendChild(importedNode);
         }
@@ -583,23 +540,22 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void ignoreHeaderFooter() throws Exception
-    {
+    public void ignoreHeaderFooter() throws Exception {
         //ExStart:IgnoreHeaderFooter
         Document srcDocument = new Document(getMyDir() + "Document source.docx");
         Document dstDocument = new Document(getMyDir() + "Northwind traders.docx");
 
-        ImportFormatOptions importFormatOptions = new ImportFormatOptions(); { importFormatOptions.setIgnoreHeaderFooter(false); }
+        ImportFormatOptions importFormatOptions = new ImportFormatOptions();
+        importFormatOptions.setIgnoreHeaderFooter(false);
 
         dstDocument.appendDocument(srcDocument, ImportFormatMode.KEEP_SOURCE_FORMATTING, importFormatOptions);
-        
+
         dstDocument.save(getArtifactsDir() + "JoinAndAppendDocuments.IgnoreHeaderFooter.docx");
         //ExEnd:IgnoreHeaderFooter
     }
 
     @Test
-    public void linkHeadersFooters() throws Exception
-    {
+    public void linkHeadersFooters() throws Exception {
         //ExStart:LinkHeadersFooters
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
@@ -617,15 +573,13 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void removeSourceHeadersFooters() throws Exception
-    {
+    public void removeSourceHeadersFooters() throws Exception {
         //ExStart:RemoveSourceHeadersFooters
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");
 
         // Remove the headers and footers from each of the sections in the source document.
-        for (Section section : (Iterable<Section>) srcDoc.getSections())
-        {
+        for (Section section : (Iterable<Section>) srcDoc.getSections()) {
             section.clearHeadersFooters();
         }
 
@@ -641,8 +595,7 @@ public class JoinAndAppendDocuments extends DocsExamplesBase
     }
 
     @Test
-    public void unlinkHeadersFooters() throws Exception
-    {
+    public void unlinkHeadersFooters() throws Exception {
         //ExStart:UnlinkHeadersFooters
         Document srcDoc = new Document(getMyDir() + "Document source.docx");
         Document dstDoc = new Document(getMyDir() + "Northwind traders.docx");

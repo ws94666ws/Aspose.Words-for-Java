@@ -1,19 +1,17 @@
 package DocsExamples.Programming_with_documents.Working_with_graphic_elements;
 
 import DocsExamples.DocsExamplesBase;
-import com.aspose.words.*;
 import com.aspose.words.Shape;
+import com.aspose.words.*;
 import org.testng.annotations.Test;
 
 import java.awt.*;
 import java.util.Date;
 
 @Test
-public class WorkingWithCharts extends DocsExamplesBase
-{
+public class WorkingWithCharts extends DocsExamplesBase {
     @Test
-    public void formatNumberOfDataLabel() throws Exception
-    {
+    public void formatNumberOfDataLabel() throws Exception {
         //ExStart:FormatNumberOfDataLabel
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -27,27 +25,26 @@ public class WorkingWithCharts extends DocsExamplesBase
         // Delete default generated series.
         chart.getSeries().clear();
 
-        ChartSeries series1 = chart.getSeries().add("Aspose Series 1", 
-            new String[] { "Category 1", "Category 2", "Category 3" }, 
-            new double[] { 2.5, 1.5, 3.5 });
-        
-        series1.hasDataLabels(true);
-        series1.getDataLabels().setShowValue(true);
-        series1.getDataLabels().get(0).getNumberFormat().setFormatCode("\"$\"#,##0.00");
-        series1.getDataLabels().get(1).getNumberFormat().setFormatCode("dd/mm/yyyy");
-        series1.getDataLabels().get(2).getNumberFormat().setFormatCode("0.00%");
+        ChartSeries series = chart.getSeries().add("Aspose Series 1",
+                new String[]{"Category 1", "Category 2", "Category 3"},
+                new double[]{2.5, 1.5, 3.5});
+
+        series.hasDataLabels(true);
+        series.getDataLabels().setShowValue(true);
+        series.getDataLabels().get(0).getNumberFormat().setFormatCode("\"$\"#,##0.00");
+        series.getDataLabels().get(1).getNumberFormat().setFormatCode("dd/mm/yyyy");
+        series.getDataLabels().get(2).getNumberFormat().setFormatCode("0.00%");
 
         // Or you can set format code to be linked to a source cell,
         // in this case NumberFormat will be reset to general and inherited from a source cell.
-        series1.getDataLabels().get(2).getNumberFormat().isLinkedToSource(true);
+        series.getDataLabels().get(2).getNumberFormat().isLinkedToSource(true);
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.FormatNumberOfDataLabel.docx");
         //ExEnd:FormatNumberOfDataLabel
     }
 
     @Test
-    public void createChartUsingShape() throws Exception
-    {
+    public void createChartUsingShape() throws Exception {
         //ExStart:CreateChartUsingShape
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -61,17 +58,15 @@ public class WorkingWithCharts extends DocsExamplesBase
         chart.getTitle().setOverlay(false);
 
         // Please note if null or empty value is specified as title text, auto generated title will be shown.
-
         chart.getLegend().setPosition(LegendPosition.LEFT);
         chart.getLegend().setOverlay(true);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithCharts.CreateChartUsingShape.docx");
         //ExEnd:CreateChartUsingShape
     }
 
     @Test
-    public void insertSimpleColumnChart() throws Exception
-    {
+    public void insertSimpleColumnChart() throws Exception {
         //ExStart:InsertSimpleColumnChart
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -92,22 +87,21 @@ public class WorkingWithCharts extends DocsExamplesBase
         seriesColl.clear();
 
         // Create category names array, in this example we have two categories.
-        String[] categories = new String[] { "Category 1", "Category 2" };
+        String[] categories = new String[]{"Category 1", "Category 2"};
 
         // Please note, data arrays must not be empty and arrays must be the same size.
-        seriesColl.add("Aspose Series 1", categories, new double[] { 1.0, 2.0 });
-        seriesColl.add("Aspose Series 2", categories, new double[] { 3.0, 4.0 });
-        seriesColl.add("Aspose Series 3", categories, new double[] { 5.0, 6.0 });
-        seriesColl.add("Aspose Series 4", categories, new double[] { 7.0, 8.0 });
-        seriesColl.add("Aspose Series 5", categories, new double[] { 9.0, 10.0 });
+        seriesColl.add("Aspose Series 1", categories, new double[]{1.0, 2.0});
+        seriesColl.add("Aspose Series 2", categories, new double[]{3.0, 4.0});
+        seriesColl.add("Aspose Series 3", categories, new double[]{5.0, 6.0});
+        seriesColl.add("Aspose Series 4", categories, new double[]{7.0, 8.0});
+        seriesColl.add("Aspose Series 5", categories, new double[]{9.0, 10.0});
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.InsertSimpleColumnChart.docx");
         //ExEnd:InsertSimpleColumnChart
     }
 
     @Test
-    public void insertColumnChart() throws Exception
-    {
+    public void insertColumnChart() throws Exception {
         //ExStart:InsertColumnChart
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -116,15 +110,14 @@ public class WorkingWithCharts extends DocsExamplesBase
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
 
         Chart chart = shape.getChart();
-        chart.getSeries().add("Aspose Series 1", new String[] { "Category 1", "Category 2" }, new double[] { 1.0, 2.0 });
+        chart.getSeries().add("Aspose Series 1", new String[]{"Category 1", "Category 2"}, new double[]{1.0, 2.0});
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.InsertColumnChart.docx");
         //ExEnd:InsertColumnChart
     }
 
     @Test
-    public void insertAreaChart() throws Exception
-    {
+    public void insertAreaChart() throws Exception {
         //ExStart:InsertAreaChart
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -134,22 +127,21 @@ public class WorkingWithCharts extends DocsExamplesBase
 
         Chart chart = shape.getChart();
         chart.getSeries().add("Aspose Series 1", new Date[]
-            {
-                new Date(2002, 5, 1),
-                new Date(2002, 6, 1),
-                new Date(2002, 7, 1),
-                new Date(2002, 8, 1),
-                new Date(2002, 9, 1)
-            }, 
-            new double[] { 32.0, 32.0, 28.0, 12.0, 15.0 });
-        
+                        {
+                                new Date(2002, 5, 1),
+                                new Date(2002, 6, 1),
+                                new Date(2002, 7, 1),
+                                new Date(2002, 8, 1),
+                                new Date(2002, 9, 1)
+                        },
+                new double[]{32.0, 32.0, 28.0, 12.0, 15.0});
+
         doc.save(getArtifactsDir() + "WorkingWithCharts.InsertAreaChart.docx");
         //ExEnd:InsertAreaChart
     }
 
     @Test
-    public void insertBubbleChart() throws Exception
-    {
+    public void insertBubbleChart() throws Exception {
         //ExStart:InsertBubbleChart
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -158,16 +150,15 @@ public class WorkingWithCharts extends DocsExamplesBase
         Shape shape = builder.insertChart(ChartType.BUBBLE, 432.0, 252.0);
 
         Chart chart = shape.getChart();
-        chart.getSeries().add("Aspose Series 1", new double[] { 0.7, 1.8, 2.6 }, new double[] { 2.7, 3.2, 0.8 },
-            new double[] { 10.0, 4.0, 8.0 });
-        
+        chart.getSeries().add("Aspose Series 1", new double[]{0.7, 1.8, 2.6}, new double[]{2.7, 3.2, 0.8},
+                new double[]{10.0, 4.0, 8.0});
+
         doc.save(getArtifactsDir() + "WorkingWithCharts.InsertBubbleChart.docx");
         //ExEnd:InsertBubbleChart
     }
 
     @Test
-    public void insertScatterChart() throws Exception
-    {
+    public void insertScatterChart() throws Exception {
         //ExStart:InsertScatterChart
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -176,15 +167,14 @@ public class WorkingWithCharts extends DocsExamplesBase
         Shape shape = builder.insertChart(ChartType.SCATTER, 432.0, 252.0);
 
         Chart chart = shape.getChart();
-        chart.getSeries().add("Aspose Series 1", new double[] { 0.7, 1.8, 2.6 }, new double[] { 2.7, 3.2, 0.8 });
+        chart.getSeries().add("Aspose Series 1", new double[]{0.7, 1.8, 2.6}, new double[]{2.7, 3.2, 0.8});
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.InsertScatterChart.docx");
         //ExEnd:InsertScatterChart
     }
 
     @Test
-    public void defineAxisProperties() throws Exception
-    {
+    public void defineAxisProperties() throws Exception {
         //ExStart:DefineAxisProperties
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -198,12 +188,12 @@ public class WorkingWithCharts extends DocsExamplesBase
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
-            new Date[]
-            {
-                new Date(2002, 1, 1), new Date(2002, 6, 1), new Date(2002, 7, 1),
-                new Date(2002, 8, 1), new Date(2002, 9, 1)
-            },
-            new double[] { 640.0, 320.0, 280.0, 120.0, 150.0 });
+                new Date[]
+                        {
+                                new Date(2002, 1, 1), new Date(2002, 6, 1), new Date(2002, 7, 1),
+                                new Date(2002, 8, 1), new Date(2002, 9, 1)
+                        },
+                new double[]{640.0, 320.0, 280.0, 120.0, 150.0});
 
         ChartAxis xAxis = chart.getAxisX();
         ChartAxis yAxis = chart.getAxisY();
@@ -229,8 +219,7 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void dateTimeValuesToAxis() throws Exception
-    {
+    public void dateTimeValuesToAxis() throws Exception {
         //ExStart:DateTimeValuesToAxis
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -242,12 +231,12 @@ public class WorkingWithCharts extends DocsExamplesBase
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
-            new Date[]
-            {
-                new Date(2017, 11, 6), new Date(2017, 11, 9), new Date(2017, 11, 15),
-                new Date(2017, 11, 21), new Date(2017, 11, 25), new Date(2017, 11, 29)
-            },
-            new double[] { 1.2, 0.3, 2.1, 2.9, 4.2, 5.3 });
+                new Date[]
+                        {
+                                new Date(2017, 11, 6), new Date(2017, 11, 9), new Date(2017, 11, 15),
+                                new Date(2017, 11, 21), new Date(2017, 11, 25), new Date(2017, 11, 29)
+                        },
+                new double[]{1.2, 0.3, 2.1, 2.9, 4.2, 5.3});
 
         ChartAxis xAxis = chart.getAxisX();
         xAxis.getScaling().setMinimum(new AxisBound(new Date(2017, 11, 5)));
@@ -264,23 +253,19 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void numberFormatForAxis() throws Exception
-    {
+    public void numberFormatForAxis() throws Exception {
         //ExStart:NumberFormatForAxis
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
-            new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" },
-            new double[] { 1900000.0, 850000.0, 2100000.0, 600000.0, 1500000.0 });
-
+                new String[]{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"},
+                new double[]{1900000.0, 850000.0, 2100000.0, 600000.0, 1500000.0});
         chart.getAxisY().getNumberFormat().setFormatCode("#,##0");
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.NumberFormatForAxis.docx");
@@ -288,23 +273,19 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void boundsOfAxis() throws Exception
-    {
+    public void boundsOfAxis() throws Exception {
         //ExStart:BoundsOfAxis
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
-            new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" },
-            new double[] { 1.2, 0.3, 2.1, 2.9, 4.2 });
-
+                new String[]{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"},
+                new double[]{1.2, 0.3, 2.1, 2.9, 4.2});
         chart.getAxisY().getScaling().setMinimum(new AxisBound(0.0));
         chart.getAxisY().getScaling().setMaximum(new AxisBound(6.0));
 
@@ -313,23 +294,19 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void intervalUnitBetweenLabelsOnAxis() throws Exception
-    {
+    public void intervalUnitBetweenLabelsOnAxis() throws Exception {
         //ExStart:IntervalUnitBetweenLabelsOnAxis
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         chart.getSeries().add("Aspose Series 1",
-            new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" },
-            new double[] { 1.2, 0.3, 2.1, 2.9, 4.2 });
-
+                new String[]{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"},
+                new double[]{1.2, 0.3, 2.1, 2.9, 4.2});
         chart.getAxisX().getTickLabels().setSpacing(2);
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.IntervalUnitBetweenLabelsOnAxis.docx");
@@ -337,23 +314,19 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void hideChartAxis() throws Exception
-    {
+    public void hideChartAxis() throws Exception {
         //ExStart:HideChartAxis
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-        
         chart.getSeries().clear();
-        
+
         chart.getSeries().add("Aspose Series 1",
-            new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" },
-            new double[] { 1.2, 0.3, 2.1, 2.9, 4.2 });
-        
+                new String[]{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"},
+                new double[]{1.2, 0.3, 2.1, 2.9, 4.2});
         chart.getAxisY().setHidden(true);
 
         doc.save(getArtifactsDir() + "WorkingWithCharts.HideChartAxis.docx");
@@ -361,8 +334,7 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void tickMultiLineLabelAlignment() throws Exception
-    {
+    public void tickMultiLineLabelAlignment() throws Exception {
         //ExStart:TickMultiLineLabelAlignment
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -379,17 +351,15 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void chartDataLabel() throws Exception
-    {
+    public void chartDataLabel() throws Exception {
         //ExStart:WorkWithChartDataLabel
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.BAR, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-        ChartSeries series0 = shape.getChart().getSeries().get(0);
+        ChartSeries series0 = chart.getSeries().get(0);
 
         ChartDataLabelCollection labels = series0.getDataLabels();
         labels.setShowLegendKey(true);
@@ -403,28 +373,25 @@ public class WorkingWithCharts extends DocsExamplesBase
         labels.setShowValue(true);
         labels.setSeparator("/");
         labels.setShowValue(true);
-        
+
         doc.save(getArtifactsDir() + "WorkingWithCharts.ChartDataLabel.docx");
         //ExEnd:WorkWithChartDataLabel
     }
 
     @Test
-    public void defaultOptionsForDataLabels() throws Exception
-    {
+    public void defaultOptionsForDataLabels() throws Exception {
         //ExStart:DefaultOptionsForDataLabels
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.PIE, 432.0, 252.0);
-
         Chart chart = shape.getChart();
-
         chart.getSeries().clear();
 
         ChartSeries series = chart.getSeries().add("Aspose Series 1",
-            new String[] { "Category 1", "Category 2", "Category 3" },
-            new double[] { 2.7, 3.2, 0.8 });
+                new String[]{"Category 1", "Category 2", "Category 3"},
+                new double[]{2.7, 3.2, 0.8});
 
         ChartDataLabelCollection labels = series.getDataLabels();
         labels.setShowPercentage(true);
@@ -437,8 +404,7 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void singleChartDataPoint() throws Exception
-    {
+    public void singleChartDataPoint() throws Exception {
         //ExStart:WorkWithSingleChartDataPoint
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
@@ -471,13 +437,11 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void singleChartSeries() throws Exception
-    {
+    public void singleChartSeries() throws Exception {
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.LINE, 432.0, 252.0);
-
         Chart chart = shape.getChart();
 
         //ExStart:WorkWithSingleChartSeries
@@ -509,15 +473,13 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void fillFormatting() throws Exception
-    {
+    public void fillFormatting() throws Exception {
         //ExStart:FillFormatting
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.COLUMN, 432.0, 252.0);
-
         Chart chart = shape.getChart();
         ChartSeriesCollection seriesColl = chart.getSeries();
 
@@ -525,12 +487,12 @@ public class WorkingWithCharts extends DocsExamplesBase
         seriesColl.clear();
 
         // Create category names array.
-        String[] categories = new String[] { "AW Category 1", "AW Category 2" };
+        String[] categories = new String[]{"AW Category 1", "AW Category 2"};
 
         // Adding new series. Value and category arrays must be the same size.
-        ChartSeries series1 = seriesColl.add("AW Series 1", categories, new double[] { 1.0, 2.0 });
-        ChartSeries series2 = seriesColl.add("AW Series 2", categories, new double[] { 3.0, 4.0 });
-        ChartSeries series3 = seriesColl.add("AW Series 3", categories, new double[] { 5.0, 6.0 });
+        ChartSeries series1 = seriesColl.add("AW Series 1", categories, new double[]{1.0, 2.0});
+        ChartSeries series2 = seriesColl.add("AW Series 2", categories, new double[]{3.0, 4.0});
+        ChartSeries series3 = seriesColl.add("AW Series 3", categories, new double[]{5.0, 6.0});
 
         // Set series color.
         series1.getFormat().getFill().setForeColor(Color.RED);
@@ -542,15 +504,13 @@ public class WorkingWithCharts extends DocsExamplesBase
     }
 
     @Test
-    public void strokeFormatting() throws Exception
-    {
+    public void strokeFormatting() throws Exception {
         //ExStart:StrokeFormatting
         //GistId:23d39c0b874655d7e7354f1ecc122e39
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         Shape shape = builder.insertChart(ChartType.LINE, 432.0, 252.0);
-
         Chart chart = shape.getChart();
         ChartSeriesCollection seriesColl = chart.getSeries();
 
@@ -558,10 +518,10 @@ public class WorkingWithCharts extends DocsExamplesBase
         seriesColl.clear();
 
         // Adding new series.
-        ChartSeries series1 = seriesColl.add("AW Series 1", new double[] { 0.7, 1.8, 2.6 },
-            new double[] { 2.7, 3.2, 0.8 });
-        ChartSeries series2 = seriesColl.add("AW Series 2", new double[] { 0.5, 1.5, 2.5 },
-            new double[] { 3.0, 1.0, 2.0 });
+        ChartSeries series1 = seriesColl.add("AW Series 1", new double[]{0.7, 1.8, 2.6},
+                new double[]{2.7, 3.2, 0.8});
+        ChartSeries series2 = seriesColl.add("AW Series 2", new double[]{0.5, 1.5, 2.5},
+                new double[]{3.0, 1.0, 2.0});
 
         // Set series color.
         series1.getFormat().getStroke().setForeColor(Color.RED);

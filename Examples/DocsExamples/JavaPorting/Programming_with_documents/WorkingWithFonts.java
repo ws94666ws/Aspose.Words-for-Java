@@ -29,6 +29,7 @@ import com.aspose.words.WarningType;
 import com.aspose.words.StreamFontSource;
 import com.aspose.ms.System.IO.Stream;
 import org.testng.Assert;
+import com.aspose.ms.NUnit.Framework.msAssert;
 import com.aspose.words.WarningInfoCollection;
 
 
@@ -480,9 +481,7 @@ class WorkingWithFonts extends DocsExamplesBase
 
         doc.save(getArtifactsDir() + "WorkingWithFonts.GetSubstitutionWithoutSuffixes.pdf");
 
-        Assert.assertEquals(
-            "Font 'DINOT-Regular' has not been found. Using 'DINOT' font instead. Reason: font name substitution.",
-            substitutionWarningHandler.FontWarnings.get(0).getDescription());
+        Assert.assertEquals("Font 'DINOT-Regular' has not been found. Using 'DINOT' font instead. Reason: font name substitution.", substitutionWarningHandler.FontWarnings.get(0).getDescription());
     }
 
     public static class DocumentSubstitutionWarnings implements IWarningCallback

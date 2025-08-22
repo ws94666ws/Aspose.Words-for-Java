@@ -9,18 +9,15 @@ import java.util.Date;
 import java.util.Map;
 
 @Test
-public class WorkingWithDocumentProperties extends DocsExamplesBase
-{
+public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
-    public void getVariables() throws Exception
-    {
+    public void getVariables() throws Exception {
         //ExStart:GetVariables
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Document.docx");
-        
+
         String variables = "";
-        for (Map.Entry<String, String> entry : doc.getVariables())
-        {
+        for (Map.Entry<String, String> entry : doc.getVariables()) {
             String name = entry.getKey();
             String value = entry.getValue();
             if ("".equals(variables))
@@ -34,36 +31,34 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase
     }
 
     @Test
-    public void enumerateProperties() throws Exception
-    {
+    public void enumerateProperties() throws Exception {
         //ExStart:EnumerateProperties
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Properties.docx");
 
         System.out.println(MessageFormat.format("1. Document name: {0}", doc.getOriginalFileName()));
         System.out.println("2. Built-in Properties");
-        
+
         for (DocumentProperty prop : doc.getBuiltInDocumentProperties())
-            System.out.println(MessageFormat.format("{0} : {1}",prop.getName(),prop.getValue()));
+            System.out.println(MessageFormat.format("{0} : {1}", prop.getName(), prop.getValue()));
 
         System.out.println("3. Custom Properties");
-        
+
         for (DocumentProperty prop : doc.getCustomDocumentProperties())
-            System.out.println(MessageFormat.format("{0} : {1}",prop.getName(),prop.getValue()));
+            System.out.println(MessageFormat.format("{0} : {1}", prop.getName(), prop.getValue()));
         //ExEnd:EnumerateProperties
     }
 
     @Test
-    public void addCustomProperties() throws Exception
-    {
+    public void addCustomProperties() throws Exception {
         //ExStart:AddCustomProperties
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Properties.docx");
 
         CustomDocumentProperties customDocumentProperties = doc.getCustomDocumentProperties();
-        
+
         if (customDocumentProperties.get("Authorized") != null) return;
-        
+
         customDocumentProperties.add("Authorized", true);
         customDocumentProperties.add("Authorized By", "John Smith");
         customDocumentProperties.add("Authorized Date", new Date());
@@ -73,34 +68,32 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase
     }
 
     @Test
-    public void removeCustomProperties() throws Exception
-    {
+    public void removeCustomProperties() throws Exception {
         //ExStart:RemoveCustomProperties
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Properties.docx");
         doc.getCustomDocumentProperties().remove("Authorized Date");
         //ExEnd:RemoveCustomProperties
     }
 
     @Test
-    public void removePersonalInformation() throws Exception
-    {
+    public void removePersonalInformation() throws Exception {
         //ExStart:RemovePersonalInformation
-        //GistId:0593a8803015363f3026f648332e7026
-        Document doc = new Document(getMyDir() + "Properties.docx"); { doc.setRemovePersonalInformation(true); }
+        //GistId:feb3c519327ef97a854a50fe24cebba7
+        Document doc = new Document(getMyDir() + "Properties.docx");
+        doc.setRemovePersonalInformation(true);
 
         doc.save(getArtifactsDir() + "DocumentPropertiesAndVariables.RemovePersonalInformation.docx");
         //ExEnd:RemovePersonalInformation
     }
 
     @Test
-    public void configuringLinkToContent() throws Exception
-    {
+    public void configuringLinkToContent() throws Exception {
         //ExStart:ConfiguringLinkToContent
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.startBookmark("MyBookmark");
         builder.writeln("Text inside a bookmark.");
         builder.endBookmark("MyBookmark");
@@ -118,10 +111,9 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase
     }
 
     @Test
-    public void convertBetweenMeasurementUnits() throws Exception
-    {
+    public void convertBetweenMeasurementUnits() throws Exception {
         //ExStart:ConvertBetweenMeasurementUnits
-        //GistId:f266e937d2c656f9441071e9a7b053c1
+        //GistId:1c2a7e0357432a333546e8b33057046a
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -136,13 +128,12 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase
     }
 
     @Test
-    public void useControlCharacters()
-    {
+    public void useControlCharacters() {
         //ExStart:UseControlCharacters
-        //GistId:6269ddb6427f9ad20623d975774a615e
-        final String TEXT = "test\r";
+        //GistId:920532ffbf33fbda20b92054f596a8ac
+        String text = "test\r";
         // Replace "\r" control character with "\r\n".
-        String replace = TEXT.replace(ControlChar.CR, ControlChar.CR_LF);
+        String replace = text.replace(ControlChar.CR, ControlChar.CR_LF);
         //ExEnd:UseControlCharacters
     }
 }

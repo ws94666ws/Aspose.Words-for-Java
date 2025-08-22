@@ -11,7 +11,7 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
     @Test
     public void detectNumberingWithWhitespaces() throws Exception {
         //ExStart:DetectNumberingWithWhitespaces
-        //GistId:ddafc3430967fb4f4f70085fa577d01a
+        //GistId:c92d84644de8ee6e7148950debea90d6
         // Create a plaintext document in the form of a string with parts that may be interpreted as lists.
         // Upon loading, the first three lists will always be detected by Aspose.Words,
         // and List objects will be created for them after loading.
@@ -36,9 +36,7 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
         // will only be detected as a list if "DetectNumberingWithWhitespaces" in a LoadOptions object is set to true,
         // to avoid paragraphs that start with numbers being mistakenly detected as lists.
         TxtLoadOptions loadOptions = new TxtLoadOptions();
-        {
-            loadOptions.setDetectNumberingWithWhitespaces(true);
-        }
+        loadOptions.setDetectNumberingWithWhitespaces(true);
 
         // Load the document while applying LoadOptions as a parameter and verify the result.
         Document doc = new Document(new ByteArrayInputStream(TEXT_DOC.getBytes()), loadOptions);
@@ -50,16 +48,14 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
     @Test
     public void handleSpacesOptions() throws Exception {
         //ExStart:HandleSpacesOptions
-        //GistId:ddafc3430967fb4f4f70085fa577d01a
+        //GistId:c92d84644de8ee6e7148950debea90d6
         final String TEXT_DOC = "      Line 1 \n" +
                 "    Line 2   \n" +
                 " Line 3       ";
 
         TxtLoadOptions loadOptions = new TxtLoadOptions();
-        {
-            loadOptions.setLeadingSpacesOptions(TxtLeadingSpacesOptions.TRIM);
-            loadOptions.setTrailingSpacesOptions(TxtTrailingSpacesOptions.TRIM);
-        }
+        loadOptions.setLeadingSpacesOptions(TxtLeadingSpacesOptions.TRIM);
+        loadOptions.setTrailingSpacesOptions(TxtTrailingSpacesOptions.TRIM);
 
         Document doc = new Document(new ByteArrayInputStream(TEXT_DOC.getBytes()), loadOptions);
 
@@ -70,8 +66,9 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
     @Test
     public void documentTextDirection() throws Exception {
         //ExStart:DocumentTextDirection
-        //GistId:ddafc3430967fb4f4f70085fa577d01a
-        TxtLoadOptions loadOptions = new TxtLoadOptions(); { loadOptions.setDocumentDirection(DocumentDirection.AUTO); }
+        //GistId:c92d84644de8ee6e7148950debea90d6
+        TxtLoadOptions loadOptions = new TxtLoadOptions();
+        loadOptions.setDocumentDirection(DocumentDirection.AUTO);
 
         Document doc = new Document(getMyDir() + "Hebrew text.txt", loadOptions);
 
@@ -83,10 +80,9 @@ public class WorkingWithTxtLoadOptions extends DocsExamplesBase {
     }
 
     @Test
-    public void exportHeadersFootersMode() throws Exception
-    {
+    public void exportHeadersFootersMode() throws Exception {
         //ExStart:ExportHeadersFootersMode
-        //GistId:ddafc3430967fb4f4f70085fa577d01a
+        //GistId:c92d84644de8ee6e7148950debea90d6
         Document doc = new Document();
 
         // Insert even and primary headers/footers into the document.

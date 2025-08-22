@@ -49,8 +49,7 @@ public class NumericTestBuilder {
         return this;
     }
 
-    public NumericTestBuilder withValues(final Integer value1, double value2)
-    {
+    public NumericTestBuilder withValues(final Integer value1, double value2) {
         mValue1 = value1;
         mValue2 = value2;
         return this;

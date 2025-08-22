@@ -68,7 +68,7 @@ class WorkingWithXmlData extends DocsExamplesBase
     }
 
     @Test
-    public void lINQtoXmlMailMerge() throws Exception
+    public void linqToXmlMailMerge() throws Exception
     {
         XElement orderXml = XElement.Load(getMyDir() + "Mail merge data - Purchase order.xml");
 
@@ -80,7 +80,7 @@ class WorkingWithXmlData extends DocsExamplesBase
         // we need to cast them to string. This prevents the XML tags from being inserted into the final document
         // when the XElement or XAttribute objects are passed to Aspose.Words.
 
-        //ExStart:LINQtoXMLMailMergeorderItems
+        //ExStart:LinqToXmlMailMergeOrderItems
         var orderItems =
             from order : orderXml.Descendants("Item")
             select new
@@ -92,9 +92,9 @@ class WorkingWithXmlData extends DocsExamplesBase
                 Comment = (String) order.Element("Comment")
                 ShipDate = (String) order.Element("ShipDate")
             };
-        //ExEnd:LINQtoXMLMailMergeorderItems
-        
-        //ExStart:LINQToXMLQueryForDeliveryAddress
+        //ExEnd:LinqToXmlMailMergeOrderItems
+
+        //ExStart:LinqToXmlQueryForDeliveryAddress
         var deliveryAddress =
             from delivery : orderXml.Elements("Address")
             where ((String) delivery.Attribute("Type") == "Shipping")
@@ -107,12 +107,12 @@ class WorkingWithXmlData extends DocsExamplesBase
                 City = (String) delivery.Element("City")
                 Street = (String) delivery.Element("Street")
             };
-        //ExEnd:LINQToXMLQueryForDeliveryAddress
+        //ExEnd:LinqToXmlQueryForDeliveryAddress
 
         MyMailMergeDataSource orderItemsDataSource = new MyMailMergeDataSource(orderItems, "Items");
         MyMailMergeDataSource deliveryDataSource = new MyMailMergeDataSource(deliveryAddress);
         
-        //ExStart:LINQToXMLMailMerge
+        //ExStart:LinqToXmlMailMerge
         Document doc = new Document(getMyDir() + "Mail merge destinations - LINQ.docx");
 
         // Fill the document with data from our data sources using mail merge regions for populating the order items
@@ -121,8 +121,8 @@ class WorkingWithXmlData extends DocsExamplesBase
 
         doc.getMailMerge().execute(deliveryDataSource);
 
-        doc.save(getArtifactsDir() + "WorkingWithXmlData.LINQtoXmlMailMerge.docx");
-        //ExEnd:LINQToXMLMailMerge
+        doc.save(getArtifactsDir() + "WorkingWithXmlData.LinqToXmlMailMerge.docx");
+        //ExEnd:LinqToXmlMailMerge
     }
 
     /// <summary>
@@ -133,9 +133,9 @@ class WorkingWithXmlData extends DocsExamplesBase
     /// interface that accepts a LINQ query (any IEnumerable object).
     /// Aspose.Words call this class during the mail merge to retrieve the data.
     /// </summary>
-    //ExStart:MyMailMergeDataSource 
+    //ExStart:MyMailMergeDataSource
     public static class MyMailMergeDataSource implements IMailMergeDataSource
-    //ExEnd:MyMailMergeDataSource 
+    //ExEnd:MyMailMergeDataSource
     {
         /// <summary>
         /// Creates a new instance of a custom mail merge data source.
@@ -190,7 +190,7 @@ class WorkingWithXmlData extends DocsExamplesBase
 
         /// <summary>
         /// Moves to the next record in the collection.
-        /// </summary>            
+        /// </summary>
         //ExStart:MyMailMergeDataSourceMoveNext
         public boolean moveNext()
         {

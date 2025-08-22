@@ -7,16 +7,13 @@ import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @Test
-public class WorkingWithOleObjectsAndActiveX extends DocsExamplesBase
-{
+public class WorkingWithOleObjectsAndActiveX extends DocsExamplesBase {
     @Test
-    public void insertOleObject() throws Exception
-    {
+    public void insertOleObject() throws Exception {
         //ExStart:InsertOleObject
         //GistId:4996b573cf231d9f66ab0d1f3f981222
         Document doc = new Document();
@@ -29,8 +26,7 @@ public class WorkingWithOleObjectsAndActiveX extends DocsExamplesBase
     }
 
     @Test
-    public void insertOleObjectWithOlePackage() throws Exception
-    {
+    public void insertOleObjectWithOlePackage() throws Exception {
         //ExStart:InsertOleObjectwithOlePackage
         //GistId:4996b573cf231d9f66ab0d1f3f981222
         Document doc = new Document();
@@ -38,8 +34,7 @@ public class WorkingWithOleObjectsAndActiveX extends DocsExamplesBase
 
         byte[] bs = FileUtils.readFileToByteArray(new File(getMyDir() + "Zip file.zip"));
 
-        try (ByteArrayInputStream stream = new ByteArrayInputStream(bs))
-        {
+        try (ByteArrayInputStream stream = new ByteArrayInputStream(bs)) {
             Shape shape = builder.insertOleObject(stream, "Package", true, null);
             OlePackage olePackage = shape.getOleFormat().getOlePackage();
             olePackage.setFileName("filename.zip");
@@ -57,57 +52,50 @@ public class WorkingWithOleObjectsAndActiveX extends DocsExamplesBase
     }
 
     @Test
-    public void insertOleObjectAsIcon() throws Exception
-    {
+    public void insertOleObjectAsIcon() throws Exception {
         //ExStart:InsertOleObjectAsIcon
         //GistId:4996b573cf231d9f66ab0d1f3f981222
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         builder.insertOleObjectAsIcon(getMyDir() + "Presentation.pptx", false, getImagesDir() + "Logo icon.ico",
-            "My embedded file");
+                "My embedded file");
 
         doc.save(getArtifactsDir() + "WorkingWithOleObjectsAndActiveX.InsertOleObjectAsIcon.docx");
         //ExEnd:InsertOleObjectAsIcon
     }
 
     @Test
-    public void insertOleObjectAsIconUsingStream() throws Exception
-    {
+    public void insertOleObjectAsIconUsingStream() throws Exception {
         //ExStart:InsertOleObjectAsIconUsingStream
         //GistId:4996b573cf231d9f66ab0d1f3f981222
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
-        try(ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readFileToByteArray(new File(getMyDir() + "Presentation.pptx"))))
-    	{
+        try (ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readFileToByteArray(new File(getMyDir() + "Presentation.pptx")))) {
             builder.insertOleObjectAsIcon(stream, "Package", getImagesDir() + "Logo icon.ico", "My embedded file");
-    	}
+        }
 
         doc.save(getArtifactsDir() + "WorkingWithOleObjectsAndActiveX.InsertOleObjectAsIconUsingStream.docx");
         //ExEnd:InsertOleObjectAsIconUsingStream
     }
 
     @Test
-    public void readActiveXControlProperties() throws Exception
-    {
+    public void readActiveXControlProperties() throws Exception {
         Document doc = new Document(getMyDir() + "ActiveX controls.docx");
 
         String properties = "";
-        for (Shape shape : (Iterable<Shape>) doc.getChildNodes(NodeType.SHAPE, true))
-        {
+        for (Shape shape : (Iterable<Shape>) doc.getChildNodes(NodeType.SHAPE, true)) {
             if (shape.getOleFormat() == null) break;
 
             OleControl oleControl = shape.getOleFormat().getOleControl();
-            if (oleControl.isForms2OleControl())
-            {
+            if (oleControl.isForms2OleControl()) {
                 Forms2OleControl checkBox = (Forms2OleControl) oleControl;
                 properties = properties + "\nCaption: " + checkBox.getCaption();
                 properties = properties + "\nValue: " + checkBox.getValue();
                 properties = properties + "\nEnabled: " + checkBox.getEnabled();
                 properties = properties + "\nType: " + checkBox.getType();
-                if (checkBox.getChildNodes() != null)
-                {
+                if (checkBox.getChildNodes() != null) {
                     properties = properties + "\nChildNodes: " + checkBox.getChildNodes();
                 }
 
@@ -120,8 +108,7 @@ public class WorkingWithOleObjectsAndActiveX extends DocsExamplesBase
     }
 
     @Test
-    public void insertOnlineVideo() throws Exception
-    {
+    public void insertOnlineVideo() throws Exception {
         //ExStart:InsertOnlineVideo
         //GistId:4996b573cf231d9f66ab0d1f3f981222
         Document doc = new Document();
@@ -138,8 +125,7 @@ public class WorkingWithOleObjectsAndActiveX extends DocsExamplesBase
     }
 
     @Test
-    public void insertOnlineVideoWithEmbedHtml() throws Exception
-    {
+    public void insertOnlineVideoWithEmbedHtml() throws Exception {
         //ExStart:InsertOnlineVideoWithEmbedHtml
         //GistId:4996b573cf231d9f66ab0d1f3f981222
         Document doc = new Document();
@@ -150,8 +136,8 @@ public class WorkingWithOleObjectsAndActiveX extends DocsExamplesBase
 
         String videoUrl = "https://vimeo.com/52477838";
         String videoEmbedCode =
-            "<iframe src=\"https://player.vimeo.com/video/52477838\" width=\"640\" height=\"360\" frameborder=\"0\" " +
-            "title=\"Aspose\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
+                "<iframe src=\"https://player.vimeo.com/video/52477838\" width=\"640\" height=\"360\" frameborder=\"0\" " +
+                        "title=\"Aspose\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
 
         byte[] thumbnailImageBytes = Files.readAllBytes(Paths.get(getImagesDir() + "Logo.jpg"));
 

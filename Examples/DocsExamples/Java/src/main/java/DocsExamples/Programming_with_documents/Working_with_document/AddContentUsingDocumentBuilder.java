@@ -12,13 +12,11 @@ import java.text.MessageFormat;
 import java.util.regex.Pattern;
 
 @Test
-public class AddContentUsingDocumentBuilder extends DocsExamplesBase
-{
+public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
-    public void createNewDocument() throws Exception
-    {
+    public void createNewDocument() throws Exception {
         //ExStart:CreateNewDocument
-        //GistId:1d626c7186a318d22d022dc96dd91d55
+        //GistId:ae20848f6cefd3f85ab9bcbbdda340c7
         Document doc = new Document();
 
         // Use a document builder to add content to the document.
@@ -30,8 +28,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertBookmark() throws Exception
-    {
+    public void insertBookmark() throws Exception {
         //ExStart:InsertBookmark
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -45,8 +42,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void buildTable() throws Exception
-    {
+    public void buildTable() throws Exception {
         //ExStart:BuildTable
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -63,7 +59,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
         builder.endRow();
 
         builder.insertCell();
-        
+
         builder.getRowFormat().setHeight(100.0);
         builder.getRowFormat().setHeightRule(HeightRule.EXACTLY);
         builder.getCellFormat().setOrientation(TextOrientation.UPWARD);
@@ -83,10 +79,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertHorizontalRule() throws Exception
-    {
+    public void insertHorizontalRule() throws Exception {
         //ExStart:InsertHorizontalRule
-        //GistId:ad463bf5f128fe6e6c1485df3c046a4c
+        //GistId:ae9835338c044aaa3ac54592b7062db8
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -98,14 +93,13 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void horizontalRuleFormat() throws Exception
-    {
+    public void horizontalRuleFormat() throws Exception {
         //ExStart:HorizontalRuleFormat
-        //GistId:ad463bf5f128fe6e6c1485df3c046a4c
+        //GistId:ae9835338c044aaa3ac54592b7062db8
         DocumentBuilder builder = new DocumentBuilder();
 
         Shape shape = builder.insertHorizontalRule();
-        
+
         HorizontalRuleFormat horizontalRuleFormat = shape.getHorizontalRuleFormat();
         horizontalRuleFormat.setAlignment(HorizontalRuleAlignment.CENTER);
         horizontalRuleFormat.setWidthPercent(70.0);
@@ -118,8 +112,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertBreak() throws Exception
-    {
+    public void insertBreak() throws Exception {
         //ExStart:InsertBreak
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -137,13 +130,12 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertTextInputFormField() throws Exception
-    {
+    public void insertTextInputFormField() throws Exception {
         //ExStart:InsertTextInputFormField
-        //GistId:b09907fef4643433271e4e0e912921b0
+        //GistId:1d9d7d13906d89380213310f7a0dffdc
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.insertTextInput("TextInput", TextFormFieldType.REGULAR, "", "Hello", 0);
 
         doc.save(getArtifactsDir() + "AddContentUsingDocumentBuilder.InsertTextInputFormField.docx");
@@ -151,13 +143,12 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertCheckBoxFormField() throws Exception
-    {
+    public void insertCheckBoxFormField() throws Exception {
         //ExStart:InsertCheckBoxFormField
-        //GistId:b09907fef4643433271e4e0e912921b0
+        //GistId:1d9d7d13906d89380213310f7a0dffdc
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.insertCheckBox("CheckBox", true, true, 0);
 
         doc.save(getArtifactsDir() + "AddContentUsingDocumentBuilder.InsertCheckBoxFormField.docx");
@@ -165,11 +156,10 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertComboBoxFormField() throws Exception
-    {
+    public void insertComboBoxFormField() throws Exception {
         //ExStart:InsertComboBoxFormField
-        //GistId:b09907fef4643433271e4e0e912921b0
-        String[] items = { "One", "Two", "Three" };
+        //GistId:1d9d7d13906d89380213310f7a0dffdc
+        String[] items = {"One", "Two", "Three"};
 
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -181,30 +171,28 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertHtml() throws Exception
-    {
+    public void insertHtml() throws Exception {
         //ExStart:InsertHtml
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.insertHtml(
-            "<P align='right'>Paragraph right</P>" +
-            "<b>Implicit paragraph left</b>" +
-            "<div align='center'>Div center</div>" +
-            "<h1 align='left'>Heading 1 left.</h1>");
+                "<P align='right'>Paragraph right</P>" +
+                        "<b>Implicit paragraph left</b>" +
+                        "<div align='center'>Div center</div>" +
+                        "<h1 align='left'>Heading 1 left.</h1>");
 
         doc.save(getArtifactsDir() + "AddContentUsingDocumentBuilder.InsertHtml.docx");
         //ExEnd:InsertHtml
     }
 
     @Test
-    public void insertHyperlink() throws Exception
-    {
+    public void insertHyperlink() throws Exception {
         //ExStart:InsertHyperlink
-        //GistId:0213851d47551e83af42233f4d075cf6
+        //GistId:d94085c26baf5235d4e7ab5483980108
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.write("Please make sure to visit ");
 
         builder.getFont().setStyle(doc.getStyles().getByStyleIdentifier(StyleIdentifier.HYPERLINK));
@@ -218,15 +206,14 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertTableOfContents() throws Exception
-    {
+    public void insertTableOfContents() throws Exception {
         //ExStart:InsertTableOfContents
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
-        
+
         builder.insertTableOfContents("\\o \"1-3\" \\h \\z \\u");
-        
+
         // Start the actual document content on the second page.
         builder.insertBreak(BreakType.PAGE_BREAK);
 
@@ -260,7 +247,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
         builder.writeln("Heading 3.3");
 
         //ExStart:UpdateFields
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         // The newly inserted table of contents will be initially empty.
         // It needs to be populated by updating the fields in the document.
         doc.updateFields();
@@ -271,10 +258,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertInlineImage() throws Exception
-    {
+    public void insertInlineImage() throws Exception {
         //ExStart:InsertInlineImage
-        //GistId:6f849e51240635a6322ab0460938c922
+        //GistId:5b273ed7ba940f81b6a42a3a78609316
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -285,31 +271,29 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertFloatingImage() throws Exception
-    {
+    public void insertFloatingImage() throws Exception {
         //ExStart:InsertFloatingImage
-        //GistId:6f849e51240635a6322ab0460938c922
+        //GistId:5b273ed7ba940f81b6a42a3a78609316
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         builder.insertImage(getImagesDir() + "Transparent background logo.png",
-            RelativeHorizontalPosition.MARGIN,
-            100.0,
-            RelativeVerticalPosition.MARGIN,
-            100.0,
-            200.0,
-            100.0,
-            WrapType.SQUARE);
+                RelativeHorizontalPosition.MARGIN,
+                100.0,
+                RelativeVerticalPosition.MARGIN,
+                100.0,
+                200.0,
+                100.0,
+                WrapType.SQUARE);
 
         doc.save(getArtifactsDir() + "AddContentUsingDocumentBuilder.InsertFloatingImage.docx");
         //ExEnd:InsertFloatingImage
     }
 
     @Test
-    public void insertParagraph() throws Exception
-    {
+    public void insertParagraph() throws Exception {
         //ExStart:InsertParagraph
-        //GistId:ecf2c438314e6c8318ca9833c7f62326
+        //GistId:f241f6361cb8566b906f0daa559ea33d
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -332,10 +316,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertTcField() throws Exception
-    {
+    public void insertTcField() throws Exception {
         //ExStart:InsertTcField
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -346,10 +329,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void insertTcFieldsAtText() throws Exception
-    {
+    public void insertTcFieldsAtText() throws Exception {
         //ExStart:InsertTcFieldsAtText
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document();
 
         FindReplaceOptions options = new FindReplaceOptions();
@@ -361,23 +343,20 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     //ExStart:InsertTCFieldHandler
-    public final static class InsertTCFieldHandler implements IReplacingCallback
-    {
+    public final static class InsertTCFieldHandler implements IReplacingCallback {
         // Store the text and switches to be used for the TC fields.
-        private /*final*/ String mFieldText;
-        private /*final*/ String mFieldSwitches;
+        private String mFieldText;
+        private String mFieldSwitches;
 
         /// <summary>
         /// The display text and switches to use for each TC field. Display name can be an empty string or null.
         /// </summary>
-        public InsertTCFieldHandler(String text, String switches)
-        {
+        public InsertTCFieldHandler(String text, String switches) {
             mFieldText = text;
             mFieldSwitches = switches;
         }
 
-        public /*ReplaceAction*/int /*IReplacingCallback.*/replacing(ReplacingArgs args) throws Exception
-        {
+        public int replacing(ReplacingArgs args) throws Exception {
             DocumentBuilder builder = new DocumentBuilder((Document) args.getMatchNode().getDocument());
             builder.moveTo(args.getMatchNode());
 
@@ -391,10 +370,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
         }
     }
     //ExEnd:InsertTCFieldHandler
-    
+
     @Test
-    public void cursorPosition() throws Exception
-    {
+    public void cursorPosition() throws Exception {
         //ExStart:CursorPosition
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -407,12 +385,11 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void moveToNode() throws Exception
-    {
+    public void moveToNode() throws Exception {
         //ExStart:MoveToNode
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         //ExStart:MoveToBookmark
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -447,10 +424,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void moveToDocumentStartEnd() throws Exception
-    {
+    public void moveToDocumentStartEnd() throws Exception {
         //ExStart:MoveToDocumentStartEnd
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -465,10 +441,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void moveToSection() throws Exception
-    {
+    public void moveToSection() throws Exception {
         //ExStart:MoveToSection
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         doc.appendChild(new Section(doc));
 
@@ -496,10 +471,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void moveToHeadersFooters() throws Exception
-    {
+    public void moveToHeadersFooters() throws Exception {
         //ExStart:MoveToHeadersFooters
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -526,8 +500,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void moveToParagraph() throws Exception
-    {
+    public void moveToParagraph() throws Exception {
         //ExStart:MoveToParagraph
         Document doc = new Document(getMyDir() + "Paragraphs.docx");
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -538,17 +511,16 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void moveToTableCell() throws Exception
-    {
+    public void moveToTableCell() throws Exception {
         //ExStart:MoveToTableCell
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document(getMyDir() + "Tables.docx");
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         // Move the builder to row 3, cell 4 of the first table.
         builder.moveToCell(0, 2, 3, 0);
         builder.write("\nCell contents added by DocumentBuilder");
-        Table table = (Table)doc.getChild(NodeType.TABLE, 0, true);
+        Table table = (Table) doc.getChild(NodeType.TABLE, 0, true);
 
         Assert.assertEquals(table.getRows().get(2).getCells().get(3), builder.getCurrentNode().getParentNode().getParentNode());
         Assert.assertEquals("Cell contents added by DocumentBuilderCell 3 contents", table.getRows().get(2).getCells().get(3).getText().trim());
@@ -556,10 +528,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void moveToBookmarkEnd() throws Exception
-    {
+    public void moveToBookmarkEnd() throws Exception {
         //ExStart:MoveToBookmarkEnd
-        //GistId:ecf2c438314e6c8318ca9833c7f62326
+        //GistId:f241f6361cb8566b906f0daa559ea33d
         Document doc = new Document(getMyDir() + "Bookmarks.docx");
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -569,10 +540,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase
     }
 
     @Test
-    public void moveToMergeField() throws Exception
-    {
+    public void moveToMergeField() throws Exception {
         //ExStart:MoveToMergeField
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
