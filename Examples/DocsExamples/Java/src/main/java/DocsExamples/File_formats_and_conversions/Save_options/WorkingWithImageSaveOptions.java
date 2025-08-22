@@ -4,6 +4,7 @@ import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.text.MessageFormat;
 
 @Test
@@ -102,4 +103,38 @@ public class WorkingWithImageSaveOptions extends DocsExamplesBase {
         }
     }
     //ExEnd:PageSavingCallback
+
+    @Test
+    public void HorizontalLayout() throws Exception {
+        //ExStart:HorizontalLayout
+        //GistId:90715b6eecef1740f54f3eddb072b5d2
+        Document doc = new Document(getMyDir() + "Rendering.docx");
+
+        ImageSaveOptions options = new ImageSaveOptions(SaveFormat.JPEG);
+        options.setPageLayout(MultiPageLayout.horizontal(10));
+
+        doc.save(getArtifactsDir() + "WorkingWithImageSaveOptions.HorizontalLayout.jpg", options);
+        //ExEnd:HorizontalLayout
+    }
+
+    @Test
+    public void GridLayout() throws Exception {
+        //ExStart:GridLayout
+        //GistId:90715b6eecef1740f54f3eddb072b5d2
+        Document doc = new Document(getMyDir() + "Rendering.docx");
+
+        ImageSaveOptions options = new ImageSaveOptions(SaveFormat.JPEG);
+        // Set up a grid layout with:
+        // - 3 columns per row.
+        // - 10pts spacing between pages (horizontal and vertical).
+        options.setPageLayout(MultiPageLayout.grid(3, 10, 10));
+
+        // Customize the background and border.
+        options.getPageLayout().setBackColor(Color.lightGray);
+        options.getPageLayout().setBorderColor(Color.blue);
+        options.getPageLayout().setBorderWidth(2);
+
+        doc.save(getArtifactsDir() + "ImageSaveOptions.GridLayout.jpg", options);
+        //ExEnd:GridLayout
+    }
 }
