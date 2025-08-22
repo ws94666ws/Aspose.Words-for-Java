@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Contents_management;
+﻿package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.Shape;
@@ -144,7 +144,7 @@ public class FindAndReplace extends DocsExamplesBase {
     @Test
     public void replaceTextContainingMetaCharacters() throws Exception {
         //ExStart:ReplaceTextContainingMetaCharacters
-        //GistId:27c3408b2c7fbee8d6dc6a1c8b61c105
+        //GistId:98f7559b16319b1e49bd27dfbd62d062
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -172,7 +172,7 @@ public class FindAndReplace extends DocsExamplesBase {
     @Test
     public void highlightColor() throws Exception {
         //ExStart:HighlightColor
-        //GistId:27c3408b2c7fbee8d6dc6a1c8b61c105
+        //GistId:98f7559b16319b1e49bd27dfbd62d062
         Document doc = new Document(getMyDir() + "Footer.docx");
 
         FindReplaceOptions options = new FindReplaceOptions();
@@ -210,7 +210,7 @@ public class FindAndReplace extends DocsExamplesBase {
     @Test
     public void ignoreTextInsideDeleteRevisions() throws Exception {
         //ExStart:IgnoreTextInsideDeleteRevisions
-        //GistId:27c3408b2c7fbee8d6dc6a1c8b61c105
+        //GistId:98f7559b16319b1e49bd27dfbd62d062
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -303,7 +303,7 @@ public class FindAndReplace extends DocsExamplesBase {
     @Test
     public void replaceTextInFooter() throws Exception {
         //ExStart:ReplaceTextInFooter
-        //GistId:27c3408b2c7fbee8d6dc6a1c8b61c105
+        //GistId:98f7559b16319b1e49bd27dfbd62d062
         Document doc = new Document(getMyDir() + "Footer.docx");
 
         HeaderFooterCollection headersFooters = doc.getFirstSection().getHeadersFooters();
@@ -482,7 +482,7 @@ public class FindAndReplace extends DocsExamplesBase {
 
     @Test
     //ExStart:ReplaceWithHtml
-    //GistId:27c3408b2c7fbee8d6dc6a1c8b61c105
+    //GistId:98f7559b16319b1e49bd27dfbd62d062
     public void replaceWithHtml() throws Exception {
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -524,7 +524,7 @@ public class FindAndReplace extends DocsExamplesBase {
     @Test
     public void replaceWithRegex() throws Exception {
         //ExStart:ReplaceWithRegex
-        //GistId:27c3408b2c7fbee8d6dc6a1c8b61c105
+        //GistId:98f7559b16319b1e49bd27dfbd62d062
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -558,7 +558,7 @@ public class FindAndReplace extends DocsExamplesBase {
     @Test
     public void replaceWithString() throws Exception {
         //ExStart:ReplaceWithString
-        //GistId:27c3408b2c7fbee8d6dc6a1c8b61c105
+        //GistId:98f7559b16319b1e49bd27dfbd62d062
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -616,7 +616,7 @@ public class FindAndReplace extends DocsExamplesBase {
     }
 
     //ExStart:LineCounter
-    //GistId:27c3408b2c7fbee8d6dc6a1c8b61c105
+    //GistId:98f7559b16319b1e49bd27dfbd62d062
     @Test //ExSkip
     public void lineCounter() throws Exception {
         Document doc = new Document();

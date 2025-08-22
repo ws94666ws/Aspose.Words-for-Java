@@ -1,4 +1,4 @@
-package DocsExamples.File_formats_and_conversions.Save_options;
+﻿package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.Document;
@@ -11,7 +11,7 @@ public class WorkingWithPclSaveOptions extends DocsExamplesBase {
     @Test
     public void rasterizeTransformedElements() throws Exception {
         //ExStart:RasterizeTransformedElements
-        //GistId:7ee438947078cf070c5bc36a4e45a18c
+        //GistId:9d2a393f6dff9d785e7747a48e590d9d
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         PclSaveOptions saveOptions = new PclSaveOptions();

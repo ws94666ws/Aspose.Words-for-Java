@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Contents_management;
+﻿package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -11,7 +11,7 @@ public class RemoveContent extends DocsExamplesBase {
     @Test
     public void removePageBreaks() throws Exception {
         //ExStart:OpenDocument
-        //GistId:1d626c7186a318d22d022dc96dd91d55
+        //GistId:ae20848f6cefd3f85ab9bcbbdda340c7
         Document doc = new Document(getMyDir() + "Document.docx");
         //ExEnd:OpenDocument
 
@@ -80,7 +80,7 @@ public class RemoveContent extends DocsExamplesBase {
 
     @Test
     //ExStart:RemoveToc
-    //GistId:db118a3e1559b9c88355356df9d7ea10
+    //GistId:5d939fbdab0ac77c575636f79013ffb1
     public void removeToc() throws Exception {
         Document doc = new Document(getMyDir() + "Table of contents.docx");
 

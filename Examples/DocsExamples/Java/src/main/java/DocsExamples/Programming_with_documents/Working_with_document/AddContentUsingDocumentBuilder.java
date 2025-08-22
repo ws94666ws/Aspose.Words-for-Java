@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Working_with_document;
+﻿package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.Font;
@@ -16,7 +16,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void createNewDocument() throws Exception {
         //ExStart:CreateNewDocument
-        //GistId:1d626c7186a318d22d022dc96dd91d55
+        //GistId:ae20848f6cefd3f85ab9bcbbdda340c7
         Document doc = new Document();
 
         // Use a document builder to add content to the document.
@@ -81,7 +81,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertHorizontalRule() throws Exception {
         //ExStart:InsertHorizontalRule
-        //GistId:ad463bf5f128fe6e6c1485df3c046a4c
+        //GistId:ae9835338c044aaa3ac54592b7062db8
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -95,7 +95,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void horizontalRuleFormat() throws Exception {
         //ExStart:HorizontalRuleFormat
-        //GistId:ad463bf5f128fe6e6c1485df3c046a4c
+        //GistId:ae9835338c044aaa3ac54592b7062db8
         DocumentBuilder builder = new DocumentBuilder();
 
         Shape shape = builder.insertHorizontalRule();
@@ -132,7 +132,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertTextInputFormField() throws Exception {
         //ExStart:InsertTextInputFormField
-        //GistId:b09907fef4643433271e4e0e912921b0
+        //GistId:1d9d7d13906d89380213310f7a0dffdc
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -145,7 +145,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertCheckBoxFormField() throws Exception {
         //ExStart:InsertCheckBoxFormField
-        //GistId:b09907fef4643433271e4e0e912921b0
+        //GistId:1d9d7d13906d89380213310f7a0dffdc
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -158,7 +158,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertComboBoxFormField() throws Exception {
         //ExStart:InsertComboBoxFormField
-        //GistId:b09907fef4643433271e4e0e912921b0
+        //GistId:1d9d7d13906d89380213310f7a0dffdc
         String[] items = {"One", "Two", "Three"};
 
         Document doc = new Document();
@@ -189,7 +189,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertHyperlink() throws Exception {
         //ExStart:InsertHyperlink
-        //GistId:0213851d47551e83af42233f4d075cf6
+        //GistId:d94085c26baf5235d4e7ab5483980108
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -208,7 +208,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertTableOfContents() throws Exception {
         //ExStart:InsertTableOfContents
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -247,7 +247,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
         builder.writeln("Heading 3.3");
 
         //ExStart:UpdateFields
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         // The newly inserted table of contents will be initially empty.
         // It needs to be populated by updating the fields in the document.
         doc.updateFields();
@@ -260,7 +260,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertInlineImage() throws Exception {
         //ExStart:InsertInlineImage
-        //GistId:6f849e51240635a6322ab0460938c922
+        //GistId:5b273ed7ba940f81b6a42a3a78609316
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -273,7 +273,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertFloatingImage() throws Exception {
         //ExStart:InsertFloatingImage
-        //GistId:6f849e51240635a6322ab0460938c922
+        //GistId:5b273ed7ba940f81b6a42a3a78609316
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -293,7 +293,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertParagraph() throws Exception {
         //ExStart:InsertParagraph
-        //GistId:ecf2c438314e6c8318ca9833c7f62326
+        //GistId:f241f6361cb8566b906f0daa559ea33d
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -318,7 +318,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertTcField() throws Exception {
         //ExStart:InsertTcField
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -331,7 +331,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void insertTcFieldsAtText() throws Exception {
         //ExStart:InsertTcFieldsAtText
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document();
 
         FindReplaceOptions options = new FindReplaceOptions();
@@ -387,9 +387,9 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void moveToNode() throws Exception {
         //ExStart:MoveToNode
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         //ExStart:MoveToBookmark
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -426,7 +426,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void moveToDocumentStartEnd() throws Exception {
         //ExStart:MoveToDocumentStartEnd
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -443,7 +443,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void moveToSection() throws Exception {
         //ExStart:MoveToSection
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         doc.appendChild(new Section(doc));
 
@@ -473,7 +473,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void moveToHeadersFooters() throws Exception {
         //ExStart:MoveToHeadersFooters
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -513,7 +513,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void moveToTableCell() throws Exception {
         //ExStart:MoveToTableCell
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document(getMyDir() + "Tables.docx");
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -530,7 +530,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void moveToBookmarkEnd() throws Exception {
         //ExStart:MoveToBookmarkEnd
-        //GistId:ecf2c438314e6c8318ca9833c7f62326
+        //GistId:f241f6361cb8566b906f0daa559ea33d
         Document doc = new Document(getMyDir() + "Bookmarks.docx");
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -542,7 +542,7 @@ public class AddContentUsingDocumentBuilder extends DocsExamplesBase {
     @Test
     public void moveToMergeField() throws Exception {
         //ExStart:MoveToMergeField
-        //GistId:1a2c340d1a9dde6fe70c2733084d9aab
+        //GistId:402a4aea5f494d032783f0e9365d5990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 

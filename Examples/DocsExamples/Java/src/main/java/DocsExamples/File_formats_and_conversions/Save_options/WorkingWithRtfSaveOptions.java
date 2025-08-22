@@ -1,4 +1,4 @@
-package DocsExamples.File_formats_and_conversions.Save_options;
+﻿package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.Document;
@@ -10,7 +10,7 @@ public class WorkingWithRtfSaveOptions extends DocsExamplesBase {
     @Test
     public void savingImagesAsWmf() throws Exception {
         //ExStart:SavingImagesAsWmf
-        //GistId:6f849e51240635a6322ab0460938c922
+        //GistId:5b273ed7ba940f81b6a42a3a78609316
         Document doc = new Document(getMyDir() + "Document.docx");
 
         RtfSaveOptions saveOptions = new RtfSaveOptions();

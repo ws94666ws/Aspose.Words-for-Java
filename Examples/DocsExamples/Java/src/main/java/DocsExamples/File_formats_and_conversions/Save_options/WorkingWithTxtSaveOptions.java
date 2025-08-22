@@ -1,4 +1,4 @@
-package DocsExamples.File_formats_and_conversions.Save_options;
+﻿package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.Document;
@@ -11,7 +11,7 @@ public class WorkingWithTxtSaveOptions extends DocsExamplesBase {
     @Test
     public void addBidiMarks() throws Exception {
         //ExStart:AddBidiMarks
-        //GistId:ddafc3430967fb4f4f70085fa577d01a
+        //GistId:c92d84644de8ee6e7148950debea90d6
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -30,7 +30,7 @@ public class WorkingWithTxtSaveOptions extends DocsExamplesBase {
     @Test
     public void useTabForListIndentation() throws Exception {
         //ExStart:UseTabForListIndentation
-        //GistId:ddafc3430967fb4f4f70085fa577d01a
+        //GistId:c92d84644de8ee6e7148950debea90d6
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -53,7 +53,7 @@ public class WorkingWithTxtSaveOptions extends DocsExamplesBase {
     @Test
     public void useSpaceForListIndentation() throws Exception {
         //ExStart:UseSpaceForListIndentation
-        //GistId:ddafc3430967fb4f4f70085fa577d01a
+        //GistId:c92d84644de8ee6e7148950debea90d6
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 

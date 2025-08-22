@@ -1,4 +1,4 @@
-package DocsExamples.File_formats_and_conversions;
+﻿package DocsExamples.File_formats_and_conversions;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.FileFormatInfo;
@@ -19,7 +19,7 @@ public class WorkingWithFileFormat extends DocsExamplesBase {
     @Test
     public void detectFileFormat() throws Exception {
         //ExStart:CheckFormatCompatibility
-        //GistId:7fe3fc4004f081628a63608db70332b3
+        //GistId:13b31394822a30faeb5b68ad2b82fd75
         File supportedDir = new File(getArtifactsDir() + "Supported");
         File unknownDir = new File(getArtifactsDir() + "Unknown");
         File encryptedDir = new File(getArtifactsDir() + "Encrypted");
@@ -36,7 +36,7 @@ public class WorkingWithFileFormat extends DocsExamplesBase {
             pre97Dir.mkdir();
 
         //ExStart:GetFiles
-        //GistId:7fe3fc4004f081628a63608db70332b3
+        //GistId:13b31394822a30faeb5b68ad2b82fd75
         Set<String> listFiles = Stream.of(new File(getMyDir()).listFiles())
                 .filter(file -> !file.getName().endsWith("Corrupted document.docx") && !Files.isDirectory(file.toPath()))
                 .map(File::getPath)

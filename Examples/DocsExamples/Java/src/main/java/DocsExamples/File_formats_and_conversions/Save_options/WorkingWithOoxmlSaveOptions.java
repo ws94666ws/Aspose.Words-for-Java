@@ -1,4 +1,4 @@
-package DocsExamples.File_formats_and_conversions.Save_options;
+﻿package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -35,7 +35,7 @@ public class WorkingWithOoxmlSaveOptions extends DocsExamplesBase {
     @Test
     public void updateLastSavedTime() throws Exception {
         //ExStart:UpdateLastSavedTime
-        //GistId:83e5c469d0e72b5114fb8a05a1d01977
+        //GistId:a6f7799aa265589fb56915bb1e401b05
         Document doc = new Document(getMyDir() + "Document.docx");
 
         OoxmlSaveOptions saveOptions = new OoxmlSaveOptions();

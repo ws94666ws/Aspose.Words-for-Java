@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Contents_management;
+﻿package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -359,7 +359,7 @@ public class ExtractContent extends DocsExamplesBase {
     @Test
     public void extractContentBasedOnStyles() throws Exception {
         //ExStart:ExtractContentBasedOnStyles
-        //GistId:a73b495f610523670f0847331ef4d6fc
+        //GistId:f1e523d4c5e156a1e42b86f56c70bf53
         Document doc = new Document(getMyDir() + "Styles.docx");
 
         ArrayList<Paragraph> paragraphs = paragraphsByStyleName(doc, "Heading 1");
@@ -377,7 +377,7 @@ public class ExtractContent extends DocsExamplesBase {
     }
 
     //ExStart:RunsByStyleName
-    //GistId:a73b495f610523670f0847331ef4d6fc
+    //GistId:f1e523d4c5e156a1e42b86f56c70bf53
     public ArrayList<Run> runsByStyleName(Document doc, String styleName) {
         ArrayList<Run> runsWithStyle = new ArrayList<>();
         NodeCollection runs = doc.getChildNodes(NodeType.RUN, true);

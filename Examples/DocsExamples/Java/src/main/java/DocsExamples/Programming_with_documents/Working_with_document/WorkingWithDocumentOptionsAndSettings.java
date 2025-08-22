@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Working_with_document;
+﻿package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -12,7 +12,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
     @Test
     public void optimizeFor() throws Exception {
         //ExStart:OptimizeFor
-        //GistId:5d2997d42c1f1fad79b18873f170855f
+        //GistId:2e73ea09c5fcbcb9f7b99f01602ecd34
         Document doc = new Document(getMyDir() + "Document.docx");
 
         doc.getCompatibilityOptions().optimizeFor(MsWordVersion.WORD_2016);
@@ -36,7 +36,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
     @Test
     public void cleanupUnusedStylesAndLists() throws Exception {
         //ExStart:CleanupUnusedStylesAndLists
-        //GistId:669f3d08f45b14f75f9d2cb17fa1056a
+        //GistId:01b0f3024b265f429ec00ffd6ec30407
         Document doc = new Document(getMyDir() + "Unused styles.docx");
 
         // Combined with the built-in styles, the document now has eight styles.
@@ -62,7 +62,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
     @Test
     public void cleanupDuplicateStyle() throws Exception {
         //ExStart:CleanupDuplicateStyle
-        //GistId:669f3d08f45b14f75f9d2cb17fa1056a
+        //GistId:01b0f3024b265f429ec00ffd6ec30407
         Document doc = new Document(getMyDir() + "Document.docx");
 
         // Count of styles before Cleanup.
@@ -84,7 +84,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
     @Test
     public void viewOptions() throws Exception {
         //ExStart:SetViewOption
-        //GistId:5d2997d42c1f1fad79b18873f170855f
+        //GistId:2e73ea09c5fcbcb9f7b99f01602ecd34
         Document doc = new Document(getMyDir() + "Document.docx");
 
         doc.getViewOptions().setViewType(ViewType.PAGE_LAYOUT);
@@ -97,7 +97,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
     @Test
     public void documentPageSetup() throws Exception {
         //ExStart:DocumentPageSetup
-        //GistId:5d2997d42c1f1fad79b18873f170855f
+        //GistId:2e73ea09c5fcbcb9f7b99f01602ecd34
         Document doc = new Document(getMyDir() + "Document.docx");
 
         // Set the layout mode for a section allowing to define the document grid behavior.
@@ -114,7 +114,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
     @Test
     public void addEditingLanguage() throws Exception {
         //ExStart:AddEditingLanguage
-        //GistId:40be8275fc43f78f5e5877212e4e1bf3
+        //GistId:9216df344e0dc0025f5eda608b9f33d8
         LoadOptions loadOptions = new LoadOptions();
         // Set language preferences that will be used when document is loading.
         loadOptions.getLanguagePreferences().addEditingLanguage(EditingLanguage.JAPANESE);
@@ -131,7 +131,7 @@ public class WorkingWithDocumentOptionsAndSettings extends DocsExamplesBase {
     @Test
     public void setRussianAsDefaultEditingLanguage() throws Exception {
         //ExStart:SetRussianAsDefaultEditingLanguage
-        //GistId:5d2997d42c1f1fad79b18873f170855f
+        //GistId:2e73ea09c5fcbcb9f7b99f01602ecd34
         LoadOptions loadOptions = new LoadOptions();
         loadOptions.getLanguagePreferences().setDefaultEditingLanguage(EditingLanguage.RUSSIAN);
 

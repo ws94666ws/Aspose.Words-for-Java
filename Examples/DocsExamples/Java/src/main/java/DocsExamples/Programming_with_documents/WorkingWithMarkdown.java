@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents;
+﻿package DocsExamples.Programming_with_documents;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -9,7 +9,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void boldText() throws Exception {
         //ExStart:BoldText
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -22,7 +22,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void italicText() throws Exception {
         //ExStart:ItalicText
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -35,7 +35,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void strikethrough() throws Exception {
         //ExStart:Strikethrough
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -48,7 +48,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void inlineCode() throws Exception {
         //ExStart:InlineCode
-        //GistId:51b4cb9c451832f23527892e19c7bca6
+        //GistId:642767bbe8d8bec8eab080120b707990
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -67,7 +67,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void autolink() throws Exception {
         //ExStart:Autolink
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -80,7 +80,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void link() throws Exception {
         //ExStart:Link
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -92,7 +92,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void image() throws Exception {
         //ExStart:Image
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -105,7 +105,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void horizontalRule() throws Exception {
         //ExStart:HorizontalRule
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -117,7 +117,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void heading() throws Exception {
         //ExStart:Heading
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -153,7 +153,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void setextHeading() throws Exception {
         //ExStart:SetextHeading
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -190,7 +190,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void indentedCode() throws Exception {
         //ExStart:IndentedCode
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -203,7 +203,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void fencedCode() throws Exception {
         //ExStart:FencedCode
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -220,7 +220,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void quote() throws Exception {
         //ExStart:Quote
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
@@ -242,7 +242,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void bulletedList() throws Exception {
         //ExStart:BulletedList
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -262,7 +262,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void orderedList() throws Exception {
         //ExStart:OrderedList
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -281,7 +281,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void table() throws Exception {
         //ExStart:Table
-        //GistId:0697355b7f872839932388d269ed6a63
+        //GistId:4d42109bdf7df29c28ebfe1550c8e259
         // Use a document builder to add content to the document.
         DocumentBuilder builder = new DocumentBuilder();
 
@@ -304,7 +304,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void readMarkdownDocument() throws Exception {
         //ExStart:ReadMarkdownDocument
-        //GistId:19de942ef8827201c1dca99f76c59133
+        //GistId:50b2b6a8785c07713e7c09d772e9a396
         Document doc = new Document(getMyDir() + "Quotes.md");
 
         // Let's remove Heading formatting from a Quote in the very last paragraph.
@@ -318,7 +318,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void emphases() throws Exception {
         //ExStart:Emphases
-        //GistId:19de942ef8827201c1dca99f76c59133
+        //GistId:50b2b6a8785c07713e7c09d772e9a396
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -371,7 +371,7 @@ public class WorkingWithMarkdown extends DocsExamplesBase {
     @Test
     public void supportedFeatures() throws Exception {
         //ExStart:SupportedFeatures
-        //GistId:51b4cb9c451832f23527892e19c7bca6
+        //GistId:642767bbe8d8bec8eab080120b707990
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 

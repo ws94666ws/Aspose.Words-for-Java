@@ -1,9 +1,10 @@
-package DocsExamples.File_formats_and_conversions.Save_options;
+﻿package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.text.MessageFormat;
 
 @Test
@@ -11,7 +12,7 @@ public class WorkingWithImageSaveOptions extends DocsExamplesBase {
     @Test
     public void exposeThresholdControlForTiffBinarization() throws Exception {
         //ExStart:ExposeThresholdControl
-        //GistId:b20a0ec0e1ff0556aa20d12f486e1963
+        //GistId:402579012106180dd1687e6d7f6386b8
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         ImageSaveOptions saveOptions = new ImageSaveOptions(SaveFormat.TIFF);
@@ -27,10 +28,10 @@ public class WorkingWithImageSaveOptions extends DocsExamplesBase {
     @Test
     public void getTiffPageRange() throws Exception {
         //ExStart:GetTiffPageRange
-        //GistId:b20a0ec0e1ff0556aa20d12f486e1963
+        //GistId:402579012106180dd1687e6d7f6386b8
         Document doc = new Document(getMyDir() + "Rendering.docx");
         //ExStart:SaveAsTiff
-        //GistId:b20a0ec0e1ff0556aa20d12f486e1963
+        //GistId:402579012106180dd1687e6d7f6386b8
         doc.save(getArtifactsDir() + "WorkingWithImageSaveOptions.MultipageTiff.tiff");
         //ExEnd:SaveAsTiff
 
@@ -48,7 +49,7 @@ public class WorkingWithImageSaveOptions extends DocsExamplesBase {
     @Test
     public void format1BppIndexed() throws Exception {
         //ExStart:Format1BppIndexed
-        //GistId:83e5c469d0e72b5114fb8a05a1d01977
+        //GistId:a6f7799aa265589fb56915bb1e401b05
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         ImageSaveOptions saveOptions = new ImageSaveOptions(SaveFormat.PNG);
@@ -63,7 +64,7 @@ public class WorkingWithImageSaveOptions extends DocsExamplesBase {
     @Test
     public void getJpegPageRange() throws Exception {
         //ExStart:GetJpegPageRange
-        //GistId:ebbb90d74ef57db456685052a18f8e86
+        //GistId:3e41a25b97b6091491b45ebf20f273b5
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         ImageSaveOptions options = new ImageSaveOptions(SaveFormat.JPEG);
@@ -102,4 +103,38 @@ public class WorkingWithImageSaveOptions extends DocsExamplesBase {
         }
     }
     //ExEnd:PageSavingCallback
+
+    @Test
+    public void HorizontalLayout() throws Exception {
+        //ExStart:HorizontalLayout
+        //GistId:90715b6eecef1740f54f3eddb072b5d2
+        Document doc = new Document(getMyDir() + "Rendering.docx");
+
+        ImageSaveOptions options = new ImageSaveOptions(SaveFormat.JPEG);
+        options.setPageLayout(MultiPageLayout.horizontal(10));
+
+        doc.save(getArtifactsDir() + "WorkingWithImageSaveOptions.HorizontalLayout.jpg", options);
+        //ExEnd:HorizontalLayout
+    }
+
+    @Test
+    public void GridLayout() throws Exception {
+        //ExStart:GridLayout
+        //GistId:90715b6eecef1740f54f3eddb072b5d2
+        Document doc = new Document(getMyDir() + "Rendering.docx");
+
+        ImageSaveOptions options = new ImageSaveOptions(SaveFormat.JPEG);
+        // Set up a grid layout with:
+        // - 3 columns per row.
+        // - 10pts spacing between pages (horizontal and vertical).
+        options.setPageLayout(MultiPageLayout.grid(3, 10, 10));
+
+        // Customize the background and border.
+        options.getPageLayout().setBackColor(Color.lightGray);
+        options.getPageLayout().setBorderColor(Color.blue);
+        options.getPageLayout().setBorderWidth(2);
+
+        doc.save(getArtifactsDir() + "ImageSaveOptions.GridLayout.jpg", options);
+        //ExEnd:GridLayout
+    }
 }

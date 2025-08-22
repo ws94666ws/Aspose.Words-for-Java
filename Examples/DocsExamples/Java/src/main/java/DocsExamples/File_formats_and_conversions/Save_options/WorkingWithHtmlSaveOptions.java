@@ -1,4 +1,4 @@
-package DocsExamples.File_formats_and_conversions.Save_options;
+﻿package DocsExamples.File_formats_and_conversions.Save_options;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -15,7 +15,7 @@ public class WorkingWithHtmlSaveOptions extends DocsExamplesBase {
     @Test
     public void exportRoundtripInformation() throws Exception {
         //ExStart:ExportRoundtripInformation
-        //GistId:c0df00d37081f41a7683339fd7ef66c1
+        //GistId:c2ec8aa36ef37670eceec8da5c612b86
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         HtmlSaveOptions saveOptions = new HtmlSaveOptions();
@@ -28,7 +28,7 @@ public class WorkingWithHtmlSaveOptions extends DocsExamplesBase {
     @Test
     public void exportFontsAsBase64() throws Exception {
         //ExStart:ExportFontsAsBase64
-        //GistId:c0df00d37081f41a7683339fd7ef66c1
+        //GistId:c2ec8aa36ef37670eceec8da5c612b86
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         HtmlSaveOptions saveOptions = new HtmlSaveOptions();
@@ -41,7 +41,7 @@ public class WorkingWithHtmlSaveOptions extends DocsExamplesBase {
     @Test
     public void exportResources() throws Exception {
         //ExStart:ExportResources
-        //GistId:c0df00d37081f41a7683339fd7ef66c1
+        //GistId:c2ec8aa36ef37670eceec8da5c612b86
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         HtmlSaveOptions saveOptions = new HtmlSaveOptions();
@@ -143,7 +143,7 @@ public class WorkingWithHtmlSaveOptions extends DocsExamplesBase {
     @Test
     public void exportTextInputFormFieldAsText() throws Exception {
         //ExStart:ExportTextInputFormFieldAsText
-        //GistId:83e5c469d0e72b5114fb8a05a1d01977
+        //GistId:a6f7799aa265589fb56915bb1e401b05
         Document doc = new Document(getMyDir() + "Rendering.docx");
 
         File imagesDir = new File(Paths.get(getArtifactsDir(), "Images").toString());

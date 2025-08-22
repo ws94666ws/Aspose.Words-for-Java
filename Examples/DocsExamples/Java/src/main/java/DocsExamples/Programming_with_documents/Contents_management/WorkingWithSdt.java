@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Contents_management;
+﻿package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.Shape;
@@ -14,7 +14,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void sdtCheckBox() throws Exception {
         //ExStart:SdtCheckBox
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -28,7 +28,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void currentStateOfCheckBox() throws Exception {
         //ExStart:CurrentStateOfCheckBox
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document(getMyDir() + "Structured document tags.docx");
 
         // Get the first content control from the document.
@@ -45,7 +45,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void modifySdt() throws Exception {
         //ExStart:ModifySdt
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document(getMyDir() + "Structured document tags.docx");
 
         for (StructuredDocumentTag sdt : (Iterable<StructuredDocumentTag>) doc.getChildNodes(NodeType.STRUCTURED_DOCUMENT_TAG, true)) {
@@ -80,7 +80,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void sdtComboBox() throws Exception {
         //ExStart:SdtComboBox
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document();
 
         StructuredDocumentTag sdt = new StructuredDocumentTag(doc, SdtType.COMBO_BOX, MarkupLevel.BLOCK);
@@ -96,7 +96,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void sdtRichTextBox() throws Exception {
         //ExStart:SdtRichTextBox
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document();
 
         StructuredDocumentTag sdtRichText = new StructuredDocumentTag(doc, SdtType.RICH_TEXT, MarkupLevel.BLOCK);
@@ -116,7 +116,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void sdtColor() throws Exception {
         //ExStart:SdtColor
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document(getMyDir() + "Structured document tags.docx");
 
         StructuredDocumentTag sdt = (StructuredDocumentTag) doc.getChild(NodeType.STRUCTURED_DOCUMENT_TAG, 0, true);
@@ -129,7 +129,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void clearSdt() throws Exception {
         //ExStart:ClearSdt
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document(getMyDir() + "Structured document tags.docx");
 
         StructuredDocumentTag sdt = (StructuredDocumentTag) doc.getChild(NodeType.STRUCTURED_DOCUMENT_TAG, 0, true);
@@ -142,7 +142,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void bindSdtToCustomXmlPart() throws Exception {
         //ExStart:BindSdtToCustomXmlPart
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document();
         CustomXmlPart xmlPart =
                 doc.getCustomXmlParts().add(UUID.randomUUID().toString(), "<root><text>Hello, World!</text></root>");
@@ -159,7 +159,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void sdtStyle() throws Exception {
         //ExStart:SdtStyle
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document(getMyDir() + "Structured document tags.docx");
 
         StructuredDocumentTag sdt = (StructuredDocumentTag) doc.getChild(NodeType.STRUCTURED_DOCUMENT_TAG, 0, true);
@@ -173,7 +173,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void repeatingSectionMappedToCustomXmlPart() throws Exception {
         //ExStart:RepeatingSectionMappedToCustomXmlPart
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -234,7 +234,7 @@ public class WorkingWithSdt extends DocsExamplesBase {
     @Test
     public void sdtRangeStartXmlMapping() throws Exception {
         //ExStart:SdtRangeStartXmlMapping
-        //GistId:089defec1b191de967e6099effeabda7
+        //GistId:e21394fa5fe859b6608b088a91bc7a7c
         Document doc = new Document(getMyDir() + "Multi-section structured document tags.docx");
 
         // Construct an XML part that contains data and add it to the document's CustomXmlPart collection.

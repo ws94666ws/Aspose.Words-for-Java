@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Working_with_document;
+﻿package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -13,7 +13,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
     public void getVariables() throws Exception {
         //ExStart:GetVariables
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Document.docx");
 
         String variables = "";
@@ -33,7 +33,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
     public void enumerateProperties() throws Exception {
         //ExStart:EnumerateProperties
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Properties.docx");
 
         System.out.println(MessageFormat.format("1. Document name: {0}", doc.getOriginalFileName()));
@@ -52,7 +52,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
     public void addCustomProperties() throws Exception {
         //ExStart:AddCustomProperties
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Properties.docx");
 
         CustomDocumentProperties customDocumentProperties = doc.getCustomDocumentProperties();
@@ -70,7 +70,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
     public void removeCustomProperties() throws Exception {
         //ExStart:RemoveCustomProperties
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Properties.docx");
         doc.getCustomDocumentProperties().remove("Authorized Date");
         //ExEnd:RemoveCustomProperties
@@ -79,7 +79,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
     public void removePersonalInformation() throws Exception {
         //ExStart:RemovePersonalInformation
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document(getMyDir() + "Properties.docx");
         doc.setRemovePersonalInformation(true);
 
@@ -90,7 +90,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
     public void configuringLinkToContent() throws Exception {
         //ExStart:ConfiguringLinkToContent
-        //GistId:0593a8803015363f3026f648332e7026
+        //GistId:feb3c519327ef97a854a50fe24cebba7
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -113,7 +113,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
     public void convertBetweenMeasurementUnits() throws Exception {
         //ExStart:ConvertBetweenMeasurementUnits
-        //GistId:f266e937d2c656f9441071e9a7b053c1
+        //GistId:1c2a7e0357432a333546e8b33057046a
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -130,7 +130,7 @@ public class WorkingWithDocumentProperties extends DocsExamplesBase {
     @Test
     public void useControlCharacters() {
         //ExStart:UseControlCharacters
-        //GistId:6269ddb6427f9ad20623d975774a615e
+        //GistId:920532ffbf33fbda20b92054f596a8ac
         String text = "test\r";
         // Replace "\r" control character with "\r\n".
         String replace = text.replace(ControlChar.CR, ControlChar.CR_LF);

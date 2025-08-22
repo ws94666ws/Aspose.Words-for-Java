@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Working_with_document;
+﻿package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -11,7 +11,7 @@ public class WorkingWithWebExtension extends DocsExamplesBase {
     @Test
     public void webExtensionTaskPanes() throws Exception {
         //ExStart:WebExtensionTaskPanes
-        //GistId:8c31c018ea71c92828223776b1a113f7
+        //GistId:b91d438dcc82b6b4a3c8db34ad732c7d
         Document doc = new Document();
 
         TaskPane taskPane = new TaskPane();
@@ -33,7 +33,7 @@ public class WorkingWithWebExtension extends DocsExamplesBase {
         //ExEnd:WebExtensionTaskPanes
 
         //ExStart:GetListOfAddins
-        //GistId:8c31c018ea71c92828223776b1a113f7
+        //GistId:b91d438dcc82b6b4a3c8db34ad732c7d
         doc = new Document(getArtifactsDir() + "WorkingWithWebExtension.WebExtensionTaskPanes.docx");
 
         System.out.println("Task panes sources:\n");
