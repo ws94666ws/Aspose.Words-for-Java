@@ -1,4 +1,4 @@
-﻿package DocsExamples.Programming_with_documents.Contents_management;
+package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;

@@ -1,4 +1,4 @@
-﻿package DocsExamples.File_formats_and_conversions.Complex_examples_and_helpers;
+package DocsExamples.File_formats_and_conversions.Complex_examples_and_helpers;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.Document;

@@ -1,4 +1,4 @@
-﻿package DocsExamples.File_formats_and_conversions.Load_options;
+package DocsExamples.File_formats_and_conversions.Load_options;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;

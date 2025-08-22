@@ -1,4 +1,4 @@
-﻿package DocsExamples.File_formats_and_conversions;
+package DocsExamples.File_formats_and_conversions;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.email.*;

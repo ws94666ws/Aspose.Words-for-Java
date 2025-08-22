@@ -1,4 +1,4 @@
-﻿package DocsExamples.Programming_with_documents.Split_documents;
+package DocsExamples.Programming_with_documents.Split_documents;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;

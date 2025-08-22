@@ -1,4 +1,4 @@
-﻿package DocsExamples.Programming_with_documents.Working_with_document;
+package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
