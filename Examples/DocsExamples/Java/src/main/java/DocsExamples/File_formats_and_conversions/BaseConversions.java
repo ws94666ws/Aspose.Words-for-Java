@@ -17,9 +17,7 @@ public class BaseConversions extends DocsExamplesBase {
     public void docToDocx() throws Exception {
         //ExStart:LoadAndSave
         //GistId:9d2a393f6dff9d785e7747a48e590d9d
-        //ExStart:OpenDocument
         Document doc = new Document(getMyDir() + "Document.doc");
-        //ExEnd:OpenDocument
 
         doc.save(getArtifactsDir() + "BaseConversions.DocToDocx.docx");
         //ExEnd:LoadAndSave
@@ -30,14 +28,14 @@ public class BaseConversions extends DocsExamplesBase {
         //ExStart:LoadAndSaveToStream
         //GistId:9d2a393f6dff9d785e7747a48e590d9d
         //ExStart:OpenFromStream
-        //GistId:1d626c7186a318d22d022dc96dd91d55
+        //GistId:ae20848f6cefd3f85ab9bcbbdda340c7
         // Read only access is enough for Aspose.Words to load a document.
         FileInputStream stream = new FileInputStream(getMyDir() + "Document.docx");
 
         Document doc = new Document(stream);
         // You can close the stream now, it is no longer needed because the document is in memory.
         stream.close();
-        //ExEnd:OpeningFromStream
+        //ExEnd:OpenFromStream
 
         // ... do something with the document.
 

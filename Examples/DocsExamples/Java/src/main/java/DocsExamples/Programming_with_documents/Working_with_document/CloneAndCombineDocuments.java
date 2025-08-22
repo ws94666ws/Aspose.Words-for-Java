@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Working_with_document;
+﻿package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -13,7 +13,7 @@ public class CloneAndCombineDocuments extends DocsExamplesBase {
     @Test
     public void cloneDocument() throws Exception {
         //ExStart:CloneDocument
-        //GistId:b2f62f736a2090163de7b0f221cf46d4
+        //GistId:faf236ea6d4dc5da50bae0db08b5e0a5
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
         builder.writeln("This is the original document before applying the clone method");

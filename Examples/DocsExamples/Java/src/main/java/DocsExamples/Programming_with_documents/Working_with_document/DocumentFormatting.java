@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Working_with_document;
+﻿package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -11,7 +11,7 @@ public class DocumentFormatting extends DocsExamplesBase {
     @Test
     public void spaceBetweenAsianAndLatinText() throws Exception {
         //ExStart:SpaceBetweenAsianAndLatinText
-        //GistId:4f54ffd5c7580f0d146b53e52d986f38
+        //GistId:93caa5d439a29d1632a48bdcf8a5efe9
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -29,7 +29,7 @@ public class DocumentFormatting extends DocsExamplesBase {
     @Test
     public void asianTypographyLineBreakGroup() throws Exception {
         //ExStart:AsianTypographyLineBreakGroup
-        //GistId:4f54ffd5c7580f0d146b53e52d986f38
+        //GistId:93caa5d439a29d1632a48bdcf8a5efe9
         Document doc = new Document(getMyDir() + "Asian typography.docx");
 
         ParagraphFormat format = doc.getFirstSection().getBody().getParagraphs().get(0).getParagraphFormat();
@@ -44,7 +44,7 @@ public class DocumentFormatting extends DocsExamplesBase {
     @Test
     public void paragraphFormatting() throws Exception {
         //ExStart:ParagraphFormatting
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -66,7 +66,7 @@ public class DocumentFormatting extends DocsExamplesBase {
     @Test
     public void multilevelListFormatting() throws Exception {
         //ExStart:MultilevelListFormatting
-        //GistId:a1dfeba1e0480d5b277a61742c8921af
+        //GistId:bcc8db50f6937463ef0f1acd71da30a8
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -97,7 +97,7 @@ public class DocumentFormatting extends DocsExamplesBase {
     @Test
     public void applyParagraphStyle() throws Exception {
         //ExStart:ApplyParagraphStyle
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -111,7 +111,7 @@ public class DocumentFormatting extends DocsExamplesBase {
     @Test
     public void applyBordersAndShadingToParagraph() throws Exception {
         //ExStart:ApplyBordersAndShadingToParagraph
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -171,7 +171,7 @@ public class DocumentFormatting extends DocsExamplesBase {
     @Test
     public void getParagraphStyleSeparator() throws Exception {
         //ExStart:GetParagraphStyleSeparator
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document(getMyDir() + "Document.docx");
 
         for (Paragraph paragraph : (Iterable<Paragraph>) doc.getChildNodes(NodeType.PARAGRAPH, true)) {
@@ -184,7 +184,7 @@ public class DocumentFormatting extends DocsExamplesBase {
 
     @Test
     //ExStart:GetParagraphLines
-    //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+    //GistId:75080b633887e95c397bce7d14d7cbf1
     public void getParagraphLines() throws Exception {
         Document doc = new Document(getMyDir() + "Properties.docx");
 

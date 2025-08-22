@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Contents_management;
+﻿package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -9,7 +9,7 @@ public class WorkingWithTableOfContent extends DocsExamplesBase {
     @Test
     public void changeStyleOfTocLevel() throws Exception {
         //ExStart:ChangeStyleOfTocLevel
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document();
         // Retrieve the style used for the first level of the TOC and change the formatting of the style.
         doc.getStyles().getByStyleIdentifier(StyleIdentifier.TOC_1).getFont().setBold(true);
@@ -19,7 +19,7 @@ public class WorkingWithTableOfContent extends DocsExamplesBase {
     @Test
     public void changeTocTabStops() throws Exception {
         //ExStart:ChangeTocTabStops
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document(getMyDir() + "Table of contents.docx");
 
         for (Paragraph para : (Iterable<Paragraph>) doc.getChildNodes(NodeType.PARAGRAPH, true)) {
@@ -46,7 +46,7 @@ public class WorkingWithTableOfContent extends DocsExamplesBase {
     @Test
     public void extractToc() throws Exception {
         //ExStart:ExtractToc
-        //GistId:db118a3e1559b9c88355356df9d7ea10
+        //GistId:5d939fbdab0ac77c575636f79013ffb1
         Document doc = new Document(getMyDir() + "Table of contents.docx");
 
         for (Field field : doc.getRange().getFields()) {

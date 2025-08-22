@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Contents_management;
+﻿package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -12,7 +12,7 @@ public class WorkingWithStylesAndThemes extends DocsExamplesBase {
     @Test
     public void accessStyles() throws Exception {
         //ExStart:AccessStyles
-        //GistId:a73b495f610523670f0847331ef4d6fc
+        //GistId:f1e523d4c5e156a1e42b86f56c70bf53
         Document doc = new Document();
 
         String styleName = "";
@@ -34,7 +34,7 @@ public class WorkingWithStylesAndThemes extends DocsExamplesBase {
     @Test
     public void copyStyles() throws Exception {
         //ExStart:CopyStyles
-        //GistId:a73b495f610523670f0847331ef4d6fc
+        //GistId:f1e523d4c5e156a1e42b86f56c70bf53
         Document doc = new Document();
         Document target = new Document(getMyDir() + "Rendering.docx");
 
@@ -47,7 +47,7 @@ public class WorkingWithStylesAndThemes extends DocsExamplesBase {
     @Test
     public void getThemeProperties() throws Exception {
         //ExStart:GetThemeProperties
-        //GistId:a73b495f610523670f0847331ef4d6fc
+        //GistId:f1e523d4c5e156a1e42b86f56c70bf53
         Document doc = new Document();
 
         Theme theme = doc.getTheme();
@@ -61,7 +61,7 @@ public class WorkingWithStylesAndThemes extends DocsExamplesBase {
     @Test
     public void setThemeProperties() throws Exception {
         //ExStart:SetThemeProperties
-        //GistId:a73b495f610523670f0847331ef4d6fc
+        //GistId:f1e523d4c5e156a1e42b86f56c70bf53
         Document doc = new Document();
 
         Theme theme = doc.getTheme();
@@ -73,7 +73,7 @@ public class WorkingWithStylesAndThemes extends DocsExamplesBase {
     @Test
     public void insertStyleSeparator() throws Exception {
         //ExStart:InsertStyleSeparator
-        //GistId:4b5526c3c0d9cad73e05fb4b18d2c3d2
+        //GistId:75080b633887e95c397bce7d14d7cbf1
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 

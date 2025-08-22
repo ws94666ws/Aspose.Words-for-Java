@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Contents_management;
+﻿package DocsExamples.Programming_with_documents.Contents_management;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -11,7 +11,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
     @Test
     public void accessBookmarks() throws Exception {
         //ExStart:AccessBookmarks
-        //GistId:c4555b1a088856e21394104faeb86e51
+        //GistId:ac2265ee10ddb4f0649f31ab8d219a94
         Document doc = new Document(getMyDir() + "Bookmarks.docx");
         // By index:
         Bookmark bookmark1 = doc.getRange().getBookmarks().get(0);
@@ -23,7 +23,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
     @Test
     public void updateBookmarkData() throws Exception {
         //ExStart:UpdateBookmarkData
-        //GistId:c4555b1a088856e21394104faeb86e51
+        //GistId:ac2265ee10ddb4f0649f31ab8d219a94
         Document doc = new Document(getMyDir() + "Bookmarks.docx");
 
         Bookmark bookmark = doc.getRange().getBookmarks().get("MyBookmark1");
@@ -39,7 +39,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
     @Test
     public void bookmarkTableColumns() throws Exception {
         //ExStart:BookmarkTable
-        //GistId:c4555b1a088856e21394104faeb86e51
+        //GistId:ac2265ee10ddb4f0649f31ab8d219a94
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -69,7 +69,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
         //ExEnd:BookmarkTable
 
         //ExStart:BookmarkTableColumns
-        //GistId:c4555b1a088856e21394104faeb86e51
+        //GistId:ac2265ee10ddb4f0649f31ab8d219a94
         for (Bookmark bookmark : doc.getRange().getBookmarks()) {
             System.out.println(MessageFormat.format("Bookmark: {0}{1}", bookmark.getName(), bookmark.isColumn() ? " (Column)" : ""));
 
@@ -143,7 +143,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
     @Test
     public void createBookmark() throws Exception {
         //ExStart:CreateBookmark
-        //GistId:c4555b1a088856e21394104faeb86e51
+        //GistId:ac2265ee10ddb4f0649f31ab8d219a94
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -168,7 +168,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
     @Test
     public void showHideBookmarks() throws Exception {
         //ExStart:ShowHideBookmarks
-        //GistId:c4555b1a088856e21394104faeb86e51
+        //GistId:ac2265ee10ddb4f0649f31ab8d219a94
         Document doc = new Document(getMyDir() + "Bookmarks.docx");
 
         showHideBookmarkedContent(doc, "MyBookmark1", true);
@@ -178,7 +178,7 @@ public class WorkingWithBookmarks extends DocsExamplesBase {
     }
 
     //ExStart:ShowHideBookmarkedContent
-    //GistId:c4555b1a088856e21394104faeb86e51
+    //GistId:ac2265ee10ddb4f0649f31ab8d219a94
     private static void showHideBookmarkedContent(Document doc, String bookmarkName, boolean isHidden) {
         Bookmark bm = doc.getRange().getBookmarks().get(bookmarkName);
 

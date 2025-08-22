@@ -1,4 +1,4 @@
-package DocsExamples.Programming_with_documents.Working_with_document;
+﻿package DocsExamples.Programming_with_documents.Working_with_document;
 
 import DocsExamples.DocsExamplesBase;
 import com.aspose.words.*;
@@ -11,7 +11,7 @@ public class CompareDocuments extends DocsExamplesBase {
     @Test
     public void compareForEqual() throws Exception {
         //ExStart:CompareForEqual
-        //GistId:66cba61d079d8ef1e676820633ba4586
+        //GistId:bb20fc6b8fbf12d0a3175a5fe1cb3d29
         Document docA = new Document(getMyDir() + "Document.docx");
         Document docB = docA.deepClone();
 
@@ -25,7 +25,7 @@ public class CompareDocuments extends DocsExamplesBase {
     @Test
     public void compareOptions() throws Exception {
         //ExStart:CompareOptions
-        //GistId:66cba61d079d8ef1e676820633ba4586
+        //GistId:bb20fc6b8fbf12d0a3175a5fe1cb3d29
         Document docA = new Document(getMyDir() + "Document.docx");
         Document docB = docA.deepClone();
 
